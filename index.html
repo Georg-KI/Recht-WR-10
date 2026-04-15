@@ -60,8 +60,8 @@ a.para-link:hover{color:var(--indigo-light);}
 /* FIXED: Dark background paragraph quote box — white text */
 .para-quote{background:#1e293b;border-radius:10px;padding:1.25rem 1.5rem;margin:0.75rem 0;}
 .para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:600;}
-.para-quote p{font-size:15px;line-height:1.7;color:#e2e8f0;font-style:italic;}
-.para-quote .para-ref{font-size:12px;color:#64748b;margin-top:0.6rem;}
+.para-quote p,.task-body .para-quote p,.section-body .para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
+.para-quote .para-ref,.task-body .para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
 .para-quote a{color:#a5b4fc !important;border-bottom-color:#a5b4fc !important;}
 /* Scenario */
 .scenario{background:var(--slate);border-radius:10px;padding:1.25rem 1.5rem;margin:1rem 0;}
@@ -569,6 +569,9 @@ body.version-b .teacher-only{display:block;}
 
       <div id="quiz-score" style="margin-top:1.25rem;display:none;">
         <div class="info-box teal"><strong id="score-text"></strong><span id="score-sub"></span></div>
+        <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+          <button class="btn-secondary" style="border-color:var(--rose);color:var(--rose);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+        </div>
       </div>
 
       <div class="badge-reveal" id="badge-1">
@@ -873,13 +876,35 @@ function checkQuiz(qId,btn,ok){
     document.getElementById('quiz-score').style.display='block';
     const n=qs.filter(q=>quizA[q]).length;
     document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
+    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch und versuche es erneut.';
+    if(n<3) document.getElementById('quiz-retry-wrap').style.display='block';
   }
 }
 function finishQuiz(){
   const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
   if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}
-  else alert('Du hast '+n+' von 4 Fragen richtig. Lies die Inhalte noch einmal durch!');
+  else {
+    document.getElementById('quiz-score').style.display='block';
+    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
+    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch und versuche es erneut.';
+    document.getElementById('quiz-retry-wrap').style.display='block';
+  }
+}
+function retryQuiz(){
+  const qs=['q1','q2','q3','q4'];
+  qs.forEach(q=>{
+    const c=document.getElementById(q);
+    delete c.dataset.answered;
+    c.querySelectorAll('.quiz-opt').forEach(b=>{
+      b.classList.remove('disabled','correct','wrong');
+    });
+    document.getElementById(q+'-fb').className='quiz-feedback';
+    document.getElementById(q+'-fb').textContent='';
+  });
+  quizA={};
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('quiz-retry-wrap').style.display='none';
+  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
 }
 function drawBadge(){
   const cv=document.getElementById('badge-canvas'),ctx=cv.getContext('2d');
