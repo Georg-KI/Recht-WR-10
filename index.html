@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 1 – Wozu brauchen wir Recht?</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --indigo: #3730a3;
+    --indigo-light: #6366f1;
+    --indigo-xlight: #e0e7ff;
+    --teal: #0d9488;
+    --teal-light: #ccfbf1;
+    --amber: #d97706;
+    --amber-light: #fef3c7;
+    --rose: #e11d48;
+    --rose-light: #ffe4e6;
+    --slate: #1e293b;
+    --slate-mid: #475569;
+    --slate-light: #94a3b8;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --border: #e2e8f0;
+    --success: #059669;
+    --success-light: #d1fae5;
+    --radius: 14px;
+    --shadow: 0 4px 24px rgba(55,48,163,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--slate);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    background: var(--indigo);
+    color: white;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(55,48,163,0.25);
+  }
+  .topbar-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.3px;
+    color: white;
+    text-decoration: none;
+  }
+  .topbar-logo span { color: #a5b4fc; }
+  .topbar-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.2); }
+  .topbar-title {
+    font-size: 13px;
+    color: #c7d2fe;
+    font-weight: 400;
+  }
+  .topbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+  /* MODE TOGGLE */
+  .mode-toggle {
+    display: flex;
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .mode-btn {
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .mode-btn.active {
+    background: white;
+    color: var(--indigo);
+    font-weight: 600;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .progress-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0;
+  }
+  .prog-step {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--slate-light);
+    font-weight: 400;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .prog-step.active { color: var(--indigo); font-weight: 500; }
+  .prog-step.done { color: var(--success); }
+  .prog-dot {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--slate-light);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .prog-step.active .prog-dot { background: var(--indigo); color: white; }
+  .prog-step.done .prog-dot { background: var(--success); color: white; }
+  .prog-line { flex: 1; height: 2px; background: var(--border); min-width: 10px; border-radius: 2px; }
+  .prog-line.done { background: var(--success); }
+
+  /* MAIN */
+  .main { max-width: 860px; margin: 0 auto; padding: 2rem 2rem 6rem; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--indigo) 0%, #4f46e5 60%, #6366f1 100%);
+    border-radius: var(--radius);
+    padding: 2.5rem 2.5rem 2rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '§';
+    position: absolute;
+    right: 1.5rem;
+    top: -10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: 0.3px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.5px;
+  }
+  .hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    max-width: 580px;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  .hero-meta-item { display: flex; align-items: center; gap: 5px; }
+
+  /* TEACHER NOTE (Version B only) */
+  .teacher-note {
+    background: #fef9ec;
+    border: 1.5px solid #fcd34d;
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    display: none;
+  }
+  .teacher-note.visible { display: block; }
+  .teacher-note-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #92400e;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .teacher-note p { font-size: 14px; color: #78350f; line-height: 1.6; }
+  .teacher-note ul { font-size: 14px; color: #78350f; padding-left: 1.2rem; line-height: 1.8; margin-top: 0.4rem; }
+
+  /* SECTION */
+  .section {
+    background: white;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .section-header {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .section-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .section-icon.indigo { background: var(--indigo-xlight); }
+  .section-icon.teal { background: var(--teal-light); }
+  .section-icon.amber { background: var(--amber-light); }
+  .section-icon.rose { background: var(--rose-light); }
+  .section-icon.green { background: var(--success-light); }
+  .section-meta { flex: 1; }
+  .section-tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--slate-light);
+    margin-bottom: 3px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--slate);
+    line-height: 1.3;
+  }
+  .section-time {
+    font-size: 12px;
+    color: var(--slate-light);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .section-body { padding: 1.5rem; }
+
+  /* PHASE LABEL */
+  .phase-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 0.75rem;
+  }
+  .phase-label.teacher { background: #fef3c7; color: #92400e; }
+  .phase-label.student { background: var(--indigo-xlight); color: var(--indigo); }
+  .phase-label.group { background: var(--teal-light); color: #0f766e; }
+  .phase-label.digital { background: #f0fdf4; color: #166534; }
+
+  /* SCENARIO BOX */
+  .scenario {
+    background: var(--slate);
+    color: white;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+  }
+  .scenario-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #94a3b8;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .scenario p { font-size: 15px; line-height: 1.6; color: #e2e8f0; }
+  .scenario strong { color: #a5b4fc; }
+
+  /* POLL */
+  .poll { margin: 1rem 0; }
+  .poll-question {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--slate);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  .poll-options { display: flex; flex-direction: column; gap: 8px; }
+  .poll-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: white;
+  }
+  .poll-option:hover { border-color: var(--indigo-light); background: var(--indigo-xlight); }
+  .poll-option.selected { border-color: var(--indigo); background: var(--indigo-xlight); }
+  .poll-option.selected .poll-radio { background: var(--indigo); border-color: var(--indigo); }
+  .poll-radio {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+  }
+  .poll-radio::after {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: white;
+    display: none;
+  }
+  .poll-option.selected .poll-radio::after { display: block; }
+  .poll-option-text { font-size: 14px; color: var(--slate); }
+  .poll-result { margin-top: 1rem; display: none; }
+  .poll-result.visible { display: block; }
+  .poll-result-text {
+    background: var(--indigo-xlight);
+    border-left: 3px solid var(--indigo);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: var(--indigo);
+    line-height: 1.6;
+  }
+
+  /* CONTENT TEXT */
+  .content-text { font-size: 15px; color: var(--slate-mid); line-height: 1.75; margin-bottom: 1rem; }
+  .content-text:last-child { margin-bottom: 0; }
+
+  /* INFO BOX */
+  .info-box {
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .info-box.indigo { background: var(--indigo-xlight); border-left: 3px solid var(--indigo); color: #3730a3; }
+  .info-box.teal { background: var(--teal-light); border-left: 3px solid var(--teal); color: #134e4a; }
+  .info-box.amber { background: var(--amber-light); border-left: 3px solid var(--amber); color: #78350f; }
+  .info-box.rose { background: var(--rose-light); border-left: 3px solid var(--rose); color: #9f1239; }
+  .info-box strong { font-weight: 600; display: block; margin-bottom: 4px; }
+
+  /* FUNCTIONS GRID */
+  .functions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .functions-grid { grid-template-columns: 1fr; } }
+  .function-card {
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+    background: white;
+    transition: all 0.15s;
+  }
+  .function-card:hover { border-color: var(--indigo-light); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(99,102,241,0.1); }
+  .function-card-icon { font-size: 22px; margin-bottom: 0.5rem; }
+  .function-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--slate);
+    margin-bottom: 0.4rem;
+  }
+  .function-card-text { font-size: 13px; color: var(--slate-mid); line-height: 1.5; }
+
+  /* NORMEN ANALYSIS */
+  .normen-diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+    margin: 1rem 0;
+  }
+  .normen-col {
+    flex: 1;
+    padding: 1.1rem 1.2rem;
+  }
+  .normen-col.left { background: #eef2ff; }
+  .normen-col.mid {
+    flex: 0 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--indigo);
+    font-size: 22px;
+    color: white;
+  }
+  .normen-col.right { background: #f0fdf4; }
+  .normen-col-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    color: var(--slate-light);
+  }
+  .normen-col.left .normen-col-label { color: var(--indigo); }
+  .normen-col.right .normen-col-label { color: var(--success); }
+  .normen-item {
+    font-size: 13px;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(0,0,0,0.08);
+    color: var(--slate);
+    line-height: 1.4;
+  }
+  .normen-item:last-child { border-bottom: none; }
+
+  /* TASK */
+  .task {
+    border: 1.5px solid var(--indigo-light);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1rem 0;
+  }
+  .task-header {
+    background: var(--indigo);
+    padding: 0.75rem 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .task-num {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .task-title { font-size: 13px; font-weight: 600; color: white; }
+  .task-body { padding: 1.1rem 1.2rem; background: #f8faff; }
+  .task-body p { font-size: 14px; color: var(--slate); line-height: 1.65; margin-bottom: 0.5rem; }
+  .task-body p:last-child { margin-bottom: 0; }
+
+  /* TEXT AREA */
+  .answer-area {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--slate);
+    resize: vertical;
+    min-height: 80px;
+    margin-top: 8px;
+    background: white;
+    transition: border-color 0.15s;
+  }
+  .answer-area:focus { outline: none; border-color: var(--indigo); }
+
+  /* SOLUTION REVEAL */
+  .solution-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--slate-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .solution-btn:hover { border-color: var(--indigo); color: var(--indigo); background: var(--indigo-xlight); }
+  .solution-reveal {
+    margin-top: 10px;
+    background: var(--success-light);
+    border-left: 3px solid var(--success);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #064e3b;
+    line-height: 1.6;
+    display: none;
+  }
+  .solution-reveal.visible { display: block; }
+
+  /* MINDMAP TASK */
+  .mindmap-placeholder {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1rem 0;
+    background: #fafbfc;
+  }
+  .mindmap-placeholder p { font-size: 14px; color: var(--slate-light); }
+
+  /* QUIZ */
+  .quiz-wrap { margin: 0.5rem 0; }
+  .quiz-q {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--slate);
+    margin-bottom: 0.75rem;
+    line-height: 1.5;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+  .quiz-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: white;
+    font-size: 14px;
+    color: var(--slate);
+    line-height: 1.4;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    border: none;
+    border: 1.5px solid var(--border);
+    width: 100%;
+  }
+  .quiz-opt:hover { border-color: var(--indigo-light); background: var(--indigo-xlight); }
+  .quiz-opt.correct { border-color: var(--success); background: var(--success-light); color: #064e3b; }
+  .quiz-opt.wrong { border-color: var(--rose); background: var(--rose-light); color: #9f1239; }
+  .quiz-opt.disabled { pointer-events: none; }
+  .quiz-opt-letter {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--slate-mid);
+  }
+  .quiz-opt.correct .quiz-opt-letter { background: var(--success); color: white; }
+  .quiz-opt.wrong .quiz-opt-letter { background: var(--rose); color: white; }
+  .quiz-feedback { font-size: 13px; color: var(--slate-mid); padding: 8px 12px; border-radius: 8px; display: none; margin-top: 6px; }
+  .quiz-feedback.correct { background: var(--success-light); color: #064e3b; display: block; }
+  .quiz-feedback.wrong { background: var(--rose-light); color: #9f1239; display: block; }
+
+  /* PROGRESS BTN */
+  .nav-btns {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--indigo);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary:hover { background: #4338ca; transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--slate);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--indigo); color: var(--indigo); }
+
+  /* BADGE */
+  .badge-reveal {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-radius: var(--radius);
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    margin-top: 1.5rem;
+    display: none;
+  }
+  .badge-reveal.visible { display: block; }
+  .badge-icon { font-size: 52px; margin-bottom: 0.75rem; }
+  .badge-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+  }
+  .badge-sub { font-size: 14px; color: #94a3b8; }
+
+  /* STEPS (pages) */
+  .step { display: none; }
+  .step.active { display: block; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.25rem 0;
+  }
+
+  /* CHIP */
+  .chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .chip {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 600;
+    border: 1px solid;
+  }
+  .chip.k { background: #eef2ff; border-color: #c7d2fe; color: var(--indigo); }
+  .chip.c2 { background: #ccfbf1; border-color: #99f6e4; color: #0f766e; }
+  .chip.c1 { background: #e0f2fe; border-color: #bae6fd; color: #0369a1; }
+  .chip.c3 { background: #fef3c7; border-color: #fde68a; color: #92400e; }
+
+  /* NORMen Analyse Übung */
+  .normen-exercise {
+    background: #f8fafc;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
+  .normen-exercise h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--slate);
+  }
+  .normen-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .normen-table th {
+    background: var(--indigo);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  .normen-table th:first-child { border-radius: 8px 0 0 0; }
+  .normen-table th:last-child { border-radius: 0 8px 0 0; }
+  .normen-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    color: var(--slate);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .normen-table tr:last-child td { border-bottom: none; }
+  .normen-table tr:nth-child(even) td { background: #f8fafc; }
+  .normen-table input[type="text"] {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    background: white;
+  }
+  .normen-table input[type="text"]:focus { outline: none; border-color: var(--indigo); }
+
+  /* KI BOX */
+  .ki-box {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin: 1rem 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ki-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .ki-text { font-size: 14px; color: #14532d; line-height: 1.6; }
+  .ki-text strong { font-weight: 600; display: block; margin-bottom: 3px; }
+  .ki-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 7px 14px;
+    background: var(--teal);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* VERSION TOGGLE visibility */
+  .teacher-only { display: none; }
+  body.version-b .teacher-only { display: block; }
+  body.version-b .student-only { display: none; }
+
+  /* SMOOTH ANIMATIONS */
+  .section { animation: fadeUp 0.3s ease both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .topbar { padding: 0 1rem; }
+    .topbar-title { display: none; }
+    .main { padding: 1rem 1rem 5rem; }
+    .hero { padding: 1.5rem 1.25rem; }
+    .hero h1 { font-size: 22px; }
+    .functions-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body id="body-root">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 1</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-version-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-version-b" onclick="setVersion('b')">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)">
+      <div class="prog-dot">1</div>
+      <span>Einstieg</span>
+    </div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)">
+      <div class="prog-dot">2</div>
+      <span>Funktionen</span>
+    </div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)">
+      <div class="prog-dot">3</div>
+      <span>Normenanalyse</span>
+    </div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)">
+      <div class="prog-dot">4</div>
+      <span>Übung</span>
+    </div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)">
+      <div class="prog-dot">5</div>
+      <span>Quiz</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">⚖️ Modul 1 · Recht &amp; Normen</div>
+    <h1>Wozu brauchen wir Recht?</h1>
+    <p>Jeden Tag bist du von Rechtsregeln umgeben – ohne es zu merken. Diese Stunde zeigt dir, was Recht eigentlich ist, warum es dein Leben schützt und wie du Gesetze richtig liest.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">⏱ 45 Minuten</div>
+      <div class="hero-meta-item">📘 Handout 2.1</div>
+      <div class="hero-meta-item">🎯 5 Lernschritte</div>
+    </div>
+  </div>
+
+  <!-- TEACHER NOTE (Version B) -->
+  <div class="teacher-note teacher-only" id="teacher-main-note">
+    <div class="teacher-note-header">🎓 Hinweise für die Lehrkraft – Version B</div>
+    <p>In dieser Version führst du Einstieg (Schritt 1) und Sicherung (Schritt 5) selbst durch. Die Schüler arbeiten in den Schritten 2–4 selbstständig auf der Website. Die Zeitangaben in den einzelnen Schritten gelten für die Schülerarbeit – plane für deinen Einstieg ca. 8 Min. und für die Sicherung ca. 8 Min. zusätzlich ein.</p>
+    <ul>
+      <li>Einstieg: Starte mit der Provokativfrage (Schritt 1) und lasse Schüler erst spontan antworten, bevor sie die Website öffnen.</li>
+      <li>Übergabe: „Öffnet jetzt Schritt 2 auf der Website und arbeitet selbstständig weiter."</li>
+      <li>Sicherung: Besprich das Quiz (Schritt 5) im Plenum. Lass Schüler ihre Antworten begründen.</li>
+    </ul>
+  </div>
+
+  <!-- ======= STEP 1: EINSTIEG ======= -->
+  <div class="step active" id="step-1">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon indigo">🚀</div>
+        <div class="section-meta">
+          <div class="section-tag">Schritt 1 · Einstieg</div>
+          <div class="section-title">Was wäre, wenn es keine Regeln gäbe?</div>
+          <div class="section-time">⏱ ca. 8 Minuten</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chip-row">
+          <span class="chip c2">Lebensweltbezug</span>
+          <span class="chip c3">Methodenvielfalt</span>
+        </div>
+
+        <!-- TEACHER VERSION: Hinweis -->
+        <div class="teacher-only">
+          <div class="teacher-note" style="display:block; margin-bottom:1rem;">
+            <div class="teacher-note-header">🎓 Lehrkraft-Tipp: Einstieg</div>
+            <p>Stelle die Frage mündlich, bevor Schüler die Website öffnen. Lass 3–4 Schüler spontan antworten. Dann erst: „Schaut jetzt auf das Szenario auf der Website."</p>
+          </div>
+        </div>
+
+        <div class="info-box amber">
+          <strong>💡 Warum ist das relevant für dich?</strong>
+          Recht klingt trocken – ist es aber nicht. Du kaufst ein Handy? Recht. Du streamst Musik? Recht. Du wirst auf der Straße angerempelt? Auch Recht. Diese Sequenz zeigt dir, was du als 16-Jähriger in Deutschland wirklich darfst, musst und nicht tun darf.
+        </div>
+
+        <div class="scenario">
+          <div class="scenario-label">📖 Gedankenexperiment</div>
+          <p>Stell dir vor: Es ist Montag, 8:15 Uhr. Du kommst in die Schule. <strong>Es gibt keine Regeln mehr.</strong> Kein Hausrecht, kein Strafgesetzbuch, kein Vertrag, keine Schulordnung. Was würde passieren?</p>
+        </div>
+
+        <div class="poll" id="poll-1">
+          <div class="poll-question">Was wäre deiner Meinung nach die schlimmste Folge, wenn es kein Recht gäbe?</div>
+          <div class="poll-options">
+            <div class="poll-option" onclick="selectPoll('poll-1', this, 0)">
+              <div class="poll-radio"></div>
+              <div class="poll-option-text">Stärkere würden Schwächere einfach unterdrücken – ohne Konsequenzen</div>
+            </div>
+            <div class="poll-option" onclick="selectPoll('poll-1', this, 1)">
+              <div class="poll-radio"></div>
+              <div class="poll-option-text">Niemand könnte mehr sicher Verträge abschließen oder Abmachungen treffen</div>
+            </div>
+            <div class="poll-option" onclick="selectPoll('poll-1', this, 2)">
+              <div class="poll-radio"></div>
+              <div class="poll-option-text">Konflikte würden mit Gewalt gelöst statt mit Gesprächen oder Gerichten</div>
+            </div>
+            <div class="poll-option" onclick="selectPoll('poll-1', this, 3)">
+              <div class="poll-radio"></div>
+              <div class="poll-option-text">Eigentum wäre bedeutungslos – jeder könnte alles nehmen, was er will</div>
+            </div>
+          </div>
+          <div class="poll-result" id="poll-1-result">
+            <div class="poll-result-text">
+              ✅ <strong>Alle Antworten sind richtig</strong> – und das zeigt genau, warum Recht so wichtig ist. Recht schützt vor Willkür, ermöglicht Vertrauen, löst Konflikte und sichert Eigentum. Du wirst alle diese Funktionen gleich kennenlernen.
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button class="btn-primary" onclick="nextStep(1)">Weiter zu den Funktionen des Rechts →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======= STEP 2: FUNKTIONEN ======= -->
+  <div class="step" id="step-2">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon teal">📚</div>
+        <div class="section-meta">
+          <div class="section-tag">Schritt 2 · Erarbeitung I</div>
+          <div class="section-title">Die Funktionen des Rechts</div>
+          <div class="section-time">⏱ ca. 12 Minuten · Partnerarbeit</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chip-row">
+          <span class="chip c1">Veranschaulichung</span>
+          <span class="chip c2">Lebensweltbezug</span>
+          <span class="chip c3">Methodenvielfalt</span>
+        </div>
+
+        <div class="teacher-only">
+          <div class="teacher-note" style="display:block; margin-bottom:1rem;">
+            <div class="teacher-note-header">🎓 Hinweis</div>
+            <p>Schüler lesen die Karten in PA, dann besprecht ihr im Plenum: „Welche Funktion ist deiner Meinung nach die wichtigste – und warum?" Verknüpft mit den Antworten aus der Abstimmung.</p>
+          </div>
+        </div>
+
+        <p class="content-text">Im Zusammenleben der Menschen stehen Freiheitsinteressen und Schutzinteressen oft im Konflikt. Recht schafft hier einen gerechten Ausgleich. Es hat dabei mehrere wichtige Funktionen:</p>
+
+        <div class="functions-grid">
+          <div class="function-card">
+            <div class="function-card-icon">☮️</div>
+            <div class="function-card-title">Friedensfunktion</div>
+            <div class="function-card-text">Die Durchsetzung des Rechts ist dem Staat übertragen – damit Konflikte nicht durch Gewalt, sondern durch Regeln gelöst werden.</div>
+          </div>
+          <div class="function-card">
+            <div class="function-card-icon">📋</div>
+            <div class="function-card-title">Ordnungsfunktion</div>
+            <div class="function-card-text">Recht schafft Regeln für ein geordnetes Zusammenleben: Es verhütet Konflikte (präventiv) und löst entstandene Konflikte (reaktiv).</div>
+          </div>
+          <div class="function-card">
+            <div class="function-card-icon">🛡️</div>
+            <div class="function-card-title">Schutz- / Sicherheitsfunktion</div>
+            <div class="function-card-text">Jeder hat einen Anspruch auf Konfliktlösung durch den Staat. Das Recht schützt besonders die Schwächeren.</div>
+          </div>
+          <div class="function-card">
+            <div class="function-card-icon">⚖️</div>
+            <div class="function-card-title">Interessenausgleich</div>
+            <div class="function-card-text">Das Recht versucht stets, einen gerechten Ausgleich zwischen den Interessen aller Beteiligten herzustellen. Das ist die Folge aller anderen Funktionen.</div>
+          </div>
+        </div>
+
+        <div class="info-box indigo">
+          <strong>Weitere Funktionen des Rechts</strong>
+          Abschreckungsfunktion (Strafen sollen von rechtswidrigem Handeln abhalten), Straffunktion (Vergehen werden geahndet) und Erziehungsfunktion (Recht soll normkonformes Verhalten fördern).
+        </div>
+
+        <div class="task">
+          <div class="task-header">
+            <div class="task-num">✍</div>
+            <div class="task-title">Aufgabe 1 – Partnerarbeit (5 Min.)</div>
+          </div>
+          <div class="task-body">
+            <p>Ordne die vier Situationen aus eurem Gedankenexperiment (Schritt 1) den Rechtsfunktionen zu. Welche Funktion wäre jeweils verletzt?</p>
+            <p><em>Beispiel: „Stärkere unterdrücken Schwächere" → Schutz-/Sicherheitsfunktion verletzt</em></p>
+            <textarea class="answer-area" placeholder="Schreibe deine Zuordnungen hier auf ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-1">
+              <strong>Musterlösung:</strong><br>
+              • Stärkere unterdrücken Schwächere → <em>Schutz-/Sicherheitsfunktion</em> verletzt<br>
+              • Keine sicheren Verträge möglich → <em>Ordnungsfunktion</em> (Konfliktverhütung) verletzt<br>
+              • Konflikte durch Gewalt → <em>Friedensfunktion</em> verletzt<br>
+              • Eigentum bedeutungslos → <em>Ordnungsfunktion + Interessenausgleich</em> verletzt
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+          <button class="btn-primary" onclick="nextStep(2)">Weiter zur Normenanalyse →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======= STEP 3: NORMENANALYSE ======= -->
+  <div class="step" id="step-3">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon amber">🔍</div>
+        <div class="section-meta">
+          <div class="section-tag">Schritt 3 · Methode</div>
+          <div class="section-title">Die Normenanalyse – Wie lese ich ein Gesetz?</div>
+          <div class="section-time">⏱ ca. 10 Minuten</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chip-row">
+          <span class="chip c1">Veranschaulichung</span>
+          <span class="chip k">Klassenführung</span>
+        </div>
+
+        <div class="teacher-only">
+          <div class="teacher-note" style="display:block; margin-bottom:1rem;">
+            <div class="teacher-note-header">🎓 Hinweis</div>
+            <p>Schüler erarbeiten die Methode selbstständig. Du kannst danach das Beispiel § 854 BGB im Plenum besprechen und auf typische Fehler hinweisen (z.B. zu allgemeine Tatbestandsmerkmale).</p>
+          </div>
+        </div>
+
+        <p class="content-text">Eine Rechtsnorm muss für viele verschiedene Fälle anwendbar sein. Deshalb ist sie abstrakt formuliert. Fast alle Normen folgen aber einer einfachen Struktur – einer <strong>Wenn-Dann-Beziehung</strong>:</p>
+
+        <div class="normen-diagram">
+          <div class="normen-col left">
+            <div class="normen-col-label">WENN … (Tatbestandsmerkmale)</div>
+            <div class="normen-item">🔹 Voraussetzungen, die erfüllt sein müssen</div>
+            <div class="normen-item">🔹 Beschreibt den Sachverhalt</div>
+            <div class="normen-item">🔹 Oft mehrere Merkmale (TB 1, TB 2 …)</div>
+          </div>
+          <div class="normen-col mid">→</div>
+          <div class="normen-col right">
+            <div class="normen-col-label">DANN … (Rechtsfolgen)</div>
+            <div class="normen-item">✅ Was rechtlich passiert</div>
+            <div class="normen-item">✅ Anspruch, Pflicht, Recht …</div>
+            <div class="normen-item">✅ Ergibt sich automatisch aus dem TB</div>
+          </div>
+        </div>
+
+        <div class="info-box teal">
+          <strong>📖 Beispiel: § 854 BGB – Erwerb des Besitzes</strong>
+          „Der Besitz einer Sache wird durch die Erlangung der tatsächlichen Gewalt über die Sache erworben."<br><br>
+          <strong>Tatbestandsmerkmale:</strong> (1) Es geht um eine Sache · (2) Jemand erlangt die tatsächliche Gewalt darüber<br>
+          <strong>Rechtsfolge:</strong> Diese Person erwirbt den Besitz der Sache.
+        </div>
+
+        <div class="task">
+          <div class="task-header">
+            <div class="task-num">✍</div>
+            <div class="task-title">Aufgabe 2 – Einzelarbeit (5 Min.)</div>
+          </div>
+          <div class="task-body">
+            <p>Lies den folgenden Paragrafen und arbeite die Tatbestandsmerkmale und die Rechtsfolge heraus:</p>
+            <div class="scenario" style="margin:0.75rem 0;">
+              <div class="scenario-label">§ 433 Abs. 1 Satz 1 BGB – Vertragstypische Pflichten beim Kaufvertrag</div>
+              <p>„Durch den Kaufvertrag wird der Verkäufer einer Sache verpflichtet, dem Käufer die Sache zu übergeben und das Eigentum an der Sache zu verschaffen."</p>
+            </div>
+            <textarea class="answer-area" placeholder="Tatbestandsmerkmale: ...&#10;Rechtsfolge: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-2')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-2">
+              <strong>Tatbestandsmerkmale:</strong><br>
+              TB 1: Es liegt ein Kaufvertrag vor<br>
+              TB 2: Es geht um eine Sache<br>
+              TB 3: Es gibt einen Verkäufer und einen Käufer<br><br>
+              <strong>Rechtsfolge:</strong><br>
+              RF 1: Verkäufer ist verpflichtet, die Sache zu übergeben<br>
+              RF 2: Verkäufer ist verpflichtet, das Eigentum an der Sache zu verschaffen
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+          <button class="btn-primary" onclick="nextStep(3)">Weiter zur Übung →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======= STEP 4: ÜBUNG ======= -->
+  <div class="step" id="step-4">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon rose">🧠</div>
+        <div class="section-meta">
+          <div class="section-tag">Schritt 4 · Intelligentes Üben</div>
+          <div class="section-title">Normenanalyse selbst anwenden</div>
+          <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chip-row">
+          <span class="chip k">Kompetenzorientiert</span>
+          <span class="chip c3">Methodenvielfalt</span>
+        </div>
+
+        <div class="teacher-only">
+          <div class="teacher-note" style="display:block; margin-bottom:1rem;">
+            <div class="teacher-note-header">🎓 Hinweis · Differenzierung</div>
+            <p>Schnellere Schüler bearbeiten beide Aufgaben. Schüler, die mehr Zeit benötigen, konzentrieren sich auf Aufgabe 3a. Die Musterlösungen erscheinen auf Knopfdruck.</p>
+          </div>
+        </div>
+
+        <p class="content-text">Jetzt bist du dran. Analysiere die folgenden Normen vollständig. Nutze das Schema: Tatbestandsmerkmale → Rechtsfolge.</p>
+
+        <div class="normen-exercise">
+          <h4>Aufgabe 3a – § 929 Satz 1 BGB (Übereignung)</h4>
+          <p style="font-size:13px; color:#64748b; margin-bottom:0.75rem; line-height:1.5;">„Zur Übertragung des Eigentums an einer beweglichen Sache ist erforderlich, dass der Eigentümer die Sache dem Erwerber übergibt und beide darüber einig sind, dass das Eigentum übergehen soll."</p>
+          <table class="normen-table">
+            <thead>
+              <tr><th>Tatbestandsmerkmal</th><th>Norm</th><th>Rechtsfolge</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" placeholder="TB 1 …"></td>
+                <td rowspan="3" style="text-align:center; font-weight:700; color:#3730a3; vertical-align:middle;">§ 929 S. 1 BGB</td>
+                <td rowspan="3"><input type="text" placeholder="RF …"></td>
+              </tr>
+              <tr><td><input type="text" placeholder="TB 2 …"></td></tr>
+              <tr><td><input type="text" placeholder="TB 3 …"></td></tr>
+            </tbody>
+          </table>
+          <button class="solution-btn" onclick="revealSolution('sol-3a')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-3a">
+            <strong>TB 1:</strong> Es geht um eine bewegliche Sache<br>
+            <strong>TB 2:</strong> Der Eigentümer übergibt die Sache dem Erwerber<br>
+            <strong>TB 3:</strong> Beide sind einig, dass das Eigentum übergehen soll<br>
+            <strong>RF:</strong> Das Eigentum an der Sache wird übertragen (Eigentumsübergang)
+          </div>
+        </div>
+
+        <div class="normen-exercise">
+          <h4>Aufgabe 3b – Zusatzaufgabe (Schnellere Schüler)</h4>
+          <p style="font-size:13px; color:#64748b; margin-bottom:0.75rem; line-height:1.5;">Erkläre in eigenen Worten, warum das Recht zwischen dem <em>Kaufvertrag</em> (Versprechen) und der <em>Übereignung</em> (tatsächliche Übergabe) unterscheidet. Was wäre der Nachteil, wenn beides dasselbe wäre?</p>
+          <textarea class="answer-area" placeholder="Begründung in eigenen Worten …"></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-3b')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-3b">
+            Die Trennung ermöglicht z.B. den <strong>Eigentumsvorbehalt</strong>: Ein Händler kann eine Ware schon vertraglich verkaufen, aber das Eigentum erst nach vollständiger Bezahlung übertragen. So ist er abgesichert, falls der Käufer nicht zahlt. Wären Vertrag und Übereignung dasselbe, würde das Eigentum schon mit Vertragsschluss übergehen – unabhängig davon, ob gezahlt wurde.
+          </div>
+        </div>
+
+        <div class="ki-box">
+          <div class="ki-icon">🤖</div>
+          <div class="ki-text">
+            <strong>KI-Aufgabe: Fobizz nutzen</strong>
+            Öffne Fobizz und stelle der KI folgende Frage: <em>„Erkläre mir § 433 BGB in einfachen Worten und gib mir ein Alltagsbeispiel aus dem Leben eines 16-Jährigen."</em><br>
+            Vergleiche die KI-Antwort mit dem, was du auf dieser Seite gelernt hast. Was hat die KI gut erklärt? Was fehlt oder ist ungenau?
+            <br><a href="https://plattform.fobizz.com" target="_blank" class="ki-link">Zu Fobizz →</a>
+          </div>
+        </div>
+
+        <div class="nav-btns">
+          <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+          <button class="btn-primary" onclick="nextStep(4)">Weiter zum Abschluss-Quiz →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======= STEP 5: QUIZ ======= -->
+  <div class="step" id="step-5">
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-icon green">🏆</div>
+        <div class="section-meta">
+          <div class="section-tag">Schritt 5 · Wissenssicherung</div>
+          <div class="section-title">Abschluss-Quiz – Stunde 1</div>
+          <div class="section-time">⏱ ca. 7 Minuten · Einzelarbeit</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="chip-row">
+          <span class="chip k">Kompetenzorientiert</span>
+          <span class="chip c1">Veranschaulichung</span>
+        </div>
+
+        <div class="teacher-only">
+          <div class="teacher-note" style="display:block; margin-bottom:1rem;">
+            <div class="teacher-note-header">🎓 Hinweis · Sicherung (Version B)</div>
+            <p>Besprich nach dem Quiz Frage 3 und 4 im Plenum – hier machen Schüler erfahrungsgemäß die meisten Fehler. Lasse begründen, nicht nur raten.</p>
+          </div>
+        </div>
+
+        <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen aus dieser Stunde. Für jede richtige Antwort sammelst du Punkte für dein Abzeichen!</p>
+
+        <!-- Q1 -->
+        <div class="quiz-wrap">
+          <div class="quiz-q">1. Welche Funktion des Rechts ist verletzt, wenn zwei Nachbarn ihren Streit um einen Zaun mit Fäusten lösen statt vor Gericht zu gehen?</div>
+          <div class="quiz-options" id="q1">
+            <button class="quiz-opt" onclick="checkQuiz('q1', this, false)"><span class="quiz-opt-letter">A</span> Schutzfunktion</button>
+            <button class="quiz-opt" onclick="checkQuiz('q1', this, true)"><span class="quiz-opt-letter">B</span> Friedensfunktion</button>
+            <button class="quiz-opt" onclick="checkQuiz('q1', this, false)"><span class="quiz-opt-letter">C</span> Ordnungsfunktion</button>
+            <button class="quiz-opt" onclick="checkQuiz('q1', this, false)"><span class="quiz-opt-letter">D</span> Interessenausgleich</button>
+          </div>
+          <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+        <hr class="divider">
+
+        <!-- Q2 -->
+        <div class="quiz-wrap">
+          <div class="quiz-q">2. Was versteht man unter einem „Tatbestandsmerkmal" in einer Rechtsnorm?</div>
+          <div class="quiz-options" id="q2">
+            <button class="quiz-opt" onclick="checkQuiz('q2', this, false)"><span class="quiz-opt-letter">A</span> Die rechtliche Konsequenz, die eintritt, wenn eine Voraussetzung erfüllt ist</button>
+            <button class="quiz-opt" onclick="checkQuiz('q2', this, false)"><span class="quiz-opt-letter">B</span> Der Name des zuständigen Richters</button>
+            <button class="quiz-opt" onclick="checkQuiz('q2', this, true)"><span class="quiz-opt-letter">C</span> Eine Voraussetzung, die erfüllt sein muss, damit die Rechtsfolge eintritt</button>
+            <button class="quiz-opt" onclick="checkQuiz('q2', this, false)"><span class="quiz-opt-letter">D</span> Ein besonders schlimmes Vergehen</button>
+          </div>
+          <div class="quiz-feedback" id="q2-fb"></div>
+        </div>
+        <hr class="divider">
+
+        <!-- Q3 -->
+        <div class="quiz-wrap">
+          <div class="quiz-q">3. Leon (17) kauft ein Skateboard. Der Verkäufer übergibt ihm das Board und Leon zahlt. Laut § 929 BGB: Wann wird Leon Eigentümer des Skateboards?</div>
+          <div class="quiz-options" id="q3">
+            <button class="quiz-opt" onclick="checkQuiz('q3', this, false)"><span class="quiz-opt-letter">A</span> Schon bei Vertragsabschluss (wenn beide einverstanden sind)</button>
+            <button class="quiz-opt" onclick="checkQuiz('q3', this, true)"><span class="quiz-opt-letter">B</span> Erst wenn das Board übergeben wird UND beide einig sind, dass das Eigentum übergeht</button>
+            <button class="quiz-opt" onclick="checkQuiz('q3', this, false)"><span class="quiz-opt-letter">C</span> Erst wenn er die Quittung in der Hand hält</button>
+            <button class="quiz-opt" onclick="checkQuiz('q3', this, false)"><span class="quiz-opt-letter">D</span> Nie – er ist zu jung, um Eigentümer zu werden</button>
+          </div>
+          <div class="quiz-feedback" id="q3-fb"></div>
+        </div>
+        <hr class="divider">
+
+        <!-- Q4 -->
+        <div class="quiz-wrap">
+          <div class="quiz-q">4. Welche Aussage beschreibt den „Interessenausgleich" als Funktion des Rechts am besten?</div>
+          <div class="quiz-options" id="q4">
+            <button class="quiz-opt" onclick="checkQuiz('q4', this, false)"><span class="quiz-opt-letter">A</span> Das Recht bestraft immer die stärkere Partei</button>
+            <button class="quiz-opt" onclick="checkQuiz('q4', this, false)"><span class="quiz-opt-letter">B</span> Das Recht sorgt dafür, dass alle immer gewinnen</button>
+            <button class="quiz-opt" onclick="checkQuiz('q4', this, true)"><span class="quiz-opt-letter">C</span> Das Recht versucht, einen gerechten Ausgleich zwischen den Interessen aller Beteiligten herzustellen</button>
+            <button class="quiz-opt" onclick="checkQuiz('q4', this, false)"><span class="quiz-opt-letter">D</span> Das Recht schützt nur die wirtschaftlich schwächere Partei</button>
+          </div>
+          <div class="quiz-feedback" id="q4-fb"></div>
+        </div>
+
+        <div id="quiz-score" style="margin-top:1.25rem; display:none;">
+          <div class="info-box teal">
+            <strong id="score-text"></strong>
+            <span id="score-sub"></span>
+          </div>
+        </div>
+
+        <div class="badge-reveal" id="badge-1">
+          <div class="badge-icon">🔰</div>
+          <div class="badge-title">Abzeichen freigeschaltet!</div>
+          <div class="badge-sub">„Rechtseinsteiger" – Du hast Stunde 1 erfolgreich abgeschlossen.</div>
+        </div>
+
+        <div class="nav-btns" style="margin-top:1.5rem;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /main -->
+
+<script>
+  let currentStep = 1;
+  let totalSteps = 5;
+  let quizAnswers = {};
+  let pollAnswered = {};
+
+  function setVersion(v) {
+    const body = document.getElementById('body-root');
+    const btnA = document.getElementById('btn-version-a');
+    const btnB = document.getElementById('btn-version-b');
+    if (v === 'b') {
+      body.classList.add('version-b');
+      btnA.classList.remove('active');
+      btnB.classList.add('active');
+      document.querySelectorAll('.teacher-only').forEach(el => el.style.display = 'block');
+    } else {
+      body.classList.remove('version-b');
+      btnA.classList.add('active');
+      btnB.classList.remove('active');
+      document.querySelectorAll('.teacher-only').forEach(el => el.style.display = 'none');
+    }
+  }
+
+  function goToStep(n) {
+    if (n > currentStep && n > 1) return; // only allow going back or to completed steps
+    document.getElementById('step-' + currentStep).classList.remove('active');
+    currentStep = n;
+    document.getElementById('step-' + currentStep).classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function nextStep(from) {
+    if (from < totalSteps) {
+      document.getElementById('step-' + from).classList.remove('active');
+      currentStep = from + 1;
+      document.getElementById('step-' + currentStep).classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 60, behavior: 'smooth' });
+    }
+  }
+
+  function prevStep(from) {
+    if (from > 1) {
+      document.getElementById('step-' + from).classList.remove('active');
+      currentStep = from - 1;
+      document.getElementById('step-' + currentStep).classList.add('active');
+      updateProgress();
+      window.scrollTo({ top: 60, behavior: 'smooth' });
+    }
+  }
+
+  function updateProgress() {
+    for (let i = 1; i <= totalSteps; i++) {
+      const step = document.getElementById('prog-' + i);
+      const line = document.getElementById('line-' + i);
+      step.classList.remove('active', 'done');
+      if (i < currentStep) { step.classList.add('done'); if (line) line.classList.add('done'); }
+      else if (i === currentStep) { step.classList.add('active'); if (line) line.classList.remove('done'); }
+      else { if (line) line.classList.remove('done'); }
+    }
+  }
+
+  function selectPoll(pollId, el, idx) {
+    if (pollAnswered[pollId]) return;
+    pollAnswered[pollId] = true;
+    el.classList.add('selected');
+    document.getElementById(pollId + '-result').classList.add('visible');
+  }
+
+  function revealSolution(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('visible');
+    const btn = el.previousElementSibling;
+    if (el.classList.contains('visible')) {
+      btn.textContent = '▲ Musterlösung ausblenden';
+    } else {
+      btn.textContent = '✓ Musterlösung anzeigen';
+    }
+  }
+
+  function checkQuiz(qId, btn, isCorrect) {
+    const container = document.getElementById(qId);
+    if (container.dataset.answered) return;
+    container.dataset.answered = 'true';
+    quizAnswers[qId] = isCorrect;
+    const allBtns = container.querySelectorAll('.quiz-opt');
+    allBtns.forEach(b => b.classList.add('disabled'));
+    const fb = document.getElementById(qId + '-fb');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      fb.textContent = '✓ Richtig!';
+      fb.className = 'quiz-feedback correct';
+      if (qId === 'q1') fb.textContent = '✓ Richtig! Die Friedensfunktion besagt, dass Konflikte über den Staat (Gerichte) und nicht durch Gewalt gelöst werden sollen.';
+      if (qId === 'q2') fb.textContent = '✓ Richtig! Tatbestandsmerkmale sind die Voraussetzungen (das „Wenn") einer Rechtsnorm.';
+      if (qId === 'q3') fb.textContent = '✓ Richtig! § 929 BGB verlangt Übergabe UND Einigung – beides zusammen macht den Eigentumsübergang aus.';
+      if (qId === 'q4') fb.textContent = '✓ Richtig! Interessenausgleich bedeutet, dass das Recht fair zwischen allen Beteiligten vermittelt.';
+    } else {
+      btn.classList.add('wrong');
+      fb.className = 'quiz-feedback wrong';
+      if (qId === 'q1') fb.textContent = '✗ Nicht ganz. Die Friedensfunktion (Antwort B) ist hier am direktesten verletzt – Konflikte sollen ohne Gewalt gelöst werden.';
+      if (qId === 'q2') fb.textContent = '✗ Nicht ganz. Ein Tatbestandsmerkmal ist eine Voraussetzung (das „Wenn"), keine Konsequenz. Antwort C ist korrekt.';
+      if (qId === 'q3') fb.textContent = '✗ Nicht ganz. Laut § 929 BGB braucht es Übergabe + Einigung. Nur Bezahlen oder nur Einverständnis reicht nicht aus. Antwort B ist korrekt.';
+      if (qId === 'q4') fb.textContent = '✗ Nicht ganz. Interessenausgleich bedeutet nicht, dass immer alle gewinnen oder nur eine Seite geschützt wird. Antwort C ist korrekt.';
+    }
+    checkAllAnswered();
+  }
+
+  function checkAllAnswered() {
+    const qs = ['q1','q2','q3','q4'];
+    if (qs.every(q => document.getElementById(q).dataset.answered)) {
+      document.getElementById('quiz-score').style.display = 'block';
+      const correct = qs.filter(q => quizAnswers[q]).length;
+      const scoreText = document.getElementById('score-text');
+      const scoreSub = document.getElementById('score-sub');
+      scoreText.textContent = correct + ' von 4 Fragen richtig';
+      if (correct === 4) scoreSub.textContent = ' – Perfekt! Du hast alle Fragen richtig beantwortet.';
+      else if (correct >= 3) scoreSub.textContent = ' – Sehr gut! Schau dir die falschen Antworten noch einmal an.';
+      else scoreSub.textContent = ' – Lies die Erklärungen nochmal durch und versuche es dann erneut.';
+    }
+  }
+
+  function finishQuiz() {
+    const qs = ['q1','q2','q3','q4'];
+    const correct = qs.filter(q => quizAnswers[q]).length;
+    if (correct >= 3) {
+      document.getElementById('badge-1').classList.add('visible');
+    } else {
+      alert('Du hast ' + correct + ' von 4 Fragen richtig. Lies die Inhalte noch einmal durch und versuche das Quiz erneut!');
+    }
+  }
+</script>
+</body>
+</html>
