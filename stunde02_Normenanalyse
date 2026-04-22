@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 2 – Normenanalyse üben &amp; Wissen sichern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;
+  --orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;
+  --red:#E53935;--red-light:#FFEBEE;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-card:#FFFFFF;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --grad-green:linear-gradient(135deg,#43A047,#26C6DA);
+  --grad-orange:linear-gradient(135deg,#FF9800,#F44336);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+  /* Aliases */
+  --indigo:var(--blue-700);--indigo-light:var(--blue-400);--indigo-xlight:var(--blue-50);
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --amber:var(--orange);--amber-light:var(--orange-light);
+  --rose:var(--red);--rose-light:var(--red-light);
+  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
+  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);
+  --radius:var(--radius-lg);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+
+/* TOPBAR */
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* PROGRESS */
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:color 0.2s;font-family:'Nunito',sans-serif;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+
+/* MAIN */
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* HERO */
+.hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-meta-item{display:flex;align-items:center;gap:5px;}
+
+/* TEACHER NOTE */
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* SECTION */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.red{background:var(--red-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:#ccfbf1;}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+
+/* PARA LINKS */
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;transition:color 0.15s;}
+a.para-link:hover{color:var(--blue-400);}
+
+/* PARAGRAPH QUOTE BOX – dark bg, always light text */
+.para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:0.75rem 0;}
+.para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:700;}
+.para-quote p,.task-body .para-quote p,.section-body .para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
+.para-quote .para-ref,.task-body .para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
+.para-quote a{color:var(--blue-400) !important;border-bottom-color:var(--blue-400) !important;}
+
+/* BOOK REF */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+
+/* CONTENT */
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.teal{background:#ccfbf1;border-left:3px solid #0d9488;color:#134e4a;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box strong{font-weight:700;display:block;margin-bottom:4px;}
+
+/* CHIPS */
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
+.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
+.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
+.chip.c2{background:#ccfbf1;border-color:#99f6e4;color:#0f766e;}
+.chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
+.chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
+
+/* TASK */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-size:13px;font-weight:700;color:white;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
+.task-body p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-body p:last-child{margin-bottom:0;}
+
+/* NORMEN TABLE */
+.normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
+.normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.75rem;color:var(--text);}
+.normen-table{width:100%;border-collapse:collapse;font-size:13px;}
+.normen-table th{background:var(--blue-700);color:white;padding:8px 12px;text-align:left;font-weight:700;font-size:12px;}
+.normen-table th:first-child{border-radius:8px 0 0 0;}
+.normen-table th:last-child{border-radius:0 8px 0 0;}
+.normen-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5;}
+.normen-table tr:last-child td{border-bottom:none;}
+.normen-table tr:nth-child(even) td{background:#f8fafc;}
+.normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
+.normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
+
+/* ANSWER AREA */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+
+/* SOLUTION BTN */
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* NORMEN DIAGRAM */
+.normen-diagram{display:flex;align-items:stretch;border-radius:var(--radius-md);overflow:hidden;border:1.5px solid var(--border);margin:1rem 0;}
+.normen-col{flex:1;padding:1.1rem 1.2rem;}
+.normen-col.left{background:var(--blue-50);}
+.normen-col.mid{flex:0 0 60px;display:flex;align-items:center;justify-content:center;background:var(--blue-700);font-size:22px;color:white;}
+.normen-col.right{background:var(--green-light);}
+.normen-col-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;}
+.normen-col.left .normen-col-label{color:var(--blue-700);}
+.normen-col.right .normen-col-label{color:var(--green);}
+.normen-item{font-size:13px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.08);color:var(--text);line-height:1.4;}
+.normen-item:last-child{border-bottom:none;}
+
+/* KI BOX */
+.ki-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.ki-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.ki-text{font-size:14px;color:#14532d;line-height:1.6;}
+.ki-text strong{font-weight:700;display:block;margin-bottom:3px;}
+.ki-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#0d9488;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
+
+/* MEBIS BOX */
+.mebis-box{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border:1.5px solid #a78bfa;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.mebis-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.mebis-text{font-size:14px;color:#3b0764;line-height:1.6;}
+.mebis-text strong{font-weight:700;display:block;margin-bottom:3px;}
+.mebis-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#7c3aed;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
+
+/* QUIZ */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+
+/* NAV BTNS */
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+
+/* BADGE */
+.badge-reveal{border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:1.5rem;display:none;background:linear-gradient(135deg,#1e293b,#334155);}
+.badge-reveal.visible{display:block;}
+.badge-canvas-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
+.badge-name{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:white;margin-bottom:0.4rem;}
+.badge-sub{font-size:14px;color:#94a3b8;margin-bottom:1.25rem;}
+.badge-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;}
+.badge-dl:hover{background:var(--blue-800);}
+
+/* STEPS */
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ABFRAGE */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:#0d9488;}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:#0d9488;}
+.abfrage-q-label.komm{color:var(--orange);}
+.abfrage-q-label.kreativ{color:var(--red);}
+.abfrage-q-text{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+.abfrage-q-body{padding:0.9rem 1.1rem;border-top:1px solid var(--border);background:white;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+
+/* PIN MODAL */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;transition:color 0.15s;font-family:'Nunito',sans-serif;}
+.pin-cancel:hover{color:var(--text);}
+
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}}
+</style>
+</head>
+<body id="body-root">
+
+<div class="topbar">
+  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 2</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Wiederholung</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Normen üben</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>StGB-Normen</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>KI-Aufgabe</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz &amp; Badge</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">⚖️ Modul 1 · Recht &amp; Normen</div>
+  <h1>Normenanalyse üben &amp; Wissen sichern</h1>
+  <p>Du kennst das Wenn-Dann-Schema schon aus Stunde 1. Jetzt wendest du es auf neue Paragrafen aus BGB und StGB an – und testest am Ende dein gesamtes Wissen aus Modul 1.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 56–57</div>
+    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Schüler arbeiten in Schritten 1–4 selbstständig. Du führst die mündliche Abfrage (Schritt 6) am Ende durch.</p>
+  <ul>
+    <li>Schritt 1: Kurze Aktivierung (ca. 3 Min.) – Schüler rufen sich das Schema aus Stunde 1 in Erinnerung.</li>
+    <li>Schritte 2–3: Normenarbeit EA – typischer Fehler: TB zu allgemein formuliert. Lasse nach Schritt 2 kurz vergleichen.</li>
+    <li>Schritt 4: KI-Vergleich Fobizz – wichtig für Medienkompetenz, nicht überspringen.</li>
+    <li>Schritt 5: Quiz + Badge → nach Abschluss mebis-Badge freischalten.</li>
+    <li>Optional: Kreuzworträtsel S. 54 (AB_54) steht als Zusatzaufgabe für schnelle Schüler zur Verfügung.</li>
+  </ul>
+</div>
+
+<!-- STEP 1: WIEDERHOLUNG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">🔄</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Aktivierung</div>
+        <div class="section-title">Das Wenn-Dann-Schema – kurze Wiederholung</div>
+        <div class="section-time">⏱ ca. 3 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip k">Klassenführung</span><span class="chip c1">Veranschaulichung</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Lass Schüler das Schema ohne Hilfe aus dem Gedächtnis ergänzen. 2 Min. Einzelarbeit, dann kurzer Vergleich mit dem Nachbarn.</p></div></div>
+
+      <p class="content-text">Bevor du neue Paragrafen analysierst: Kannst du das Schema aus Stunde 1 noch aus dem Gedächtnis ergänzen?</p>
+
+      <div class="normen-diagram">
+        <div class="normen-col left">
+          <div class="normen-col-label">WENN … (Tatbestand)</div>
+          <div class="normen-item">🔹 Voraussetzungen, die erfüllt sein müssen</div>
+          <div class="normen-item">🔹 Beschreibt den Sachverhalt</div>
+          <div class="normen-item">🔹 Oft mehrere Merkmale: TB 1, TB 2 …</div>
+        </div>
+        <div class="normen-col mid">→</div>
+        <div class="normen-col right">
+          <div class="normen-col-label">DANN … (Rechtsfolge)</div>
+          <div class="normen-item">✅ Was rechtlich passiert</div>
+          <div class="normen-item">✅ Anspruch, Pflicht, Recht …</div>
+          <div class="normen-item">✅ Ergibt sich automatisch aus dem TB</div>
+        </div>
+      </div>
+
+      <div class="info-box blue">
+        <strong>💡 Merke: Das Schema gilt für alle Rechtsnormen – BGB, StGB, StVO, SchulO …</strong>
+        Egal ob Bußgeld, Schadensersatz oder Eigentumsübergang: Immer erst den Tatbestand prüfen, dann die Rechtsfolge ableiten.
+      </div>
+
+      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Normen üben →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: NORMEN BGB -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">📋</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Normenanalyse BGB</div>
+        <div class="section-title">§ 903 und § 985 BGB analysieren</div>
+        <div class="section-time">⏱ ca. 10 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Buchverweis: Aufgaben 2 und 3 auf Seite 57. Typischer Fehler: Schüler schreiben zu allgemeine TB (z.B. „jemand hat etwas" statt „Eigentümer einer Sache"). Nach der Aufgabe kurz im Plenum vergleichen.</p></div></div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Lies die Normen auf Seite <strong>57, Aufgaben 2 und 3</strong> in deinem Buch. Beachte dabei: Was ist der Unterschied zwischen Eigentum (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a>) und dem Recht auf Herausgabe (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a>)?</div>
+        </div>
+      </div>
+
+      <div class="normen-exercise">
+        <h4>Aufgabe 1 – <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a> – Befugnisse des Eigentümers</h4>
+        <div class="para-quote">
+          <div class="para-label"><a href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a> – Befugnisse des Eigentümers</div>
+          <p>„Der Eigentümer einer Sache kann, soweit nicht das Gesetz oder Rechte Dritter entgegenstehen, mit der Sache nach Belieben verfahren und andere von jeder Einwirkung ausschließen."</p>
+          <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">gesetze-im-internet.de – § 903 BGB ↗</a></div>
+        </div>
+        <table class="normen-table">
+          <thead><tr><th>Tatbestandsmerkmal(e)</th><th>Norm</th><th>Rechtsfolge(n)</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="TB 1 …"></td>
+              <td rowspan="2" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a></td>
+              <td><input type="text" placeholder="RF 1 …"></td>
+            </tr>
+            <tr>
+              <td><input type="text" placeholder="TB 2 …"></td>
+              <td><input type="text" placeholder="RF 2 …"></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="solution-btn" onclick="revealSolution('sol-903')">✓ Musterlösung anzeigen</button>
+        <div class="solution-reveal" id="sol-903">
+          <strong>Tatbestandsmerkmale:</strong><br>
+          TB 1: Jemand ist Eigentümer einer Sache<br>
+          TB 2: Kein Gesetz und keine Rechte Dritter stehen entgegen<br><br>
+          <strong>Rechtsfolgen:</strong><br>
+          RF 1: Der Eigentümer darf mit der Sache nach Belieben verfahren<br>
+          RF 2: Der Eigentümer darf andere von jeder Einwirkung auf die Sache ausschließen
+        </div>
+      </div>
+
+      <div class="normen-exercise">
+        <h4>Aufgabe 2 – <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> – Herausgabeanspruch</h4>
+        <div class="para-quote">
+          <div class="para-label"><a href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> – Herausgabeanspruch</div>
+          <p>„Der Eigentümer kann von dem Besitzer die Herausgabe der Sache verlangen."</p>
+          <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">gesetze-im-internet.de – § 985 BGB ↗</a></div>
+        </div>
+        <table class="normen-table">
+          <thead><tr><th>Tatbestandsmerkmal(e)</th><th>Norm</th><th>Rechtsfolge</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="TB 1 …"></td>
+              <td rowspan="2" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a></td>
+              <td rowspan="2"><input type="text" placeholder="RF …"></td>
+            </tr>
+            <tr><td><input type="text" placeholder="TB 2 …"></td></tr>
+          </tbody>
+        </table>
+        <button class="solution-btn" onclick="revealSolution('sol-985')">✓ Musterlösung anzeigen</button>
+        <div class="solution-reveal" id="sol-985">
+          <strong>Tatbestandsmerkmale:</strong><br>
+          TB 1: Jemand ist Eigentümer einer Sache<br>
+          TB 2: Ein anderer hat den Besitz an dieser Sache (ist Besitzer)<br><br>
+          <strong>Rechtsfolge:</strong><br>
+          RF: Der Eigentümer kann vom Besitzer verlangen, dass ihm die Sache herausgegeben wird<br><br>
+          <em>💡 Merke: § 985 BGB zeigt, dass Eigentum und Besitz getrennt sein können. Wer Eigentümer ist, hat das Recht auf Herausgabe – auch wenn er die Sache gerade nicht in der Hand hält.</em>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: StGB-Normen →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: STGB NORMEN -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">⚖️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Normenanalyse StGB</div>
+        <div class="section-title">§ 242 StGB – Recht hat zwei Seiten: BGB &amp; StGB</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Buchverweis: Aufgabe 2 auf Seite 57 (§ 242 StGB). Wichtig: Schüler erkennen sollen, dass bei einem Diebstahl BEIDE Rechtsbereiche greifen – zivilrechtlicher Herausgabeanspruch (§ 985 BGB) UND strafrechtliche Folge (§ 242 StGB).</p></div></div>
+
+      <p class="content-text">Nicht nur das BGB enthält Normen – auch das Strafgesetzbuch (StGB) folgt dem Wenn-Dann-Schema. Analysiere den bekanntesten Paragraf des deutschen Strafrechts:</p>
+
+      <div class="normen-exercise">
+        <h4>Aufgabe 3 – <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 Abs. 1 StGB</a> – Diebstahl</h4>
+        <div class="para-quote">
+          <div class="para-label"><a href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 Abs. 1 StGB</a> – Diebstahl</div>
+          <p>„Wer eine fremde bewegliche Sache einem anderen in der Absicht wegnimmt, die Sache sich oder einem Dritten rechtswidrig zuzueignen, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft."</p>
+          <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">gesetze-im-internet.de – § 242 StGB ↗</a></div>
+        </div>
+        <table class="normen-table">
+          <thead><tr><th>Tatbestandsmerkmal(e)</th><th>Norm</th><th>Rechtsfolge</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><input type="text" placeholder="TB 1 …"></td>
+              <td rowspan="4" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 I StGB</a></td>
+              <td rowspan="4"><input type="text" placeholder="RF …"></td>
+            </tr>
+            <tr><td><input type="text" placeholder="TB 2 …"></td></tr>
+            <tr><td><input type="text" placeholder="TB 3 …"></td></tr>
+            <tr><td><input type="text" placeholder="TB 4 …"></td></tr>
+          </tbody>
+        </table>
+        <button class="solution-btn" onclick="revealSolution('sol-242')">✓ Musterlösung anzeigen</button>
+        <div class="solution-reveal" id="sol-242">
+          <strong>Tatbestandsmerkmale:</strong><br>
+          TB 1: Es geht um eine fremde bewegliche Sache<br>
+          TB 2: Jemand nimmt diese Sache einem anderen weg<br>
+          TB 3: Die Wegnahme erfolgt in der Absicht, die Sache sich selbst oder einem Dritten zuzueignen<br>
+          TB 4: Diese Zueignung ist rechtswidrig (ohne Erlaubnis)<br><br>
+          <strong>Rechtsfolge:</strong><br>
+          RF: Freiheitsstrafe bis zu 5 Jahren oder Geldstrafe
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header"><div class="task-num">💬</div><div class="task-title">Transferaufgabe – Buchverweis S. 57, Aufgabe 2</div></div>
+        <div class="task-body">
+          <p>Bearbeite <strong>Aufgabe 2 auf Seite 57</strong> in deinem Buch: Ein Fahrrad wird gestohlen. Welche Normen greifen gleichzeitig – und warum betreffen sie zwei verschiedene Rechtsbereiche?</p>
+          <textarea class="answer-area" placeholder="Zivilrechtliche Folge (BGB): ...&#10;Strafrechtliche Folge (StGB): ...&#10;Unterschied: ..."></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-transfer')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-transfer">
+            <strong>Zivilrechtliche Folge (BGB):</strong><br>
+            Der Eigentümer kann vom Dieb die Herausgabe des Fahrrads verlangen (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a>). Das Zivilrecht regelt die Beziehung zwischen den beiden Personen – Eigentümer und Besitzer.<br><br>
+            <strong>Strafrechtliche Folge (StGB):</strong><br>
+            Der Dieb begeht einen Diebstahl (<a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 StGB</a>) und muss mit einer Strafe rechnen. Das Strafrecht schützt das öffentliche Interesse – der Staat verfolgt die Tat.<br><br>
+            <strong>Unterschied:</strong><br>
+            Das <em>Zivilrecht</em> (BGB) regelt Rechte zwischen Privatpersonen. Das <em>Strafrecht</em> (StGB) schützt das gesellschaftliche Zusammenleben – hier tritt der Staat als Verfolger auf, nicht das Opfer.
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: KI-Aufgabe →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: KI-AUFGABE -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🤖</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · KI &amp; Reflexion</div>
+        <div class="section-title">KI als Rechtserklärer – kritisch vergleichen</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit mit Fobizz</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c4">Kreativität</span><span class="chip k">Kompetenzorientiert</span><span class="chip c2">Individualisiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Kernziel dieser Aufgabe: Schüler merken, wo KI ungenau oder zu vereinfacht erklärt. Wichtig für Medienkompetenz. Lass 1–2 Schüler ihre Vergleiche am Ende kurz vorstellen.</p></div></div>
+
+      <p class="content-text">Du hast jetzt drei Normen analysiert. Teste jetzt, wie gut eine KI das gleiche leisten kann – und wo du kritisch hinschauen musst.</p>
+
+      <div class="ki-box">
+        <div class="ki-icon">🤖</div>
+        <div class="ki-text">
+          <strong>KI-Aufgabe: § 985 BGB erklären lassen</strong>
+          Öffne Fobizz und stelle der KI folgende Frage:<br>
+          <em>„Erkläre mir § 985 BGB in einfachen Worten. Was sind die Tatbestandsmerkmale und die Rechtsfolge? Gib mir ein Alltagsbeispiel."</em><br><br>
+          Vergleiche die Antwort dann mit deiner eigenen Normenanalyse aus Schritt 2.
+          <br><a href="https://plattform.fobizz.com" target="_blank" class="ki-link">Zu Fobizz →</a>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Reflexionsaufgabe – nach der KI-Antwort</div></div>
+        <div class="task-body">
+          <p>Beantworte nach dem Fobizz-Gespräch folgende Fragen:</p>
+          <textarea class="answer-area" style="min-height:100px;" placeholder="1. Was hat die KI gut erklärt? ...&#10;&#10;2. Was fehlt in der KI-Antwort oder ist ungenau? ...&#10;&#10;3. Worin unterscheidet sich die KI-Erklärung von deiner Normentabelle?"></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-ki')">📋 Reflexionshilfe anzeigen</button>
+          <div class="solution-reveal" id="sol-ki">
+            <strong>Typische Stärken der KI:</strong><br>
+            • Alltagsbeispiele sind oft anschaulich und leicht verständlich<br>
+            • Einfache Sprache, gut als erster Einstieg<br><br>
+            <strong>Typische Schwächen der KI:</strong><br>
+            • Tatbestandsmerkmale oft nicht klar nummeriert (TB 1, TB 2 …)<br>
+            • Rechtsfolge und Tatbestand nicht immer sauber getrennt<br>
+            • Kann veraltete Gesetzestexte zitieren (immer mit gesetze-im-internet.de prüfen!)<br>
+            • Keine Haftung für Fehler – KI ist kein Rechtsanwalt<br><br>
+            <em>Fazit: KI ist ein hilfreicher Einstieg – aber du musst die Normenanalyse selbst können und KI-Ausgaben kritisch prüfen.</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz &amp; Badge →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: QUIZ + BADGE -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🏆</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Wissenssicherung</div>
+        <div class="section-title">Abschluss-Quiz – Modul 1 abschließen</div>
+        <div class="section-time">⏱ ca. 7 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Nach dem Quiz: Frage 3 und 4 im Plenum besprechen – Schüler sollen begründen, nicht nur raten. Danach mebis-Badge freischalten.</p></div></div>
+
+      <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen aus Modul 1 (Stunden 1 &amp; 2). Bei 3 oder mehr richtigen Antworten schaltest du das Abzeichen <strong>„Rechtseinsteiger"</strong> frei!</p>
+
+      <!-- Q1 -->
+      <div class="quiz-wrap">
+        <div class="quiz-q">1. Was beschreibt der Begriff „Tatbestandsmerkmal" in einer Rechtsnorm?</div>
+        <div class="quiz-options" id="q1">
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Die Strafe, die bei einem Gesetzesverstoß verhängt wird</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Eine Voraussetzung, die erfüllt sein muss, damit die Rechtsfolge eintritt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Der Name des zuständigen Richters</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Der Paragraph, der eine Tat als Verbrechen einstuft</button>
+        </div>
+        <div class="quiz-feedback" id="q1-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <!-- Q2 -->
+      <div class="quiz-wrap">
+        <div class="quiz-q">2. Lena ist Eigentümerin ihres Fahrrads. Ihr Bruder hat es ohne Erlaubnis genommen und fährt damit. Was kann Lena laut <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> verlangen?</div>
+        <div class="quiz-options" id="q2">
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Schadensersatz für die Abnutzung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">B</span>Die Herausgabe des Fahrrads</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">C</span>Eine Geldstrafe für ihren Bruder</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Nichts – sie ist selbst schuld, da sie es nicht abgeschlossen hat</button>
+        </div>
+        <div class="quiz-feedback" id="q2-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <!-- Q3 -->
+      <div class="quiz-wrap">
+        <div class="quiz-q">3. Warum greifen beim Fahrraddiebstahl ZWEI verschiedene Rechtsbereiche gleichzeitig?</div>
+        <div class="quiz-options" id="q3">
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span>Weil das Fahrrad besonders wertvoll ist</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span>Weil der Dieb zwei verschiedene Gesetze gleichzeitig unterschreiben muss</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">C</span>Weil das Zivilrecht (BGB) die Beziehung zwischen den Personen regelt und das Strafrecht (StGB) das öffentliche Interesse schützt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Weil der Geschädigte sich aussuchen darf, welches Recht er anwendet</button>
+        </div>
+        <div class="quiz-feedback" id="q3-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <!-- Q4 -->
+      <div class="quiz-wrap">
+        <div class="quiz-q">4. Was ist die Rechtsfolge aus <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a>, wenn jemand Eigentümer einer Sache ist?</div>
+        <div class="quiz-options" id="q4">
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span>Der Eigentümer muss die Sache bei der Gemeinde registrieren lassen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">B</span>Der Eigentümer darf mit der Sache nach Belieben verfahren und andere von der Einwirkung ausschließen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">C</span>Der Eigentümer muss die Sache versichern</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span>Der Eigentümer bekommt automatisch den Besitz an der Sache</button>
+        </div>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <div id="quiz-score" style="margin-top:1.25rem;display:none;">
+        <div class="info-box teal"><strong id="score-text"></strong><span id="score-sub"></span></div>
+        <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+          <button class="btn-secondary" style="border-color:var(--red);color:var(--red);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+        </div>
+      </div>
+
+      <div class="badge-reveal" id="badge-1">
+        <div class="badge-canvas-wrap"><canvas id="badge-canvas" width="280" height="280"></canvas></div>
+        <div class="badge-name">🔰 Rechtseinsteiger</div>
+        <div class="badge-sub">Modul 1 abgeschlossen · WR 10 · Lernbereich 2</div>
+        <a id="badge-dl" class="badge-dl" download="badge_rechtseinsteiger.png">⬇ Badge als PNG herunterladen</a>
+      </div>
+
+      <div class="teacher-only" style="margin-top:1rem;">
+        <div class="mebis-box">
+          <div class="mebis-icon">🎓</div>
+          <div class="mebis-text">
+            <strong>mebis-Badge freischalten</strong>
+            Nach dem Quiz: Schalte den digitalen Badge „Rechtseinsteiger" in mebis für die Klasse frei. Schüler die das Quiz bestanden haben erhalten dort die offizielle Bestätigung für Modul 1.
+            <br><a href="https://www.mebis.bayerncloud.de" target="_blank" class="mebis-link">Zu mebis →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;">
+        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: ABFRAGE (nur Lehrkraft) -->
+<div class="step teacher-only" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage · nur Lehrkraft</div>
+        <div class="section-title">Abfrage – Stunde 2: Normenanalyse üben</div>
+        <div class="section-time">⏱ 10 Minuten · 1 Schüler · Notenbildung &amp; Sicherung</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
+        <div class="teacher-note-header">🎓 Hinweise zur Durchführung</div>
+        <p>Die Abfrage deckt alle vier 4K-Kompetenzen ab. Schwerpunkt dieser Stunde: Normenanalyse auf neue §§ anwenden und Unterschied Zivil-/Strafrecht erklären. Frage 3 bezieht sich auf die KI-Reflexion (Schritt 4).</p>
+        <ul>
+          <li>Fragen 1–2: Einzelleistung (Normenanalyse-Kompetenz)</li>
+          <li>Frage 3: Kommunikation – KI-Vergleich schildern</li>
+          <li>Frage 4: Kreativ-Transfer – eigener Fall erfinden</li>
+        </ul>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid var(--blue-400);color:var(--blue-700);">🔵 Wissen</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:#ccfbf1;border:1px solid #99f6e4;color:#0f766e;">🟢 Kritisches Denken</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--orange-light);border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--red-light);border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
+      </div>
+
+      <div class="abfrage-wrap">
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Analysiere § 985 BGB vollständig: Nenne alle Tatbestandsmerkmale und die Rechtsfolge.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Schüler soll § 985 BGB ohne Notizen aus dem Gedächtnis analysieren. Vollständige Antwort: TB 1 + TB 2 + RF.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew1">
+              <strong>Vollständige Antwort (3 Punkte):</strong><br>
+              TB 1: Jemand ist Eigentümer einer Sache (1 P.)<br>
+              TB 2: Ein anderer hat den Besitz an dieser Sache (1 P.)<br>
+              RF: Der Eigentümer kann vom Besitzer die Herausgabe der Sache verlangen (1 P.)<br><br>
+              <em>Teilpunkt möglich wenn RF korrekt aber TB unvollständig.</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Tims Fahrrad wird gestohlen. Welche Rechtsnormen greifen – und aus welchen zwei Rechtsbereichen stammen sie? Erkläre den Unterschied.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet wird: korrekte Zuordnung der §§ zu den Rechtsbereichen + schlüssige Erklärung des Unterschieds.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew2">
+              <strong>Zivilrecht (BGB):</strong> Tim kann gemäß § 985 BGB die Herausgabe des Fahrrads verlangen (Beziehung zwischen Tim und dem Dieb als Privatpersonen).<br><br>
+              <strong>Strafrecht (StGB):</strong> Der Dieb hat einen Diebstahl begangen (§ 242 StGB) und muss mit staatlicher Strafe rechnen. Der Staat verfolgt die Tat im öffentlichen Interesse.<br><br>
+              <strong>Unterschied:</strong> Das Zivilrecht regelt Rechte zwischen Privatpersonen. Das Strafrecht schützt die Gesellschaft – hier tritt der Staat als Ankläger auf, nicht das Opfer.
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Du hast eine KI gebeten, § 985 BGB zu erklären. Was hat die KI gut gemacht – und wo warst du kritisch? Erkläre deinen Vergleichsprozess.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Schüler schildert den eigenen Reflexionsprozess. Bewertet: Qualität der Kritik, nicht die KI-Antwort selbst.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew3">
+              <strong>Gute Antwort enthält:</strong><br>
+              • Eine konkrete Stärke der KI (z.B. verständliches Alltagsbeispiel)<br>
+              • Eine konkrete Schwäche oder Ungenauigkeit (z.B. TB nicht klar getrennt, keine Nummerierung)<br>
+              • Erklärung, warum man KI-Ausgaben immer mit dem Originalgesetz prüfen sollte<br><br>
+              <em>Hinweis: Es gibt keine falsche Antwort – bewertet wird das kritische Denken, nicht das Ergebnis.</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erfinde einen kurzen Alltagsfall, in dem § 903 BGB und § 985 BGB gleichzeitig relevant sind. Erkläre welche Norm welche Rolle spielt.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Schüler erfindet einen eigenen Fall – kein Beispiel aus dem Unterricht übernehmen. Bewertet: Korrekte Anwendung beider Normen + kreative Fallkonstruktion.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew4">
+              <strong>Guter Fall enthält:</strong><br>
+              • Einen konkreten Sachverhalt (wer hat was, wer hat es gerade)<br>
+              • § 903 BGB: der Eigentümer darf mit der Sache nach Belieben verfahren<br>
+              • § 985 BGB: der Eigentümer kann die Herausgabe verlangen<br><br>
+              <em>Beispiel: „Anna leiht ihrer Freundin ihr Handy. Nach einer Woche gibt die Freundin es nicht zurück. Anna kann gemäß § 985 BGB die Herausgabe verlangen – sie ist Eigentümerin (§ 903 BGB) und darf andere von der Einwirkung ausschließen."</em>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;">
+        <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
+        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein,<br>um die Lehrkraft-Version freizuschalten.</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div>
+    </div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button>
+      <button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN = '123456';
+let pinInput='', cur=1, quizA={}, pollD={};
+const TOTAL_STEPS = 6;
+
+function openPinModal(){
+  if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}
+  pinInput='';updatePinDots();
+  document.getElementById('pin-error').textContent='';
+  document.getElementById('pin-overlay').classList.add('open');
+}
+function closePinModal(){
+  document.getElementById('pin-overlay').classList.remove('open');
+  pinInput='';updatePinDots();
+}
+function pinKey(d){
+  if(pinInput.length>=6)return;
+  pinInput+=d;updatePinDots();
+  if(pinInput.length===6)setTimeout(checkPin,120);
+}
+function pinDel(){
+  pinInput=pinInput.slice(0,-1);updatePinDots();
+  document.getElementById('pin-error').textContent='';
+}
+function updatePinDots(){
+  for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);
+}
+function checkPin(){
+  if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}
+  else{
+    document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';
+    pinInput='';updatePinDots();
+    const box=document.querySelector('.pin-box');
+    box.style.animation='none';
+    setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);
+  }
+}
+
+function setVersion(v){
+  const b=document.getElementById('body-root');
+  document.getElementById('btn-a').classList.toggle('active',v==='a');
+  document.getElementById('btn-b').classList.toggle('active',v==='b');
+  if(v==='b'){
+    b.classList.add('version-b');
+    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');
+    document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';
+  } else {
+    b.classList.remove('version-b');
+    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');
+    document.getElementById('btn-b').textContent='🎓 Lehrkraft';
+    if(cur===6)goToStep(5);
+  }
+}
+
+function goToStep(n){
+  if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;
+  document.getElementById('step-'+cur).classList.remove('active');
+  cur=n;
+  document.getElementById('step-'+cur).classList.add('active');
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);
+    if(!s)continue;
+    s.classList.remove('active','done');
+    if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}
+    else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}
+    else if(l)l.classList.remove('done');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+
+function revealSolution(id){
+  const el=document.getElementById(id);el.classList.toggle('visible');
+  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';
+}
+function toggleErwartung(id){
+  const el=document.getElementById(id);el.classList.toggle('visible');
+  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Erwartungshorizont ausblenden':'📋 Erwartungshorizont anzeigen';
+}
+
+function checkQuiz(qId,btn,ok){
+  const c=document.getElementById(qId);if(c.dataset.answered)return;
+  c.dataset.answered='true';quizA[qId]=ok;
+  c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));
+  const fb=document.getElementById(qId+'-fb');
+  const yes={
+    q1:'✓ Richtig! Tatbestandsmerkmale sind die Voraussetzungen – das „Wenn" einer Rechtsnorm.',
+    q2:'✓ Richtig! § 985 BGB gibt dem Eigentümer das Recht, die Herausgabe vom Besitzer zu verlangen.',
+    q3:'✓ Richtig! BGB = Beziehung zwischen Privatpersonen · StGB = Staat schützt öffentliches Interesse.',
+    q4:'✓ Richtig! § 903 BGB gibt dem Eigentümer das Recht, mit der Sache nach Belieben zu verfahren und andere auszuschließen.'
+  };
+  const no={
+    q1:'✗ Nicht ganz. Ein Tatbestandsmerkmal ist eine Voraussetzung (das „Wenn"), keine Konsequenz. → B ist korrekt.',
+    q2:'✗ Nicht ganz. § 985 BGB gibt den Herausgabeanspruch – Lena kann das Fahrrad zurückfordern. → B ist korrekt.',
+    q3:'✗ Nicht ganz. Der Unterschied liegt in den Rechtsbereichen: BGB (privat) vs. StGB (öffentlich/staatlich). → C ist korrekt.',
+    q4:'✗ Nicht ganz. § 903 BGB regelt die Befugnisse des Eigentümers: nach Belieben verfahren + andere ausschließen. → B ist korrekt.'
+  };
+  if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}
+  else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+  const qs=['q1','q2','q3','q4'];
+  if(qs.every(q=>document.getElementById(q).dataset.answered)){
+    document.getElementById('quiz-score').style.display='block';
+    const n=qs.filter(q=>quizA[q]).length;
+    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
+    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
+    if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';
+  }
+}
+
+function finishQuiz(){
+  const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
+  if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}
+  else{
+    document.getElementById('quiz-score').style.display='block';
+    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
+    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch und versuche es erneut.';
+    document.getElementById('quiz-retry-wrap').style.display='block';
+  }
+}
+
+function retryQuiz(){
+  const qs=['q1','q2','q3','q4'];
+  qs.forEach(q=>{
+    const c=document.getElementById(q);delete c.dataset.answered;
+    c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));
+    document.getElementById(q+'-fb').className='quiz-feedback';
+    document.getElementById(q+'-fb').textContent='';
+  });
+  quizA={};
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('quiz-retry-wrap').style.display='none';
+  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
+}
+
+function drawBadge(){
+  const cv=document.getElementById('badge-canvas'),ctx=cv.getContext('2d');
+  const w=280,h=280,cx=140,cy=140,r=128;
+  const g=ctx.createRadialGradient(cx,cy-30,20,cx,cy,r);
+  g.addColorStop(0,'#1976D2');g.addColorStop(1,'#0D47A1');
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='#fbbf24';ctx.lineWidth=6;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,r-12,0,Math.PI*2);ctx.strokeStyle='rgba(251,191,36,0.2)';ctx.lineWidth=2;ctx.stroke();
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(cx,cy-60);ctx.bezierCurveTo(cx+52,cy-60,cx+62,cy-18,cx+62,cy+14);
+  ctx.bezierCurveTo(cx+62,cy+48,cx+24,cy+72,cx,cy+80);
+  ctx.bezierCurveTo(cx-24,cy+72,cx-62,cy+48,cx-62,cy+14);
+  ctx.bezierCurveTo(cx-62,cy-18,cx-52,cy-60,cx,cy-60);
+  ctx.closePath();ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fill();ctx.strokeStyle='#fbbf24';ctx.lineWidth=3;ctx.stroke();
+  ctx.restore();
+  ctx.font='bold 56px Georgia,serif';ctx.fillStyle='#fbbf24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('§',cx,cy-4);
+  ctx.font='bold 17px sans-serif';ctx.fillStyle='#ffffff';ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  ctx.fillText('RECHTS-',cx,cy+58);ctx.fillText('EINSTEIGER',cx,cy+79);
+  ctx.font='14px sans-serif';ctx.fillStyle='#fbbf24';ctx.textBaseline='middle';
+  ctx.fillText('★',cx-72,cy+26);ctx.fillText('★',cx+72,cy+26);
+  ctx.font='10px sans-serif';ctx.fillStyle='rgba(255,255,255,0.4)';ctx.textBaseline='alphabetic';
+  ctx.fillText('WR 10 · Lernbereich 2 · Modul 1',cx,cy+104);
+  document.getElementById('badge-dl').href=cv.toDataURL('image/png');
+}
+
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('pin-overlay').classList.contains('open'))return;
+  if(e.key>='0'&&e.key<='9')pinKey(e.key);
+  else if(e.key==='Backspace')pinDel();
+  else if(e.key==='Escape')closePinModal();
+});
+</script>
+<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
+</body>
+</html>
