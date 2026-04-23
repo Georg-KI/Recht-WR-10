@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 6 – Verpflichtungs- &amp; Erfüllungsgeschäft</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+  --indigo:var(--blue-700);--amber:var(--orange);--amber-light:var(--orange-light);
+  --rose:var(--red);--rose-light:var(--red-light);
+  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
+  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);--radius:var(--radius-lg);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+.hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-meta-item{display:flex;align-items:center;gap:5px;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.red{background:var(--red-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:var(--teal-light);}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;transition:color 0.15s;}
+a.para-link:hover{color:var(--blue-400);}
+.para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:0.75rem 0;}
+.para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:700;}
+.para-quote p,.task-body .para-quote p,.section-body .para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
+.para-quote .para-ref,.task-body .para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
+.para-quote a{color:var(--blue-400) !important;border-bottom-color:var(--blue-400) !important;}
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box strong{font-weight:700;display:block;margin-bottom:4px;}
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
+.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
+.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
+.chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
+.chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
+.chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
+/* ZEITSTRAHL */
+.zeitstrahl{margin:1.25rem 0;position:relative;}
+.zeitstrahl-line{position:absolute;top:28px;left:60px;right:60px;height:3px;background:var(--blue-400);z-index:0;}
+.zeitstrahl-steps{display:flex;justify-content:space-between;position:relative;z-index:1;}
+.zs-step{display:flex;flex-direction:column;align-items:center;width:30%;}
+.zs-dot{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:0.5rem;font-weight:700;border:3px solid white;box-shadow:var(--shadow);}
+.zs-dot.step1{background:var(--blue-700);color:white;}
+.zs-dot.step2{background:var(--orange);color:white;}
+.zs-dot.step3{background:var(--green);color:white;}
+.zs-label{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;text-align:center;margin-bottom:3px;}
+.zs-sub{font-size:11px;color:var(--text-secondary);text-align:center;line-height:1.4;}
+/* POLL */
+.poll{margin:1rem 0;}
+.poll-question{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.poll-options{display:flex;flex-direction:column;gap:8px;}
+.poll-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all 0.15s;background:white;}
+.poll-option:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.poll-option.selected{border-color:var(--blue-700);background:var(--blue-50);}
+.poll-option.selected .poll-radio{background:var(--blue-700);border-color:var(--blue-700);}
+.poll-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.15s;}
+.poll-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:white;display:none;margin:3px auto;}
+.poll-option.selected .poll-radio::after{display:block;}
+.poll-option-text{font-size:14px;color:var(--text);}
+.poll-result{margin-top:1rem;display:none;}
+.poll-result.visible{display:block;}
+.poll-result-text{background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:var(--blue-800);line-height:1.6;}
+/* NORMEN TABLE */
+.normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
+.normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.75rem;color:var(--text);}
+.normen-table{width:100%;border-collapse:collapse;font-size:13px;}
+.normen-table th{background:var(--blue-700);color:white;padding:8px 12px;text-align:left;font-weight:700;font-size:12px;}
+.normen-table th:first-child{border-radius:8px 0 0 0;}
+.normen-table th:last-child{border-radius:0 8px 0 0;}
+.normen-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5;}
+.normen-table tr:last-child td{border-bottom:none;}
+.normen-table tr:nth-child(even) td{background:#f8fafc;}
+.normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
+.normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
+/* TASK */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-title{font-size:13px;font-weight:700;color:white;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
+.task-body p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+/* WAHR/FALSCH */
+.wf-wrap{display:flex;flex-direction:column;gap:8px;margin:1rem 0;}
+.wf-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:14px;color:var(--text);}
+.wf-btns{display:flex;gap:6px;margin-left:auto;flex-shrink:0;}
+.wf-btn{padding:4px 12px;border-radius:6px;border:1.5px solid var(--border);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;transition:all 0.15s;background:white;}
+.wf-btn.wahr:hover,.wf-btn.wahr.selected{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.wf-btn.falsch:hover,.wf-btn.falsch.selected{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.wf-btn.correct{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.wf-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+/* QUIZ */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+/* ABFRAGE */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:var(--teal);}
+.abfrage-q-label.komm{color:var(--orange);}
+.abfrage-q-label.kreativ{color:var(--red);}
+.abfrage-q-text{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+.abfrage-q-body{padding:0.9rem 1.1rem;border-top:1px solid var(--border);background:white;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+/* PIN */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.zeitstrahl-steps{flex-direction:column;align-items:flex-start;gap:12px;}.zeitstrahl-line{display:none;}}
+</style>
+</head>
+<body id="body-root">
+<div class="topbar">
+  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 6</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Trennungsprinzip</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>§ 929 BGB</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Buchaufgaben</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">🛒 Modul 3 · Die Kaufhandlung</div>
+  <h1>Verpflichtungs- &amp; Erfüllungsgeschäft</h1>
+  <p>Ein Kaufvertrag schließen ist eine Sache – ihn erfüllen eine andere. Das Recht trennt beides strikt. Was passiert wirklich, wenn du ein Fahrrad kaufst? Und wann wirst du Eigentümer?</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 62–63</div>
+    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Kerninhalt: Trennungsprinzip (Verpflichtungs- vs. Erfüllungsgeschäft) + § 929 BGB. Achtung: zwei didaktische Schwerpunkte aus DK_62 beachten!</p>
+  <ul>
+    <li>⚠️ <strong>Lehrkraft muss Trennungsprinzip explizit hervorheben</strong> (DK_62): „Kaufvertrag = NUR Verpflichtung. Eigentum und Besitz gehen noch NICHT über!"</li>
+    <li>⚠️ <strong>Schülerfehlmeinung gezielt ansprechen</strong> (DK_62): „Bezahlen = Eigentümer werden" ist FALSCH. Als Wahr/Falsch-Aufgabe eingebaut.</li>
+    <li>Schritt 1: Pro/Contra-Poll zur Fehlmeinung – erst Meinungen sammeln, dann aufklären.</li>
+    <li>Schritt 3: Normenanalyse § 929 BGB in EA. Gute Differenzierung: Basis = § 929, Zusatz = Eigentumsvorbehalt § 449.</li>
+    <li>Schritt 4: Buchaufgaben S. 63, Aufg. 1–3.</li>
+  </ul>
+</div>
+
+<!-- STEP 1: EINSTIEG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🚲</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Einstieg</div>
+        <div class="section-title">Wann wirst du Eigentümer – wenn du zahlst?</div>
+        <div class="section-time">⏱ ca. 5 Minuten</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Wichtig</div><p>Diese Fehlvorstellung (Bezahlen = Eigentümer) ist laut DK_62 sehr verbreitet. Lass Schüler ERST abstimmen, DANN aufklären. Nicht gleich die richtige Antwort verraten!</p></div></div>
+
+      <div class="poll" id="poll-1">
+        <div class="poll-question">Du kaufst ein Fahrrad für 300 € und bezahlst sofort. Wann wirst du rechtlich gesehen Eigentümer?</div>
+        <div class="poll-options">
+          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Schon beim Vertragsabschluss – also wenn du und der Verkäufer einig seid</div></div>
+          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Wenn du bezahlst – mit der Zahlung gehört es dir</div></div>
+          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Wenn dir das Fahrrad übergeben wird UND ihr euch einig seid, dass das Eigentum übergeht</div></div>
+          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Wenn du eine Quittung erhältst</div></div>
+        </div>
+        <div class="poll-result" id="poll-1-result">
+          <div class="poll-result-text">✅ <strong>Antwort C ist korrekt!</strong> Bezahlen allein macht dich noch nicht zum Eigentümer. Das Recht trennt den Kaufvertrag (Verpflichtungsgeschäft) strikt vom Eigentumsübergang (Erfüllungsgeschäft). Mehr dazu gleich!</div>
+        </div>
+      </div>
+
+      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Das Trennungsprinzip →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: TRENNUNGSPRINZIP -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">⚖️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Kerninhalt</div>
+        <div class="section-title">Das Trennungsprinzip – zwei Geschäfte, eine Kaufhandlung</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 EXPLIZITER HINWEIS PFLICHT</div><p>Nach diesem Schritt unbedingt aktiv eingreifen und betonen: „Der Kaufvertrag begründet NUR Verpflichtungen – er überträgt noch KEIN Eigentum und KEINEN Besitz. Das passiert erst beim Erfüllungsgeschäft." (DK_62 explizit)</p></div></div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Lies Seite <strong>62–63</strong>, Abschnitt <strong>2.4 „Wie werden die Pflichten aus einem Kaufvertrag erfüllt?"</strong>. Achte besonders auf M1 (Fahrradkauf) und den Unterschied zwischen Verpflichtungs- und Erfüllungsgeschäft.</div>
+        </div>
+      </div>
+
+      <p class="content-text">Das deutsche Recht trennt jeden Kauf in <strong>zwei getrennte Rechtsgeschäfte</strong>:</p>
+
+      <div class="zeitstrahl">
+        <div class="zeitstrahl-line"></div>
+        <div class="zeitstrahl-steps">
+          <div class="zs-step">
+            <div class="zs-dot step1">📝</div>
+            <div class="zs-label">1. Verpflichtungsgeschäft</div>
+            <div class="zs-sub">Kaufvertrag § 433 BGB<br>Nur Pflichten entstehen<br>Noch kein Eigentumsübergang!</div>
+          </div>
+          <div class="zs-step">
+            <div class="zs-dot step2">📦</div>
+            <div class="zs-label">2. Erfüllungsgeschäft I</div>
+            <div class="zs-sub">Übereignung der Sache<br>§ 929 BGB<br>Übergabe + Einigung</div>
+          </div>
+          <div class="zs-step">
+            <div class="zs-dot step3">💶</div>
+            <div class="zs-label">3. Erfüllungsgeschäft II</div>
+            <div class="zs-sub">Übereignung des Geldes<br>§ 929 BGB<br>Übergabe + Einigung</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box red">
+        <strong>⚠️ Die häufigste Fehlvorstellung: „Bezahlen = Eigentümer werden"</strong>
+        FALSCH! Du wirst Eigentümer durch Übergabe + Einigung (§ 929 BGB) – nicht durch das Bezahlen. Man kann sogar Eigentümer werden ohne zu bezahlen (z.B. Schenkung). Und man kann zahlen ohne Eigentümer zu werden (z.B. Eigentumsvorbehalt).
+      </div>
+
+      <div class="info-box purple">
+        <strong>💡 Warum trennt das Recht das so?</strong>
+        Das Trennungsprinzip schützt Verkäufer und Käufer. Beispiel: Ein Händler kann eine Ware verkaufen und trotzdem Eigentümer bleiben, bis die vollständige Bezahlung erfolgt ist. Das nennt man <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__449.html" target="_blank">Eigentumsvorbehalt (§ 449 BGB)</a>.
+      </div>
+
+      <!-- WAHR/FALSCH -->
+      <p class="content-text" style="margin-top:1rem;"><strong>Teste dein Verständnis – Wahr oder Falsch?</strong></p>
+      <div class="wf-wrap" id="wf-wrap">
+        <div class="wf-item" id="wf1">
+          <span>Mit Abschluss des Kaufvertrags werde ich sofort Eigentümer der Sache.</span>
+          <div class="wf-btns">
+            <button class="wf-btn wahr" onclick="checkWF(1,false,this)">Wahr</button>
+            <button class="wf-btn falsch" onclick="checkWF(1,true,this)">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item" id="wf2">
+          <span>Beim Kauf im Supermarkt fallen Verpflichtungs- und Erfüllungsgeschäft zeitlich zusammen.</span>
+          <div class="wf-btns">
+            <button class="wf-btn wahr" onclick="checkWF(2,true,this)">Wahr</button>
+            <button class="wf-btn falsch" onclick="checkWF(2,false,this)">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item" id="wf3">
+          <span>Der Eigentumsvorbehalt ist ein Beispiel dafür, dass Kaufvertrag und Eigentumsübergang getrennt sind.</span>
+          <div class="wf-btns">
+            <button class="wf-btn wahr" onclick="checkWF(3,true,this)">Wahr</button>
+            <button class="wf-btn falsch" onclick="checkWF(3,false,this)">Falsch</button>
+          </div>
+        </div>
+      </div>
+      <div id="wf-result" style="display:none;" class="info-box green"><strong>✅ Lösungen:</strong> 1 = Falsch · 2 = Wahr · 3 = Wahr</div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: § 929 BGB →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: § 929 BGB -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon teal">🔍</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Normenanalyse</div>
+        <div class="section-title">§ 929 BGB – Wie wird Eigentum übertragen?</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Normenanalyse in EA. Basis: § 929 BGB. Zusatz: Eigentumsvorbehalt § 449 BGB erklären. Nach der Aufgabe kurz im Plenum vergleichen – besonders „Einigung" wird von Schülern oft vergessen.</p></div></div>
+
+      <div class="normen-exercise">
+        <h4>Normenanalyse – <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 Satz 1 BGB</a> – Übereignung einer beweglichen Sache</h4>
+        <div class="para-quote">
+          <div class="para-label"><a href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 Satz 1 BGB</a> – Einigung und Übergabe</div>
+          <p>„Zur Übertragung des Eigentums an einer beweglichen Sache ist erforderlich, dass der Eigentümer die Sache dem Erwerber übergibt und beide darüber einig sind, dass das Eigentum übergehen soll."</p>
+          <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">gesetze-im-internet.de – § 929 BGB ↗</a></div>
+        </div>
+        <table class="normen-table">
+          <thead><tr><th>Tatbestandsmerkmal(e)</th><th>§</th><th>Rechtsfolge</th></tr></thead>
+          <tbody>
+            <tr><td><input type="text" placeholder="TB 1: Art der Sache …"></td><td rowspan="4" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 S.1 BGB</a></td><td rowspan="4"><input type="text" placeholder="RF …"></td></tr>
+            <tr><td><input type="text" placeholder="TB 2: Wer übergibt? …"></td></tr>
+            <tr><td><input type="text" placeholder="TB 3: Was passiert? (Übergabe)"></td></tr>
+            <tr><td><input type="text" placeholder="TB 4: Was müssen beide? (Einigung)"></td></tr>
+          </tbody>
+        </table>
+        <button class="solution-btn" onclick="revealSolution('sol-929')">✓ Musterlösung anzeigen</button>
+        <div class="solution-reveal" id="sol-929">
+          <strong>TB 1:</strong> Es geht um eine bewegliche Sache<br>
+          <strong>TB 2:</strong> Der Eigentümer übergibt die Sache<br>
+          <strong>TB 3:</strong> Die Sache wird dem Erwerber übergeben (§ 854 BGB: Besitzübergang)<br>
+          <strong>TB 4:</strong> Beide sind sich einig, dass das Eigentum auf den Erwerber übergehen soll<br><br>
+          <strong>Rechtsfolge:</strong> Das Eigentum an der Sache wird auf den Erwerber übertragen.<br><br>
+          <em>💡 Merke: BEIDE Voraussetzungen müssen gleichzeitig vorliegen – Übergabe UND Einigung. Nur bezahlen reicht nicht!</em>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header"><div class="task-num">➕</div><div class="task-title">Zusatzaufgabe – Eigentumsvorbehalt § 449 BGB</div></div>
+        <div class="task-body">
+          <p>Ein Möbelhaus liefert eine Küche für 3.000 €. Im Vertrag steht: „Das Eigentum geht erst mit vollständiger Bezahlung über."</p>
+          <p>Erkläre in eigenen Worten: Was bedeutet das für den Käufer – und warum ist das für den Verkäufer sinnvoll?</p>
+          <textarea class="answer-area" placeholder="Für den Käufer bedeutet das: ...&#10;&#10;Für den Verkäufer ist das sinnvoll, weil: ...&#10;&#10;Paragraf: § 449 BGB heißt ..."></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-449')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-449">
+            <strong>Für den Käufer:</strong> Er bekommt die Küche geliefert und kann sie nutzen – er ist jedoch noch nicht Eigentümer, sondern nur Besitzer. Eigentümer wird er erst nach vollständiger Bezahlung.<br><br>
+            <strong>Für den Verkäufer ist das sinnvoll</strong>, weil er sich absichert: Zahlt der Käufer nicht vollständig, bleibt der Verkäufer Eigentümer und kann die Küche zurückverlangen. Das Trennungsprinzip macht das möglich.<br><br>
+            <strong><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__449.html" target="_blank">§ 449 BGB</a> – Eigentumsvorbehalt:</strong> Der Eigentümer kann den Eigentumsübergang unter die Bedingung der vollständigen Zahlung stellen. Das Eigentum geht dann erst bei Erfüllung dieser Bedingung über.
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Buchaufgaben →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: BUCHAUFGABEN -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">📚</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · Buchaufgaben</div>
+        <div class="section-title">Kaufhandlung vollziehen – S. 63, Aufgaben 1–3</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip c4">Kollaboration</span><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Aufg. 1 (Pro/Contra) ist die wichtigste – hier sollen Schüler die Fehlmeinung reflektieren. Aufg. 2 = Normenanalyse § 929 BGB (Vertiefung). Aufg. 3 = Fahrradkauf-Fall nachvollziehen.</p></div></div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Buchaufgaben – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Bearbeite <strong>Aufgaben 1, 2 und 3 auf Seite 63</strong> in deinem Buch.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header"><div class="task-num">1</div><div class="task-title">Aufgabe 1 (S. 63) – Pro/Contra: Bezahlen = Eigentümer?</div></div>
+        <div class="task-body">
+          <p>Bearbeite <strong>Aufgabe 1 auf Seite 63</strong>: Sammle Argumente dafür und dagegen, dass Bezahlen automatisch Eigentümer werden bedeutet.</p>
+          <textarea class="answer-area" placeholder="Pro (Bezahlen = Eigentümer): ...&#10;&#10;Contra (Bezahlen ≠ Eigentümer): ...&#10;&#10;Mein Fazit: ..."></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-a1')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-a1">
+            <strong>Pro-Argumente (Alltagsintuition):</strong><br>
+            Wenn man bezahlt hat, „gehört" einem die Sache im Alltag. Hinweisschilder an Tankstellen weisen darauf hin, dass der Verkäufer bis zur Bezahlung Eigentümer bleibt – das setzt voraus, dass man durch Bezahlen Eigentümer wird.<br><br>
+            <strong>Contra-Argumente (juristische Realität):</strong><br>
+            Man kann Eigentümer werden ohne zu zahlen (Schenkung). Man kann zahlen ohne sofort Eigentümer zu werden (Eigentumsvorbehalt). § 929 BGB setzt Übergabe + Einigung voraus – nicht Bezahlung.<br><br>
+            <strong>Fazit:</strong> Bezahlen ist eine Käuferpflicht (§ 433 Abs. 2), macht aber rechtlich gesehen nicht automatisch zum Eigentümer. Dafür braucht es § 929 BGB.
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header"><div class="task-num">2</div><div class="task-title">Aufgaben 2 &amp; 3 (S. 63) – § 929 + Fahrradkauf</div></div>
+        <div class="task-body">
+          <p>Bearbeite <strong>Aufgabe 2</strong> (Normenanalyse § 929 BGB) und <strong>Aufgabe 3</strong> (Fahrradkauf nachvollziehen) auf Seite 63.</p>
+          <textarea class="answer-area" style="min-height:100px;" placeholder="Aufg. 2 – § 929 BGB: TB = ... / RF = ...&#10;&#10;Aufg. 3 – Übereignung Fahrrad: Besitz wechselt durch ... (§ 854 BGB). Einigung erfolgt durch ... (§ 929 BGB). Damit wird die Käuferin ..."></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-a23')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-a23">
+            <strong>Aufgabe 2 – § 929 BGB (Normenanalyse):</strong><br>
+            TB: Eigentümer einer beweglichen Sache / übergibt die Sache dem Erwerber / beide sind einig, dass das Eigentum übergehen soll<br>
+            RF: Das Eigentum wird übertragen<br><br>
+            <strong>Aufgabe 3 – Übereignung Fahrrad:</strong><br>
+            Der Fahrradhändler übergibt das Fahrrad an die Käuferin → Besitzübergang (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a>).<br>
+            Beide sind sich einig, dass das Eigentum auf die Käuferin übergehen soll → Einigung (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a>).<br>
+            Damit wird die Käuferin Eigentümerin des Fahrrads.
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: QUIZ -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🏆</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Wissenssicherung</div>
+        <div class="section-title">Abschluss-Quiz – Stunde 6</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Frage 2 und 3 im Plenum besprechen – die Fehlmeinung „Bezahlen = Eigentümer" nochmals explizit korrigieren.</p></div></div>
+      <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen!</p>
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">1. Was ist der Unterschied zwischen Verpflichtungsgeschäft und Erfüllungsgeschäft?</div>
+        <div class="quiz-options" id="q1">
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Das Verpflichtungsgeschäft ist schriftlich, das Erfüllungsgeschäft mündlich</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Das Verpflichtungsgeschäft (Kaufvertrag) begründet Pflichten; das Erfüllungsgeschäft (Übereignung) überträgt Eigentum und Besitz</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Beim Verpflichtungsgeschäft bezahlt man, beim Erfüllungsgeschäft nimmt man die Ware ab</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Es gibt keinen Unterschied – beides ist dasselbe</button>
+        </div>
+        <div class="quiz-feedback" id="q1-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">2. Was sind die zwei Voraussetzungen für den Eigentumsübergang nach <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a>?</div>
+        <div class="quiz-options" id="q2">
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Bezahlung + Unterschrift</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span>Vertragsschluss + Bezahlung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">C</span>Übergabe der Sache + Einigung über den Eigentumsübergang</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Bezahlung + Übergabe der Sache</button>
+        </div>
+        <div class="quiz-feedback" id="q2-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">3. Kira kauft ein Fahrrad und bezahlt sofort. Das Rad steht noch im Laden. Ist Kira jetzt Eigentümerin?</div>
+        <div class="quiz-options" id="q3">
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span>Ja – sie hat bezahlt, also gehört es ihr</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span>Ja – der Kaufvertrag überträgt das Eigentum</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">C</span>Nein – das Eigentum geht erst mit Übergabe + Einigung über (§ 929 BGB)</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Nein – erst wenn sie eine Quittung erhält</button>
+        </div>
+        <div class="quiz-feedback" id="q3-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">4. Ein Händler verkauft eine Küche, behält aber laut Vertrag das Eigentum bis zur Vollzahlung. Wie heißt das?</div>
+        <div class="quiz-options" id="q4">
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span>Verpflichtungsgeschäft</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">B</span>Trennungsprinzip</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">C</span>Eigentumsvorbehalt (§ 449 BGB)</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span>Erfüllungsgeschäft</button>
+        </div>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <div id="quiz-score" style="margin-top:1.25rem;display:none;">
+        <div class="info-box teal"><strong id="score-text"></strong><span id="score-sub"></span></div>
+        <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+          <button class="btn-secondary" style="border-color:var(--red);color:var(--red);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;">
+        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: ABFRAGE -->
+<div class="step teacher-only" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage · nur Lehrkraft</div>
+        <div class="section-title">Abfrage – Stunde 6: Verpflichtungs- &amp; Erfüllungsgeschäft</div>
+        <div class="section-time">⏱ 10 Minuten · 1 Schüler</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
+        <div class="teacher-note-header">🎓 Hinweise</div>
+        <p>Schwerpunkt: Trennungsprinzip + § 929 BGB. Frage 2 prüft gezielt die häufigste Fehlvorstellung.</p>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid var(--blue-400);color:var(--blue-700);">🔵 Wissen</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--teal-light);border:1px solid #99f6e4;color:#0f766e;">🟢 Krit. Denken</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--orange-light);border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--red-light);border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
+      </div>
+      <div class="abfrage-wrap">
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erkläre das Trennungsprinzip: Was ist ein Verpflichtungsgeschäft, was ein Erfüllungsgeschäft? Was passiert wann?</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Vollständige Antwort: beide Begriffe definiert + zeitliche Abfolge erklärt.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew1">
+              <strong>Verpflichtungsgeschäft (1 P.):</strong> Der Kaufvertrag (§ 433 BGB) – begründet Pflichten für Käufer und Verkäufer, überträgt aber noch kein Eigentum.<br>
+              <strong>Erfüllungsgeschäft (1 P.):</strong> Die Übereignung (§ 929 BGB) – überträgt Eigentum und Besitz durch Übergabe + Einigung.<br>
+              <strong>Zeitliche Abfolge (1 P.):</strong> Erst Kaufvertrag, dann Übereignung. Beide können gleichzeitig stattfinden (z.B. Supermarkt) oder zeitlich auseinanderfallen (z.B. Onlinebestellung).
+            </div>
+          </div>
+        </div>
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 2 Min.</div>
+              <div class="abfrage-q-text">„Wer bezahlt, wird Eigentümer." – Stimmt das? Begründe mit § 929 BGB!</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Gezielte Prüfung der häufigsten Fehlvorstellung. Bewertet: korrekte Widerlegung mit § 929.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew2">
+              <strong>FALSCH.</strong> Bezahlen ist eine Käuferpflicht (§ 433 Abs. 2 BGB), macht aber nicht zum Eigentümer.<br><br>
+              Gem. § 929 BGB wird man Eigentümer durch: (1) Übergabe der Sache + (2) Einigung über den Eigentumsübergang.<br><br>
+              Beispiele: Man kann Eigentümer werden ohne zu zahlen (Schenkung). Man kann zahlen ohne Eigentümer zu werden (Eigentumsvorbehalt § 449 BGB).
+            </div>
+          </div>
+        </div>
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Erkläre anhand des Fahrradkaufs (S. 63) wie Verpflichtungs- und Erfüllungsgeschäft ablaufen. Nenne die relevanten §§.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Schüler erklärt den Ablauf strukturiert. Bewertet: vollständige Benennung beider Geschäfte + korrekte §§.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew3">
+              <strong>1. Verpflichtungsgeschäft (§ 433 BGB):</strong> Käuferin und Fahrradhändler schließen Kaufvertrag – Pflichten entstehen.<br>
+              <strong>2. Erfüllungsgeschäft I – Fahrrad (§§ 854, 929 BGB):</strong> Händler übergibt Fahrrad (§ 854: Besitzübergang), beide einig über Eigentumsübergang (§ 929). Käuferin wird Eigentümerin.<br>
+              <strong>3. Erfüllungsgeschäft II – Geld (§§ 854, 929 BGB):</strong> Käuferin übergibt Geld, Händler wird Eigentümer des Geldes.
+            </div>
+          </div>
+        </div>
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erfinde einen Alltagsfall, bei dem Verpflichtungs- und Erfüllungsgeschäft zeitlich auseinanderfallen – und erkläre warum das Trennungsprinzip dort praktisch wichtig ist.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Eigener Fall – nicht aus dem Unterricht. Bewertet: plausibler Alltagsbezug + korrekte Anwendung des Trennungsprinzips.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew4">
+              <em>Beispiel: Maja bestellt online ein Smartphone. Der Kaufvertrag wird sofort geschlossen – aber das Gerät wird erst 3 Tage später geliefert. Eigentümerin wird sie erst bei Übergabe + Einigung. In der Zwischenzeit trägt der Verkäufer das Risiko, falls das Gerät untergeht.</em><br><br>
+              <em>Weitere gute Beispiele: Neuwagen-Bestellung, Maßanzug, Geburtstagstorte für nächste Woche usw.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-btns" style="margin-top:1.5rem;">
+        <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div></div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN='123456';
+let pinInput='',cur=1,quizA={},pollD={},wfAnswered=0;
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+function selectPoll(id,el){if(pollD[id])return;pollD[id]=true;el.classList.add('selected');document.getElementById(id+'-result').classList.add('visible');}
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';}
+function checkWF(num,isCorrect,btn){
+  const item=document.getElementById('wf'+num);
+  item.querySelectorAll('.wf-btn').forEach(b=>b.style.pointerEvents='none');
+  btn.classList.add(isCorrect?'correct':'wrong');
+  wfAnswered++;
+  if(wfAnswered>=3)document.getElementById('wf-result').style.display='block';
+}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');const yes={q1:'✓ Richtig! Verpflichtungsgeschäft = Pflichten entstehen. Erfüllungsgeschäft = Eigentum und Besitz werden übertragen.',q2:'✓ Richtig! § 929 BGB: Übergabe + Einigung. Bezahlen macht nicht zum Eigentümer!',q3:'✓ Richtig! Kira ist noch keine Eigentümerin – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung.',q4:'✓ Richtig! Eigentumsvorbehalt (§ 449 BGB) – Eigentum geht erst mit Vollzahlung über.'};const no={q1:'✗ Nicht ganz. Verpflichtungsgeschäft = Kaufvertrag (Pflichten). Erfüllungsgeschäft = Übereignung (Eigentum). → B ist korrekt.',q2:'✗ Nicht ganz. § 929 BGB: Eigentum geht über durch Übergabe + Einigung – nicht durch Bezahlung! → C ist korrekt.',q3:'✗ Nicht ganz. Kira hat noch kein Eigentum – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung. → C.',q4:'✗ Nicht ganz. Das nennt man Eigentumsvorbehalt gem. § 449 BGB. → C ist korrekt.'};if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+</script>
+<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
+</body>
+</html>
