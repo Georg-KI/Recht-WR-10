@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recht &amp; Ich – WR 10 Lernbereich 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;
+  --orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;
+  --red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;--bg-card:#FFFFFF;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.14);
+  /* Modulfarben */
+  --m1:#1976D2;--m1-light:#E3F2FD;--m1-grad:linear-gradient(135deg,#1976D2,#29B6F6);
+  --m2:#0d9488;--m2-light:#ccfbf1;--m2-grad:linear-gradient(135deg,#0d9488,#26C6DA);
+  --m3:#7B1FA2;--m3-light:#F3E5F5;--m3-grad:linear-gradient(135deg,#7B1FA2,#AB47BC);
+  --m4:#E65100;--m4-light:#FFF3E0;--m4-grad:linear-gradient(135deg,#E65100,#FF9800);
+  --m5:#C62828;--m5-light:#FFEBEE;--m5-grad:linear-gradient(135deg,#C62828,#E53935);
+  --m6:#2E7D32;--m6-light:#E8F5E9;--m6-grad:linear-gradient(135deg,#2E7D32,#43A047);
+  --m7:#4527A0;--m7-light:#EDE7F6;--m7-grad:linear-gradient(135deg,#4527A0,#7B1FA2);
+  --m8:#37474F;--m8-light:#ECEFF1;--m8-grad:linear-gradient(135deg,#37474F,#607D8B);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;min-height:100vh;}
+
+/* TOPBAR */
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:56px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:white;text-decoration:none;letter-spacing:-0.5px;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-sep{width:1px;height:22px;background:rgba(255,255,255,0.2);}
+.topbar-sub{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.unlock-btn{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:white;border-radius:100px;padding:6px 16px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.unlock-btn:hover{background:rgba(255,255,255,0.25);}
+
+/* HERO */
+.hero{background:var(--grad-blue);padding:3rem 2rem 2.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;left:-20px;top:-30px;font-size:200px;font-weight:900;color:rgba(255,255,255,0.05);line-height:1;pointer-events:none;}
+.hero::after{content:'⚖';position:absolute;right:20px;bottom:-20px;font-size:160px;color:rgba(255,255,255,0.04);line-height:1;pointer-events:none;}
+.hero-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border-radius:100px;padding:5px 16px;font-size:12px;font-weight:700;color:white;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:36px;font-weight:900;color:white;line-height:1.15;margin-bottom:0.75rem;}
+.hero h1 span{color:var(--blue-400);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.85);max-width:520px;margin:0 auto 1.75rem;line-height:1.6;}
+.hero-stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-size:28px;font-weight:900;color:white;line-height:1;}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;}
+
+/* PROGRESS BAR */
+.progress-section{background:white;border-bottom:1px solid var(--border);padding:1rem 2rem;}
+.progress-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:16px;}
+.progress-label{font-size:13px;font-weight:700;color:var(--text);white-space:nowrap;}
+.progress-track{flex:1;height:10px;background:var(--bg-page);border-radius:100px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--grad-blue);border-radius:100px;transition:width 0.5s ease;}
+.progress-pct{font-size:13px;font-weight:700;color:var(--blue-700);white-space:nowrap;}
+
+/* MAIN */
+.main{max-width:960px;margin:0 auto;padding:2.5rem 2rem 6rem;}
+
+/* SECTION TITLE */
+.section-heading{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;margin-top:2.5rem;}
+.section-heading:first-child{margin-top:0;}
+.section-heading-line{flex:1;height:1px;background:var(--border);}
+.section-heading-text{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);}
+
+/* MODULE CARD */
+.module-card{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.5rem;overflow:hidden;box-shadow:var(--shadow);}
+.module-header{padding:1.1rem 1.5rem;display:flex;align-items:center;gap:14px;cursor:pointer;user-select:none;}
+.module-color-bar{width:5px;height:44px;border-radius:100px;flex-shrink:0;}
+.module-icon{width:44px;height:44px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.module-meta{flex:1;}
+.module-num{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
+.module-title{font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;color:var(--text);line-height:1.2;}
+.module-progress{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.module-badge{font-size:20px;transition:transform 0.15s;}
+.module-badge.locked{filter:grayscale(1);opacity:0.35;}
+.module-count{font-size:12px;color:var(--text-muted);font-weight:600;}
+.module-chevron{font-size:16px;color:var(--text-muted);transition:transform 0.2s;margin-left:4px;}
+.module-card.open .module-chevron{transform:rotate(180deg);}
+
+/* STUNDEN GRID */
+.stunden-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;padding:0 1.5rem 1.5rem;}
+.stunden-card{border-radius:var(--radius-md);border:1.5px solid var(--border);padding:1rem 1.1rem;background:var(--bg-page);transition:all 0.15s;position:relative;overflow:hidden;}
+.stunden-card.unlocked{background:white;cursor:pointer;text-decoration:none;display:block;color:inherit;}
+.stunden-card.unlocked:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.stunden-card.locked{opacity:0.55;cursor:default;}
+.stunden-card.coming-soon{opacity:0.4;cursor:default;}
+.stunden-num{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;}
+.stunden-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:6px;}
+.stunden-meta{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted);}
+.stunden-lock{position:absolute;top:10px;right:10px;font-size:16px;opacity:0.5;}
+.stunden-done{position:absolute;top:10px;right:10px;font-size:16px;}
+.stunden-card.unlocked .stunden-num{color:inherit;}
+
+/* BADGES SECTION */
+.badges-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:0.75rem;}
+.badge-item{background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1rem;text-align:center;transition:all 0.15s;}
+.badge-item.earned{border-color:var(--orange);box-shadow:0 0 0 2px rgba(255,152,0,0.15);}
+.badge-item.locked{opacity:0.4;filter:grayscale(0.8);}
+.badge-emoji{font-size:32px;margin-bottom:0.4rem;}
+.badge-name{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;color:var(--text);line-height:1.3;}
+.badge-module{font-size:11px;color:var(--text-muted);margin-top:2px;}
+
+/* CODE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:340px;box-shadow:0 24px 60px rgba(0,0,0,0.25);animation:fadeUp 0.2s ease both;}
+.modal-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;text-align:center;}
+.modal-logo span{color:var(--blue-400);}
+.modal-icon{font-size:40px;text-align:center;margin-bottom:0.75rem;}
+.modal-title{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:0.3rem;text-align:center;}
+.modal-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;text-align:center;}
+.code-input-wrap{display:flex;gap:8px;margin-bottom:1rem;}
+.code-input{flex:1;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 14px;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:3px;text-align:center;transition:border-color 0.15s;outline:none;}
+.code-input:focus{border-color:var(--blue-700);}
+.code-input.error{border-color:var(--red);animation:shake 0.35s ease;}
+.code-submit{background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 18px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.code-submit:hover{background:var(--blue-800);}
+.code-error{font-size:13px;color:var(--red);font-weight:600;height:18px;margin-bottom:0.75rem;text-align:center;}
+.code-success{font-size:14px;color:var(--green);font-weight:700;text-align:center;padding:10px;background:var(--green-light);border-radius:var(--radius-sm);margin-bottom:0.75rem;display:none;}
+.modal-cancel{display:block;text-align:center;font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;margin:0 auto;}
+.modal-cancel:hover{color:var(--text);}
+/* RECENT UNLOCKED */
+.recent-box{background:var(--blue-50);border:1.5px solid var(--blue-400);border-radius:var(--radius-md);padding:0.9rem 1.1rem;margin-bottom:1rem;font-size:13px;color:var(--blue-800);display:none;}
+.recent-box strong{font-weight:700;}
+
+/* FOOTER */
+.site-footer{text-align:center;padding:2rem;font-size:12px;color:var(--text-muted);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}}
+@media(max-width:640px){
+  .topbar{padding:0 1rem;}.topbar-sub{display:none;}
+  .hero{padding:2rem 1rem 1.75rem;}.hero h1{font-size:26px;}
+  .main{padding:1.5rem 1rem 5rem;}
+  .stunden-grid{grid-template-columns:1fr;padding:0 1rem 1rem;}
+  .hero-stats{gap:1.25rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar-logo">Recht<span>&</span>Ich</span>
+  <div class="topbar-sep"></div>
+  <span class="topbar-sub">WR 10 · Lernbereich 2: Recht als Handlungsrahmen</span>
+  <div class="topbar-right">
+    <button class="unlock-btn" onclick="openModal()">🔓 Stunde freischalten</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">📚 Gymnasium Bayern · Klasse 10</div>
+    <h1>Recht als<br><span>Handlungsrahmen</span></h1>
+    <div class="hero-sub">18 interaktive Unterrichtsstunden zu Vertragsrecht, Geschäftsfähigkeit, Gewährleistung, Deliktsrecht und mehr.</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="stat-unlocked">0</div>
+        <div class="hero-stat-label">Stunden freigeschaltet</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">18</div>
+        <div class="hero-stat-label">Stunden gesamt</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" id="stat-badges" style="font-size:16px;padding-top:6px;">🎓</div>
+        <div class="hero-stat-label">Badges via mebis</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-label">Module</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-section">
+  <div class="progress-inner">
+    <span class="progress-label">Dein Fortschritt</span>
+    <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    <span class="progress-pct" id="progress-pct">0 / 18</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="recent-box" id="recent-box">
+    ✅ <strong id="recent-text"></strong> wurde gerade freigeschaltet!
+  </div>
+
+  <!-- BADGES OVERVIEW -->
+  <div class="section-heading">
+    <div class="section-heading-text">Deine Badges</div>
+    <div class="section-heading-line"></div>
+  </div>
+  <div class="badges-grid" id="badges-grid">
+    <!-- generated by JS -->
+  </div>
+
+  <!-- MODULE CARDS -->
+  <div class="section-heading" style="margin-top:2.5rem;">
+    <div class="section-heading-text">Alle Stunden</div>
+    <div class="section-heading-line"></div>
+  </div>
+  <div id="modules-container">
+    <!-- generated by JS -->
+  </div>
+
+</div>
+
+<div class="site-footer">
+  startup.WR Bayern 10 · C.C. Buchner Verlag (ISBN 978-3-661-82021-7) · Lehrplankonform BY LehrplanPLUS
+</div>
+
+<!-- CODE MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-logo">Recht<span>&</span>Ich</div>
+    <div class="modal-icon">🔓</div>
+    <div class="modal-title">Stunde freischalten</div>
+    <div class="modal-sub">Gib den Code ein, den deine Lehrkraft dir nennt – die Stunde wird dauerhaft freigeschaltet.</div>
+    <div class="code-success" id="code-success"></div>
+    <div class="code-input-wrap">
+      <input class="code-input" id="code-input" type="text" maxlength="6" placeholder="______" autocomplete="off" spellcheck="false" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')submitCode()">
+      <button class="code-submit" onclick="submitCode()">→</button>
+    </div>
+    <div class="code-error" id="code-error"></div>
+    <button class="modal-cancel" onclick="closeModal()">Schließen</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  DATEN
+// ═══════════════════════════════════════════════════════
+const MODULES = [
+  {
+    id:1, title:"Recht &amp; Normen", icon:"⚖️", color:"var(--m1)", light:"var(--m1-light)", grad:"var(--m1-grad)",
+    badge:{emoji:"🔰", name:"Rechtseinsteiger", module:"Modul 1"},
+    badgeStunden:[1,2],
+    stunden:[
+      {nr:1, title:"Wozu brauchen wir Recht?", file:"stunde01_wozuRecht.html", ready:true},
+      {nr:2, title:"Normenanalyse üben &amp; Wissen sichern", file:"stunde02_Normenanalyse.html", ready:true},
+    ]
+  },
+  {
+    id:2, title:"Der Vertrag", icon:"📝", color:"var(--m2)", light:"var(--m2-light)", grad:"var(--m2-grad)",
+    badge:{emoji:"📝", name:"Vertragsprofi", module:"Modul 2"},
+    badgeStunden:[3,4,5],
+    stunden:[
+      {nr:3, title:"Wie entsteht ein Vertrag?", file:"stunde03_Vertragsschluss.html", ready:true},
+      {nr:4, title:"Rechte &amp; Pflichten aus § 433 BGB", file:"stunde04_Kaufvertrag_Pflichten.html", ready:true},
+      {nr:5, title:"Falltraining Vertragsrecht", file:"stunde05_Falltraining_Vertrag.html", ready:true},
+    ]
+  },
+  {
+    id:3, title:"Die Kaufhandlung", icon:"🛒", color:"var(--m3)", light:"var(--m3-light)", grad:"var(--m3-grad)",
+    badge:{emoji:"🛒", name:"Kaufexperte", module:"Modul 3"},
+    badgeStunden:[6,7,8],
+    stunden:[
+      {nr:6, title:"Verpflichtungs- &amp; Erfüllungsgeschäft", file:"stunde06_Verpflichtungs_Erfuellungsgeschaeft.html", ready:true},
+      {nr:7, title:"Eigentum vs. Besitz", file:"stunde07_Eigentum_vs_Besitz.html", ready:false},
+      {nr:8, title:"Falltraining Kaufhandlung", file:"stunde08_Falltraining_Kaufhandlung.html", ready:false},
+    ]
+  },
+  {
+    id:4, title:"Geschäftsfähigkeit", icon:"👤", color:"var(--m4)", light:"var(--m4-light)", grad:"var(--m4-grad)",
+    badge:{emoji:"👤", name:"Minderjährigen-Experte", module:"Modul 4"},
+    badgeStunden:[9,10,11],
+    stunden:[
+      {nr:9, title:"Stufen der Geschäftsfähigkeit", file:"stunde09_Geschaeftsfaehigkeit_Stufen.html", ready:false},
+      {nr:10, title:"Der Taschengeldparagraf § 110 BGB", file:"stunde10_Taschengeldparagraf.html", ready:false},
+      {nr:11, title:"Peer-Feedback &amp; Falltraining GF", file:"stunde11_Falltraining_Geschaeftsfaehigkeit.html", ready:false},
+    ]
+  },
+  {
+    id:5, title:"Sachmangel &amp; Gewährleistung", icon:"⚖️", color:"var(--m5)", light:"var(--m5-light)", grad:"var(--m5-grad)",
+    badge:{emoji:"⚖️", name:"Verbraucheranwalt", module:"Modul 5+6"},
+    badgeStunden:[12,13,14],
+    stunden:[
+      {nr:12, title:"Was ist ein Sachmangel?", file:"stunde12_Sachmangel.html", ready:false},
+      {nr:13, title:"Gewährleistungsrechte &amp; Muster-E-Mail", file:"stunde13_Gewaehrleistung.html", ready:false},
+    ]
+  },
+  {
+    id:6, title:"Verbraucherschutz", icon:"🛡️", color:"var(--m6)", light:"var(--m6-light)", grad:"var(--m6-grad)",
+    badge:null,
+    badgeStunden:[],
+    stunden:[
+      {nr:14, title:"Widerrufsrecht &amp; Verbraucherschutz", file:"stunde14_Verbraucherschutz.html", ready:false},
+    ]
+  },
+  {
+    id:7, title:"Widerrechtliches Handeln", icon:"🚨", color:"var(--m7)", light:"var(--m7-light)", grad:"var(--m7-grad)",
+    badge:{emoji:"🚨", name:"Deliktskenner", module:"Modul 7"},
+    badgeStunden:[15,16,17],
+    stunden:[
+      {nr:15, title:"Deliktsrecht &amp; § 823 BGB", file:"stunde15_Deliktsrecht.html", ready:false},
+      {nr:16, title:"Strafmündigkeit &amp; Jugendstrafrecht", file:"stunde16_Strafmuendigkeit.html", ready:false},
+      {nr:17, title:"Urheberrecht im digitalen Alltag", file:"stunde17_Urheberrecht.html", ready:false},
+    ]
+  },
+  {
+    id:8, title:"Abschluss", icon:"🏆", color:"var(--m8)", light:"var(--m8-light)", grad:"var(--m8-grad)",
+    badge:{emoji:"🏆", name:"Rechtsexperte", module:"Abschluss"},
+    badgeStunden:[18],
+    stunden:[
+      {nr:18, title:"Rechtsfall-Simulator: Komplexfall", file:"stunde18_Komplexfall.html", ready:false},
+    ]
+  }
+];
+
+const CODES = {
+  "FALE42":1,"FUDU70":2,"BAJE99":3,"BUJU73":4,"TULA36":5,
+  "NIGE61":6,"DOFI69":7,"LATU26":8,"DUMU69":9,"JACE51":10,
+  "KARI85":11,"HIPE51":12,"HUKE86":13,"LUKI13":14,"CIRI23":15,
+  "ZIJO77":16,"GIGE98":17,"LUSU75":18
+};
+
+// ═══════════════════════════════════════════════════════
+//  STATE – localStorage
+// ═══════════════════════════════════════════════════════
+function getUnlocked(){
+  try{return JSON.parse(localStorage.getItem('recht_unlocked')||'[]');}
+  catch{return [];}
+}
+function saveUnlocked(arr){
+  try{localStorage.setItem('recht_unlocked',JSON.stringify(arr));}catch{}
+}
+function isUnlocked(nr){return getUnlocked().includes(nr);}
+function unlock(nr){
+  const u=getUnlocked();
+  if(!u.includes(nr)){u.push(nr);saveUnlocked(u);}
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER
+// ═══════════════════════════════════════════════════════
+function render(){
+  const unlocked=getUnlocked();
+  const count=unlocked.length;
+
+  // stats
+  document.getElementById('stat-unlocked').textContent=count;
+  document.getElementById('progress-fill').style.width=(count/18*100)+'%';
+  document.getElementById('progress-pct').textContent=count+' / 18';
+
+  // badges – immer als Vorschau, Vergabe nur über mebis
+  let badgeHTML='';
+  MODULES.forEach(m=>{
+    if(!m.badge)return;
+    badgeHTML+=`<div class="badge-item locked" title="Wird von der Lehrkraft über mebis freigeschaltet">
+      <div class="badge-emoji">${m.badge.emoji}</div>
+      <div class="badge-name">${m.badge.name}</div>
+      <div class="badge-module">${m.badge.module}</div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">🎓 via mebis</div>
+    </div>`;
+  });
+  document.getElementById('badges-grid').innerHTML=badgeHTML;
+  document.getElementById('stat-badges').textContent='via mebis';
+
+  // modules
+  let html='';
+  MODULES.forEach((m,mi)=>{
+    const stundenUnlocked=m.stunden.filter(s=>unlocked.includes(s.nr)).length;
+    const total=m.stunden.length;
+    const allDone=stundenUnlocked===total&&total>0;
+    const badgeEarned=m.badge&&m.badgeStunden.length>0&&m.badgeStunden.every(s=>unlocked.includes(s));
+
+    html+=`<div class="module-card" id="mod-${m.id}">
+      <div class="module-header" onclick="toggleModule(${m.id})">
+        <div class="module-color-bar" style="background:${m.color}"></div>
+        <div class="module-icon" style="background:${m.light}">${m.icon}</div>
+        <div class="module-meta">
+          <div class="module-num" style="color:${m.color}">Modul ${m.id} · ${stundenUnlocked}/${total} Stunden</div>
+          <div class="module-title">${m.title}</div>
+        </div>
+        <div class="module-progress">
+          ${m.badge?`<div class="module-badge ${badgeEarned?'':'locked'}" title="${m.badge.name}">${m.badge.emoji}</div>`:''}
+          <div class="module-count">${stundenUnlocked}/${total}</div>
+          <div class="module-chevron">▾</div>
+        </div>
+      </div>
+      <div class="stunden-grid" id="stunden-${m.id}" style="display:none">
+        ${m.stunden.map(s=>{
+          const done=unlocked.includes(s.nr);
+          const avail=s.ready;
+          if(done){
+            return `<a class="stunden-card unlocked" href="${s.file}" style="border-color:${m.color}20">
+              <div class="stunden-num" style="color:${m.color}">Stunde ${s.nr}</div>
+              <div class="stunden-title">${s.title}</div>
+              <div class="stunden-meta" style="color:${m.color}">✅ Freigeschaltet</div>
+              <div class="stunden-done">✅</div>
+            </a>`;
+          } else if(!avail){
+            return `<div class="stunden-card coming-soon">
+              <div class="stunden-num" style="color:var(--text-muted)">Stunde ${s.nr}</div>
+              <div class="stunden-title" style="color:var(--text-muted)">${s.title}</div>
+              <div class="stunden-meta">🔧 In Bearbeitung</div>
+              <div class="stunden-lock">🔧</div>
+            </div>`;
+          } else {
+            return `<div class="stunden-card locked">
+              <div class="stunden-num" style="color:var(--text-muted)">Stunde ${s.nr}</div>
+              <div class="stunden-title">${s.title}</div>
+              <div class="stunden-meta">🔒 Code erforderlich</div>
+              <div class="stunden-lock">🔒</div>
+            </div>`;
+          }
+        }).join('')}
+      </div>
+    </div>`;
+  });
+  document.getElementById('modules-container').innerHTML=html;
+
+  // auto-open module with freshly unlocked stunden
+  MODULES.forEach(m=>{
+    const hasUnlocked=m.stunden.some(s=>unlocked.includes(s.nr));
+    if(hasUnlocked)openModule(m.id);
+  });
+}
+
+function toggleModule(id){
+  const grid=document.getElementById('stunden-'+id);
+  const card=document.getElementById('mod-'+id);
+  const open=grid.style.display!=='none';
+  grid.style.display=open?'none':'grid';
+  card.classList.toggle('open',!open);
+}
+function openModule(id){
+  const grid=document.getElementById('stunden-'+id);
+  const card=document.getElementById('mod-'+id);
+  if(grid){grid.style.display='grid';card.classList.add('open');}
+}
+
+// ═══════════════════════════════════════════════════════
+//  CODE MODAL
+// ═══════════════════════════════════════════════════════
+function openModal(){
+  document.getElementById('modal-overlay').classList.add('open');
+  document.getElementById('code-input').value='';
+  document.getElementById('code-error').textContent='';
+  document.getElementById('code-success').style.display='none';
+  setTimeout(()=>document.getElementById('code-input').focus(),100);
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+function submitCode(){
+  const val=document.getElementById('code-input').value.trim().toUpperCase();
+  const input=document.getElementById('code-input');
+  const errEl=document.getElementById('code-error');
+  const sucEl=document.getElementById('code-success');
+
+  if(val.length<6){errEl.textContent='Bitte alle 6 Zeichen eingeben.';input.classList.add('error');setTimeout(()=>input.classList.remove('error'),400);return;}
+
+  if(CODES[val]){
+    const nr=CODES[val];
+    const alreadyDone=isUnlocked(nr);
+    unlock(nr);
+    if(alreadyDone){
+      sucEl.textContent='Stunde '+nr+' war bereits freigeschaltet ✓';
+    } else {
+      sucEl.textContent='✅ Stunde '+nr+' wurde freigeschaltet!';
+      // show recent notice
+      const recentBox=document.getElementById('recent-box');
+      document.getElementById('recent-text').textContent='Stunde '+nr+' wurde freigeschaltet';
+      recentBox.style.display='block';
+      setTimeout(()=>{recentBox.style.display='none';},5000);
+    }
+    sucEl.style.display='block';
+    errEl.textContent='';
+    input.value='';
+    render();
+    setTimeout(closeModal,1800);
+  } else {
+    errEl.textContent='Ungültiger Code – bitte nochmal prüfen.';
+    input.classList.add('error');
+    setTimeout(()=>input.classList.remove('error'),400);
+  }
+}
+
+document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
+document.addEventListener('keydown',function(e){
+  if(document.getElementById('modal-overlay').classList.contains('open')){
+    if(e.key==='Escape')closeModal();
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════
+render();
+</script>
+</body>
+</html>
