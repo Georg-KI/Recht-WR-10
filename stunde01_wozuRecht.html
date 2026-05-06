@@ -8,266 +8,223 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Primär: Blau */
   --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
-  /* Akzente */
-  --green:#43A047;--green-light:#E8F5E9;
-  --orange:#FF9800;--orange-light:#FFF3E0;
-  --purple:#AB47BC;--purple-light:#F3E5F5;
-  --red:#E53935;--red-light:#FFEBEE;
-  /* Neutrale */
-  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
-  --border:#E0E0E0;--bg-card:#FFFFFF;--bg-page:#F0F4F8;
-  /* Gradients */
-  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
-  --grad-green:linear-gradient(135deg,#66BB6A,#CDDC39);
-  --grad-teal:linear-gradient(135deg,#26C6DA,#43A047);
-  --grad-orange:linear-gradient(135deg,#FF9800,#F44336);
-  --grad-purple:linear-gradient(135deg,#AB47BC,#E91E63);
-  /* Radien & Schatten */
-  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
-  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
-  /* Aliases für Rückwärtskompatibilität */
-  --indigo:var(--blue-700);--indigo-light:var(--blue-400);--indigo-xlight:var(--blue-50);
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
   --teal:#0d9488;--teal-light:#ccfbf1;
-  --amber:var(--orange);--amber-light:var(--orange-light);
-  --rose:var(--red);--rose-light:var(--red-light);
-  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
-  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);
-  --radius:var(--radius-lg);
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--slate);font-size:16px;line-height:1.7;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
-.topbar-logo{font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar-right{margin-left:auto;}
 .mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
-.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:500;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.mode-btn.active{background:white;color:var(--indigo);font-weight:600;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
 .progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
-.progress-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;}
-.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--slate-light);cursor:pointer;transition:color 0.2s;}
-.prog-step.active{color:var(--blue-700);font-weight:600;}
-.prog-step.done{color:var(--success);}
-.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--slate-light);flex-shrink:0;transition:all 0.2s;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
 .prog-step.active .prog-dot{background:var(--blue-700);color:white;}
-.prog-step.done .prog-dot{background:var(--success);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
 .prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
-.prog-line.done{background:var(--success);}
-.main{max-width:860px;margin:0 auto;padding:2rem 2rem 6rem;}
-.hero{background:var(--grad-blue);border-radius:var(--radius);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
-.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:120px;font-weight:800;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
-.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border-radius:100px;padding:4px 12px;font-size:12px;font-weight:500;margin-bottom:1rem;}
-.hero h1{font-family:'Nunito',sans-serif;font-size:28px;font-weight:800;line-height:1.2;margin-bottom:0.75rem;letter-spacing:-0.5px;}
-.hero p{font-size:15px;color:rgba(255,255,255,0.85);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
-.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.7);flex-wrap:wrap;}
-.hero-meta-item{display:flex;align-items:center;gap:5px;}
-.teacher-note{background:#fef9ec;border:1.5px solid #fcd34d;border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
-.teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
+.prog-line.done{background:var(--green);}
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+.hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
 .teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
-.section{background:white;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
 .section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
-.section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;margin-top:1px;}
-.section-icon.indigo{background:var(--blue-50);}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.purple{background:var(--purple-light);}
 .section-icon.teal{background:var(--teal-light);}
-.section-icon.amber{background:var(--amber-light);}
-.section-icon.rose{background:var(--rose-light);}
-.section-icon.green{background:var(--success-light);}
-.section-icon.purple{background:#f3e8ff;}
 .section-meta{flex:1;}
-.section-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:var(--slate-light);margin-bottom:3px;}
-.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:700;color:var(--slate);line-height:1.3;}
-.section-time{font-size:12px;color:var(--slate-light);margin-top:3px;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
 .section-body{padding:1.5rem;}
-/* Paragraph links */
-a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:500;transition:color 0.15s;}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;}
 a.para-link:hover{color:var(--blue-400);}
-/* FIXED: Dark background paragraph quote box — white text */
-.para-quote{background:#1e293b;border-radius:10px;padding:1.25rem 1.5rem;margin:0.75rem 0;}
-.para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:600;}
-.para-quote p,.task-body .para-quote p,.section-body .para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
-.para-quote .para-ref,.task-body .para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
-.para-quote a{color:var(--blue-400) !important;border-bottom-color:var(--blue-400) !important;}
-/* Scenario */
-.scenario{background:var(--slate);border-radius:10px;padding:1.25rem 1.5rem;margin:1rem 0;}
-.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:600;}
-.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
-.scenario strong{color:var(--blue-400);}
-/* Poll */
-.poll{margin:1rem 0;}
-.poll-question{font-size:15px;font-weight:500;color:var(--slate);margin-bottom:0.75rem;line-height:1.5;}
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box strong{font-weight:700;display:block;margin-bottom:4px;}
+/* CHIP-ROW – nur Lehrkraft */
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
+.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
+.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
+.chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
+.chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
+.chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
+/* TASK mit Icon-Layout */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-purple{border:1.5px solid var(--purple);}
+.ico-red{border:1.5px solid var(--red);}
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+/* POLL */
+.poll-question{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .poll-options{display:flex;flex-direction:column;gap:8px;}
-.poll-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.15s;background:white;}
+.poll-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all 0.15s;background:white;}
 .poll-option:hover{border-color:var(--blue-400);background:var(--blue-50);}
 .poll-option.selected{border-color:var(--blue-700);background:var(--blue-50);}
+.poll-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.15s;position:relative;}
 .poll-option.selected .poll-radio{background:var(--blue-700);border-color:var(--blue-700);}
-.poll-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
-.poll-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:white;display:none;}
-.poll-option.selected .poll-radio::after{display:block;}
-.poll-option-text{font-size:14px;color:var(--slate);}
+.poll-option.selected .poll-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:white;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.poll-option-text{font-size:14px;color:var(--text);}
 .poll-result{margin-top:1rem;display:none;}
 .poll-result.visible{display:block;}
 .poll-result-text{background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:var(--blue-800);line-height:1.6;}
-.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
-.info-box{border-radius:10px;padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
-.info-box.indigo{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
-.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
-.info-box.amber{background:var(--amber-light);border-left:3px solid var(--amber);color:#78350f;}
-.info-box strong{font-weight:600;display:block;margin-bottom:4px;}
-/* Book reference box */
-.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:12px;padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.book-ref-icon{font-size:24px;flex-shrink:0;}
-.book-ref-body{flex:1;}
-.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#6b21a8;margin-bottom:4px;}
-.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
-.book-ref-text strong{font-weight:600;}
-.book-ref-text a.para-link{color:#7c3aed;border-bottom-color:#7c3aed;}
-.functions-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0;}
-@media(max-width:600px){.functions-grid{grid-template-columns:1fr;}}
-.function-card{border:1.5px solid var(--border);border-radius:12px;padding:1.1rem 1.2rem;background:white;transition:all 0.15s;}
-.function-card:hover{border-color:var(--blue-400);transform:translateY(-1px);box-shadow:var(--shadow);}
-.function-card-icon{font-size:22px;margin-bottom:0.5rem;}
-.function-card-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;color:var(--slate);margin-bottom:0.4rem;}
-.function-card-text{font-size:13px;color:var(--slate-mid);line-height:1.5;}
-.normen-diagram{display:flex;align-items:stretch;border-radius:12px;overflow:hidden;border:1.5px solid var(--border);margin:1rem 0;}
-.normen-col{flex:1;padding:1.1rem 1.2rem;}
-.normen-col.left{background:var(--blue-50);}
-.normen-col.mid{flex:0 0 60px;display:flex;align-items:center;justify-content:center;background:var(--blue-700);font-size:22px;color:white;}
-.normen-col.right{background:#f0fdf4;}
-.normen-col-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;}
-.normen-col.left .normen-col-label{color:var(--indigo);}
-.normen-col.right .normen-col-label{color:var(--success);}
-.normen-item{font-size:13px;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.08);color:var(--slate);line-height:1.4;}
-.normen-item:last-child{border-bottom:none;}
-.task{border:1.5px solid var(--indigo-light);border-radius:12px;overflow:hidden;margin:1rem 0;}
-.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
-.task-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-title{font-size:13px;font-weight:600;color:white;}
-.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
-.task-body p{font-size:14px;color:var(--slate);line-height:1.65;margin-bottom:0.5rem;}
-.answer-area{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--slate);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
-.answer-area:focus{outline:none;border-color:var(--blue-700);}
-.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:8px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:500;color:var(--slate-mid);cursor:pointer;transition:all 0.15s;}
-.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
-.solution-reveal{margin-top:10px;background:var(--success-light);border-left:3px solid var(--success);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#064e3b;line-height:1.6;display:none;}
-.solution-reveal.visible{display:block;}
-.normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:12px;padding:1.25rem;margin:1rem 0;}
-.normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;margin-bottom:0.75rem;color:var(--slate);}
-.normen-table{width:100%;border-collapse:collapse;font-size:13px;}
-.normen-table th{background:var(--blue-700);color:white;padding:8px 12px;text-align:left;font-weight:600;font-size:12px;}
-.normen-table th:first-child{border-radius:8px 0 0 0;}
-.normen-table th:last-child{border-radius:0 8px 0 0;}
-.normen-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--slate);vertical-align:top;line-height:1.5;}
-.normen-table tr:last-child td{border-bottom:none;}
-.normen-table tr:nth-child(even) td{background:#f8fafc;}
-.normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
-.normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
-.ki-box{background:linear-gradient(135deg,#f0fdf4 0%,#dcfce7 100%);border:1.5px solid #86efac;border-radius:12px;padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.ki-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
-.ki-text{font-size:14px;color:#14532d;line-height:1.6;}
-.ki-text strong{font-weight:600;display:block;margin-bottom:3px;}
-.ki-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:var(--teal);color:white;text-decoration:none;border-radius:8px;font-size:13px;font-weight:600;}
-.quiz-wrap{margin:0.5rem 0;}
-.quiz-q{font-size:15px;font-weight:500;color:var(--slate);margin-bottom:0.75rem;line-height:1.5;}
-.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
-.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--slate);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;}
-.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
-.quiz-opt.correct{border-color:var(--success);background:var(--success-light);color:#064e3b;}
-.quiz-opt.wrong{border-color:var(--rose);background:var(--rose-light);color:#9f1239;}
-.quiz-opt.disabled{pointer-events:none;}
-.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;color:var(--slate-mid);}
-.quiz-opt.correct .quiz-opt-letter{background:var(--success);color:white;}
-.quiz-opt.wrong .quiz-opt-letter{background:var(--rose);color:white;}
-.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:8px;display:none;margin-top:6px;}
-.quiz-feedback.correct{background:var(--success-light);color:#064e3b;display:block;}
-.quiz-feedback.wrong{background:var(--rose-light);color:#9f1239;display:block;}
-.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--indigo);color:white;border:none;border-radius:10px;padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
-.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--slate);border:1.5px solid var(--border);border-radius:10px;padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s;}
-.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+/* FUNKTIONSKARTEN */
+.func-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:1rem 0;}
+.func-card{border-radius:var(--radius-md);padding:1rem;border:1.5px solid var(--border);background:white;transition:all 0.15s;}
+.func-card:hover{border-color:var(--blue-400);transform:translateY(-2px);box-shadow:var(--shadow);}
+.func-card-icon{font-size:24px;margin-bottom:0.5rem;}
+.func-card-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.func-card-text{font-size:12px;color:var(--text-secondary);line-height:1.4;}
 /* BADGE */
-.badge-reveal{border-radius:var(--radius);padding:2rem;text-align:center;margin-top:1.5rem;display:none;background:linear-gradient(135deg,#1e293b 0%,#334155 100%);}
+.badge-reveal{border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:1.5rem;display:none;background:linear-gradient(135deg,#1e293b,#334155);}
 .badge-reveal.visible{display:block;}
 .badge-canvas-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
-.badge-name{font-family:'Nunito',sans-serif;font-size:20px;font-weight:800;color:white;margin-bottom:0.4rem;}
+.badge-name{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:white;margin-bottom:0.4rem;}
 .badge-sub{font-size:14px;color:#94a3b8;margin-bottom:1.25rem;}
-.badge-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:10px;padding:10px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;}
+.badge-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;}
 .badge-dl:hover{background:var(--blue-800);}
-.step{display:none;}
-.step.active{display:block;}
+/* QUIZ */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
 .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
-.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
-.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:600;border:1px solid;}
-.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
-.chip.c2{background:#ccfbf1;border-color:#99f6e4;color:#0f766e;}
-.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
-.chip.c3{background:#fef3c7;border-color:#fde68a;color:#92400e;}
-.teacher-only{display:none;}
-body.version-b .teacher-only{display:block;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-/* PIN MODAL */
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+/* ABFRAGE */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:var(--teal);}
+.abfrage-q-label.komm{color:var(--orange);}
+.abfrage-q-label.kreativ{color:var(--red);}
+.abfrage-q-text{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+.abfrage-q-body{padding:0.9rem 1.1rem;border-top:1px solid var(--border);background:white;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+/* PIN */
 .pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
 .pin-overlay.open{display:flex;}
 .pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
-.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--indigo);margin-bottom:1rem;letter-spacing:-0.3px;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
 .pin-logo span{color:var(--blue-400);}
 .pin-icon{font-size:38px;margin-bottom:0.75rem;}
-.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:700;color:var(--slate);margin-bottom:0.3rem;}
-.pin-sub{font-size:13px;color:var(--slate-light);margin-bottom:1.5rem;line-height:1.5;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
 .pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
 .pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
 .pin-dot.filled{background:var(--blue-700);}
 .pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
-.pin-key{border:1.5px solid var(--border);border-radius:12px;padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:700;color:var(--slate);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
 .pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
 .pin-key:active{transform:scale(0.94);}
-.pin-key.del{font-size:16px;font-family:'Nunito',sans-serif;font-weight:500;color:var(--slate-mid);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
 .pin-key.zero{grid-column:2;}
-.pin-error{font-size:13px;color:var(--rose);height:18px;margin-bottom:0.5rem;font-weight:500;}
-.pin-cancel{font-size:13px;color:var(--slate-light);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;transition:color 0.15s;}
-.pin-cancel:hover{color:var(--slate);}
-/* Abfrage section styles */
-.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
-.abfrage-q{border:1.5px solid var(--border);border-radius:12px;overflow:hidden;}
-.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
-.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;}
-.abfrage-q-num.wissen{background:var(--blue-700);}
-.abfrage-q-num.denken{background:#0d9488;}
-.abfrage-q-num.komm{background:#d97706;}
-.abfrage-q-num.kreativ{background:#e11d48;}
-.abfrage-q-meta{flex:1;}
-.abfrage-q-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
-.abfrage-q-label.wissen{color:var(--blue-700);}
-.abfrage-q-label.denken{color:#0d9488;}
-.abfrage-q-label.komm{color:#d97706;}
-.abfrage-q-label.kreativ{color:#e11d48;}
-.abfrage-q-text{font-size:14px;font-weight:600;color:var(--slate);line-height:1.4;}
-.abfrage-q-body{padding:0.9rem 1.1rem;border-top:1px solid var(--border);background:white;}
-.abfrage-q-body p{font-size:13px;color:var(--slate-mid);line-height:1.6;margin-bottom:0.5rem;}
-.abfrage-q-body p:last-child{margin-bottom:0;}
-.erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:7px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:500;color:var(--slate-mid);cursor:pointer;transition:all 0.15s;}
-.erwartung-btn:hover{border-color:var(--amber);color:var(--amber);background:var(--amber-light);}
-.erwartung-box{margin-top:8px;background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
-.erwartung-box.visible{display:block;}
-.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:500;color:var(--slate-mid);cursor:pointer;transition:all 0.15s;}
-.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
-@media print{
-  .topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}
-  .step{display:block!important;}
-  .section{box-shadow:none;border:1px solid #ccc;}
-}
-@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.functions-grid{grid-template-columns:1fr;}}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}}
 </style>
 </head>
 <body id="body-root">
 
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 1</span>
   <div class="topbar-right">
@@ -282,11 +239,11 @@ body.version-b .teacher-only{display:block;}
   <div class="progress-inner">
     <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
     <div class="prog-line" id="line-1"></div>
-    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Lesen &amp; Funktionen</span></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>4 Funktionen</span></div>
     <div class="prog-line" id="line-2"></div>
-    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Normenanalyse</span></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Buchaufgaben</span></div>
     <div class="prog-line" id="line-3"></div>
-    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Übung</span></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Normenanalyse</span></div>
     <div class="prog-line" id="line-4"></div>
     <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz &amp; Badge</span></div>
     <div class="prog-line" id="line-5"></div>
@@ -299,327 +256,313 @@ body.version-b .teacher-only{display:block;}
 <div class="hero">
   <div class="hero-tag">⚖️ Modul 1 · Recht &amp; Normen</div>
   <h1>Wozu brauchen wir Recht?</h1>
-  <p>Jeden Tag bist du von Rechtsregeln umgeben – ohne es zu merken. Diese Stunde zeigt dir, was Recht eigentlich ist, warum es dein Leben schützt und wie du Gesetze richtig liest.</p>
+  <p>Stell dir vor: keine Regeln, keine Gesetze. Was würde passieren? Diese Stunde zeigt dir warum Recht unverzichtbar ist – und welche vier Hauptfunktionen es erfüllt.</p>
   <div class="hero-meta">
-    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
-    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 54–57</div>
-    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 52–55</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
   </div>
 </div>
 
 <div class="teacher-note teacher-only">
-  <div class="teacher-note-header">🎓 Hinweise für die Lehrkraft – Version B</div>
-  <p>Du führst Einstieg (Schritt 1) und Sicherung (Schritt 5) selbst durch. Schüler arbeiten in Schritten 2–4 selbstständig auf der Website.</p>
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Einstiegsstunde Modul 1. Schüler erarbeiten die vier Rechtsfunktionen anhand von Alltagskonflikten.</p>
   <ul>
-    <li>Einstieg: Stelle die Provokativfrage mündlich, bevor Schüler die Website öffnen. Lass 3–4 spontan antworten.</li>
-    <li>Übergabe: „Öffnet jetzt Schritt 2 auf der Website und lest zuerst die angegebene Buchseite."</li>
-    <li>Sicherung: Besprich Quiz-Fragen 3 und 4 im Plenum. Lass begründen, nicht nur raten.</li>
+    <li>Schritt 1: Gedankenexperiment „Keine Regeln" – Schüler sollen spontan antworten, kein Buch</li>
+    <li>Schritt 2: Vier Funktionen erarbeiten (M1–M4, S. 52–55)</li>
+    <li>Schritt 3: Buchaufgaben S. 55 (Aufg. 1 + 4) – Schüler schlagen Buch auf</li>
+    <li>Schritt 4: Normenanalyse-Einstieg (Vorbereitung für Stunde 2)</li>
+    <li>Schritt 5: Quiz → Badge „🔰 Rechtseinsteiger" nach ≥ 3/4 richtigen Antworten</li>
   </ul>
 </div>
 
-<!-- STEP 1 -->
+<!-- STEP 1: EINSTIEG -->
 <div class="step active" id="step-1">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon indigo">🚀</div>
+      <div class="section-icon orange">🤔</div>
       <div class="section-meta">
         <div class="section-tag">Schritt 1 · Einstieg</div>
         <div class="section-title">Was wäre, wenn es keine Regeln gäbe?</div>
-        <div class="section-time">⏱ ca. 8 Minuten</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Partnerarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Lehrkraft-Tipp</div><p>Stelle die Frage mündlich, bevor Schüler die Website öffnen. Dann: „Schaut jetzt auf das Szenario auf der Website."</p></div></div>
-      <div class="info-box amber">
-        <strong>💡 Warum ist das relevant für dich?</strong>
-        Recht klingt trocken – ist es aber nicht. Du kaufst ein Handy? Recht. Du streamst Musik? Recht. Du wirst auf der Straße angerempelt? Auch Recht. Diese Sequenz zeigt dir, was du als 16-Jähriger in Deutschland wirklich darfst, musst – und was nicht.
+      <div class="teacher-only">
+        <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Schüler diskutieren zuerst frei – kein Buch öffnen. Ergebnisse kurz im Plenum sammeln, bevor es weitergeht.</p></div>
       </div>
-      <div class="scenario">
-        <div class="scenario-label">📖 Gedankenexperiment</div>
-        <p>Stell dir vor: Es ist Montag, 8:15 Uhr. Du kommst in die Schule. <strong>Es gibt keine Regeln mehr.</strong> Kein Hausrecht, kein Strafgesetzbuch, kein Vertrag, keine Schulordnung. Was würde passieren?</p>
-      </div>
-      <div class="poll" id="poll-1">
-        <div class="poll-question">Was wäre deiner Meinung nach die schlimmste Folge, wenn es kein Recht gäbe?</div>
-        <div class="poll-options">
-          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Stärkere würden Schwächere einfach unterdrücken – ohne Konsequenzen</div></div>
-          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Niemand könnte mehr sicher Verträge abschließen oder Abmachungen treffen</div></div>
-          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Konflikte würden mit Gewalt gelöst statt mit Gesprächen oder Gerichten</div></div>
-          <div class="poll-option" onclick="selectPoll('poll-1',this)"><div class="poll-radio"></div><div class="poll-option-text">Eigentum wäre bedeutungslos – jeder könnte alles nehmen, was er will</div></div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">💬</div>
+          <div class="task-header-text">
+            <span class="task-title">Gedankenexperiment – Was wäre ohne Regeln?</span>
+            <span class="task-subtitle">Diskussion · Partnerarbeit</span>
+          </div>
         </div>
-        <div class="poll-result" id="poll-1-result">
-          <div class="poll-result-text">✅ <strong>Alle Antworten sind richtig</strong> – das zeigt genau, warum Recht so wichtig ist. Du wirst alle diese Funktionen gleich kennenlernen.</div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-teal"><svg width="22" height="22" viewBox="0 0 44 38" fill="none"><rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/><path d="M6 19l-4 6 8-4" fill="#0d9488"/><rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/><path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/><path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="ico ico-teal"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Stellt euch vor: Es gibt keine Gesetze, keine Regeln, keine Strafen. Diskutiert: Was würde im Straßenverkehr passieren? Was in der Schule? Was beim Einkaufen?</p>
+            <textarea class="answer-area" placeholder="Im Straßenverkehr würde ...&#10;&#10;In der Schule würde ...&#10;&#10;Beim Einkaufen würde ...&#10;&#10;Fazit: Recht ist nötig, weil ..."></textarea>
+          </div>
         </div>
       </div>
-      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Buch lesen &amp; Funktionen →</button></div>
+
+      <div class="info-box blue">
+        <strong>💡 Merke:</strong>
+        Überall wo Menschen zusammenleben entstehen Konflikte – unterschiedliche Interessen prallen aufeinander. Recht schafft einen Rahmen, der diese Konflikte regelt und das Zusammenleben ermöglicht.
+      </div>
+
+      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Die 4 Funktionen →</button></div>
     </div>
   </div>
 </div>
 
-<!-- STEP 2 -->
+<!-- STEP 2: 4 FUNKTIONEN -->
 <div class="step" id="step-2">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon purple">📖</div>
+      <div class="section-icon blue">⚖️</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 2 · Lesen &amp; Erarbeitung</div>
-        <div class="section-title">Funktionen des Rechts – Buch &amp; Aufgaben</div>
-        <div class="section-time">⏱ ca. 15 Minuten · Partnerarbeit</div>
+        <div class="section-tag">Schritt 2 · Erarbeitung</div>
+        <div class="section-title">Die vier Hauptfunktionen des Rechts</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c1">Veranschaulichung</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Schüler lesen S. 54–55 im Buch (ca. 5–7 Min.), dann Aufgaben in PA. Plenumsdiskussion: „Welche Funktion ist die wichtigste – und warum?" Verknüpfe mit den Antworten aus Schritt 1.</p></div></div>
+      <div class="teacher-only">
+        <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip c2">Lebensweltbezug</span></div>
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Buchverweis S. 52–55 (M1–M4). Schüler lesen und ordnen die Funktionen zu. Weitere Funktionen (Erziehung, Abschreckung) können erwähnt, aber nicht vertieft werden.</p></div>
+      </div>
 
       <div class="book-ref">
         <div class="book-ref-icon">📗</div>
         <div class="book-ref-body">
           <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
-          <div class="book-ref-text">Lies den Abschnitt <strong>2.1 „Warum braucht man rechtliche Regelungen?"</strong> auf Seiten <strong>54–55</strong> aufmerksam durch. Achte besonders auf die vier Hauptfunktionen, das Schaubild zum Interessenausgleich und die Beispiele zu Konfliktverhütung und Konfliktlösung.<br><em>Erst lesen – dann die Aufgaben unten bearbeiten.</em></div>
+          <div class="book-ref-text">Lies Seite <strong>52–55</strong>, Abschnitt <strong>2.1 „Warum brauchen wir Recht und Normen?"</strong>. Achte auf die vier Hauptfunktionen des Rechts und die Beispiele M1–M4.</div>
         </div>
       </div>
 
-      <p class="content-text">Im Zusammenleben der Menschen stehen Freiheitsinteressen und Schutzinteressen oft im Konflikt. Recht schafft hier einen gerechten Ausgleich:</p>
-      <div class="functions-grid">
-        <div class="function-card"><div class="function-card-icon">☮️</div><div class="function-card-title">Friedensfunktion</div><div class="function-card-text">Die Durchsetzung des Rechts ist dem Staat übertragen – damit Konflikte nicht durch Gewalt, sondern durch Regeln gelöst werden.</div></div>
-        <div class="function-card"><div class="function-card-icon">📋</div><div class="function-card-title">Ordnungsfunktion</div><div class="function-card-text">Recht schafft Regeln für ein geordnetes Zusammenleben: Es verhütet Konflikte (präventiv) und löst entstandene Konflikte (reaktiv).</div></div>
-        <div class="function-card"><div class="function-card-icon">🛡️</div><div class="function-card-title">Schutz- / Sicherheitsfunktion</div><div class="function-card-text">Jeder hat einen Anspruch auf Konfliktlösung durch den Staat. Das Recht schützt besonders die Schwächeren.</div></div>
-        <div class="function-card"><div class="function-card-icon">⚖️</div><div class="function-card-title">Interessenausgleich</div><div class="function-card-text">Das Recht versucht stets, einen gerechten Ausgleich zwischen den Interessen aller Beteiligten herzustellen – die Folge aller anderen Funktionen.</div></div>
-      </div>
-      <div class="info-box indigo"><strong>Weitere Funktionen des Rechts</strong>Abschreckungsfunktion · Straffunktion · Erziehungsfunktion (vgl. startup.WR Bayern 10, S. 55 unten)</div>
-
-      <div class="task">
-        <div class="task-header"><div class="task-num">1</div><div class="task-title">Buchaufgaben – Partnerarbeit (S. 55, Aufgaben 1 &amp; 4)</div></div>
-        <div class="task-body">
-          <p><strong>Aufgabe 1 (S. 55):</strong> Stelle die Interessen der Beteiligten in den Fällen M1 und M2 gegenüber. Ordne ihnen dann je eine Rechtsfunktion zu (Freiheit oder Schutz).</p>
-          <p><em>M1 = Schlagzeug-Fall (Musiker vs. Physiotherapeuten-Praxis) &nbsp;·&nbsp; M2 = Handy-Fall (Kunde vs. Ladeninhaber)</em></p>
-          <textarea class="answer-area" placeholder="M1 – Interesse Jugendlicher: ...&#10;M1 – Interesse Betreiber: ...&#10;M1 – Rechtsfunktion: ...&#10;&#10;M2 – Interesse Kunde: ...&#10;M2 – Interesse Ladeninhaber: ...&#10;M2 – Rechtsfunktion: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-b1')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-b1">
-            <strong>M1 – Schlagzeug-Fall:</strong><br>
-            Interesse Jugendlicher: Frei und uneingeschränkt seinem Hobby nachgehen → <em>Freiheit</em><br>
-            Interesse Betreiber: Vor Lärm geschützt werden, ruhige Praxis für Patienten → <em>Schutz</em><br>
-            Faire Lösung: Musizieren per Hausordnung auf bestimmte Zeiten beschränken.<br><br>
-            <strong>M2 – Handy-Fall:</strong><br>
-            Interesse Kunde: Funktionierendes Gerät, da er bezahlt hat und Garantie besitzt → <em>Schutz</em><br>
-            Interesse Ladeninhaber: Nur zurücknehmen bei nachweisbarem Kauf (Garantieschein) → <em>Schutz</em><br>
-            → Aufgabe des Rechts: gerechten Interessensausgleich herbeiführen.
-          </div>
-          <br>
-          <p><strong>Aufgabe 4 (S. 55):</strong> Erläutere anhand der Materialien M3/1–M3/3 je eine Rechtsfunktion: Ordnungs-, Schutz- und Friedensfunktion.</p>
-          <textarea class="answer-area" placeholder="M3/1 (Verkehrsschilder) → Funktion + Erklärung: ...&#10;M3/2 (schriftlicher Vertrag) → Funktion + Erklärung: ...&#10;M3/3 (Gericht) → Funktion + Erklärung: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-b2')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-b2">
-            <strong>M3/1 – Verkehrsschilder:</strong><br>
-            <em>Ordnungsfunktion</em>: Schafft klare Regeln im Straßenverkehr – was erlaubt, was verboten ist.<br>
-            <em>Schutzfunktion</em>: Schützt schwächere Verkehrsteilnehmer (z.B. spielende Kinder).<br>
-            <em>Friedensfunktion</em>: Verhindert im Vorfeld Auseinandersetzungen zwischen Verkehrsteilnehmern.<br><br>
-            <strong>M3/2 – Schriftlicher Vertrag:</strong><br>
-            <em>Ordnungsfunktion</em>: Rechte und Pflichten der Beteiligten werden verbindlich festgelegt.<br>
-            <em>Schutzfunktion</em>: Bei Pflichtverletzung kann der Benachteiligte ein Gericht anrufen.<br>
-            <em>Friedensfunktion</em>: Klare Vereinbarung verhindert Streit im Vorfeld.<br><br>
-            <strong>M3/3 – Gericht:</strong><br>
-            <em>Ordnungs- + Friedensfunktion</em>: Urteile schaffen verbindliche Regelungen und lösen Konflikte ohne Gewalt. Das Recht des Stärkeren wird verhindert.
-          </div>
+      <div class="func-grid">
+        <div class="func-card">
+          <div class="func-card-icon">🕊️</div>
+          <div class="func-card-title">Friedensfunktion</div>
+          <div class="func-card-text">Konflikte werden ohne Gewalt gelöst. Das Recht des Stärkeren wird verhindert.</div>
         </div>
+        <div class="func-card">
+          <div class="func-card-icon">📋</div>
+          <div class="func-card-title">Ordnungsfunktion</div>
+          <div class="func-card-text">Klare Regeln für das Zusammenleben. Jeder weiß was erlaubt und verboten ist.</div>
+        </div>
+        <div class="func-card">
+          <div class="func-card-icon">🛡️</div>
+          <div class="func-card-title">Schutzfunktion</div>
+          <div class="func-card-text">Schwächere werden vor Stärkeren geschützt. Grundrechte werden gesichert.</div>
+        </div>
+        <div class="func-card">
+          <div class="func-card-icon">⚖️</div>
+          <div class="func-card-title">Ausgleichsfunktion</div>
+          <div class="func-card-text">Unterschiedliche Interessen werden gerecht ausgeglichen. Niemand wird bevorzugt.</div>
+        </div>
+      </div>
+
+      <div class="info-box teal">
+        <strong>💡 Merke: Diese Funktionen sind nicht trennscharf!</strong>
+        Ein Gesetz kann gleichzeitig mehrere Funktionen erfüllen. Ein Tempolimit z.B. schützt (Schutzfunktion), ordnet (Ordnungsfunktion) und verhindert Streit (Friedensfunktion).
       </div>
 
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(2)">Weiter zur Normenanalyse →</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: Buchaufgaben →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 3 -->
+<!-- STEP 3: BUCHAUFGABEN -->
 <div class="step" id="step-3">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon amber">🔍</div>
+      <div class="section-icon purple">📚</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 3 · Methode</div>
-        <div class="section-title">Die Normenanalyse – Wie lese ich ein Gesetz?</div>
-        <div class="section-time">⏱ ca. 10 Minuten</div>
+        <div class="section-tag">Schritt 3 · Buchaufgaben</div>
+        <div class="section-title">Interessen gegenüberstellen &amp; Funktionen erläutern – S. 55</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Partnerarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip k">Klassenführung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Typischer Fehler: zu allgemeine Tatbestandsmerkmale. Besprich nach der Aufgabe das Beispiel <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a> im Plenum.</p></div></div>
-
-      <div class="book-ref">
-        <div class="book-ref-icon">📗</div>
-        <div class="book-ref-body">
-          <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
-          <div class="book-ref-text">Lies die Methodenseite <strong>„Wie sind rechtliche Normen aufgebaut? – Die Normenanalyse"</strong> auf Seiten <strong>56–57</strong>. Beachte das Wenn-Dann-Schema und das Beispiel zu <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a>.</div>
-        </div>
-      </div>
-
-      <p class="content-text">Eine Rechtsnorm muss für viele verschiedene Fälle anwendbar sein. Deshalb ist sie abstrakt formuliert. Fast alle Normen folgen einer einfachen Struktur – einer <strong>Wenn-Dann-Beziehung</strong>:</p>
-      <div class="normen-diagram">
-        <div class="normen-col left"><div class="normen-col-label">WENN … (Tatbestandsmerkmale)</div><div class="normen-item">🔹 Voraussetzungen, die erfüllt sein müssen</div><div class="normen-item">🔹 Beschreibt den Sachverhalt</div><div class="normen-item">🔹 Oft mehrere Merkmale (TB 1, TB 2 …)</div></div>
-        <div class="normen-col mid">→</div>
-        <div class="normen-col right"><div class="normen-col-label">DANN … (Rechtsfolgen)</div><div class="normen-item">✅ Was rechtlich passiert</div><div class="normen-item">✅ Anspruch, Pflicht, Recht …</div><div class="normen-item">✅ Ergibt sich automatisch aus dem TB</div></div>
-      </div>
-
-      <div class="info-box teal">
-        <strong>📖 Beispiel: <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a> – Erwerb des Besitzes</strong>
-        „Der Besitz einer Sache wird durch die Erlangung der tatsächlichen Gewalt über die Sache erworben."<br><br>
-        <strong>Tatbestandsmerkmale:</strong> (1) Es geht um eine Sache &nbsp;·&nbsp; (2) Jemand erlangt die tatsächliche Gewalt darüber<br>
-        <strong>Rechtsfolge:</strong> Diese Person erwirbt den Besitz der Sache.
+      <div class="teacher-only">
+        <div class="chip-row"><span class="chip c4">Individualisiert</span><span class="chip k">Kompetenzorientiert</span></div>
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Aufg. 1 (S. 55): Interessen M1/M2 gegenüberstellen. Aufg. 4 (S. 55): Rechtsfunktionen an M3/1–M3/3 erläutern. Beide Aufgaben in PA bearbeiten lassen.</p></div>
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Aufgabe – Einzelarbeit (5 Min.)</div></div>
-        <div class="task-body">
-          <p>Lies den folgenden Paragrafen und arbeite Tatbestandsmerkmale und Rechtsfolge heraus. Den vollständigen Text findest du über den Link.</p>
-          <div class="para-quote">
-            <div class="para-label"><a href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 Abs. 1 Satz 1 BGB</a> – Vertragstypische Pflichten beim Kaufvertrag</div>
-            <p>„Durch den Kaufvertrag wird der Verkäufer einer Sache verpflichtet, dem Käufer die Sache zu übergeben und das Eigentum an der Sache zu verschaffen."</p>
-            <div class="para-ref">→ Vollständiger Text: <a href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">gesetze-im-internet.de – § 433 BGB ↗</a></div>
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Buchaufgaben – S. 55, Aufgaben 1 &amp; 4</span>
+            <span class="task-subtitle">Buchaufgabe · Partnerarbeit</span>
           </div>
-          <textarea class="answer-area" placeholder="Tatbestandsmerkmale:&#10;TB 1: ...&#10;TB 2: ...&#10;TB 3: ...&#10;&#10;Rechtsfolge:&#10;RF 1: ...&#10;RF 2: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-2')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-2">
-            <strong>Tatbestandsmerkmale (§ 433 Abs. 1):</strong><br>
-            TB 1: Es liegt ein Kaufvertrag vor<br>
-            TB 2: Es geht um eine Sache<br>
-            TB 3: Es gibt einen Verkäufer und einen Käufer<br><br>
-            <strong>Rechtsfolgen – Pflichten des Verkäufers (§ 433 Abs. 1):</strong><br>
-            RF 1: Verkäufer ist verpflichtet, die Sache zu übergeben<br>
-            RF 2: Verkäufer ist verpflichtet, das Eigentum an der Sache zu verschaffen<br><br>
-            <strong>Pflichten des Käufers (§ 433 Abs. 2) – Gegenleistung:</strong><br>
-            RF 3: Käufer ist verpflichtet, den vereinbarten Kaufpreis zu bezahlen<br>
-            RF 4: Käufer ist verpflichtet, die Sache abzunehmen<br><br>
-            <em>💡 Merke: Der Kaufvertrag begründet also Pflichten für BEIDE Seiten – nicht nur für den Verkäufer!</em>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/><path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg></div>
+            <div class="ico ico-teal"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Bearbeite <strong>Aufgabe 1 und Aufgabe 4 auf Seite 55</strong> in deinem Buch (startup.WR Bayern 10).</p>
+            <textarea class="answer-area" placeholder="Aufg. 1 – Interessen M1 (Schlagzeug):&#10;Jugendlicher: ...&#10;Praxisbetreiber: ...&#10;&#10;Aufg. 1 – Interessen M2 (Handy):&#10;Kunde: ...&#10;Ladeninhaber: ...&#10;&#10;Aufg. 4 – Funktionen:&#10;M3/1 (Verkehrsschild): ...&#10;M3/2 (Vertrag): ...&#10;M3/3 (Gericht): ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-buch1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-buch1">
+              <strong>Aufg. 1 – M1 (Schlagzeug-Fall):</strong><br>
+              Jugendlicher: möchte sein Hobby frei und zu jeder Zeit ausüben → Interesse: Freiheit<br>
+              Praxisbetreiber: möchte ungestört arbeiten, Patienten vor Lärm schützen → Interesse: Schutz<br>
+              Faire Lösung: Musizieren durch Hausordnung auf bestimmte Tageszeiten beschränken<br><br>
+              <strong>Aufg. 1 – M2 (Handy-Fall):</strong><br>
+              Kunde: möchte funktionierendes Gerät erhalten, da er bezahlt hat → Interesse: Schutz<br>
+              Ladeninhaber: möchte Ware nur bei nachgewiesenem Kauf zurücknehmen → Interesse: Schutz<br><br>
+              <strong>Aufg. 4 – Rechtsfunktionen:</strong><br>
+              M3/1 (Verkehrsschild): legt fest was erlaubt/verboten ist → Ordnungsfunktion; schützt schwächere Verkehrsteilnehmer → Schutzfunktion; verhindert Auseinandersetzungen → Friedensfunktion<br>
+              M3/2 (schriftlicher Vertrag): legt Rechte und Pflichten verbindlich fest → Ordnungsfunktion; ermöglicht Rechtsdurchsetzung → Schutzfunktion; beugt Streit vor → Friedensfunktion<br>
+              M3/3 (Gericht): schafft verbindliche Entscheidungen → Ordnungsfunktion; löst Konflikte ohne Gewalt → Friedensfunktion
+            </div>
           </div>
         </div>
       </div>
 
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(3)">Weiter zur Übung →</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Normenanalyse →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 4 -->
+<!-- STEP 4: NORMENANALYSE EINSTIEG -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon rose">🧠</div>
+      <div class="section-icon teal">📋</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 4 · Intelligentes Üben</div>
-        <div class="section-title">Normenanalyse selbst anwenden</div>
-        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+        <div class="section-tag">Schritt 4 · Methode</div>
+        <div class="section-title">Rechtsnormen lesen – das Wenn-Dann-Schema</div>
+        <div class="section-time">⏱ ca. 7 Minuten · Einzelarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Differenzierung</div><p>Schnellere Schüler bearbeiten beide Aufgaben. Wer mehr Zeit benötigt, konzentriert sich auf Aufgabe 3a.</p></div></div>
-      <p class="content-text">Jetzt bist du dran. Analysiere die Normen vollständig. Den Volltext findest du jeweils per Klick auf den Paragrafen.</p>
-
-      <div class="normen-exercise">
-        <h4>Aufgabe 3a – <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 Satz 1 BGB</a> (Übereignung)</h4>
-        <p style="font-size:13px;color:#64748b;margin-bottom:0.75rem;line-height:1.5;">„Zur Übertragung des Eigentums an einer beweglichen Sache ist erforderlich, dass der Eigentümer die Sache dem Erwerber übergibt und beide darüber einig sind, dass das Eigentum übergehen soll."</p>
-        <table class="normen-table">
-          <thead><tr><th>Tatbestandsmerkmal</th><th>Norm</th><th>Rechtsfolge</th></tr></thead>
-          <tbody>
-            <tr><td><input type="text" placeholder="TB 1 …"></td><td rowspan="3" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 S.1 BGB</a></td><td rowspan="3"><input type="text" placeholder="RF …"></td></tr>
-            <tr><td><input type="text" placeholder="TB 2 …"></td></tr>
-            <tr><td><input type="text" placeholder="TB 3 …"></td></tr>
-          </tbody>
-        </table>
-        <button class="solution-btn" onclick="revealSolution('sol-3a')">✓ Musterlösung anzeigen</button>
-        <div class="solution-reveal" id="sol-3a"><strong>TB 1:</strong> Es geht um eine bewegliche Sache<br><strong>TB 2:</strong> Der Eigentümer übergibt die Sache dem Erwerber<br><strong>TB 3:</strong> Beide sind einig, dass das Eigentum übergehen soll<br><strong>RF:</strong> Das Eigentum an der Sache wird übertragen (Eigentumsübergang)</div>
+      <div class="teacher-only">
+        <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Einstieg in die Normenanalyse-Methode – wird in Stunde 2 vertieft. Hier nur das Grundprinzip einführen. Nicht zu viele Details.</p></div>
       </div>
 
-      <div class="normen-exercise">
-        <h4>Aufgabe 3b – Zusatz (Schnellere Schüler)</h4>
-        <p style="font-size:13px;color:#64748b;margin-bottom:0.75rem;line-height:1.5;">Erkläre in eigenen Worten, warum das Recht zwischen dem <em>Kaufvertrag</em> (Versprechen, <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a>) und der <em>Übereignung</em> (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a>) unterscheidet. Was wäre der Nachteil, wenn beides dasselbe wäre?</p>
-        <textarea class="answer-area" placeholder="Begründung in eigenen Worten …"></textarea>
-        <button class="solution-btn" onclick="revealSolution('sol-3b')">✓ Musterlösung anzeigen</button>
-        <div class="solution-reveal" id="sol-3b">Die Trennung ermöglicht z.B. den <strong>Eigentumsvorbehalt</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__449.html" target="_blank">§ 449 BGB</a>): Ein Händler kann eine Ware schon vertraglich verkaufen, aber das Eigentum erst nach vollständiger Bezahlung übertragen. So ist er abgesichert, falls der Käufer nicht zahlt. Wären Vertrag und Übereignung dasselbe, würde das Eigentum schon mit Vertragsschluss übergehen – unabhängig davon, ob gezahlt wurde.</div>
+      <p class="content-text">Alle Rechtsnormen sind nach dem gleichen Prinzip aufgebaut: <strong>Wenn</strong> bestimmte Voraussetzungen erfüllt sind (Tatbestand), <strong>dann</strong> tritt eine bestimmte Rechtsfolge ein.</p>
+
+      <div class="info-box blue">
+        <strong>Das Wenn-Dann-Schema:</strong>
+        WENN [Tatbestand: Voraussetzungen] → DANN [Rechtsfolge: was rechtlich passiert]<br><br>
+        Beispiel § 433 BGB: WENN ein Kaufvertrag geschlossen wird → DANN muss der Verkäufer die Ware übergeben und der Käufer bezahlen.
       </div>
 
-      <div class="ki-box">
-        <div class="ki-icon">🤖</div>
-        <div class="ki-text">
-          <strong>KI-Aufgabe: Fobizz nutzen</strong>
-          Öffne Fobizz und stelle der KI: <em>„Erkläre mir <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a> in einfachen Worten und gib mir ein Alltagsbeispiel aus dem Leben eines 16-Jährigen."</em><br>
-          Vergleiche die KI-Antwort mit dem, was du hier gelernt hast. Was hat die KI gut erklärt? Was fehlt oder ist ungenau?
-          <br><a href="https://plattform.fobizz.com" target="_blank" class="ki-link">Zu Fobizz →</a>
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Normen aus dem Alltag erkennen</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Lies <strong>Aufgabe 1 auf Seite 57</strong> in deinem Buch. Formuliere für jedes Schild eine Wenn-Dann-Regel.</p>
+            <textarea class="answer-area" placeholder="Schild 1: Wenn ... dann ...&#10;&#10;Schild 2: Wenn ... dann ...&#10;&#10;Schild 3: Wenn ... dann ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-schilder')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-schilder">
+              <strong>Beispiele (abhängig von den Schildern auf S. 57):</strong><br>
+              Schulgelände-Schild: Wenn jemand das Schulgelände betritt → dann gilt Schulordnung (z.B. kein Rauchen)<br>
+              80 km/h-Schild: Wenn jemand diesen Streckenabschnitt befährt → dann darf er max. 80 km/h fahren<br>
+              Anwohner-Schild: Wenn jemand kein Anwohner ist → dann darf er hier nicht parken
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Abschluss-Quiz →</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz &amp; Badge →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 5 -->
+<!-- STEP 5: QUIZ + BADGE -->
 <div class="step" id="step-5">
   <div class="section">
     <div class="section-header">
       <div class="section-icon green">🏆</div>
       <div class="section-meta">
         <div class="section-tag">Schritt 5 · Wissenssicherung</div>
-        <div class="section-title">Abschluss-Quiz &amp; Badge</div>
-        <div class="section-time">⏱ ca. 7 Minuten · Einzelarbeit</div>
+        <div class="section-title">Quiz &amp; Badge – Modul 1 startet</div>
+        <div class="section-time">⏱ ca. 6 Minuten · Einzelarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung (Version B)</div><p>Besprich Frage 3 und 4 im Plenum. Lass begründen, nicht nur raten.</p></div></div>
-      <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen! Bei 3 oder mehr richtigen Antworten schaltest du das Abzeichen <strong>„Rechtseinsteiger"</strong> frei – als PNG zum Herunterladen.</p>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Fragen 2 und 4 im Plenum besprechen. Bei ≥ 3/4 richtigen Antworten erscheint der Badge „Rechtseinsteiger" – in mebis nach vollständiger Abgabe freischalten.</p></div>
+      </div>
+      <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen. Bei <strong>3 oder mehr</strong> richtigen Antworten verdienst du den Badge <strong>„🔰 Rechtseinsteiger"</strong>!</p>
 
       <div class="quiz-wrap">
-        <div class="quiz-q">1. Welche Funktion des Rechts ist verletzt, wenn zwei Nachbarn ihren Streit mit Fäusten lösen statt vor Gericht zu gehen?</div>
+        <div class="quiz-q">1. Was ist die Hauptaufgabe von Rechtsnormen in einer Gesellschaft?</div>
         <div class="quiz-options" id="q1">
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Schutzfunktion</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Friedensfunktion</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Ordnungsfunktion</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Interessenausgleich</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Den Staat vor seinen Bürgern zu schützen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Das Zusammenleben zu regeln, Konflikte zu lösen und Interessen auszugleichen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Nur Kriminelle zu bestrafen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Wirtschaftliches Wachstum zu sichern</button>
         </div>
         <div class="quiz-feedback" id="q1-fb"></div>
       </div>
       <hr class="divider">
 
       <div class="quiz-wrap">
-        <div class="quiz-q">2. Was versteht man unter einem „Tatbestandsmerkmal" in einer Rechtsnorm?</div>
+        <div class="quiz-q">2. Ein Tempolimit schützt schwächere Verkehrsteilnehmer. Welche Rechtsfunktion ist das?</div>
         <div class="quiz-options" id="q2">
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Die rechtliche Konsequenz, die eintritt</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span>Der Name des zuständigen Richters</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">C</span>Eine Voraussetzung, die erfüllt sein muss, damit die Rechtsfolge eintritt</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Ein besonders schlimmes Vergehen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Friedensfunktion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span>Ausgleichsfunktion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">C</span>Schutzfunktion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Ordnungsfunktion</button>
         </div>
         <div class="quiz-feedback" id="q2-fb"></div>
       </div>
       <hr class="divider">
 
       <div class="quiz-wrap">
-        <div class="quiz-q">3. Leon (17) kauft ein Skateboard. Laut <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a>: Wann wird Leon Eigentümer?</div>
+        <div class="quiz-q">3. Was beschreibt der „Tatbestand" einer Rechtsnorm?</div>
         <div class="quiz-options" id="q3">
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span>Schon bei Vertragsabschluss</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">B</span>Erst wenn das Board übergeben wird UND beide einig sind, dass das Eigentum übergeht</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span>Erst wenn er die Quittung hält</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Nie – er ist zu jung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span>Die Strafe bei einem Gesetzesverstoß</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">B</span>Die Voraussetzungen, die erfüllt sein müssen, damit die Rechtsfolge eintritt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span>Den Namen des zuständigen Richters</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Den Paragrafentext im BGB</button>
         </div>
         <div class="quiz-feedback" id="q3-fb"></div>
       </div>
       <hr class="divider">
 
       <div class="quiz-wrap">
-        <div class="quiz-q">4. Welche Aussage beschreibt den „Interessenausgleich" als Funktion des Rechts am besten?</div>
+        <div class="quiz-q">4. Ein Gericht löst einen Streit zwischen zwei Parteien verbindlich. Welche Funktion(en) erfüllt es dabei?</div>
         <div class="quiz-options" id="q4">
-          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span>Das Recht bestraft immer die stärkere Partei</button>
-          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">B</span>Das Recht sorgt dafür, dass alle immer gewinnen</button>
-          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">C</span>Das Recht versucht, einen gerechten Ausgleich zwischen den Interessen aller Beteiligten herzustellen</button>
-          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span>Das Recht schützt nur die wirtschaftlich schwächere Partei</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span>Nur Ordnungsfunktion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">B</span>Nur Schutzfunktion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">C</span>Ordnungs- und Friedensfunktion – verbindliche Entscheidung ohne Gewalt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span>Ausgleichsfunktion – beide Parteien bekommen immer recht</button>
         </div>
         <div class="quiz-feedback" id="q4-fb"></div>
       </div>
@@ -634,155 +577,130 @@ body.version-b .teacher-only{display:block;}
       <div class="badge-reveal" id="badge-1">
         <div class="badge-canvas-wrap"><canvas id="badge-canvas" width="280" height="280"></canvas></div>
         <div class="badge-name">🔰 Rechtseinsteiger</div>
-        <div class="badge-sub">Stunde 1 erfolgreich abgeschlossen · WR 10 · Lernbereich 2</div>
+        <div class="badge-sub">Modul 1 gestartet · WR 10 · Lernbereich 2</div>
         <a id="badge-dl" class="badge-dl" download="badge_rechtseinsteiger.png">⬇ Badge als PNG herunterladen</a>
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
-        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      <div class="teacher-only" style="margin-top:1rem;">
+        <div class="info-box orange">
+          <strong>🎓 mebis-Badge freischalten</strong>
+          Nach dem Quiz und vollständiger Bearbeitung: Badge „🔰 Rechtseinsteiger" in mebis für die Klasse freischalten. Der Badge gilt für Modul 1 (Stunden 1 + 2).
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+          <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 6: ABFRAGE (nur Lehrkraft) -->
+<!-- STEP 6: ABFRAGE -->
 <div class="step teacher-only" id="step-6">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon amber">🎓</div>
+      <div class="section-icon orange">🎓</div>
       <div class="section-meta">
         <div class="section-tag">Schritt 6 · Mündliche Abfrage · nur Lehrkraft</div>
-        <div class="section-title">Abfrage – Stunde 1: Recht &amp; Normen</div>
-        <div class="section-time">⏱ 10 Minuten · 1 Schüler · Notenbildung &amp; Sicherung</div>
+        <div class="section-title">Abfrage – Stunde 1: Wozu brauchen wir Recht?</div>
+        <div class="section-time">⏱ 10 Minuten · 1 Schüler · Notenbildung</div>
       </div>
     </div>
     <div class="section-body">
-
       <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
-        <div class="teacher-note-header">🎓 Hinweise zur Durchführung</div>
-        <p>Die Abfrage dauert ca. 10 Minuten und wird von einem Schüler beantwortet. Die Fragen decken die vier Kompetenzen des 4K-Modells ab – passend zum Schwerpunkt dieser Stunde (Wissen &amp; Methode). Stelle die Fragen der Reihe nach. Frage 3 bezieht sich auf die Partnerarbeit der gesamten Klasse – der abgefragte Schüler stellt das gemeinsame Ergebnis vor.</p>
-        <ul>
-          <li>Bewertungstipp: Volle Punkte für vollständige, begründete Antworten – Teilpunkte für Teilantworten.</li>
-          <li>Fragen 1–2: Einzelleistung · Frage 3: Bezug auf Partnerarbeit · Frage 4: Kreativ-Impuls</li>
-        </ul>
+        <div class="teacher-note-header">🎓 Hinweise</div>
+        <p>Schwerpunkt: 4 Rechtsfunktionen + Wenn-Dann-Schema. Frage 3 bezieht sich auf die Buchaufgaben (Partnerarbeit Schritt 3).</p>
       </div>
-
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid var(--blue-400);color:var(--blue-700);">🔵 Wissen</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:#ccfbf1;border:1px solid #99f6e4;color:#0f766e;">🟢 Kritisches Denken</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:#fef3c7;border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
-          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:#ffe4e6;border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--teal-light);border:1px solid #99f6e4;color:#0f766e;">🟢 Krit. Denken</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--orange-light);border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--red-light);border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
         </div>
         <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
       </div>
-
       <div class="abfrage-wrap">
-
-        <!-- F1: Wissen -->
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num wissen">1</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Nenne und erkläre die vier Hauptfunktionen des Rechts. Gib zu jeder Funktion ein kurzes Beispiel.</div>
+              <div class="abfrage-q-text">Nenne und erkläre die vier Hauptfunktionen des Rechts mit je einem Alltagsbeispiel.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Der Schüler soll die vier Funktionen aus dem Gedächtnis nennen und mit eigenen Worten erklären – ohne Notizen.</p>
-            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <p>Vollständige Antwort: alle 4 Funktionen mit Erklärung + Beispiel.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont</button>
             <div class="erwartung-box" id="ew1">
-              <strong>Vollständige Antwort (4 Punkte):</strong><br>
-              1. <em>Friedensfunktion</em>: Konflikte werden durch den Staat (Gerichte) gelöst, nicht durch Gewalt. Bsp.: Nachbarschaftsstreit vor Gericht.<br>
-              2. <em>Ordnungsfunktion</em>: Regeln verhüten (präventiv) und lösen (reaktiv) Konflikte. Bsp.: StVO verhindert Unfälle.<br>
-              3. <em>Schutz-/Sicherheitsfunktion</em>: Der Staat schützt Schwächere und garantiert Konfliktlösung. Bsp.: Verbraucherschutzgesetze.<br>
-              4. <em>Interessenausgleich</em>: Ausgleich zwischen widerstreitenden Interessen. Bsp.: Mietrecht balanciert Mieter und Vermieter.<br>
-              <em>Weitere akzeptable Nennungen: Abschreckung, Erziehung, Straffunktion.</em>
+              <strong>Friedensfunktion:</strong> Konflikte ohne Gewalt lösen → z.B. Gericht entscheidet Nachbarschaftsstreit<br>
+              <strong>Ordnungsfunktion:</strong> Klare Regeln für alle → z.B. Straßenverkehrsordnung<br>
+              <strong>Schutzfunktion:</strong> Schwächere schützen → z.B. Tempolimit schützt Fußgänger<br>
+              <strong>Ausgleichsfunktion:</strong> Interessen ausgleichen → z.B. Lärm-Hausordnung für Musiker und Nachbarn
             </div>
           </div>
         </div>
-
-        <!-- F2: Kritisches Denken -->
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num denken">2</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Welche Funktion des Rechts hältst du für die wichtigste – und warum? Begründe deine Meinung!</div>
+              <div class="abfrage-q-text">Welche Rechtsfunktion ist deiner Meinung nach die wichtigste – und warum? Begründe deine Entscheidung.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Es gibt keine „richtige" Antwort. Bewertet werden Qualität und Schlüssigkeit der Begründung, nicht die Wahl der Funktion.</p>
-            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <p>Keine Musterlösung – bewertet wird Qualität der Begründung, nicht die gewählte Funktion.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont</button>
             <div class="erwartung-box" id="ew2">
-              <strong>Gute Antwort enthält:</strong><br>
-              • Klare Entscheidung für eine Funktion<br>
-              • Mindestens ein konkretes Argument (warum gerade diese?)<br>
-              • Bezug zu einer realen Situation oder einem Alltagsbeispiel<br>
-              • Ggf. Abgrenzung zu einer anderen Funktion<br><br>
-              <em>Beispiel-Argumentation: „Die Friedensfunktion ist am wichtigsten, weil ohne sie körperliche Gewalt zur Normalität würde – alle anderen Funktionen setzen voraus, dass Konflikte ohne Gewalt lösbar sind."</em>
+              Gute Antwort enthält: Klare Entscheidung für eine Funktion + mindestens zwei nachvollziehbare Argumente + Bezug auf konkrete Folgen wenn diese Funktion fehlte. Keine Funktion ist objektiv „die wichtigste" – jede Begründung kann stimmen, solange sie schlüssig ist.
             </div>
           </div>
         </div>
-
-        <!-- F3: Kommunikation -->
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num komm">3</div>
             <div class="abfrage-q-meta">
-              <div class="abfrage-q-label komm">🟡 Kommunikation &amp; Kollaboration · ca. 3 Min.</div>
-              <div class="abfrage-q-text">Erkläre das Wenn-Dann-Schema der Normenanalyse und stelle das Ergebnis eurer Partnerarbeit zu § 433 BGB vor. Wie bist du vorgegangen?</div>
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Erkläre das Ergebnis eurer Partnerarbeit zu Aufgabe 4 (S. 55): Welche Funktionen hat ein Verkehrsschild – und wie habt ihr das herausgearbeitet?</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Der Schüler erklärt die Methode <em>und</em> das konkrete Ergebnis der Partnerarbeit. Hier geht es auch darum, den Arbeitsprozess zu kommunizieren.</p>
-            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <p>Schüler erklärt strukturiert das PA-Ergebnis. Bewertet: Vollständigkeit + klare Kommunikation.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont</button>
             <div class="erwartung-box" id="ew3">
-              <strong>Methode (2 P.):</strong> Wenn-Dann-Struktur erklären: Tatbestandsmerkmale = Voraussetzungen (TB 1, TB 2 …) → Rechtsfolge = was rechtlich passiert.<br><br>
-              <strong>Ergebnis § 433 BGB (2 P.):</strong><br>
-              <em>§ 433 Abs. 1 – Pflichten des Verkäufers:</em><br>
-              TB 1: Kaufvertrag liegt vor · TB 2: Es geht um eine Sache · TB 3: Verkäufer und Käufer vorhanden<br>
-              RF 1: Verkäufer übergibt die Sache · RF 2: Verkäufer verschafft das Eigentum<br><br>
-              <em>§ 433 Abs. 2 – Pflichten des Käufers:</em><br>
-              RF 3: Käufer bezahlt den vereinbarten Kaufpreis · RF 4: Käufer nimmt die Sache ab<br>
-              <em>Wichtig: Der Kaufvertrag begründet Pflichten für BEIDE Seiten!</em><br><br>
-              <strong>Prozess (1 P.):</strong> Schüler schildert sinngemäß, wie er/sie vorgegangen ist (z.B. zuerst Tatbestandsmerkmale gesucht, dann Rechtsfolge abgeleitet).
+              Gute Antwort: Benennt Ordnungsfunktion (legt Regeln fest), Schutzfunktion (schützt z.B. Kinder), Friedensfunktion (verhindert Auseinandersetzungen). Erklärt wie die PA-Erarbeitung verlief.
             </div>
           </div>
         </div>
-
-        <!-- F4: Kreativität -->
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num kreativ">4</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Erfinde einen kurzen Alltagsfall, in dem zwei Rechtsfunktionen gleichzeitig eine Rolle spielen. Erkläre, welche Funktionen das sind und warum.</div>
+              <div class="abfrage-q-text">Erfinde einen Alltagsfall, in dem zwei Rechtsfunktionen gleichzeitig relevant sind. Erkläre welche und warum.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Der Schüler erfindet einen eigenen Fall – kein vorher gesehenes Beispiel verwenden. Kreativität und korrekte Anwendung des Wissens werden bewertet.</p>
-            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <p>Eigener Fall – nicht aus dem Unterricht. Bewertet: korrekte Nennung und Erklärung beider Funktionen.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont</button>
             <div class="erwartung-box" id="ew4">
-              <strong>Guter Fall enthält:</strong><br>
-              • Einen konkreten, realistischen Alltagssachverhalt (nicht aus dem Unterricht)<br>
-              • Benennung von mindestens zwei Rechtsfunktionen<br>
-              • Erklärung, warum beide Funktionen zutreffen<br><br>
-              <em>Beispiel: „Jemand klaut in einem Supermarkt. Die Schutzfunktion schützt den Supermarkt als Eigentümer. Die Abschreckungsfunktion soll zukünftige Diebstähle verhindern."</em><br><br>
-              <em>Akzeptable Funktionskombinationen: Frieden + Schutz · Ordnung + Interessenausgleich · Abschreckung + Erziehung usw.</em>
+              <em>Beispiel: Rauchverbot in der Schule → Schutzfunktion (schützt Nichtraucher vor Passivrauch) + Ordnungsfunktion (klare Regel für alle). Viele andere Beispiele möglich.</em>
             </div>
           </div>
         </div>
-
-      </div><!-- /abfrage-wrap -->
-
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
-        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
       </div>
-
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -795,218 +713,69 @@ body.version-b .teacher-only{display:block;}
     <div class="pin-logo">Recht<span>&</span>Ich</div>
     <div class="pin-icon">🔐</div>
     <div class="pin-title">Lehrkraft-Bereich</div>
-    <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein,<br>um die Lehrkraft-Version freizuschalten.</div>
-    <div class="pin-dots">
-      <div class="pin-dot" id="pd0"></div>
-      <div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div>
-      <div class="pin-dot" id="pd3"></div>
-      <div class="pin-dot" id="pd4"></div>
-      <div class="pin-dot" id="pd5"></div>
-    </div>
+    <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div></div>
     <div class="pin-error" id="pin-error"></div>
     <div class="pin-pad">
-      <button class="pin-key" onclick="pinKey('1')">1</button>
-      <button class="pin-key" onclick="pinKey('2')">2</button>
-      <button class="pin-key" onclick="pinKey('3')">3</button>
-      <button class="pin-key" onclick="pinKey('4')">4</button>
-      <button class="pin-key" onclick="pinKey('5')">5</button>
-      <button class="pin-key" onclick="pinKey('6')">6</button>
-      <button class="pin-key" onclick="pinKey('7')">7</button>
-      <button class="pin-key" onclick="pinKey('8')">8</button>
-      <button class="pin-key" onclick="pinKey('9')">9</button>
-      <button class="pin-key del" onclick="pinDel()">⌫</button>
-      <button class="pin-key zero" onclick="pinKey('0')">0</button>
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
     </div>
     <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
   </div>
 </div>
 
 <script>
-// ─── PIN KONFIGURATION ────────────────────────────────────────────────────────
-const TEACHER_PIN = '066090'; // ← PIN hier ändern
-// ─────────────────────────────────────────────────────────────────────────────
-
-let pinInput = '';
-const TOTAL_STEPS = 6;
-
-function openPinModal(){
-  // If already in teacher mode, just switch back to student
-  if(document.getElementById('body-root').classList.contains('version-b')){
-    setVersion('a'); return;
-  }
-  pinInput='';updatePinDots();
-  document.getElementById('pin-error').textContent='';
-  document.getElementById('pin-overlay').classList.add('open');
-}
-function closePinModal(){
-  document.getElementById('pin-overlay').classList.remove('open');
-  pinInput='';updatePinDots();
-}
-function pinKey(d){
-  if(pinInput.length>=6)return;
-  pinInput+=d;
-  updatePinDots();
-  if(pinInput.length===6) setTimeout(checkPin,120);
-}
-function pinDel(){
-  pinInput=pinInput.slice(0,-1);
-  updatePinDots();
-  document.getElementById('pin-error').textContent='';
-}
-function updatePinDots(){
-  for(let i=0;i<6;i++){
-    document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);
-  }
-}
-function checkPin(){
-  if(pinInput===TEACHER_PIN){
-    closePinModal();
-    setVersion('b');
-  } else {
-    document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';
-    pinInput='';
-    updatePinDots();
-    // shake animation
-    const box=document.querySelector('.pin-box');
-    box.style.animation='none';
-    setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);
-  }
-}
-
-let cur=1,quizA={},pollD={};
-function setVersion(v){
-  const b=document.getElementById('body-root');
-  document.getElementById('btn-a').classList.toggle('active',v==='a');
-  document.getElementById('btn-b').classList.toggle('active',v==='b');
-  if(v==='b'){
-    b.classList.add('version-b');
-    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');
-    document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';
-  } else {
-    b.classList.remove('version-b');
-    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');
-    document.getElementById('btn-b').textContent='🎓 Lehrkraft';
-    // if on step 6, go back to step 5
-    if(cur===6) goToStep(5);
-  }
-}
-
-function goToStep(n){
-  // Step 6 only accessible in teacher mode
-  if(n===6 && !document.getElementById('body-root').classList.contains('version-b')) return;
-  document.getElementById('step-'+cur).classList.remove('active');
-  cur=n;
-  document.getElementById('step-'+cur).classList.add('active');
-  for(let i=1;i<=TOTAL_STEPS;i++){
-    const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);
-    if(!s)continue;
-    s.classList.remove('active','done');
-    if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}
-    else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}
-    else if(l)l.classList.remove('done');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+const TEACHER_PIN='135791';
+let pinInput='',cur=1,quizA={},pollD={};
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
 function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
 function prevStep(f){if(f>1)goToStep(f-1);}
-function selectPoll(id,el){
-  if(pollD[id])return;pollD[id]=true;
-  el.classList.add('selected');
-  document.getElementById(id+'-result').classList.add('visible');
-}
-function revealSolution(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Musterlösung ausblenden':'✓ Musterlösung anzeigen';
-}
-function toggleErwartung(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Erwartungshorizont ausblenden':'📋 Erwartungshorizont anzeigen';
-}
-function checkQuiz(qId,btn,ok){
-  const c=document.getElementById(qId);if(c.dataset.answered)return;
-  c.dataset.answered='true';quizA[qId]=ok;
-  c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));
-  const fb=document.getElementById(qId+'-fb');
-  const yes={q1:'✓ Richtig! Friedensfunktion: Konflikte sollen über Gerichte gelöst werden, nicht durch Gewalt.',q2:'✓ Richtig! Tatbestandsmerkmale sind die Voraussetzungen – das „Wenn" der Norm.',q3:'✓ Richtig! § 929 BGB verlangt Übergabe UND Einigung – beides zusammen.',q4:'✓ Richtig! Das Recht vermittelt fair zwischen allen Beteiligten.'};
-  const no={q1:'✗ Nicht ganz. Die Friedensfunktion (B) ist am direktesten verletzt.',q2:'✗ Nicht ganz. Tatbestandsmerkmal = Voraussetzung, nicht Konsequenz. → C ist korrekt.',q3:'✗ Nicht ganz. § 929 BGB braucht Übergabe + Einigung. → B ist korrekt.',q4:'✗ Interessenausgleich bedeutet nicht, dass alle gewinnen. → C ist korrekt.'};
-  if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}
-  else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
-  const qs=['q1','q2','q3','q4'];
-  if(qs.every(q=>document.getElementById(q).dataset.answered)){
-    document.getElementById('quiz-score').style.display='block';
-    const n=qs.filter(q=>quizA[q]).length;
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch und versuche es erneut.';
-    if(n<3) document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
-function finishQuiz(){
-  const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
-  if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}
-  else {
-    document.getElementById('quiz-score').style.display='block';
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch und versuche es erneut.';
-    document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont';}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! Recht regelt das Zusammenleben und gleicht unterschiedliche Interessen aus.',q2:'✓ Richtig! Schutzfunktion: Das Recht schützt schwächere Personen.',q3:'✓ Richtig! Der Tatbestand beschreibt die Voraussetzungen – das „Wenn" der Norm.',q4:'✓ Richtig! Ein Gericht erfüllt Ordnungs- und Friedensfunktion: verbindliche Entscheidung ohne Gewalt.'};
+const no={q1:'✗ Nicht ganz. Recht dient dem Zusammenleben aller – nicht nur der Bestrafung. → B',q2:'✗ Nicht ganz. Schutz für Schwächere = Schutzfunktion. → C',q3:'✗ Nicht ganz. Tatbestand = Voraussetzungen (das Wenn). Die Rechtsfolge ist das Dann. → B',q4:'✗ Nicht ganz. Ordnungs- + Friedensfunktion – verbindliche Lösung ohne Gewalt. → C'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}else{document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
 function retryQuiz(){
   const qs=['q1','q2','q3','q4'];
-  qs.forEach(q=>{
-    const c=document.getElementById(q);
-    delete c.dataset.answered;
-    c.querySelectorAll('.quiz-opt').forEach(b=>{
-      b.classList.remove('disabled','correct','wrong');
-    });
-    document.getElementById(q+'-fb').className='quiz-feedback';
-    document.getElementById(q+'-fb').textContent='';
-  });
+  qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});
   quizA={};
   document.getElementById('quiz-score').style.display='none';
   document.getElementById('quiz-retry-wrap').style.display='none';
+  document.getElementById('badge-1').classList.remove('visible');
   window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
 }
 function drawBadge(){
   const cv=document.getElementById('badge-canvas'),ctx=cv.getContext('2d');
-  const w=280,h=280,cx=140,cy=140,r=128;
+  const cx=140,cy=140,r=128;
   const g=ctx.createRadialGradient(cx,cy-30,20,cx,cy,r);
-  g.addColorStop(0,'#4f46e5');g.addColorStop(1,'#1e1b4b');
+  g.addColorStop(0,'#1976D2');g.addColorStop(1,'#0D47A1');
   ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
   ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='#fbbf24';ctx.lineWidth=6;ctx.stroke();
   ctx.beginPath();ctx.arc(cx,cy,r-12,0,Math.PI*2);ctx.strokeStyle='rgba(251,191,36,0.2)';ctx.lineWidth=2;ctx.stroke();
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(cx,cy-60);ctx.bezierCurveTo(cx+52,cy-60,cx+62,cy-18,cx+62,cy+14);
-  ctx.bezierCurveTo(cx+62,cy+48,cx+24,cy+72,cx,cy+80);
-  ctx.bezierCurveTo(cx-24,cy+72,cx-62,cy+48,cx-62,cy+14);
-  ctx.bezierCurveTo(cx-62,cy-18,cx-52,cy-60,cx,cy-60);
-  ctx.closePath();ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fill();ctx.strokeStyle='#fbbf24';ctx.lineWidth=3;ctx.stroke();
-  ctx.restore();
   ctx.font='bold 56px Georgia,serif';ctx.fillStyle='#fbbf24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('§',cx,cy-4);
   ctx.font='bold 17px sans-serif';ctx.fillStyle='#ffffff';ctx.textAlign='center';ctx.textBaseline='alphabetic';
   ctx.fillText('RECHTS-',cx,cy+58);ctx.fillText('EINSTEIGER',cx,cy+79);
   ctx.font='14px sans-serif';ctx.fillStyle='#fbbf24';ctx.textBaseline='middle';
   ctx.fillText('★',cx-72,cy+26);ctx.fillText('★',cx+72,cy+26);
   ctx.font='10px sans-serif';ctx.fillStyle='rgba(255,255,255,0.4)';ctx.textBaseline='alphabetic';
-  ctx.fillText('WR 10 · Lernbereich 2 · Recht & Normen',cx,cy+104);
+  ctx.fillText('WR 10 · Lernbereich 2 · Modul 1',cx,cy+104);
   document.getElementById('badge-dl').href=cv.toDataURL('image/png');
 }
-// Close modal on overlay click
-document.getElementById('pin-overlay').addEventListener('click',function(e){
-  if(e.target===this)closePinModal();
-});
-// Keyboard support for PIN
-document.addEventListener('keydown',function(e){
-  if(!document.getElementById('pin-overlay').classList.contains('open'))return;
-  if(e.key>='0'&&e.key<='9')pinKey(e.key);
-  else if(e.key==='Backspace')pinDel();
-  else if(e.key==='Escape')closePinModal();
-});
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
 </script>
-
-<style>
-@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
-</style>
 </body>
 </html>
