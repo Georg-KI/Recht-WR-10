@@ -19,18 +19,13 @@
   --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
   --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
   --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
-  --indigo:var(--blue-700);--indigo-light:var(--blue-400);--indigo-xlight:var(--blue-50);
-  --amber:var(--orange);--amber-light:var(--orange-light);
-  --rose:var(--red);--rose-light:var(--red-light);
-  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
-  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);
-  --radius:var(--radius-lg);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
-.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
@@ -54,7 +49,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
 .hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
 .hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
-.hero-meta-item{display:flex;align-items:center;gap:5px;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
 .teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
@@ -65,7 +62,6 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .section-icon.blue{background:var(--blue-50);}
 .section-icon.green{background:var(--green-light);}
 .section-icon.orange{background:var(--orange-light);}
-.section-icon.red{background:var(--red-light);}
 .section-icon.purple{background:var(--purple-light);}
 .section-icon.teal{background:var(--teal-light);}
 .section-meta{flex:1;}
@@ -96,52 +92,41 @@ a.para-link:hover{color:var(--blue-400);}
 .chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
 .chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
 .chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
-/* SCENARIO */
-.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
-.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
-.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
-.scenario strong{color:var(--blue-400);}
-/* POLL */
 .poll{margin:1rem 0;}
 .poll-question{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .poll-options{display:flex;flex-direction:column;gap:8px;}
 .poll-option{display:flex;align-items:center;gap:12px;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all 0.15s;background:white;}
 .poll-option:hover{border-color:var(--blue-400);background:var(--blue-50);}
 .poll-option.selected{border-color:var(--blue-700);background:var(--blue-50);}
-.poll-option.selected .poll-radio{background:var(--blue-700);border-color:var(--blue-700);}
 .poll-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;transition:all 0.15s;}
-.poll-radio::after{content:'';width:8px;height:8px;border-radius:50%;background:white;display:none;margin:3px auto;}
-.poll-option.selected .poll-radio::after{display:block;}
+.poll-option.selected .poll-radio{background:var(--blue-700);border-color:var(--blue-700);}
 .poll-option-text{font-size:14px;color:var(--text);}
 .poll-result{margin-top:1rem;display:none;}
 .poll-result.visible{display:block;}
 .poll-result-text{background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:var(--blue-800);line-height:1.6;}
-/* VERTRAGSSCHLUSS CARDS */
 .vschluss-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:1rem 0;}
-@media(max-width:640px){.vschluss-grid{grid-template-columns:1fr;}}
 .vschluss-card{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.1rem;background:white;transition:all 0.15s;text-align:center;}
 .vschluss-card:hover{border-color:var(--blue-400);transform:translateY(-2px);box-shadow:var(--shadow);}
 .vschluss-icon{font-size:28px;margin-bottom:0.5rem;}
 .vschluss-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:0.35rem;}
 .vschluss-text{font-size:12px;color:var(--text-secondary);line-height:1.4;}
 .vschluss-badge{display:inline-block;margin-top:0.5rem;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-400);}
-/* TASK */
 .task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
 .task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
 .task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-title{font-size:13px;font-weight:700;color:white;}
-.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
-.task-body p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
-.task-body p:last-child{margin-bottom:0;}
-.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
-.answer-area:focus{outline:none;border-color:var(--blue-700);}
-.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
-.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
-.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
-.solution-reveal.visible{display:block;}
-/* ROLLENSPIEL */
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-purple{border:1.5px solid #7B1FA2;}
 .rollen-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0;}
-@media(max-width:600px){.rollen-wrap{grid-template-columns:1fr;}}
 .rollen-card{border-radius:var(--radius-md);padding:1rem 1.1rem;border:1.5px solid;}
 .rollen-card.kaeufer{background:#E3F2FD;border-color:var(--blue-400);}
 .rollen-card.verkaeufer{background:var(--green-light);border-color:#81c784;}
@@ -149,7 +134,12 @@ a.para-link:hover{color:var(--blue-400);}
 .rollen-card.kaeufer .rollen-card-title{color:var(--blue-700);}
 .rollen-card.verkaeufer .rollen-card-title{color:var(--green);}
 .rollen-card ul{font-size:13px;color:var(--text);padding-left:1.1rem;line-height:1.7;}
-/* QUIZ */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
@@ -170,7 +160,8 @@ a.para-link:hover{color:var(--blue-400);}
 .btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* ABFRAGE */
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
 .abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
 .abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
 .abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
@@ -194,7 +185,6 @@ a.para-link:hover{color:var(--blue-400);}
 .erwartung-box.visible{display:block;}
 .print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
 .print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* PIN MODAL */
 .pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
 .pin-overlay.open{display:flex;}
 .pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
@@ -220,14 +210,18 @@ a.para-link:hover{color:var(--blue-400);}
 .teacher-only{display:none;}
 body.version-b .teacher-only{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 @media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
-@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.vschluss-grid{grid-template-columns:1fr;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.vschluss-grid{grid-template-columns:1fr;}.rollen-wrap{grid-template-columns:1fr;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}}
 </style>
 </head>
 <body id="body-root">
 
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 3</span>
   <div class="topbar-right">
@@ -261,9 +255,13 @@ body.version-b .teacher-only{display:block;}
   <h1>Wie entsteht ein Vertrag?</h1>
   <p>Du schließt täglich Verträge – oft ohne es zu merken. Ob im Supermarkt, online oder beim FC Bayern: Überall entstehen rechtliche Bindungen. Diese Stunde zeigt dir wie.</p>
   <div class="hero-meta">
-    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
-    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 58–59</div>
-    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 58–59</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler analysieren das Zustandekommen von Verträgen und sind sich der rechtlichen Folgen bewusst. Sie wenden Rechtsnormen auf konkrete Sachverhalte an.</div>
   </div>
 </div>
 
@@ -271,15 +269,15 @@ body.version-b .teacher-only{display:block;}
   <div class="teacher-note-header">🎓 Hinweise – Version B</div>
   <p>Schwerpunkt dieser Stunde: Vertragsschluss durch Antrag und Annahme, verschiedene Formen (mündlich, schriftlich, konkludent). Schüler arbeiten in Schritten 1–4 selbstständig.</p>
   <ul>
-    <li>Schritt 1: FC Bayern-Einstieg – Schüler sollen erst selbst überlegen, was ein Vertrag bedeutet, bevor sie den Buchverweis lesen.</li>
+    <li>Schritt 1: FC Bayern-Einstieg – Schüler sollen erst selbst überlegen, bevor sie den Buchverweis lesen.</li>
     <li>Schritt 2: Begriff „schlüssiges/konkludentes Handeln" muss von der Lehrkraft mündlich erläutert werden (DK_58)!</li>
     <li>Schritt 3: Rollenspiel in PA – je ein Schüler spielt Käufer, einer Verkäufer. Anschließend kurzer Plenum-Austausch.</li>
     <li>Schritt 4: Buchaufgaben S. 59 – Schüler schlagen Buch auf, Aufgaben 3 und 4.</li>
-    <li>Hinweis: §§ 145/147 BGB werden in dieser Stunde bewusst NICHT vertieft (vgl. DK_58).</li>
+    <li>⚠️ Hinweis: §§ 145/147 BGB werden in dieser Stunde bewusst NICHT vertieft (vgl. DK_58).</li>
   </ul>
 </div>
 
-<!-- STEP 1: EINSTIEG -->
+<!-- STEP 1 -->
 <div class="step active" id="step-1">
   <div class="section">
     <div class="section-header">
@@ -291,8 +289,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Lass Schüler zuerst spontan antworten: „Was bedeutet es für Thomas Müller, einen Vertrag mit dem FC Bayern zu haben?" – dann Buchverweis öffnen lassen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c2">Lebensweltbezug</span>
+        <span class="chip c3">Methodenvielfalt</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Tipp</div>
+          <p>Lass Schüler zuerst spontan antworten: „Was bedeutet es für Thomas Müller, einen Vertrag mit dem FC Bayern zu haben?" – dann Buchverweis öffnen lassen.</p>
+        </div>
+      </div>
 
       <div class="info-box orange">
         <strong>💡 Warum ist das relevant für dich?</strong>
@@ -303,7 +309,7 @@ body.version-b .teacher-only{display:block;}
         <div class="book-ref-icon">📗</div>
         <div class="book-ref-body">
           <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
-          <div class="book-ref-text">Lies die Seiten <strong>58–59</strong> in deinem Buch, Abschnitt <strong>2.2 „Wie entsteht ein Vertrag und warum brauchen wir ihn?"</strong>. Achte besonders auf die Karikatur (M1) und den FC Bayern-Fall (M2).</div>
+          <div class="book-ref-text">Lies die Seiten <strong>58–59</strong> in deinem Buch, Abschnitt <strong>„Wie entsteht ein Vertrag und warum brauchen wir ihn?"</strong>. Achte besonders auf die Karikatur (M1) und den FC Bayern-Fall (M2).</div>
         </div>
       </div>
 
@@ -325,12 +331,14 @@ body.version-b .teacher-only{display:block;}
         Lateinisch für: <em>„Verträge sind einzuhalten."</em> Dieser Grundsatz gilt im deutschen Recht für alle Verträge – egal ob mündlich, schriftlich oder per Handschlag. Wer einen Vertrag schließt, ist daran gebunden.
       </div>
 
-      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Wie entsteht ein Vertrag? →</button></div>
+      <div class="nav-btns">
+        <button class="btn-primary" onclick="nextStep(1)">Weiter: Wie entsteht ein Vertrag? →</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 2: WIE ENTSTEHT EIN VERTRAG -->
+<!-- STEP 2 -->
 <div class="step" id="step-2">
   <div class="section">
     <div class="section-header">
@@ -342,8 +350,17 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip c2">Lebensweltbezug</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Wichtig</div><p>Den Begriff „schlüssiges (konkludentes) Handeln" muss die Lehrkraft mündlich erläutern – er taucht in M3/1 und M3/4 auf. Beispiel: Wer die Waren aufs Kassenband legt, „sagt" damit ohne Worte: Ich möchte das kaufen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c1">Veranschaulichung</span>
+        <span class="chip c2">Lebensweltbezug</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Wichtig</div>
+          <p>Den Begriff „schlüssiges (konkludentes) Handeln" muss die Lehrkraft mündlich erläutern – er taucht in M3/1 und M3/4 auf. Beispiel: Wer die Waren aufs Kassenband legt, „sagt" damit ohne Worte: Ich möchte das kaufen.</p>
+          <p style="margin-top:0.5rem;">⚠️ §§ 145/147 BGB werden bewusst NICHT eingeführt (laut DK_58).</p>
+        </div>
+      </div>
 
       <p class="content-text">Ein Vertrag entsteht immer nach dem gleichen Prinzip: Eine Seite macht ein <strong>Angebot (Antrag)</strong> – die andere <strong>nimmt an</strong>. Erst wenn beide einig sind, ist ein Vertrag geschlossen.</p>
 
@@ -373,13 +390,6 @@ body.version-b .teacher-only{display:block;}
         Du legst Waren aufs Kassenband (= Antrag durch schlüssiges Handeln). Die Kassiererin scannt sie ein (= Annahme durch schlüssiges Handeln). Fertig – der Kaufvertrag ist geschlossen. Kein einziges Wort nötig!
       </div>
 
-      <div class="teacher-only">
-        <div class="teacher-note" style="display:block;margin-top:0.5rem;">
-          <div class="teacher-note-header">🎓 Abgrenzung</div>
-          <p>Bewusst werden §§ 145/147 BGB (Antrag/Annahme) in dieser Stunde NICHT vertieft – laut didaktischem Kommentar des Buchverlags nicht angebracht. Der Fokus liegt auf dem Verständnis des Prinzips, nicht auf der Normenanalyse.</p>
-        </div>
-      </div>
-
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
         <button class="btn-primary" onclick="nextStep(2)">Weiter: Rollenspiel →</button>
@@ -388,7 +398,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 3: ROLLENSPIEL -->
+<!-- STEP 3 -->
 <div class="step" id="step-3">
   <div class="section">
     <div class="section-header">
@@ -400,8 +410,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c3">Methodenvielfalt</span><span class="chip c4">Kollaboration</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>PA: Je ein Schüler übernimmt eine Rolle. Nach ca. 4 Min. kurzer Austausch im Plenum: Wann war der Vertrag geschlossen? War die Einigung eindeutig? Ggf. zweites Szenario (konkludent) spielen lassen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c3">Methodenvielfalt</span>
+        <span class="chip c4">Kollaboration</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>PA: Je ein Schüler übernimmt eine Rolle. Nach ca. 4 Min. kurzer Austausch im Plenum: Wann war der Vertrag geschlossen? War die Einigung eindeutig? Ggf. zweites Szenario (konkludent) spielen lassen.</p>
+        </div>
+      </div>
 
       <p class="content-text">Führe mit deinem Partner ein kurzes Kaufgespräch durch. Achte dabei: Wann genau entsteht der Vertrag? Nach dem Gespräch beantwortet ihr gemeinsam die Fragen unten.</p>
 
@@ -427,16 +445,46 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Reflexion nach dem Rollenspiel – Partnerarbeit</div></div>
+        <div class="task-header">
+          <div class="task-num">✍</div>
+          <div class="task-header-text">
+            <span class="task-title">Reflexion nach dem Rollenspiel</span>
+            <span class="task-subtitle">Rollenspiel · Partnerarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Beantwortet gemeinsam: In welchem Moment ist der Kaufvertrag entstanden? Wie habt ihr euch geeinigt?</p>
-          <textarea class="answer-area" placeholder="Der Vertrag entstand in dem Moment als ...&#10;&#10;Die Einigung erfolgte durch (mündlich / schriftlich / konkludent): ...&#10;&#10;Antrag kam von: ...&#10;Annahme kam von: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-rolle')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-rolle">
-            <strong>Der Vertrag entsteht in dem Moment</strong>, in dem Käufer und Verkäufer sich über Ware und Preis einig sind – d.h. wenn der eine einen Preis nennt und der andere zustimmt.<br><br>
-            <strong>Antrag:</strong> Der Verkäufer nennt seinen Preis (Angebot). Oder: Der Käufer macht ein Gegenangebot.<br>
-            <strong>Annahme:</strong> Der andere stimmt zu – durch ein klares „Ja", einen Handschlag oder eine andere eindeutige Reaktion.<br><br>
-            <em>Merke: Beide müssen dasselbe wollen. Erst wenn Antrag und Annahme übereinstimmen, ist der Vertrag geschlossen.</em>
+          <div class="task-icons">
+            <div class="ico ico-purple">
+              <svg width="22" height="22" viewBox="0 0 44 32" fill="none">
+                <path d="M3 6c0-2 1.5-4 4-4h12c2.5 0 4 2 4 4v10c0 4-3 8-10 8S3 20 3 16V6z" stroke="#7B1FA2" stroke-width="2.2" fill="none"/>
+                <path d="M9 10c0-1 0.8-2 2-2s2 1 2 2" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M17 10c0-1 0.8-2 2-2s2 1 2 2" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9 16c1 2 3 3 5 3s4-1 5-3" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M21 10c0-2 1.5-4 4-4h12c2.5 0 4 2 4 4v10c0 4-3 8-10 8s-10-4-10-10V10z" stroke="#7B1FA2" stroke-width="2.2" fill="none"/>
+                <path d="M27 14c0 1 0.8 2 2 2s2-1 2-2" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M35 14c0 1 0.8 2 2 2s2-1 2-2" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M27 22c1-2 3-3 5-3s4 1 5 3" stroke="#7B1FA2" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+                <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+                <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+                <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Beantwortet gemeinsam: In welchem Moment ist der Kaufvertrag entstanden? Wie habt ihr euch geeinigt?</p>
+            <textarea class="answer-area" placeholder="Der Vertrag entstand in dem Moment als ...&#10;&#10;Die Einigung erfolgte durch (mündlich / schriftlich / konkludent): ...&#10;&#10;Antrag kam von: ...&#10;Annahme kam von: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-rolle')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-rolle">
+              <strong>Der Vertrag entsteht in dem Moment</strong>, in dem Käufer und Verkäufer sich über Ware und Preis einig sind – d.h. wenn der eine einen Preis nennt und der andere zustimmt.<br><br>
+              <strong>Antrag:</strong> Der Verkäufer nennt seinen Preis (Angebot). Oder: Der Käufer macht ein Gegenangebot.<br>
+              <strong>Annahme:</strong> Der andere stimmt zu – durch ein klares „Ja", einen Handschlag oder eine andere eindeutige Reaktion.<br><br>
+              <em>Merke: Beide müssen dasselbe wollen. Erst wenn Antrag und Annahme übereinstimmen, ist der Vertrag geschlossen.</em>
+            </div>
           </div>
         </div>
       </div>
@@ -449,7 +497,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 4: BUCHAUFGABEN -->
+<!-- STEP 4 -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
@@ -461,8 +509,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Buchaufgaben 3 und 4 auf Seite 59. Aufgabe 3: Schüler ordnen die Alltagssituationen (M1–M3/4) der Art des Vertragsschlusses zu. Aufgabe 4: Schüler zeigen am Beispiel des Handschlags (M4), warum beide Partner dasselbe wollen müssen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip k">Kompetenzorientiert</span>
+        <span class="chip c1">Veranschaulichung</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Buchaufgaben 3 und 4 auf S. 59. Aufgabe 3: Schüler ordnen Alltagssituationen (M1–M3/4) der Art des Vertragsschlusses zu. Aufgabe 4: Schüler zeigen am Beispiel des Handschlags (M4), warum beide Partner dasselbe wollen müssen.</p>
+        </div>
+      </div>
 
       <div class="book-ref">
         <div class="book-ref-icon">📗</div>
@@ -473,30 +529,80 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">1</div><div class="task-title">Aufgabe 3 (S. 59) – Vertragsschluss beschreiben</div></div>
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 3 (S. 59) – Vertragsschluss beschreiben</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Bearbeite <strong>Aufgabe 3 auf Seite 59</strong>: Beschreibe für jede Situation (M1–M3/4), wie der Vertrag zustande kommt – faktisch und rechtlich.</p>
-          <textarea class="answer-area" style="min-height:110px;" placeholder="M1: Faktisch: ... / Rechtlich: ...&#10;M2: Faktisch: ... / Rechtlich: ...&#10;M3/1: Faktisch: ... / Rechtlich: ...&#10;M3/3 (Online): Faktisch: ... / Rechtlich: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-aufg3')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-aufg3">
-            <strong>M1 (Autoverkauf):</strong> Käufer und Verkäufer treffen eine mündliche Absprache und unterschreiben einen Vertrag → Antrag und Annahme mündlich und schriftlich.<br><br>
-            <strong>M2 (FC Bayern):</strong> Spieler und Vereinsvertreter unterschreiben einen schriftlichen Vertrag → Antrag und Annahme schriftlich.<br><br>
-            <strong>M3/1 (Supermarkt):</strong> Käufer legt Waren aufs Kassenband → Antrag durch schlüssiges Handeln. Kassiererin scannt ein → Annahme durch schlüssiges Handeln.<br><br>
-            <strong>M3/3 (Online-Kauf):</strong> Käufer klickt auf „Kaufen" → Antrag. Verkäufer bestätigt per E-Mail → Annahme schriftlich (elektronisch).<br><br>
-            <em>Merke: Auch beim Online-Kauf entsteht ein rechtlich bindender Vertrag – durch das Klicken!</em>
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+                <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                <path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Beschreibe für jede Situation (M1–M3/4) auf Seite 59, wie der Vertrag zustande kommt – faktisch und rechtlich.</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="M1: Faktisch: ... / Rechtlich: ...&#10;M2: Faktisch: ... / Rechtlich: ...&#10;M3/1: Faktisch: ... / Rechtlich: ...&#10;M3/3 (Online): Faktisch: ... / Rechtlich: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-aufg3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-aufg3">
+              <strong>M1 (Autoverkauf):</strong> Käufer und Verkäufer treffen eine mündliche Absprache und unterschreiben einen Vertrag → Antrag und Annahme mündlich und schriftlich.<br><br>
+              <strong>M2 (FC Bayern):</strong> Spieler und Vereinsvertreter unterschreiben einen schriftlichen Vertrag → Antrag und Annahme schriftlich.<br><br>
+              <strong>M3/1 (Supermarkt):</strong> Käufer legt Waren aufs Kassenband → Antrag durch schlüssiges Handeln. Kassiererin scannt ein → Annahme durch schlüssiges Handeln.<br><br>
+              <strong>M3/3 (Online-Kauf):</strong> Käufer klickt auf „Kaufen" → Antrag. Verkäufer bestätigt per E-Mail → Annahme schriftlich (elektronisch).<br><br>
+              <em>Merke: Auch beim Online-Kauf entsteht ein rechtlich bindender Vertrag – durch das Klicken!</em>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">2</div><div class="task-title">Aufgabe 4 (S. 59) – Wann ist ein Vertrag wirklich geschlossen?</div></div>
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 4 (S. 59) – Wann ist ein Vertrag wirklich geschlossen?</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Bearbeite <strong>Aufgabe 4 auf Seite 59</strong>: Zeige am Beispiel des Handschlags (M4), was dafür nötig ist, dass ein Vertrag tatsächlich zustande kommt.</p>
-          <textarea class="answer-area" placeholder="Für einen Vertragsschluss müssen beide Partner ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-aufg4')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-aufg4">
-            Damit ein Vertrag zustande kommt, müssen die Vertragspartner dem jeweils anderen deutlich machen, was sie wollen. Erst wenn beide Seiten <strong>dieselben Vorstellungen</strong> haben – z.B. über Ware und Preis – kann ein Vertrag entstehen.<br><br>
-            Der <strong>Handschlag</strong> zeigt den Moment, in dem beide übereinstimmen: Antrag und Annahme kommen zusammen. Beide müssen erkennen, dass sie sich einig sind – das macht den Vertragsschluss aus.
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+                <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                <path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Zeige am Beispiel des Handschlags (M4 auf S. 59), was dafür nötig ist, dass ein Vertrag tatsächlich zustande kommt.</p>
+            <textarea class="answer-area" placeholder="Für einen Vertragsschluss müssen beide Partner ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-aufg4')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-aufg4">
+              Damit ein Vertrag zustande kommt, müssen die Vertragspartner dem jeweils anderen deutlich machen, was sie wollen. Erst wenn beide Seiten <strong>dieselben Vorstellungen</strong> haben – z.B. über Ware und Preis – kann ein Vertrag entstehen.<br><br>
+              Der <strong>Handschlag</strong> zeigt den Moment, in dem beide übereinstimmen: Antrag und Annahme kommen zusammen. Beide müssen erkennen, dass sie sich einig sind – das macht den Vertragsschluss aus.
+            </div>
           </div>
         </div>
       </div>
@@ -509,7 +615,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 5: QUIZ -->
+<!-- STEP 5 -->
 <div class="step" id="step-5">
   <div class="section">
     <div class="section-header">
@@ -521,8 +627,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Frage 3 (konkludentes Handeln) im Plenum besprechen – hier irren Schüler am häufigsten. Lass begründen, nicht nur raten.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip k">Kompetenzorientiert</span>
+        <span class="chip c1">Veranschaulichung</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Sicherung</div>
+          <p>Frage 3 (konkludentes Handeln) im Plenum besprechen – hier irren Schüler am häufigsten. Lass begründen, nicht nur raten.</p>
+        </div>
+      </div>
       <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen aus Stunde 3. Bei 3 oder mehr richtigen Antworten besteht du!</p>
 
       <div class="quiz-wrap">
@@ -579,16 +693,24 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
-        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst nun die drei Formen des Vertragsschlusses (mündlich, schriftlich, konkludent) und weißt, dass ein Vertrag immer durch <strong>Antrag und Annahme</strong> entsteht. Du kannst den Grundsatz <em>„pacta sunt servanda"</em> erklären und auf Alltagsbeispiele anwenden. In der mündlichen Abfrage wirst du zeigen, dass du Vertragsschlüsse aus dem Alltag rechtlich einordnen und begründen kannst.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+          <button class="btn-primary teacher-only" style="background:var(--orange);border:none;" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 6: ABFRAGE -->
+<!-- STEP 6 -->
 <div class="step teacher-only" id="step-6">
   <div class="section">
     <div class="section-header">
@@ -621,7 +743,6 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="abfrage-wrap">
-
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num wissen">1</div>
@@ -669,7 +790,7 @@ body.version-b .teacher-only{display:block;}
             <div class="abfrage-q-num komm">3</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
-              <div class="abfrage-q-text">Beschreibe das Ergebnis eures Rollenspiels: Wann genau entstand der Vertrag? Wer hat Antrag gestellt, wer hat angenommen?</div>
+              <div class="abfrage-q-text">Beschreibe das Ergebnis eures Rollenspiels: Wann genau entstand der Vertrag? Wer hat den Antrag gestellt, wer hat angenommen?</div>
             </div>
           </div>
           <div class="abfrage-q-body">
@@ -700,17 +821,19 @@ body.version-b .teacher-only{display:block;}
             <div class="erwartung-box" id="ew4">
               <strong>Beispiel-Lösung:</strong><br>
               Tom scrollt auf einer Website und klickt auf „Kostenlos testen" – ohne die AGB zu lesen. Es war ein kostenpflichtiges Abo. Der Klick war sein Antrag, die Bestätigung die Annahme → Vertrag geschlossen.<br><br>
-              <strong>Was hätte er tun müssen?</strong> Die AGB lesen, bevor er klickt. Oder den Klick nicht abschicken.<br><br>
-              <em>Andere gute Beispiele: Schweigen auf ein Angebot (führt in der Regel NICHT zu Vertragsschluss), Unterschreiben ohne Lesen, konkludentes Handeln im Laden usw.</em>
+              <strong>Was hätte er tun müssen?</strong> Die AGB lesen, bevor er klickt – oder den Button gar nicht erst anklicken.<br><br>
+              <em>Andere gute Beispiele: Unterschreiben ohne Lesen, konkludentes Handeln im Laden, Schweigen auf ein Angebot (führt in der Regel NICHT zu einem Vertragsschluss).</em>
             </div>
           </div>
         </div>
-
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
-        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
       </div>
     </div>
   </div>
@@ -718,7 +841,6 @@ body.version-b .teacher-only{display:block;}
 
 </div><!-- /main -->
 
-<!-- PIN MODAL -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-logo">Recht<span>&</span>Ich</div>
@@ -749,123 +871,31 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN='123456';
+const TEACHER_PIN='135791';
 let pinInput='',cur=1,quizA={},pollD={};
 const TOTAL_STEPS=6;
-function openPinModal(){
-  if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}
-  pinInput='';updatePinDots();
-  document.getElementById('pin-error').textContent='';
-  document.getElementById('pin-overlay').classList.add('open');
-}
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
 function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
 function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
 function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
 function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
-function checkPin(){
-  if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}
-  else{
-    document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';
-    pinInput='';updatePinDots();
-    const box=document.querySelector('.pin-box');
-    box.style.animation='none';
-    setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);
-  }
-}
-function setVersion(v){
-  const b=document.getElementById('body-root');
-  document.getElementById('btn-a').classList.toggle('active',v==='a');
-  document.getElementById('btn-b').classList.toggle('active',v==='b');
-  if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}
-  else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}
-}
-function goToStep(n){
-  if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;
-  document.getElementById('step-'+cur).classList.remove('active');
-  cur=n;document.getElementById('step-'+cur).classList.add('active');
-  for(let i=1;i<=TOTAL_STEPS;i++){
-    const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);
-    if(!s)continue;
-    s.classList.remove('active','done');
-    if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}
-    else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}
-    else if(l)l.classList.remove('done');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';pinInput='';updatePinDots();const box=document.querySelector('.pin-box');box.style.animation='none';setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
 function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
 function prevStep(f){if(f>1)goToStep(f-1);}
-function selectPoll(id,el){
-  if(pollD[id])return;pollD[id]=true;
-  el.classList.add('selected');
-  document.getElementById(id+'-result').classList.add('visible');
-}
-function revealSolution(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';
-}
-function toggleErwartung(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Erwartungshorizont ausblenden':'📋 Erwartungshorizont anzeigen';
-}
-function checkQuiz(qId,btn,ok){
-  const c=document.getElementById(qId);if(c.dataset.answered)return;
-  c.dataset.answered='true';quizA[qId]=ok;
-  c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));
-  const fb=document.getElementById(qId+'-fb');
-  const yes={
-    q1:'✓ Richtig! „pacta sunt servanda" – Verträge sind einzuhalten, egal in welcher Form sie geschlossen wurden.',
-    q2:'✓ Richtig! Ein Vertrag entsteht durch übereinstimmende Willenserklärungen: Antrag + Annahme.',
-    q3:'✓ Richtig! Das nennt man konkludentes (schlüssiges) Handeln – kein Wort nötig, aber rechtlich bindend.',
-    q4:'✓ Richtig! Klick = Antrag, Bestätigungsmail = Annahme. Der Kaufvertrag ist geschlossen – pacta sunt servanda!'
-  };
-  const no={
-    q1:'✗ Nicht ganz. „pacta sunt servanda" bedeutet: Verträge sind einzuhalten – unabhängig von der Form. → B ist korrekt.',
-    q2:'✗ Nicht ganz. Ein Vertrag entsteht durch Antrag und Annahme – nicht erst durch Bezahlung oder Unterschrift. → C ist korrekt.',
-    q3:'✗ Nicht ganz. Das Auflegen auf das Kassenband + Einscannen = konkludenter Vertragsschluss. Kein Wort nötig! → B ist korrekt.',
-    q4:'✗ Nicht ganz. Der Klick ist eine rechtswirksame Willenserklärung. Online-Verträge sind genauso bindend. → C ist korrekt.'
-  };
-  if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}
-  else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
-  const qs=['q1','q2','q3','q4'];
-  if(qs.every(q=>document.getElementById(q).dataset.answered)){
-    document.getElementById('quiz-score').style.display='block';
-    const n=qs.filter(q=>quizA[q]).length;
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
-    if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
-function finishQuiz(){
-  const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
-  if(n<3){
-    document.getElementById('quiz-score').style.display='block';
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';
-    document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
-function retryQuiz(){
-  const qs=['q1','q2','q3','q4'];
-  qs.forEach(q=>{
-    const c=document.getElementById(q);delete c.dataset.answered;
-    c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));
-    document.getElementById(q+'-fb').className='quiz-feedback';
-    document.getElementById(q+'-fb').textContent='';
-  });
-  quizA={};
-  document.getElementById('quiz-score').style.display='none';
-  document.getElementById('quiz-retry-wrap').style.display='none';
-  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
-}
+function selectPoll(id,el){if(pollD[id])return;pollD[id]=true;el.classList.add('selected');document.getElementById(id+'-result').classList.add('visible');}
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! „pacta sunt servanda" – Verträge sind einzuhalten, egal in welcher Form.',q2:'✓ Richtig! Ein Vertrag entsteht durch übereinstimmende Willenserklärungen: Antrag + Annahme.',q3:'✓ Richtig! Das nennt man konkludentes (schlüssiges) Handeln – kein Wort nötig, aber rechtlich bindend.',q4:'✓ Richtig! Klick = Antrag, Bestätigungsmail = Annahme. Der Kaufvertrag ist geschlossen!'};
+const no={q1:'✗ Nicht ganz. „pacta sunt servanda" bedeutet: Verträge sind einzuhalten – unabhängig von der Form. → B',q2:'✗ Nicht ganz. Ein Vertrag entsteht durch Antrag und Annahme – nicht erst durch Bezahlung oder Unterschrift. → C',q3:'✗ Nicht ganz. Das Auflegen auf das Kassenband + Einscannen = konkludenter Vertragsschluss. Kein Wort nötig! → B',q4:'✗ Nicht ganz. Der Klick ist eine rechtswirksame Willenserklärung. Online-Verträge sind genauso bindend. → C'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
-document.addEventListener('keydown',function(e){
-  if(!document.getElementById('pin-overlay').classList.contains('open'))return;
-  if(e.key>='0'&&e.key<='9')pinKey(e.key);
-  else if(e.key==='Backspace')pinDel();
-  else if(e.key==='Escape')closePinModal();
-});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
 </script>
-<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
 </body>
 </html>
