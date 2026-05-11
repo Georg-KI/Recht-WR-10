@@ -16,23 +16,24 @@
   --border:#E0E0E0;--bg-page:#F0F4F8;--bg-card:#FFFFFF;
   --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
   --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
-  --shadow:0 2px 8px rgba(0,0,0,0.08);
-  --indigo:var(--blue-700);--amber:var(--orange);--amber-light:var(--orange-light);
-  --rose:var(--red);--rose-light:var(--red-light);
-  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
-  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);--radius:var(--radius-lg);
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+
+/* ── TOPBAR ── */
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
-.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
-.topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.topbar-right{margin-left:auto;}
 .mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
 .mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
 .mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* ── PROGRESS ── */
 .progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
 .progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
 .prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
@@ -43,18 +44,28 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .prog-step.done .prog-dot{background:var(--green);color:white;}
 .prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
 .prog-line.done{background:var(--green);}
+
+/* ── MAIN ── */
 .main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* ── HERO ── */
 .hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
 .hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
 .hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
 .hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
 .hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
-.hero-meta-item{display:flex;align-items:center;gap:5px;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
+
+/* ── TEACHER NOTE ── */
 .teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
-.teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
 .teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* ── SECTION ── */
 .section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
 .section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
 .section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
@@ -69,64 +80,84 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
 .section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
 .section-body{padding:1.5rem;}
-a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;transition:color 0.15s;}
-a.para-link:hover{color:var(--blue-400);}
-.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.book-ref-icon{font-size:24px;flex-shrink:0;}
-.book-ref-body{flex:1;}
-.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
-.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
-.book-ref-text strong{font-weight:700;}
-.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+
+/* ── ICON KACHEL ── */
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+
+/* ── INFO BOXEN ── */
 .info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
 .info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
 .info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
 .info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
 .info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
 .info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
 .info-box strong{font-weight:700;display:block;margin-bottom:4px;}
-.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
-.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
-.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
-.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
-.chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
-.chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
-.chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
-/* FALL SCHEMA */
-.fall-schema{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:8px;margin:1rem 0;padding:1.1rem;background:var(--blue-50);border-radius:var(--radius-md);border:1.5px solid var(--blue-400);}
-@media(max-width:600px){.fall-schema{grid-template-columns:1fr;}.fall-schema-arrow{display:none;}}
-.fall-schema-step{background:white;border-radius:var(--radius-sm);padding:0.75rem 1rem;text-align:center;border:1.5px solid var(--blue-400);}
-.fall-schema-step-num{font-size:10px;font-weight:800;color:var(--blue-700);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
-.fall-schema-step-text{font-size:13px;font-weight:700;color:var(--text);}
-.fall-schema-arrow{font-size:20px;color:var(--blue-400);text-align:center;}
-/* PEER FEEDBACK */
+
+/* ── GUTACHTEN-SCHEMA ── */
+.gutachten-schema{display:grid;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;align-items:center;gap:6px;margin:1rem 0;padding:1.1rem;background:var(--blue-50);border-radius:var(--radius-md);border:1.5px solid var(--blue-400);}
+@media(max-width:640px){.gutachten-schema{grid-template-columns:1fr;}.gutachten-arrow{display:none;}}
+.gutachten-step{background:white;border-radius:var(--radius-sm);padding:0.75rem 1rem;text-align:center;border:1.5px solid var(--blue-400);}
+.gutachten-step-num{font-size:10px;font-weight:800;color:var(--blue-700);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:3px;}
+.gutachten-step-label{font-size:10px;color:var(--text-muted);margin-bottom:3px;font-style:italic;}
+.gutachten-step-text{font-size:13px;font-weight:700;color:var(--text);}
+.gutachten-step-hint{font-size:11px;color:var(--text-secondary);margin-top:4px;line-height:1.4;}
+.gutachten-arrow{font-size:18px;color:var(--blue-400);text-align:center;}
+
+/* ── BUCHVERWEIS ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+
+/* ── INPUTS ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:85px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+
+/* ── SOLUTION ── */
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.7;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* ── §-LINKS ── */
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;transition:color 0.15s;}
+a.para-link:hover{color:var(--blue-400);}
+
+/* ── PEER FEEDBACK ── */
 .peer-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;}
 .peer-box-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#14532d;margin-bottom:0.75rem;display:flex;align-items:center;gap:6px;}
 .peer-checklist{display:flex;flex-direction:column;gap:6px;}
 .peer-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#1b5e20;line-height:1.5;}
 .peer-check{width:18px;height:18px;border-radius:4px;border:2px solid #86efac;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;background:white;}
 .peer-check.checked{background:var(--green);border-color:var(--green);color:white;}
-/* MEBIS BOX */
-.mebis-box{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border:1.5px solid #a78bfa;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.mebis-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
-.mebis-text{font-size:14px;color:#3b0764;line-height:1.6;}
-.mebis-text strong{font-weight:700;display:block;margin-bottom:3px;}
-.mebis-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#7c3aed;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
-/* TASK */
-.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
-.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
-.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-title{font-size:13px;font-weight:700;color:white;}
-.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
-.task-body p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
-.task-body p:last-child{margin-bottom:0;}
-.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:90px;margin-top:8px;background:white;transition:border-color 0.15s;}
-.answer-area:focus{outline:none;border-color:var(--blue-700);}
-.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
-.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
-.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
-.solution-reveal.visible{display:block;}
-/* QUIZ */
+
+/* ── BYCS BOX ── */
+.bycs-box{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border:1.5px solid #a78bfa;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.bycs-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.bycs-text{font-size:14px;color:#3b0764;line-height:1.6;}
+.bycs-text strong{font-weight:700;display:block;margin-bottom:3px;}
+.bycs-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#7c3aed;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
+
+/* ── QUIZ ── */
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
@@ -141,13 +172,29 @@ a.para-link:hover{color:var(--blue-400);}
 .quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
 .quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
 .quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+
+/* ── CHIPS (nur Lehrkraft) ── */
+.chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
+.chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
+.chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
+.chip.c1{background:#e0f2fe;border-color:#bae6fd;color:#0369a1;}
+.chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
+.chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
+.chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
+
+/* ── DIVIDER ── */
 .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+
+/* ── NAVIGATION ── */
 .nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
 .btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* ABFRAGE */
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+
+/* ── ABFRAGE ── */
 .abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
 .abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
 .abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
@@ -167,11 +214,12 @@ a.para-link:hover{color:var(--blue-400);}
 .abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
 .erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
 .erwartung-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
-.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
+.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.7;display:none;}
 .erwartung-box.visible{display:block;}
 .print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
 .print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* PIN */
+
+/* ── PIN ── */
 .pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
 .pin-overlay.open{display:flex;}
 .pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
@@ -191,18 +239,26 @@ a.para-link:hover{color:var(--blue-400);}
 .pin-key.zero{grid-column:2;}
 .pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
 .pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+
+/* ── STEPS ── */
 .step{display:none;}
 .step.active{display:block;}
 .teacher-only{display:none;}
 body.version-b .teacher-only{display:block;}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 @media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
-@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}.gutachten-schema{grid-template-columns:1fr;}.gutachten-arrow{display:none;}}
 </style>
 </head>
 <body id="body-root">
+
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 5</span>
   <div class="topbar-right">
@@ -212,9 +268,10 @@ body.version-b .teacher-only{display:block;}
     </div>
   </div>
 </div>
+
 <div class="progress-bar-wrap">
   <div class="progress-inner">
-    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Schema</span></div>
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Gutachtenstil</span></div>
     <div class="prog-line" id="line-1"></div>
     <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Fall 1</span></div>
     <div class="prog-line" id="line-2"></div>
@@ -227,77 +284,115 @@ body.version-b .teacher-only{display:block;}
     <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
   </div>
 </div>
+
 <div class="main">
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-tag">📝 Modul 2 · Der Vertrag</div>
   <h1>Falltraining Vertragsrecht</h1>
-  <p>Jetzt wird's ernst: Du löst zwei echte Rechtsfälle zum Vertragsrecht selbstständig – mit dem Obersatz-Prüfung-Ergebnis-Schema. Danach gibst du Feedback an deinen Partner und lädst deine Lösung in mebis hoch.</p>
+  <p>Jetzt wird's ernst: Du löst zwei echte Rechtsfälle zum Vertragsrecht selbstständig – mit dem Gutachtenstil wie Juristinnen und Juristen ihn nutzen. Danach gibst du Feedback an deinen Partner.</p>
   <div class="hero-meta">
-    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
-    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 60–61</div>
-    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 60–61</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler wenden rechtliche Normen auf Fallbeispiele an und beurteilen das Zustandekommen und die Wirksamkeit von Verträgen, indem sie Sachverhalte strukturiert nach dem Gutachtenstil prüfen.</div>
   </div>
 </div>
 
+<!-- TEACHER NOTE -->
 <div class="teacher-note teacher-only">
   <div class="teacher-note-header">🎓 Hinweise – Version B</div>
-  <p>Diese Stunde ist die Abschlussstunde von Modul 2. Schüler lösen Rechtsfälle selbstständig und geben sich gegenseitig Feedback. Am Ende mebis-Abgabe → Badge freischalten.</p>
+  <p>Diese Stunde ist die Abschlussstunde von Modul 2. Schüler wenden den Gutachtenstil erstmals selbstständig auf neue Fälle an und geben sich gegenseitig strukturiertes Feedback.</p>
   <ul>
-    <li>Schritt 1: OPE-Schema kurz einführen (3 Min.) – dann selbstständig arbeiten lassen.</li>
-    <li>Schritt 2+3: EA je ca. 8 Min. Schnellere Schüler machen beide Fälle, andere konzentrieren sich auf Fall 1.</li>
+    <li>Schritt 1: Gutachtenstil einführen (ca. 5 Min.) – vier Schritte erklären, dann Beispiel gemeinsam durchgehen.</li>
+    <li>Schritt 2+3: EA je ca. 8 Min. Schnellere Schüler bearbeiten beide Fälle, andere konzentrieren sich auf Fall 1.</li>
     <li>Schritt 4: Peer-Feedback in PA – Checkliste auf der Website verwenden.</li>
-    <li>Schritt 5: mebis-Abgabe → Badge „Vertragsprofi" freischalten.</li>
-    <li>Badge gilt für Modul 2 komplett (Std. 3–5).</li>
+    <li>Schritt 5: ByCS-Abgabe → Badge „Vertragsprofi" freischalten. Badge gilt für Modul 2 komplett (Std. 3–5).</li>
   </ul>
 </div>
 
-<!-- STEP 1: OPE-SCHEMA -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 1: GUTACHTENSTIL
+═══════════════════════════════════════════════════════ -->
 <div class="step active" id="step-1">
   <div class="section">
     <div class="section-header">
       <div class="section-icon blue">📐</div>
       <div class="section-meta">
         <div class="section-tag">Schritt 1 · Methode</div>
-        <div class="section-title">Das OPE-Schema – so löst du Rechtsfälle</div>
-        <div class="section-time">⏱ ca. 3 Minuten</div>
+        <div class="section-title">Der Gutachtenstil – so lösen Juristen Rechtsfälle</div>
+        <div class="section-time">⏱ ca. 5 Minuten</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Klassenführung</span><span class="chip c1">Veranschaulichung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>OPE kurz vorstellen, dann sofort mit Fall 1 starten. Nicht zu lang erklären – Schüler lernen das Schema am besten durch Anwenden.</p></div></div>
-      <p class="content-text">Für jede Falllösung im Recht gilt dasselbe dreiteilige Schema:</p>
-      <div class="fall-schema">
-        <div class="fall-schema-step">
-          <div class="fall-schema-step-num">Schritt 1</div>
-          <div class="fall-schema-step-text">⚖️ Obersatz</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">„Es fragt sich, ob …"</div>
+      <div class="chip-row teacher-only"><span class="chip k">Klassenführung</span><span class="chip c1">Veranschaulichung</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Den Gutachtenstil kurz erläutern und gemeinsam am Beispiel unten durchgehen, bevor die Schüler selbstständig arbeiten. Wichtig: Der Obersatz ist eine <em>Hypothese</em> – noch keine Aussage ob etwas gilt. Die Definition nennt die gesetzlichen Voraussetzungen abstrakt. Erst in der Subsumtion wird geprüft ob der konkrete Sachverhalt diese Voraussetzungen erfüllt.</p></div></div>
+
+      <div class="info-box orange">
+        <strong>💡 Warum ist das relevant für dich?</strong>
+        Du kaufst im Internet ein Handy, bereust es sofort und willst stornieren – doch der Shop lehnt ab. War überhaupt ein Vertrag entstanden? Um solche Fragen rechtlich zu klären, nutzen Juristen den Gutachtenstil. Er hilft dir, jeden Rechtsfall strukturiert und nachvollziehbar zu lösen – egal ob du später Anwalt, Kaufmann oder Verbraucher bist.
+      </div>
+
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;">Im Recht lösen Juristen Fälle immer nach demselben Schema – dem <strong>Gutachtenstil</strong>. Er besteht aus vier Schritten:</p>
+
+      <div class="gutachten-schema">
+        <div class="gutachten-step">
+          <div class="gutachten-step-num">Schritt 1</div>
+          <div class="gutachten-step-label">Obersatz</div>
+          <div class="gutachten-step-text">⚖️ Hypothese</div>
+          <div class="gutachten-step-hint">„Es fragt sich, ob …"</div>
         </div>
-        <div class="fall-schema-arrow">→</div>
-        <div class="fall-schema-step">
-          <div class="fall-schema-step-num">Schritt 2</div>
-          <div class="fall-schema-step-text">🔍 Prüfung</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Tatbestandsmerkmale prüfen</div>
+        <div class="gutachten-arrow">→</div>
+        <div class="gutachten-step">
+          <div class="gutachten-step-num">Schritt 2</div>
+          <div class="gutachten-step-label">Untersatz 1</div>
+          <div class="gutachten-step-text">📖 Definition</div>
+          <div class="gutachten-step-hint">Voraussetzungen des § nennen</div>
         </div>
-        <div class="fall-schema-arrow">→</div>
-        <div class="fall-schema-step">
-          <div class="fall-schema-step-num">Schritt 3</div>
-          <div class="fall-schema-step-text">✅ Ergebnis</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">„Also gilt …"</div>
+        <div class="gutachten-arrow">→</div>
+        <div class="gutachten-step">
+          <div class="gutachten-step-num">Schritt 3</div>
+          <div class="gutachten-step-label">Untersatz 2</div>
+          <div class="gutachten-step-text">🔍 Subsumtion</div>
+          <div class="gutachten-step-hint">Sachverhalt unter die Norm stellen</div>
+        </div>
+        <div class="gutachten-arrow">→</div>
+        <div class="gutachten-step">
+          <div class="gutachten-step-num">Schritt 4</div>
+          <div class="gutachten-step-label">Ergebnis</div>
+          <div class="gutachten-step-text">✅ Konklusion</div>
+          <div class="gutachten-step-hint">„Also gilt …"</div>
         </div>
       </div>
+
       <div class="info-box blue">
-        <strong>💡 Beispiel:</strong>
-        <em>Obersatz:</em> Es fragt sich, ob ein Kaufvertrag zwischen Anna und dem Händler geschlossen wurde.<br>
-        <em>Prüfung:</em> Ein Kaufvertrag entsteht durch übereinstimmende Willenserklärungen (§ 433 BGB). Anna hat das Angebot angenommen – Antrag und Annahme liegen vor.<br>
-        <em>Ergebnis:</em> Also ist ein wirksamer Kaufvertrag zustande gekommen. Anna ist verpflichtet, den Kaufpreis zu zahlen und die Sache abzunehmen.
+        <strong>💡 Was bedeuten die vier Schritte?</strong>
+        <strong>Obersatz (Hypothese):</strong> Du formulierst eine rechtliche Frage als offene Vermutung – noch keine Antwort!<br>
+        <strong>Definition:</strong> Du nennst abstrakt die gesetzlichen Voraussetzungen des relevanten Paragraphen.<br>
+        <strong>Subsumtion:</strong> Du wendest diese Voraussetzungen auf den konkreten Sachverhalt an – passt der Fall zur Norm?<br>
+        <strong>Konklusion:</strong> Du ziehst das Ergebnis und beantwortest damit die Frage aus dem Obersatz.
       </div>
+
+      <div class="info-box teal">
+        <strong>📌 Beispiel – Gutachtenstil angewandt</strong>
+        <strong>Obersatz (Hypothese):</strong> Es fragt sich, ob zwischen Anna und dem Händler ein Kaufvertrag geschlossen wurde.<br><br>
+        <strong>Definition:</strong> Gemäß <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a> entsteht ein Kaufvertrag durch zwei übereinstimmende Willenserklärungen: einen Antrag und eine Annahme.<br><br>
+        <strong>Subsumtion:</strong> Anna hat dem Händler ein konkretes Angebot gemacht (Antrag). Der Händler hat dieses Angebot angenommen (Annahme). Beide Willenserklärungen stimmen inhaltlich überein.<br><br>
+        <strong>Konklusion:</strong> Also ist zwischen Anna und dem Händler ein wirksamer Kaufvertrag zustande gekommen. Anna ist verpflichtet, den Kaufpreis zu zahlen und die Sache abzunehmen.
+      </div>
+
       <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Fall 1 →</button></div>
     </div>
   </div>
 </div>
 
-<!-- STEP 2: FALL 1 -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 2: FALL 1
+═══════════════════════════════════════════════════════ -->
 <div class="step" id="step-2">
   <div class="section">
     <div class="section-header">
@@ -309,8 +404,8 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c2">Lebensweltbezug</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Schüler lösen den Fall vollständig nach OPE. Typischer Fehler: Schüler vergessen den Obersatz oder schreiben nur eine Ja/Nein-Antwort ohne Begründung. Auf vollständige Subsumtion achten.</p></div></div>
+      <div class="chip-row teacher-only"><span class="chip k">Kompetenzorientiert</span><span class="chip c2">Lebensweltbezug</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Schüler lösen den Fall vollständig im Gutachtenstil. Häufiger Fehler: Obersatz wird als fertige Aussage formuliert statt als offene Hypothese. Auch: Subsumtion und Definition werden verwechselt – darauf achten. Die Frage der Geschäftsfähigkeit (Tims Alter) ist hier noch nicht relevant – Modul 4.</p></div></div>
 
       <div class="info-box orange">
         <strong>📋 Sachverhalt – Fall 1: Das Notebook</strong>
@@ -318,17 +413,34 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Aufgabe – OPE-Schema anwenden</div></div>
+        <div class="task-header">
+          <div class="task-num">✍</div>
+          <div class="task-header-text">
+            <span class="task-title">Gutachtenstil anwenden – Fall 1</span>
+            <span class="task-subtitle">Falllösung · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Prüfe nach dem OPE-Schema: Ist ein wirksamer Kaufvertrag entstanden? Muss Tim das Notebook abnehmen und bezahlen?</p>
-          <p><em>Hinweis: Prüfe auch ob Tims Alter relevant ist – dazu mehr in Modul 4. Hier zunächst nur den Vertragsschluss prüfen.</em></p>
-          <textarea class="answer-area" style="min-height:120px;" placeholder="Obersatz: Es fragt sich, ob ...&#10;&#10;Prüfung: Ein Kaufvertrag entsteht durch ... (§ 433 BGB). Im vorliegenden Fall ...&#10;&#10;Ergebnis: Also ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-fall1')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-fall1">
-            <strong>Obersatz:</strong> Es fragt sich, ob zwischen Tim und dem Online-Shop ein wirksamer Kaufvertrag über das Notebook entstanden ist.<br><br>
-            <strong>Prüfung:</strong> Ein Kaufvertrag entsteht durch übereinstimmende Willenserklärungen – Antrag und Annahme (§ 433 BGB). Tim hat durch den Klick auf „Jetzt kaufen" einen Antrag abgegeben. Der Online-Shop hat durch die Bestätigungsmail angenommen. Antrag und Annahme stimmen überein.<br><br>
-            <strong>Ergebnis:</strong> Also ist ein wirksamer Kaufvertrag zwischen Tim und dem Online-Shop entstanden. „Pacta sunt servanda" – Tim ist an den Vertrag gebunden und kann nicht einfach stornieren. Er muss das Notebook abnehmen und 649 € zahlen.<br><br>
-            <em>Hinweis Alter: Tims Alter (16 J.) ist hier zunächst nicht entscheidend – die Frage der Geschäftsfähigkeit wird in Modul 4 behandelt.</em>
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none"><path d="M6 6C6 4.343 7.343 3 9 3h14l8 8v26a2 2 0 01-2 2H9a3 3 0 01-3-3V6z" stroke="#1976D2" stroke-width="2.5" fill="none"/><path d="M23 3v8h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="18" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2" font-family="Georgia,serif">§</text></svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Prüfe im Gutachtenstil: Ist ein wirksamer Kaufvertrag entstanden? Muss Tim das Notebook abnehmen und bezahlen? Geh alle vier Schritte durch.</p>
+            <p><em>Hinweis: Tims Alter (16 J.) ist hier noch nicht relevant – die Geschäftsfähigkeit behandeln wir in Modul 4.</em></p>
+            <textarea class="answer-area" style="min-height:140px;" placeholder="Obersatz (Hypothese): Es fragt sich, ob ...&#10;&#10;Definition: Gemäß § 433 BGB entsteht ein Kaufvertrag durch ...&#10;&#10;Subsumtion: Im vorliegenden Fall hat Tim ... Der Shop hat ...&#10;&#10;Konklusion: Also ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fall1">
+              <strong>Obersatz (Hypothese):</strong> Es fragt sich, ob zwischen Tim und dem Online-Shop ein wirksamer Kaufvertrag über das Notebook entstanden ist.<br><br>
+              <strong>Definition:</strong> Gemäß <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a> entsteht ein Kaufvertrag durch zwei übereinstimmende Willenserklärungen – einen Antrag und eine Annahme.<br><br>
+              <strong>Subsumtion:</strong> Tim hat durch den Klick auf „Jetzt kaufen" und die Eingabe seiner Daten einen Antrag abgegeben. Der Online-Shop hat durch die automatische Bestätigungsmail diesen Antrag angenommen. Die Willenserklärungen beider Seiten stimmen inhaltlich überein.<br><br>
+              <strong>Konklusion:</strong> Also ist ein wirksamer Kaufvertrag zwischen Tim und dem Online-Shop entstanden. „Pacta sunt servanda" – Tim ist an den Vertrag gebunden und kann nicht einfach stornieren. Er muss das Notebook abnehmen und 649 € zahlen.<br><br>
+              <em>Hinweis Alter: Tims Alter (16 J.) könnte die Wirksamkeit beeinflussen – das wird in Modul 4 (Geschäftsfähigkeit) geprüft.</em>
+            </div>
           </div>
         </div>
       </div>
@@ -341,7 +453,9 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 3: FALL 2 -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 3: FALL 2
+═══════════════════════════════════════════════════════ -->
 <div class="step" id="step-3">
   <div class="section">
     <div class="section-header">
@@ -353,27 +467,44 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Komplexerer Fall – hier müssen beide Pflichten des Käufers (§ 433 Abs. 2) geprüft werden. Buchverweis S. 60–61 (Aufg. 1–3) als Referenz. Gute Differenzierung: Basis = Teil a, Zusatz = Teil b.</p></div></div>
+      <div class="chip-row teacher-only"><span class="chip k">Kompetenzorientiert</span><span class="chip c3">Methodenvielfalt</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Komplexerer Fall – in der Subsumtion müssen beide Käuferpflichten aus § 433 Abs. 2 BGB geprüft werden. Wichtig: Der Vertrag ist mündlich entstanden – das ist ein guter Anlass, die Formfreiheit zu betonen. Basis = Teil a, Zusatz = Teil b.</p></div></div>
 
       <div class="info-box red">
         <strong>📋 Sachverhalt – Fall 2: Die Autowerkstatt</strong>
-        Herr Maier bestellt telefonisch bei einer Autowerkstatt eine Gasanlage für 1.200 €. Die Werkstatt bestellt die Anlage beim Hersteller. Eine Woche später sagt Herr Maier, er wolle die Anlage nicht mehr.<br><br>
+        Herr Maier bestellt telefonisch bei einer Autowerkstatt eine Gasanlage für 1.200 €. Die Werkstatt bestellt die Anlage daraufhin beim Hersteller. Eine Woche später erklärt Herr Maier, er wolle die Anlage nicht mehr.<br><br>
         <strong>a)</strong> Muss Herr Maier die Anlage abnehmen und bezahlen?<br>
-        <strong>b) Zusatz:</strong> Die Werkstatt hat die Anlage bestellt und muss nun selbst zahlen. Welche weiteren Schäden könnte sie von Herrn Maier verlangen?
+        <strong>b) Zusatz:</strong> Die Werkstatt hat die Anlage bestellt und muss nun selbst zahlen. Welche weiteren Ansprüche könnte sie gegen Herrn Maier geltend machen?
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Aufgabe – OPE-Schema anwenden (Basis: Teil a)</div></div>
+        <div class="task-header">
+          <div class="task-num">✍</div>
+          <div class="task-header-text">
+            <span class="task-title">Gutachtenstil anwenden – Fall 2 (Basis: Teil a)</span>
+            <span class="task-subtitle">Falllösung · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Prüfe nach dem OPE-Schema: Welche Pflichten hat Herr Maier aus § 433 Abs. 2 BGB? Muss er sie erfüllen?</p>
-          <textarea class="answer-area" style="min-height:120px;" placeholder="Obersatz: Es fragt sich, ob Herr Maier verpflichtet ist ...&#10;&#10;Prüfung: Gem. § 433 Abs. 2 BGB muss der Käufer ... Im vorliegenden Fall ...&#10;&#10;Ergebnis: Also ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-fall2a')">✓ Musterlösung Teil a</button>
-          <div class="solution-reveal" id="sol-fall2a">
-            <strong>Obersatz:</strong> Es fragt sich, ob Herr Maier verpflichtet ist, die Gasanlage abzunehmen und zu bezahlen.<br><br>
-            <strong>Prüfung:</strong> Gem. § 433 Abs. 2 BGB ist der Käufer verpflichtet, den Kaufpreis zu zahlen und die Sache abzunehmen. Der Kaufvertrag wurde mündlich per Telefon geschlossen – das ist rechtlich wirksam, da Kaufverträge formfrei sind. Antrag und Annahme lagen vor. Der Vertrag ist zustande gekommen.<br><br>
-            <strong>Ergebnis:</strong> Also muss Herr Maier die Gasanlage abnehmen und 1.200 € zahlen. „Pacta sunt servanda" – der mündliche Vertrag ist genauso bindend wie ein schriftlicher.<br><br>
-            <strong>Zusatz Teil b:</strong> Die Werkstatt kann auch Schadensersatz für entstandene Kosten verlangen (z.B. Bestellkosten beim Hersteller, Rücksendekosten). Das folgt aus dem allgemeinen Schadensersatzrecht.
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none"><path d="M6 6C6 4.343 7.343 3 9 3h14l8 8v26a2 2 0 01-2 2H9a3 3 0 01-3-3V6z" stroke="#1976D2" stroke-width="2.5" fill="none"/><path d="M23 3v8h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="18" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2" font-family="Georgia,serif">§</text></svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Prüfe im Gutachtenstil: Welche Pflichten hat Herr Maier aus <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 Abs. 2 BGB</a>? Muss er sie erfüllen – obwohl der Vertrag nur telefonisch geschlossen wurde?</p>
+            <textarea class="answer-area" style="min-height:140px;" placeholder="Obersatz (Hypothese): Es fragt sich, ob Herr Maier verpflichtet ist, ...&#10;&#10;Definition: Gemäß § 433 Abs. 2 BGB muss der Käufer ...&#10;&#10;Subsumtion: Im vorliegenden Fall wurde der Vertrag ... Das Gespräch enthielt ...&#10;&#10;Konklusion: Also ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall2a')">✓ Musterlösung Teil a</button>
+            <div class="solution-reveal" id="sol-fall2a">
+              <strong>Obersatz (Hypothese):</strong> Es fragt sich, ob Herr Maier verpflichtet ist, die Gasanlage abzunehmen und den Kaufpreis von 1.200 € zu zahlen.<br><br>
+              <strong>Definition:</strong> Gemäß <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 Abs. 2 BGB</a> ist der Käufer verpflichtet, dem Verkäufer den vereinbarten Kaufpreis zu zahlen und die gekaufte Sache abzunehmen. Kaufverträge sind grundsätzlich formfrei und können auch mündlich geschlossen werden.<br><br>
+              <strong>Subsumtion:</strong> Herr Maier hat telefonisch eine konkrete Gasanlage zu einem bestimmten Preis bestellt (Antrag). Die Werkstatt hat den Auftrag angenommen und die Anlage sogar bereits beim Hersteller geordert (Annahme). Ein wirksamer Kaufvertrag ist damit zustande gekommen. Die telefonische Form ändert daran nichts.<br><br>
+              <strong>Konklusion:</strong> Also muss Herr Maier die Gasanlage abnehmen und 1.200 € zahlen. „Pacta sunt servanda" – ein mündlicher Vertrag ist rechtlich genauso bindend wie ein schriftlicher.<br><br>
+              <strong>Zusatz Teil b:</strong> Da Herr Maier seine Pflichten verletzt (Nichtabnahme), kann die Werkstatt Schadensersatz für entstandene Kosten verlangen – etwa Beschaffungskosten beim Hersteller oder Rücktransportkosten. Das folgt aus den allgemeinen Grundsätzen des Schadensersatzrechts.
+            </div>
           </div>
         </div>
       </div>
@@ -386,7 +517,9 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 4: PEER FEEDBACK -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 4: PEER FEEDBACK
+═══════════════════════════════════════════════════════ -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
@@ -398,36 +531,49 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c4">Kollaboration</span><span class="chip c2">Kommunikation</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Jeder Schüler liest die Lösung des Partners und gibt strukturiertes Feedback anhand der Checkliste. Dann kurzer mündlicher Austausch: Was war gut, was fehlte?</p></div></div>
+      <div class="chip-row teacher-only"><span class="chip c4">Kollaboration</span><span class="chip c2">Kommunikation</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Jeder Schüler liest die Lösung des Partners und gibt strukturiertes Feedback anhand der Checkliste. Danach kurzer mündlicher Austausch (2–3 Min.): Was war gut, was fehlte? Besonders auf Vollständigkeit des Gutachtenstils achten – sind alle vier Schritte vorhanden?</p></div></div>
 
-      <p class="content-text">Tausche deine Lösung mit deinem Nachbarn. Gib strukturiertes Feedback anhand dieser Checkliste:</p>
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;">Tausche deine Lösung mit deinem Nachbarn. Prüfe anhand der Checkliste, ob der Gutachtenstil vollständig eingehalten wurde:</p>
 
       <div class="peer-box">
         <div class="peer-box-title">✅ Peer-Feedback-Checkliste – Fall 1 (Online-Kauf)</div>
         <div class="peer-checklist">
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Obersatz vorhanden und korrekt formuliert?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Antrag und Annahme korrekt identifiziert?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>§ 433 BGB als Rechtsgrundlage genannt?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>„Pacta sunt servanda" erwähnt oder angewandt?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Klares Ergebnis (Ja/Nein + Begründung)?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Obersatz als offene Hypothese formuliert (nicht als fertige Aussage)?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Definition: Voraussetzungen des § 433 BGB abstrakt genannt?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Subsumtion: Antrag und Annahme im konkreten Sachverhalt identifiziert?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Konklusion: Klares Ergebnis mit „Also …" formuliert?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>„Pacta sunt servanda" erwähnt oder sinngemäß angewandt?</span></div>
         </div>
       </div>
 
       <div class="peer-box" style="margin-top:0.75rem;">
         <div class="peer-box-title">✅ Peer-Feedback-Checkliste – Fall 2 (Gasanlage)</div>
         <div class="peer-checklist">
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Beide Pflichten des Käufers genannt (zahlen + abnehmen)?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>§ 433 Abs. 2 BGB korrekt herangezogen?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Formfreiheit des Vertrags erwähnt?</span></div>
-          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>OPE-Struktur eingehalten?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Obersatz als Hypothese formuliert?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Definition: Beide Käuferpflichten aus § 433 Abs. 2 BGB genannt (zahlen + abnehmen)?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Subsumtion: Formfreiheit des Vertrags berücksichtigt?</span></div>
+          <div class="peer-item"><div class="peer-check" onclick="toggleCheck(this)"></div><span>Konklusion: Ergebnis klar und begründet?</span></div>
         </div>
       </div>
 
       <div class="task" style="margin-top:1rem;">
-        <div class="task-header"><div class="task-num">💬</div><div class="task-title">Was hat dein Partner an deiner Lösung verbessert?</div></div>
+        <div class="task-header">
+          <div class="task-num">💬</div>
+          <div class="task-header-text">
+            <span class="task-title">Was hat dein Partner an deiner Lösung verbessert?</span>
+            <span class="task-subtitle">Reflexion · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <textarea class="answer-area" placeholder="Mein Partner hat folgendes angemerkt: ...&#10;&#10;Das nehme ich mit / das ergänze ich noch: ..."></textarea>
+          <div class="task-icons">
+            <div class="ico ico-orange">
+              <svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="9" cy="10" r="5.5" fill="#E65100"/><path d="M1 30c0-5.523 3.582-10 8-10" stroke="#E65100" stroke-width="2.5" stroke-linecap="round" fill="none"/><circle cx="35" cy="10" r="5.5" fill="#E65100"/><path d="M43 30c0-5.523-3.582-10-8-10" stroke="#E65100" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M15 18h14" stroke="#E65100" stroke-width="2" stroke-linecap="round"/><path d="M26 15l3 3-3 3" stroke="#E65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 15l-3 3 3 3" stroke="#E65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <textarea class="answer-area" placeholder="Mein Partner hat folgendes angemerkt: ...&#10;&#10;Das nehme ich mit / das ergänze ich noch: ..."></textarea>
+          </div>
         </div>
       </div>
 
@@ -439,53 +585,56 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 5: QUIZ + ABGABE -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 5: QUIZ + ABGABE
+═══════════════════════════════════════════════════════ -->
 <div class="step" id="step-5">
   <div class="section">
     <div class="section-header">
       <div class="section-icon green">🏆</div>
       <div class="section-meta">
         <div class="section-tag">Schritt 5 · Abschluss</div>
-        <div class="section-title">Quiz &amp; mebis-Abgabe → Badge Vertragsprofi</div>
+        <div class="section-title">Quiz &amp; ByCS-Abgabe → Badge Vertragsprofi</div>
         <div class="section-time">⏱ ca. 5 Minuten</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung + Badge</div><p>Nach dem Quiz: Schüler laden ihre Falllösung in mebis hoch. Danach Badge „Vertragsprofi" in mebis für die Klasse freischalten. Badge schließt Modul 2 (Std. 3–5) ab.</p></div></div>
-      <p class="content-text" style="margin-bottom:1.25rem;">Kurzes Abschluss-Quiz – dann Lösung in mebis hochladen und Badge verdienen!</p>
+      <div class="chip-row teacher-only"><span class="chip k">Kompetenzorientiert</span></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung + Badge</div><p>Nach dem Quiz: Schüler laden ihre Falllösung in ByCS hoch. Danach Badge „Vertragsprofi" in ByCS für die Klasse freischalten. Badge schließt Modul 2 (Std. 3–5) ab.</p></div></div>
+      <p style="font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1.25rem;">Kurzes Abschluss-Quiz – dann Lösung in ByCS hochladen und Badge verdienen!</p>
 
+      <!-- QUIZ -->
       <div class="quiz-wrap">
-        <div class="quiz-q">1. Was bedeutet das OPE-Schema in der Falllösung?</div>
+        <div class="quiz-q">1. Welche vier Schritte enthält der Gutachtenstil in der richtigen Reihenfolge?</div>
         <div class="quiz-options" id="q1">
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Obersatz – Paragraf – Erklärung</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Obersatz – Prüfung – Ergebnis</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Ordnung – Prüfung – Einigung</button>
-          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Obersatz – Paragraph – Einschätzung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Obersatz – Ergebnis – Definition – Subsumtion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Obersatz (Hypothese) – Definition – Subsumtion – Konklusion</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Sachverhalt – Paragraf – Ergebnis – Begründung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Hypothese – Beweis – Widerlegung – Urteil</button>
         </div>
         <div class="quiz-feedback" id="q1-fb"></div>
       </div>
       <hr class="divider">
 
       <div class="quiz-wrap">
-        <div class="quiz-q">2. Tim klickt beim Online-Shop auf „Kaufen". Was ist das rechtlich?</div>
+        <div class="quiz-q">2. Tim klickt beim Online-Shop auf „Kaufen". Welchem Schritt des Gutachtenstils ist das zuzuordnen?</div>
         <div class="quiz-options" id="q2">
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Eine unverbindliche Anfrage</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">B</span>Eine Willenserklärung – der Antrag zum Vertragsschluss</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">C</span>Nur dann verbindlich, wenn Tim über 18 ist</button>
-          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Noch kein Vertrag – erst mit Lieferung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Definition – hier wird § 433 BGB erklärt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span>Konklusion – das Ergebnis steht damit fest</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">C</span>Subsumtion – der konkrete Sachverhalt (Tims Klick als Antrag) wird unter die Norm gestellt</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Obersatz – hier wird die rechtliche Frage gestellt</button>
         </div>
         <div class="quiz-feedback" id="q2-fb"></div>
       </div>
       <hr class="divider">
 
       <div class="quiz-wrap">
-        <div class="quiz-q">3. Herr Maier hat die Gasanlage nur telefonisch bestellt. Kann er trotzdem auf Abnahme verpflichtet werden?</div>
+        <div class="quiz-q">3. Herr Maier hat die Gasanlage nur telefonisch bestellt. Kann er trotzdem auf Abnahme und Zahlung verpflichtet werden?</div>
         <div class="quiz-options" id="q3">
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">A</span>Ja – Kaufverträge sind formfrei; der mündliche Vertrag gilt genauso</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span>Nein – ohne Schriftform ist der Kaufvertrag unwirksam</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span>Nur wenn er die Anlage schon gesehen hat</button>
-          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Nein – eine Bestellung per Telefon ist stets widerrufbar</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">A</span>Ja – Kaufverträge sind formfrei; auch ein mündlicher Vertrag ist rechtlich verbindlich</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span>Nein – ohne Schriftform ist ein Kaufvertrag über 1.000 € unwirksam</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span>Nur wenn er die Anlage bereits gesehen und bestätigt hat</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Nein – eine telefonische Bestellung ist stets frei widerrufbar</button>
         </div>
         <div class="quiz-feedback" id="q3-fb"></div>
       </div>
@@ -497,25 +646,37 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="mebis-box" style="margin-top:1.25rem;">
-        <div class="mebis-icon">📤</div>
-        <div class="mebis-text">
-          <strong>Abgabe in mebis – Falllösung hochladen</strong>
-          Lade deine Falllösung (Fall 1 oder Fall 2) als Datei oder Texteingabe in mebis hoch. Nach erfolgreicher Abgabe schaltet deine Lehrkraft den Badge <strong>„📝 Vertragsprofi"</strong> für dich frei.
-          <br><a href="https://www.mebis.bayerncloud.de" target="_blank" class="mebis-link">Zu mebis →</a>
+      <!-- BYCS ABGABE -->
+      <div class="bycs-box" style="margin-top:1.25rem;">
+        <div class="bycs-icon">📤</div>
+        <div class="bycs-text">
+          <strong>Abgabe in ByCS – Falllösung hochladen</strong>
+          Lade deine Falllösung (Fall 1 oder Fall 2) als Datei oder Texteingabe in ByCS hoch. Nach erfolgreicher Abgabe schaltet deine Lehrkraft den Badge <strong>„📝 Vertragsprofi"</strong> für dich frei. Der Badge schließt das gesamte Modul 2 (Stunden 3–5) ab.
+          <br><a href="https://www.bycs.de" target="_blank" class="bycs-link">Zu ByCS →</a>
         </div>
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
-        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      <!-- LERNZUSAMMENFASSUNG -->
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst nun den <strong>Gutachtenstil</strong> mit seinen vier Schritten (Obersatz, Definition, Subsumtion, Konklusion) und kannst ihn auf Rechtsfälle anwenden. Du weißt, wie ein Kaufvertrag entsteht (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a>), welche Pflichten beide Seiten haben, und dass Kaufverträge formfrei – also auch mündlich oder per Mausklick – entstehen können. In der mündlichen Abfrage wirst du zeigen, dass du einen neuen Sachverhalt selbstständig mit dem Gutachtenstil lösen kannst.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+          <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 6: ABFRAGE -->
+<!-- ═══════════════════════════════════════════════════════
+     STEP 6: ABFRAGE (nur Lehrkraft)
+═══════════════════════════════════════════════════════ -->
 <div class="step teacher-only" id="step-6">
   <div class="section">
     <div class="section-header">
@@ -529,8 +690,9 @@ body.version-b .teacher-only{display:block;}
     <div class="section-body">
       <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
         <div class="teacher-note-header">🎓 Hinweise</div>
-        <p>Abschluss-Abfrage Modul 2. Schwerpunkt: Falllösungskompetenz (OPE-Schema) + Transfer. Frage 3: Schüler erklärt den Peer-Feedback-Prozess.</p>
+        <p>Abschluss-Abfrage Modul 2. Schwerpunkt: Gutachtenstil korrekt anwenden + Transfer auf neuen Fall. Frage 1 prüft Begriffskenntnis, Frage 2 die Anwendung auf einen unbekannten Sachverhalt, Frage 3 die Reflexion des Peer-Feedbacks.</p>
       </div>
+
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid var(--blue-400);color:var(--blue-700);">🔵 Wissen</span>
@@ -540,83 +702,93 @@ body.version-b .teacher-only{display:block;}
         </div>
         <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
       </div>
+
       <div class="abfrage-wrap">
+
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num wissen">1</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Erkläre das OPE-Schema. Was steht in jedem der drei Teile?</div>
+              <div class="abfrage-q-text">Erkläre den Gutachtenstil. Was steht in jedem der vier Schritte – und warum beginnt man mit einer Hypothese statt einer Aussage?</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Vollständige Antwort: alle drei Schritte mit Inhalt und Beispielformulierung.</p>
+            <p>Vollständige Antwort: alle vier Schritte mit Inhalt, Beispielformulierung und Begründung der Hypothesenform.</p>
             <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
             <div class="erwartung-box" id="ew1">
-              <strong>O – Obersatz (1 P.):</strong> Formuliert die rechtliche Frage: „Es fragt sich, ob …"<br>
-              <strong>P – Prüfung (1 P.):</strong> Die Tatbestandsmerkmale des einschlägigen §§ werden auf den Sachverhalt angewendet.<br>
-              <strong>E – Ergebnis (1 P.):</strong> Klare Schlussfolgerung: „Also …" – mit Ja oder Nein + kurzer Begründung.
+              <strong>Obersatz / Hypothese (1 P.):</strong> Formuliert die rechtliche Frage als offene Vermutung: „Es fragt sich, ob …" – noch keine Antwort, weil das Ergebnis erst durch die Prüfung ermittelt wird.<br>
+              <strong>Definition (1 P.):</strong> Die abstrakten gesetzlichen Voraussetzungen des relevanten Paragraphen werden genannt – unabhängig vom konkreten Fall.<br>
+              <strong>Subsumtion (1 P.):</strong> Der konkrete Sachverhalt wird unter die abstrakten Voraussetzungen gefasst: „Im vorliegenden Fall …" – hier entscheidet sich ob der Tatbestand erfüllt ist.<br>
+              <strong>Konklusion (1 P.):</strong> Schlussfolgerung, die die Frage aus dem Obersatz beantwortet: „Also …"
             </div>
           </div>
         </div>
+
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num denken">2</div>
             <div class="abfrage-q-meta">
-              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Sara kauft im Supermarkt einen Joghurt und legt ihn aufs Band. Ist ein Vertrag entstanden? Prüfe mit OPE und nenne alle Pflichten beider Seiten.</div>
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Sara legt im Supermarkt einen Joghurt aufs Kassenband. Ist ein Vertrag entstanden? Prüfe vollständig im Gutachtenstil und nenne alle Pflichten beider Seiten.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Neues Beispiel – nicht aus dem Unterricht. Bewertet: OPE-Struktur + § 433 vollständig angewandt.</p>
+            <p>Neuer, unbekannter Fall – nicht aus dem Unterricht. Bewertet: Gutachtenstil vollständig + § 433 BGB mit allen Pflichten angewandt.</p>
             <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
             <div class="erwartung-box" id="ew2">
-              <strong>O:</strong> Es fragt sich, ob ein Kaufvertrag entstanden ist.<br>
-              <strong>P:</strong> Ein Kaufvertrag entsteht durch Antrag + Annahme (§ 433 BGB). Sara legt den Joghurt aufs Band = Antrag durch konkludentes Handeln. Kassiererin scannt ihn ein = Annahme durch konkludentes Handeln. Beide Willenserklärungen stimmen überein.<br>
-              <strong>E:</strong> Also ist ein Kaufvertrag entstanden. Supermarkt muss Joghurt übergeben + Eigentum verschaffen. Sara muss zahlen + abnehmen.
+              <strong>Obersatz (Hypothese):</strong> Es fragt sich, ob zwischen Sara und dem Supermarkt ein wirksamer Kaufvertrag entstanden ist.<br>
+              <strong>Definition:</strong> Gemäß § 433 BGB entsteht ein Kaufvertrag durch zwei übereinstimmende Willenserklärungen (Antrag + Annahme). Der Verkäufer muss die Sache übergeben und Eigentum verschaffen (Abs. 1), der Käufer muss zahlen und abnehmen (Abs. 2).<br>
+              <strong>Subsumtion:</strong> Sara legt den Joghurt aufs Band = Antrag durch konkludentes Handeln. Die Kassiererin scannt ihn ein = Annahme durch konkludentes Handeln. Beide Willenserklärungen stimmen überein.<br>
+              <strong>Konklusion:</strong> Also ist ein wirksamer Kaufvertrag entstanden. Supermarkt muss Joghurt übergeben und Eigentum übertragen; Sara muss zahlen und den Joghurt mitnehmen.
             </div>
           </div>
         </div>
+
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num komm">3</div>
             <div class="abfrage-q-meta">
-              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
-              <div class="abfrage-q-text">Was hat dein Partner an deiner Falllösung verbessert oder ergänzt? Erkläre den Feedback-Prozess.</div>
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Was hat dein Partner an deiner Falllösung konkret verbessert oder ergänzt? Erkläre den Feedback-Prozess.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Schüler schildert konkret was am Feedback hilfreich war. Bewertet: Qualität der Reflexion.</p>
+            <p>Schüler schildert konkret was am Feedback hilfreich war. Bewertet: Qualität der Reflexion, Bezug zum Gutachtenstil.</p>
             <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
             <div class="erwartung-box" id="ew3">
               <strong>Gute Antwort enthält:</strong><br>
-              • Konkretes Feedback das der Partner gegeben hat (z.B. „Obersatz fehlte", „Abnahmepflicht vergessen")<br>
+              • Konkretes Feedback, das der Partner gegeben hat (z.B. „Obersatz war eine fertige Aussage, keine Hypothese", „Definition fehlte", „Subsumtion war zu knapp")<br>
               • Wie der Schüler die Lösung daraufhin angepasst hat<br>
-              • Einschätzung: Was war am Feedback hilfreich, was nicht?
+              • Einschätzung: Was war am Feedback hilfreich – was hat es gebracht?
             </div>
           </div>
         </div>
+
         <div class="abfrage-q">
           <div class="abfrage-q-header">
             <div class="abfrage-q-num kreativ">4</div>
             <div class="abfrage-q-meta">
               <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
-              <div class="abfrage-q-text">Erfinde einen Kauffall, bei dem jemand behauptet, es sei kein Vertrag entstanden – obwohl doch einer entstanden ist. Löse den Fall kurz.</div>
+              <div class="abfrage-q-text">Erfinde einen Kauffall, bei dem jemand behauptet, kein Vertrag sei entstanden – obwohl rechtlich doch einer vorliegt. Löse den Fall kurz im Gutachtenstil.</div>
             </div>
           </div>
           <div class="abfrage-q-body">
-            <p>Eigener Fall – nicht aus dem Unterricht. Bewertet: plausibler Fall + korrekte rechtliche Lösung.</p>
+            <p>Eigener, frei erfundener Fall. Bewertet: plausibler Sachverhalt + korrekte Anwendung aller vier Gutachtenstil-Schritte.</p>
             <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
             <div class="erwartung-box" id="ew4">
-              <em>Beispiel: „Max hat im Café einen Kaffee bestellt und getrunken. Danach sagt er: 'Ich habe keinen Vertrag unterschrieben!' Der Wirt verlangt trotzdem 3,50 €." → Kaufvertrag mündlich/konkludent geschlossen, Formfreiheit, pacta sunt servanda. Max muss zahlen.</em><br><br>
-              Andere kreative Varianten akzeptabel – solange der Vertragsschluss korrekt erklärt wird.
+              <em>Beispiel: „Max hat im Café einen Kaffee bestellt und getrunken. Danach sagt er: 'Ich habe nichts unterschrieben!' Der Wirt verlangt trotzdem 3,50 €."</em><br><br>
+              Gutachtenstil: Hypothese (Vertrag entstanden?) → Definition (§ 433 BGB: Antrag + Annahme) → Subsumtion (Bestellen = Antrag, Zubereiten/Servieren = Annahme, konkludentes Handeln) → Konklusion (Vertrag ja, Max muss zahlen, Formfreiheit).<br><br>
+              Andere kreative Varianten akzeptabel – alle vier Schritte müssen erkennbar vorhanden sein.
             </div>
           </div>
         </div>
+
       </div>
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
-        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
+
+      <div class="nav-btns" style="justify-content:space-between;margin-top:1.5rem;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
       </div>
     </div>
   </div>
@@ -644,28 +816,122 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN='123456';
+const TEACHER_PIN='135791';
 let pinInput='',cur=1,quizA={};
 const TOTAL_STEPS=6;
+
 function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
 function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
 function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
 function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
 function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
 function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
-function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
-function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
+
+function setVersion(v){
+  const b=document.getElementById('body-root');
+  document.getElementById('btn-a').classList.toggle('active',v==='a');
+  document.getElementById('btn-b').classList.toggle('active',v==='b');
+  if(v==='b'){
+    b.classList.add('version-b');
+    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');
+    document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';
+  }else{
+    b.classList.remove('version-b');
+    document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');
+    document.getElementById('btn-b').textContent='🎓 Lehrkraft';
+    if(cur===6)goToStep(5);
+  }
+}
+
+function goToStep(n){
+  if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;
+  document.getElementById('step-'+cur).classList.remove('active');
+  cur=n;
+  document.getElementById('step-'+cur).classList.add('active');
+  for(let i=1;i<=TOTAL_STEPS;i++){
+    const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);
+    if(!s)continue;
+    s.classList.remove('active','done');
+    if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}
+    else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}
+    else if(l)l.classList.remove('done');
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
 function prevStep(f){if(f>1)goToStep(f-1);}
-function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
-function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';}
+
+function revealSolution(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('visible');
+  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';
+}
+function toggleErwartung(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('visible');
+  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';
+}
 function toggleCheck(el){el.classList.toggle('checked');el.textContent=el.classList.contains('checked')?'✓':'';}
-function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');const yes={q1:'✓ Richtig! OPE = Obersatz – Prüfung – Ergebnis.',q2:'✓ Richtig! Der Klick ist eine Willenserklärung – der Antrag zum Vertragsschluss.',q3:'✓ Richtig! Kaufverträge sind formfrei – mündlich gilt genauso wie schriftlich.'};const no={q1:'✗ Nicht ganz. OPE = Obersatz – Prüfung – Ergebnis. → B ist korrekt.',q2:'✗ Nicht ganz. Der Klick ist rechtlich ein Antrag – eine Willenserklärung. → B ist korrekt.',q3:'✗ Nicht ganz. Kaufverträge sind formfrei – der mündliche Vertrag gilt. → A ist korrekt.'};if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}const qs=['q1','q2','q3'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 3 Fragen richtig';document.getElementById('score-sub').textContent=n===3?' – Perfekt!':n>=2?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<2)document.getElementById('quiz-retry-wrap').style.display='block';}}
-function finishQuiz(){const qs=['q1','q2','q3'],n=qs.filter(q=>quizA[q]).length;if(n<2){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 3 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
-function retryQuiz(){const qs=['q1','q2','q3'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
+
+function checkQuiz(qId,btn,ok){
+  const c=document.getElementById(qId);
+  if(c.dataset.answered)return;
+  c.dataset.answered='true';
+  quizA[qId]=ok;
+  c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));
+  const fb=document.getElementById(qId+'-fb');
+  const yes={
+    q1:'✓ Richtig! Gutachtenstil: Obersatz (Hypothese) – Definition – Subsumtion – Konklusion.',
+    q2:'✓ Richtig! In der Subsumtion wird der konkrete Sachverhalt unter die abstrakten Normen gefasst.',
+    q3:'✓ Richtig! Kaufverträge sind formfrei – mündlich oder per Klick gilt genauso wie schriftlich.'
+  };
+  const no={
+    q1:'✗ Nicht ganz. Die richtige Reihenfolge: Obersatz (Hypothese) – Definition – Subsumtion – Konklusion. → B ist korrekt.',
+    q2:'✗ Nicht ganz. Der Klick gehört zur Subsumtion – hier wird Tims konkretes Handeln unter § 433 BGB gefasst. → C ist korrekt.',
+    q3:'✗ Nicht ganz. Kaufverträge sind formfrei – der mündliche oder telefonische Vertrag ist genauso wirksam. → A ist korrekt.'
+  };
+  if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}
+  else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+  const qs=['q1','q2','q3'];
+  if(qs.every(q=>document.getElementById(q).dataset.answered)){
+    document.getElementById('quiz-score').style.display='block';
+    const n=qs.filter(q=>quizA[q]).length;
+    document.getElementById('score-text').textContent=n+' von 3 Fragen richtig';
+    document.getElementById('score-sub').textContent=n===3?' – Perfekt! Alles verstanden.':n>=2?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
+    if(n<2)document.getElementById('quiz-retry-wrap').style.display='block';
+  }
+}
+
+function finishQuiz(){
+  const qs=['q1','q2','q3'],n=qs.filter(q=>quizA[q]).length;
+  document.getElementById('quiz-score').style.display='block';
+  document.getElementById('score-text').textContent=n+' von 3 Fragen richtig';
+  document.getElementById('score-sub').textContent=n===3?' – Perfekt!':n>=2?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
+  if(n<2)document.getElementById('quiz-retry-wrap').style.display='block';
+}
+
+function retryQuiz(){
+  const qs=['q1','q2','q3'];
+  qs.forEach(q=>{
+    const c=document.getElementById(q);
+    delete c.dataset.answered;
+    c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));
+    document.getElementById(q+'-fb').className='quiz-feedback';
+    document.getElementById(q+'-fb').textContent='';
+  });
+  quizA={};
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('quiz-retry-wrap').style.display='none';
+  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
+}
+
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
-document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('pin-overlay').classList.contains('open'))return;
+  if(e.key>='0'&&e.key<='9')pinKey(e.key);
+  else if(e.key==='Backspace')pinDel();
+  else if(e.key==='Escape')closePinModal();
+});
 </script>
-<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
 </body>
 </html>
