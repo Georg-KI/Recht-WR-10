@@ -1,1 +1,869 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 7 – Eigentum vs. Besitz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+.hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:var(--teal-light);}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;}
+a.para-link:hover{color:var(--blue-400);}
+.para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:0.75rem 0;}
+.para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:700;}
+.para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
+.para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
+.para-quote a{color:var(--blue-400) !important;border-bottom-color:var(--blue-400) !important;}
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box strong{font-weight:700;display:block;margin-bottom:4px;}
+/* VERGLEICH KARTEN */
+.vergleich-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1rem 0;}
+@media(max-width:600px){.vergleich-grid{grid-template-columns:1fr;}}
+.vergleich-card{border-radius:var(--radius-md);padding:1.1rem 1.2rem;border:2px solid;}
+.vergleich-card.eigentum{background:#E3F2FD;border-color:var(--blue-400);}
+.vergleich-card.besitz{background:var(--green-light);border-color:#81c784;}
+.vergleich-card-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.6rem;display:flex;align-items:center;gap:6px;}
+.vergleich-card.eigentum .vergleich-card-title{color:var(--blue-700);}
+.vergleich-card.besitz .vergleich-card-title{color:var(--green);}
+.vergleich-card ul{font-size:13px;color:var(--text);padding-left:1.1rem;line-height:1.7;}
+.vergleich-card .para-badge{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;}
+.vergleich-card.eigentum .para-badge{background:var(--blue-50);color:var(--blue-700);border:1px solid var(--blue-400);}
+.vergleich-card.besitz .para-badge{background:var(--green-light);color:var(--green);border:1px solid #81c784;}
+/* WAHR/FALSCH */
+.wf-wrap{display:flex;flex-direction:column;gap:8px;margin:1rem 0;}
+.wf-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:14px;color:var(--text);}
+.wf-text{flex:1;line-height:1.5;}
+.wf-btns{display:flex;gap:6px;flex-shrink:0;margin-top:2px;}
+.wf-btn{padding:4px 12px;border-radius:6px;border:1.5px solid var(--border);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;cursor:pointer;background:white;transition:all 0.15s;}
+.wf-btn:hover{opacity:0.85;}
+.wf-btn.wahr-btn:hover{background:var(--green-light);border-color:var(--green);color:var(--green);}
+.wf-btn.falsch-btn:hover{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.wf-btn.correct{background:var(--green-light);border-color:var(--green);color:var(--green);pointer-events:none;}
+.wf-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);pointer-events:none;}
+.wf-btn.disabled{pointer-events:none;opacity:0.5;}
+/* NORMENTABELLE */
+.normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
+.normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.75rem;color:var(--text);}
+.normen-table{width:100%;border-collapse:collapse;font-size:13px;}
+.normen-table th{background:var(--blue-700);color:white;padding:8px 12px;text-align:left;font-weight:700;font-size:12px;}
+.normen-table th:first-child{border-radius:8px 0 0 0;}
+.normen-table th:last-child{border-radius:0 8px 0 0;}
+.normen-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5;}
+.normen-table tr:last-child td{border-bottom:none;}
+.normen-table tr:nth-child(even) td{background:#f8fafc;}
+.normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
+.normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
+/* TASK */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-purple{border:1.5px solid var(--purple);}
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:85px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+/* QUIZ */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+/* ABFRAGE */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:var(--teal);}
+.abfrage-q-label.komm{color:var(--orange);}
+.abfrage-q-label.kreativ{color:var(--red);}
+.abfrage-q-text{font-size:14px;font-weight:700;color:var(--text);line-height:1.4;}
+.abfrage-q-body{padding:0.9rem 1.1rem;border-top:1px solid var(--border);background:white;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:6px 13px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-light);}
+.erwartung-box{margin-top:8px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 8px 8px 0;padding:10px 13px;font-size:13px;color:#78350f;line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+/* PIN */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.vergleich-grid{grid-template-columns:1fr;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}}
+</style>
+</head>
+<body id="body-root">
 
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 7</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Eigentum vs. Besitz</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Wahr / Falsch</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Buchaufgaben</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">🛒 Modul 3 · Die Kaufhandlung</div>
+  <h1>Eigentum vs. Besitz – was ist der Unterschied?</h1>
+  <p>„Das gehört mir!" – Aber stimmt das rechtlich? Im Alltag verwechseln viele Eigentum und Besitz. Das Recht unterscheidet diese Begriffe strikt – und das hat wichtige Konsequenzen.</p>
+  <div class="hero-meta">
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 62–63</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Schwerpunkt: §§ 854, 903, 929, 985 BGB. Schülerfehlvorstellung gezielt ansprechen: „Eigentümer = Besitzer" ist im Alltag oft synonym – rechtlich aber strikt getrennt.</p>
+  <ul>
+    <li>Schritt 1: Fahrrad-Einstieg – Schüler sollen erst spontan antworten bevor sie die Definitionen kennen</li>
+    <li>Schritt 2: Definitionen erarbeiten, §§ einführen</li>
+    <li>Schritt 3: Wahr/Falsch-Aufgabe – die häufigsten Fehlvorstellungen gezielt aufgreifen</li>
+    <li>Schritt 4: Buchaufgaben S. 63 (Aufg. 1–3 + 6)</li>
+    <li>Aufg. 6 (Polizei sucht Eigentümer, nicht Besitzer) ist besonders einprägsam</li>
+  </ul>
+</div>
+
+<!-- STEP 1: EINSTIEG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🚲</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Einstieg</div>
+        <div class="section-title">Wem gehört das Fahrrad?</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Schüler sollen zuerst spontan antworten. Viele werden „Besitzer = Eigentümer" gleichsetzen. Das ist der Ausgangspunkt für den Unterricht.</p></div></div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">💬</div>
+          <div class="task-header-text">
+            <span class="task-title">Drei Fälle – wem gehört was?</span>
+            <span class="task-subtitle">Diskussion · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-teal"><svg width="22" height="22" viewBox="0 0 44 38" fill="none"><rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/><path d="M6 19l-4 6 8-4" fill="#0d9488"/><rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/><path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/><path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="ico ico-teal"><svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p><strong>Fall 1:</strong> Lena leiht sich das Fahrrad ihrer Freundin für eine Woche. Wem gehört das Fahrrad?</p>
+            <p><strong>Fall 2:</strong> Max kauft ein Fahrrad und zahlt sofort. Der Händler sagt: „Ich bringe es dir morgen vorbei." Wem gehört das Fahrrad jetzt – Max oder dem Händler?</p>
+            <p><strong>Fall 3:</strong> Das Fahrrad von Tom wird gestohlen. Der Dieb verkauft es weiter. Wer ist Eigentümer?</p>
+            <textarea class="answer-area" placeholder="Fall 1: Das Fahrrad gehört ... weil ...&#10;Fall 2: Das Fahrrad gehört ... weil ...&#10;Fall 3: Das Fahrrad gehört ... weil ..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box blue">
+        <strong>💡 Merke für diese Stunde:</strong>
+        Die Antworten auf diese drei Fälle hängen davon ab, ob man Eigentum und Besitz sauber trennt. Das lernst du jetzt!
+      </div>
+
+      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Die Unterscheidung →</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: EIGENTUM VS BESITZ -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">⚖️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Kerninhalt</div>
+        <div class="section-title">Eigentum und Besitz – zwei verschiedene Rechtsbegriffe</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Buchverweis S. 62–63. Schüler lesen Abschnitt 2.4. Kern: Man kann Eigentümer sein ohne Besitzer zu sein (z.B. verliehenes Fahrrad) – und Besitzer sein ohne Eigentümer zu sein (z.B. Leihe, Miete).</p></div></div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Lies Seite <strong>62–63</strong>, Abschnitt <strong>2.4</strong>. Achte auf die Unterscheidung zwischen Eigentum und Besitz sowie auf die relevanten Paragrafen.</div>
+        </div>
+      </div>
+
+      <div class="vergleich-grid">
+        <div class="vergleich-card eigentum">
+          <div class="vergleich-card-title">👑 Eigentum</div>
+          <ul>
+            <li>Das <strong>rechtliche Verhältnis</strong> zur Sache</li>
+            <li>Eigentümer hat das Recht, mit der Sache nach Belieben zu verfahren</li>
+            <li>Eigentümer kann andere von der Einwirkung ausschließen</li>
+            <li>Eigentümer kann Herausgabe verlangen (auch ohne die Sache zu haben)</li>
+          </ul>
+          <span class="para-badge"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__903.html" target="_blank">§ 903 BGB</a> · <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a></span>
+        </div>
+        <div class="vergleich-card besitz">
+          <div class="vergleich-card-title">✋ Besitz</div>
+          <ul>
+            <li>Das <strong>tatsächliche Verhältnis</strong> zur Sache</li>
+            <li>Besitzer hat die Sache gerade in seiner tatsächlichen Gewalt</li>
+            <li>Besitz sagt nichts darüber aus, wem die Sache gehört</li>
+            <li>Man kann Besitzer sein, ohne Eigentümer zu sein</li>
+          </ul>
+          <span class="para-badge"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a></span>
+        </div>
+      </div>
+
+      <div class="info-box red">
+        <strong>⚠️ Die häufigste Fehlvorstellung: „Besitzer = Eigentümer"</strong>
+        Im Alltag sagt man oft „das gehört mir" wenn man etwas in der Hand hält. Rechtlich ist das falsch: Wer etwas <em>hat</em> (Besitzer), muss nicht derjenige sein, dem es <em>gehört</em> (Eigentümer).
+      </div>
+
+      <div class="info-box teal">
+        <strong>💡 Beispiel Leihrad:</strong>
+        Anna leiht sich Bens Fahrrad für den Nachmittag.<br>
+        → Anna ist <strong>Besitzerin</strong> (sie hat das Rad gerade)<br>
+        → Ben ist <strong>Eigentümer</strong> (ihm gehört es)<br>
+        → Ben kann von Anna die <strong>Herausgabe verlangen</strong> (§ 985 BGB) – er ist Eigentümer, obwohl er das Rad gerade nicht hat.
+      </div>
+
+      <div class="normen-exercise">
+        <h4>Normenanalyse – <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> – Herausgabeanspruch</h4>
+        <div class="para-quote">
+          <div class="para-label"><a href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> – Herausgabeanspruch</div>
+          <p>„Der Eigentümer kann von dem Besitzer die Herausgabe der Sache verlangen."</p>
+          <div class="para-ref">→ <a href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">gesetze-im-internet.de – § 985 BGB ↗</a></div>
+        </div>
+        <table class="normen-table">
+          <thead><tr><th>Tatbestandsmerkmal(e)</th><th>§</th><th>Rechtsfolge</th></tr></thead>
+          <tbody>
+            <tr><td><input type="text" placeholder="TB 1 …"></td>
+              <td rowspan="2" style="text-align:center;font-weight:700;color:var(--blue-700);vertical-align:middle;"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a></td>
+              <td rowspan="2"><input type="text" placeholder="RF …"></td></tr>
+            <tr><td><input type="text" placeholder="TB 2 …"></td></tr>
+          </tbody>
+        </table>
+        <button class="solution-btn" onclick="revealSolution('sol-985')">✓ Musterlösung anzeigen</button>
+        <div class="solution-reveal" id="sol-985">
+          <strong>TB 1:</strong> Jemand ist Eigentümer einer Sache<br>
+          <strong>TB 2:</strong> Ein anderer hat den Besitz an der Sache<br>
+          <strong>RF:</strong> Der Eigentümer kann vom Besitzer verlangen, dass ihm die Sache herausgegeben wird<br><br>
+          <em>💡 § 985 BGB zeigt: Eigentum und Besitz können auseinanderfallen. Wer Eigentümer ist, hat das Recht auf Rückgabe – auch wenn er die Sache gerade nicht in der Hand hält.</em>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: Wahr / Falsch →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: WAHR / FALSCH -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">✅</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Überprüfung</div>
+        <div class="section-title">Wahr oder Falsch? – Fehlvorstellungen aufdecken</div>
+        <div class="section-time">⏱ ca. 6 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Diese Aufgabe zielt auf die typischen Fehlvorstellungen ab. Nach der Aufgabe kurz im Plenum besprechen – besonders Aussage 1 und 4 sind häufige Fehlerquellen.</p></div></div>
+
+      <p class="content-text">Entscheide bei jeder Aussage: Wahr oder Falsch?</p>
+
+      <div class="wf-wrap" id="wf-container">
+        <div class="wf-item">
+          <div class="wf-text">1. Wer eine Sache in der Hand hält, ist automatisch auch ihr Eigentümer.</div>
+          <div class="wf-btns">
+            <button class="wf-btn wahr-btn" onclick="checkWF(this,false,'wahr','Falsch! Besitz (tatsächliche Gewalt) und Eigentum (rechtliches Verhältnis) sind getrennte Begriffe. Man kann Besitzer sein ohne Eigentümer zu sein.')">Wahr</button>
+            <button class="wf-btn falsch-btn" onclick="checkWF(this,true,'falsch','Richtig! Besitz ≠ Eigentum. Beispiel: Wer sich ein Fahrrad leiht, ist Besitzer – aber nicht Eigentümer.')">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-text">2. Der Eigentümer kann von § 985 BGB Gebrauch machen, um seine Sache zurückzuverlangen – auch wenn er sie gerade nicht hat.</div>
+          <div class="wf-btns">
+            <button class="wf-btn wahr-btn" onclick="checkWF(this,true,'wahr','Richtig! § 985 BGB gibt dem Eigentümer den Herausgabeanspruch gegenüber dem Besitzer – unabhängig davon, wo die Sache gerade ist.')">Wahr</button>
+            <button class="wf-btn falsch-btn" onclick="checkWF(this,false,'falsch','Falsch! § 985 BGB gibt dem Eigentümer genau dieses Recht: Herausgabe verlangen, auch ohne die Sache gerade zu haben.')">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-text">3. Ein Dieb, der ein Fahrrad stiehlt, wird durch den Diebstahl Eigentümer des Fahrrads.</div>
+          <div class="wf-btns">
+            <button class="wf-btn wahr-btn" onclick="checkWF(this,false,'wahr','Falsch! Der Dieb wird nur Besitzer – nicht Eigentümer. Eigentum kann nur durch rechtswirksame Einigung + Übergabe (§ 929 BGB) übertragen werden.')">Wahr</button>
+            <button class="wf-btn falsch-btn" onclick="checkWF(this,true,'falsch','Richtig! Durch Diebstahl wird man nur Besitzer, nicht Eigentümer. Der ursprüngliche Eigentümer bleibt Eigentümer und kann Herausgabe verlangen (§ 985 BGB).')">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-text">4. Eigentum und Besitz liegen immer bei derselben Person.</div>
+          <div class="wf-btns">
+            <button class="wf-btn wahr-btn" onclick="checkWF(this,false,'wahr','Falsch! Eigentum und Besitz können auseinanderfallen – z.B. bei Leihe, Miete, Pacht oder nach einem Diebstahl.')">Wahr</button>
+            <button class="wf-btn falsch-btn" onclick="checkWF(this,true,'falsch','Richtig! Klassisches Beispiel: Vermieter = Eigentümer der Wohnung, Mieter = Besitzer. Das Trennungsprinzip macht das möglich.')">Falsch</button>
+          </div>
+        </div>
+        <div class="wf-item">
+          <div class="wf-text">5. Lena kauft ein Fahrrad, zahlt sofort, nimmt es aber erst morgen mit. Sie ist bereits heute Eigentümerin.</div>
+          <div class="wf-btns">
+            <button class="wf-btn wahr-btn" onclick="checkWF(this,false,'wahr','Nicht ganz! Eigentum geht nach § 929 BGB erst über wenn BEIDE Voraussetzungen erfüllt sind: Übergabe + Einigung. Ohne Übergabe kein Eigentumsübergang.')">Wahr</button>
+            <button class="wf-btn falsch-btn" onclick="checkWF(this,true,'falsch','Richtig! Nach § 929 BGB braucht es Übergabe + Einigung. Ohne Übergabe ist Lena noch keine Eigentümerin – der Händler bleibt Eigentümer bis zur Übergabe.')">Falsch</button>
+          </div>
+        </div>
+      </div>
+      <div id="wf-result" style="display:none;margin-top:1rem;" class="info-box green">
+        <strong>✅ Gut gemacht!</strong> Vergleiche deine Antworten mit den Erklärungen.
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Buchaufgaben →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: BUCHAUFGABEN -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">📚</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · Buchaufgaben</div>
+        <div class="section-title">Eigentum und Besitz anwenden – S. 63, Aufg. 2, 3 &amp; 6</div>
+        <div class="section-time">⏱ ca. 10 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Aufg. 2 (S. 63, mit M1a/M1b): Normenanalyse § 929 BGB – TB + RF herausarbeiten. Aufg. 3 (S. 63, mit M1a/M1b): Übereignung am Fahrradkauf für beide Seiten zeigen (§§ 854, 929 BGB). Aufg. 6 (S. 63, mit M3): Polizei sucht Eigentümer, nicht Besitzer – besonders einprägsam für Eigentum/Besitz-Unterscheidung.</p></div></div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Buchaufgaben – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Bearbeite <strong>Aufgaben 2, 3 und 6 auf Seite 63</strong> in deinem Buch (startup.WR Bayern 10).</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 2 (S. 63) – § 929 BGB Normenanalyse (M1a/M1b)</span>
+            <span class="task-subtitle">Normenanalyse · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Schau dir M1a und M1b auf Seite 62–63 an und bearbeite <strong>Aufgabe 2 auf Seite 63</strong>: Erstelle eine vollständige Normenanalyse für <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a> – trage alle Tatbestandsmerkmale und die Rechtsfolge heraus.</p>
+            <textarea class="answer-area" placeholder="§ 929 BGB:&#10;TB 1: ...&#10;TB 2: ...&#10;TB 3: (Einigung über Eigentumsübergang) ...&#10;RF: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-929-norm')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-929-norm">
+              <strong>Tatbestandsmerkmale § 929 BGB:</strong><br>
+              TB 1: Eigentümer einer beweglichen Sache<br>
+              TB 2: Übergibt die Sache dem Erwerber (Übergabe → § 854 BGB)<br>
+              TB 3: Beide sind einig, dass das Eigentum auf den Erwerber übergehen soll (Einigung)<br><br>
+              <strong>Rechtsfolge:</strong> Das Eigentum wird auf den Erwerber übertragen.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 3 (S. 63) – Übereignung am Fahrradkauf zeigen (M1a/M1b)</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Schau dir M1a und M1b auf Seite 62–63 an und bearbeite <strong>Aufgabe 3 auf Seite 63</strong>: Zeige wie die Übereignung beim Fahrradkauf abläuft – für das Fahrrad und für das Geld. Welche Rolle spielen §§ 854 und 929 BGB jeweils?</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="Übereignung Kaffee:&#10;Übergabe (§ 854): ...&#10;Einigung (§ 929): ...&#10;&#10;Übereignung Geld:&#10;Übergabe (§ 854): ...&#10;Einigung (§ 929): ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fahrrad')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fahrrad">
+              <strong>Übereignung Fahrrad (M1b):</strong><br>
+              Übergabe (§ 854 BGB): Der Händler übergibt das Fahrrad → die Käuferin wird Besitzerin.<br>
+              Einigung (§ 929 BGB): Beide sind einig, dass das Eigentum am Fahrrad auf die Käuferin übergeht → sie wird Eigentümerin.<br><br>
+              <strong>Übereignung Geld (M1a):</strong><br>
+              Übergabe (§ 854 BGB): Die Käuferin übergibt das Geld → der Händler wird Besitzer.<br>
+              Einigung (§ 929 BGB): Beide sind einig, dass das Eigentum am Geld auf den Händler übergeht → er wird Eigentümer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">3</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 6 (S. 63) – Polizei sucht Eigentümer, nicht Besitzer (M3)</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue"><svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/></svg></div>
+          </div>
+          <div class="task-content">
+            <p>Schau dir M3 auf Seite 63 an und bearbeite <strong>Aufgabe 6 auf Seite 63</strong>: Die Polizei findet ein gestohlenes Fahrrad. Erkläre warum sie nach dem Eigentümer sucht – und nicht einfach den aktuellen Besitzer als Eigentümer anerkennt.</p>
+            <textarea class="answer-area" placeholder="Die Polizei sucht den Eigentümer, weil ...&#10;&#10;Der Besitzer (Dieb) ist nicht Eigentümer, weil ...&#10;&#10;Rechtliche Grundlage: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-polizei')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-polizei">
+              Die Polizei sucht den Eigentümer, weil nur ihm das Fahrrad rechtlich gehört – er hat das rechtliche Verhältnis zur Sache und kann die Herausgabe verlangen (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a>).<br><br>
+              Der Dieb hat durch die Wegnahme nur den Besitz erlangt – er hat die tatsächliche Gewalt. Da aber keine Einigung nach <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a> vorlag, ist er nicht Eigentümer geworden.<br><br>
+              Eigentum und Besitz fallen hier auseinander – das Recht schützt den Eigentümer, nicht den unrechtmäßigen Besitzer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: QUIZ -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🏆</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Wissenssicherung</div>
+        <div class="section-title">Abschluss-Quiz – Stunde 7</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Fragen 1 und 3 im Plenum besprechen – Eigentum/Besitz-Unterscheidung und § 985 BGB sind die wichtigsten Begriffe dieser Stunde.</p></div></div>
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">1. Was ist der rechtliche Unterschied zwischen Eigentum und Besitz?</div>
+        <div class="quiz-options" id="q1">
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span>Eigentum gilt nur für unbewegliche Sachen, Besitz für bewegliche</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">B</span>Eigentum ist das rechtliche Verhältnis zur Sache, Besitz ist die tatsächliche Gewalt über die Sache</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span>Eigentum und Besitz bedeuten dasselbe – nur der Sprachgebrauch unterscheidet sich</button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span>Besitz ist stärker als Eigentum – wer etwas hat, darf es behalten</button>
+        </div>
+        <div class="quiz-feedback" id="q1-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">2. Tom verleiht sein Fahrrad an Lisa. Wer ist Eigentümer – wer ist Besitzer?</div>
+        <div class="quiz-options" id="q2">
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span>Lisa ist Eigentümerin und Besitzerin</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span>Tom ist Eigentümer und Besitzer</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">C</span>Tom ist Eigentümer, Lisa ist Besitzerin</button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span>Beide sind gleichzeitig Eigentümer und Besitzer</button>
+        </div>
+        <div class="quiz-feedback" id="q2-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">3. Was kann Tom laut <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__985.html" target="_blank">§ 985 BGB</a> von Lisa verlangen?</div>
+        <div class="quiz-options" id="q3">
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span>Schadensersatz für die Nutzung</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">B</span>Die Herausgabe des Fahrrads</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span>Nichts – er hat es freiwillig verliehen</button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span>Eine Leihgebühr</button>
+        </div>
+        <div class="quiz-feedback" id="q3-fb"></div>
+      </div>
+      <hr class="divider">
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">4. Was braucht es laut <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929 BGB</a>, damit Eigentum an einer Sache übertragen wird?</div>
+        <div class="quiz-options" id="q4">
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span>Nur die Zahlung des Kaufpreises</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">B</span>Nur einen schriftlichen Vertrag</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">C</span>Übergabe der Sache + Einigung über den Eigentumsübergang</button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span>Den Abschluss eines Kaufvertrags</button>
+        </div>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <div id="quiz-score" style="margin-top:1.25rem;display:none;">
+        <div class="info-box teal"><strong id="score-text"></strong><span id="score-sub"></span></div>
+        <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+          <button class="btn-secondary" style="border-color:var(--red);color:var(--red);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+          <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: ABFRAGE -->
+<div class="step teacher-only" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage · nur Lehrkraft</div>
+        <div class="section-title">Abfrage – Stunde 7: Eigentum vs. Besitz</div>
+        <div class="section-time">⏱ 10 Minuten · 1 Schüler · Notenbildung</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
+        <div class="teacher-note-header">🎓 Hinweise</div>
+        <p>Schwerpunkt: Eigentum/Besitz-Unterscheidung + §§ 929, 985 BGB. Frage 2 prüft den wichtigsten Unterschied gezielt.</p>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid var(--blue-400);color:var(--blue-700);">🔵 Wissen</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--teal-light);border:1px solid #99f6e4;color:#0f766e;">🟢 Krit. Denken</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--orange-light);border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--red-light);border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
+      </div>
+
+      <div class="abfrage-wrap">
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erkläre den Unterschied zwischen Eigentum und Besitz – mit Definition und je einem Paragraf.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Vollständige Antwort: beide Definitionen + §§ 903/985 (Eigentum) und § 854 (Besitz).</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont</button>
+            <div class="erwartung-box" id="ew1">
+              <strong>Eigentum (1 P.):</strong> Das rechtliche Verhältnis einer Person zu einer Sache. Der Eigentümer darf mit der Sache nach Belieben verfahren (§ 903 BGB) und kann von jedem Besitzer Herausgabe verlangen (§ 985 BGB).<br><br>
+              <strong>Besitz (1 P.):</strong> Die tatsächliche Gewalt einer Person über eine Sache (§ 854 BGB). Sagt nichts darüber aus, wem die Sache gehört.<br><br>
+              <strong>Unterschied (1 P.):</strong> Eigentum = rechtlich; Besitz = tatsächlich. Können auseinanderfallen – z.B. bei Leihe oder Miete.
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 2 Min.</div>
+              <div class="abfrage-q-text">„Wer etwas hat, dem gehört es." – Stimmt das rechtlich? Nenne ein Beispiel das zeigt wann das falsch ist.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: korrekte Widerlegung der Fehlvorstellung + passendes Beispiel.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont</button>
+            <div class="erwartung-box" id="ew2">
+              <strong>Falsch!</strong> Besitz (tatsächliche Gewalt) und Eigentum (rechtliches Verhältnis) sind strikt getrennte Begriffe.<br><br>
+              <strong>Beispiele:</strong><br>
+              • Wer sich ein Fahrrad leiht, ist Besitzer – aber nicht Eigentümer.<br>
+              • Ein Dieb hat das gestohlene Rad – er ist Besitzer, aber kein Eigentümer.<br>
+              • Ein Mieter bewohnt eine Wohnung – er ist Besitzer, der Vermieter bleibt Eigentümer.
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Erkläre am Kaffee-Fall (Buchaufgabe 3): Wie wird die Kundin Eigentümerin des Kaffees – und die Barista Eigentümerin des Geldes? Nenne die relevanten §§.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Schüler erklärt beide Übereignungsvorgänge. Bewertet: §§ 854 + 929 korrekt angewendet.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont</button>
+            <div class="erwartung-box" id="ew3">
+              <strong>Kaffee → Kundin:</strong><br>
+              Übergabe (§ 854): Barista gibt Kaffee → Kundin wird Besitzerin<br>
+              Einigung (§ 929): Beide einig über Eigentumsübergang → Kundin wird Eigentümerin<br><br>
+              <strong>Geld → Barista:</strong><br>
+              Übergabe (§ 854): Kundin bezahlt → Barista wird Besitzerin<br>
+              Einigung (§ 929): Beide einig → Barista wird Eigentümerin des Geldes
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Konstruiere einen Fall, in dem eine Person gleichzeitig Eigentümer einer Sache ist, aber NICHT Besitzer – und erkläre welche Rechte sie trotzdem hat.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Eigener Fall. Bewertet: plausibler Alltagsfall + korrekte Nennung von § 985 BGB.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont</button>
+            <div class="erwartung-box" id="ew4">
+              <em>Beispiele:</em><br>
+              • Vermieter vermietet Wohnung → Eigentümer, kein Besitzer → kann bei Vertragsende Herausgabe verlangen (§ 985 BGB)<br>
+              • Jemand verleiht sein Auto → Eigentümer, kein Besitzer → kann Rückgabe verlangen<br>
+              • Buch wird gestohlen → Eigentümer bleibt Eigentümer, kein Besitzer mehr → kann Herausgabe vom Dieb verlangen (§ 985 BGB)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div></div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const TEACHER_PIN='135791';
+let pinInput='',cur=1,quizA={},wfDone=0;
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont';}
+function checkWF(btn, correct, type, msg){
+  const item = btn.closest('.wf-item');
+  item.querySelectorAll('.wf-btn').forEach(b=>b.classList.add('disabled'));
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  // show explanation
+  const exp = document.createElement('div');
+  exp.style.cssText='font-size:12px;margin-top:6px;padding:6px 10px;border-radius:6px;line-height:1.5;';
+  exp.style.background = correct ? '#E8F5E9' : '#FFEBEE';
+  exp.style.color = correct ? '#1b5e20' : '#7f1d1d';
+  exp.textContent = (correct ? '✓ ' : '✗ ') + msg;
+  item.appendChild(exp);
+  wfDone++;
+  if(wfDone >= 5) document.getElementById('wf-result').style.display='block';
+}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! Eigentum = rechtlich (§ 903 BGB), Besitz = tatsächlich (§ 854 BGB).',q2:'✓ Richtig! Tom = Eigentümer (dem gehört es), Lisa = Besitzerin (sie hat es gerade).',q3:'✓ Richtig! § 985 BGB: Eigentümer kann Herausgabe vom Besitzer verlangen.',q4:'✓ Richtig! § 929 BGB: Übergabe + Einigung – beides nötig für Eigentumsübergang.'};
+const no={q1:'✗ Nicht ganz. Eigentum = rechtliches Verhältnis (§ 903), Besitz = tatsächliche Gewalt (§ 854). → B',q2:'✗ Nicht ganz. Tom bleibt Eigentümer, weil er das Rad nur verliehen hat. Lisa hat es nur tatsächlich. → C',q3:'✗ Nicht ganz. § 985 BGB: Herausgabeanspruch des Eigentümers gegenüber dem Besitzer. → B',q4:'✗ Nicht ganz. § 929 BGB: Eigentumsübergang braucht Übergabe + Einigung – nicht nur Zahlung oder Vertrag. → C'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){
+  const qs=['q1','q2','q3','q4'];
+  qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});
+  quizA={};
+  document.getElementById('quiz-score').style.display='none';
+  document.getElementById('quiz-retry-wrap').style.display='none';
+  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
+}
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+</script>
+</body>
+</html> 
