@@ -19,23 +19,23 @@
   --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
   --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
   --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
-  --indigo:var(--blue-700);--amber:var(--orange);--amber-light:var(--orange-light);
-  --rose:var(--red);--rose-light:var(--red-light);
-  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
-  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);
-  --radius:var(--radius-lg);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+
+/* ── TOPBAR ── */
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
-.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
 .mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
 .mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
 .mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* ── PROGRESS ── */
 .progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
 .progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
 .prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:color 0.2s;font-family:'Nunito',sans-serif;white-space:nowrap;}
@@ -46,25 +46,34 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .prog-step.done .prog-dot{background:var(--green);color:white;}
 .prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
 .prog-line.done{background:var(--green);}
+
+/* ── MAIN ── */
 .main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* ── HERO ── */
 .hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
 .hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
 .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
 .hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
 .hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
 .hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
-.hero-meta-item{display:flex;align-items:center;gap:5px;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
+
+/* ── TEACHER NOTE ── */
 .teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
 .teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* ── SECTION ── */
 .section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
 .section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
 .section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
 .section-icon.blue{background:var(--blue-50);}
 .section-icon.green{background:var(--green-light);}
 .section-icon.orange{background:var(--orange-light);}
-.section-icon.red{background:var(--red-light);}
 .section-icon.purple{background:var(--purple-light);}
 .section-icon.teal{background:var(--teal-light);}
 .section-meta{flex:1;}
@@ -72,19 +81,27 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
 .section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
 .section-body{padding:1.5rem;}
+
+/* ── LINKS ── */
 a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;transition:color 0.15s;}
 a.para-link:hover{color:var(--blue-400);}
+
+/* ── PARA QUOTE ── */
 .para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:0.75rem 0;}
 .para-quote .para-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.6rem;font-weight:700;}
-.para-quote p,.task-body .para-quote p,.section-body .para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
-.para-quote .para-ref,.task-body .para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
+.para-quote p{font-size:15px !important;line-height:1.7 !important;color:#e2e8f0 !important;font-style:italic !important;margin-bottom:0 !important;}
+.para-quote .para-ref{font-size:12px !important;color:#64748b !important;margin-top:0.6rem;font-style:normal !important;}
 .para-quote a{color:var(--blue-400) !important;border-bottom-color:var(--blue-400) !important;}
+
+/* ── BOOK REF ── */
 .book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
 .book-ref-icon{font-size:24px;flex-shrink:0;}
 .book-ref-body{flex:1;}
 .book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
 .book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
 .book-ref-text strong{font-weight:700;}
+
+/* ── INFO BOXES ── */
 .content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
 .info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
 .info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
@@ -92,8 +109,9 @@ a.para-link:hover{color:var(--blue-400);}
 .info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
 .info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
 .info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
-.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
 .info-box strong{font-weight:700;display:block;margin-bottom:4px;}
+
+/* ── CHIPS ── */
 .chip-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
 .chip{font-size:11px;padding:3px 10px;border-radius:100px;font-weight:700;border:1px solid;}
 .chip.k{background:var(--blue-50);border-color:var(--blue-400);color:var(--blue-700);}
@@ -101,9 +119,15 @@ a.para-link:hover{color:var(--blue-400);}
 .chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
 .chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
 .chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
-/* PFLICHTEN SPLIT */
+
+/* ── SCENARIO ── */
+.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
+.scenario strong{color:var(--blue-400);}
+
+/* ── PFLICHTEN SPLIT ── */
 .pflichten-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:1rem 0;}
-@media(max-width:600px){.pflichten-split{grid-template-columns:1fr;}}
 .pflichten-card{border-radius:var(--radius-md);padding:1.1rem 1.2rem;border:2px solid;}
 .pflichten-card.verkaeufer{background:#E3F2FD;border-color:var(--blue-400);}
 .pflichten-card.kaeufer{background:var(--green-light);border-color:#81c784;}
@@ -113,26 +137,8 @@ a.para-link:hover{color:var(--blue-400);}
 .pflichten-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text);line-height:1.5;padding:5px 0;border-bottom:1px dashed rgba(0,0,0,0.08);}
 .pflichten-item:last-child{border-bottom:none;}
 .pflichten-item-icon{flex-shrink:0;margin-top:1px;}
-/* SCENARIO */
-.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
-.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
-.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
-.scenario strong{color:var(--blue-400);}
-/* TASK */
-.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
-.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
-.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.task-title{font-size:13px;font-weight:700;color:white;}
-.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;}
-.task-body p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
-.task-body p:last-child{margin-bottom:0;}
-.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
-.answer-area:focus{outline:none;border-color:var(--blue-700);}
-.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
-.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
-.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
-.solution-reveal.visible{display:block;}
-/* NORMEN TABLE */
+
+/* ── NORMEN TABLE ── */
 .normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
 .normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.75rem;color:var(--text);}
 .normen-table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -144,13 +150,53 @@ a.para-link:hover{color:var(--blue-400);}
 .normen-table tr:nth-child(even) td{background:#f8fafc;}
 .normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
 .normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
-/* KI BOX */
-.ki-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.ki-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
-.ki-text{font-size:14px;color:#14532d;line-height:1.6;}
-.ki-text strong{font-weight:700;display:block;margin-bottom:3px;}
-.ki-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:var(--teal);color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
-/* QUIZ */
+
+/* ── TASK (Variante C – Icons links) ── */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-purple{border:1.5px solid #7B1FA2;}
+
+/* ── KI BOX (neu) ── */
+.ki-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
+.ki-box-header{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;}
+.ki-box-icon{font-size:22px;flex-shrink:0;}
+.ki-box-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:#14532d;}
+.ki-box-subtitle{font-size:11px;color:#16a34a;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
+.ki-prompt-wrap{background:white;border:1.5px solid #86efac;border-radius:var(--radius-sm);padding:1rem 1.1rem;margin:0.75rem 0;position:relative;}
+.ki-prompt-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#16a34a;margin-bottom:0.5rem;}
+.ki-prompt-text{font-size:13px;color:#1a1a1a;line-height:1.7;white-space:pre-wrap;font-family:'Nunito',sans-serif;}
+.ki-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.ki-copy-btn:hover{background:#0f766e;transform:translateY(-1px);}
+.ki-copy-btn.copied{background:var(--green);}
+.ki-fobizz-btn{display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;margin-left:8px;padding:8px 16px;background:white;color:var(--teal);border:1.5px solid var(--teal);border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.15s;}
+.ki-fobizz-btn:hover{background:var(--teal-light);}
+.ki-steps{margin-top:0.75rem;display:flex;flex-direction:column;gap:6px;}
+.ki-step{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#14532d;line-height:1.5;}
+.ki-step-num{width:20px;height:20px;border-radius:50%;background:#16a34a;color:white;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+
+/* ── ANSWER / SOLUTION ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* ── QUIZ ── */
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
@@ -166,12 +212,17 @@ a.para-link:hover{color:var(--blue-400);}
 .quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
 .quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
 .divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+
+/* ── BUTTONS ── */
 .nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
 .btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* ABFRAGE */
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+
+/* ── ABFRAGE ── */
 .abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
 .abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
 .abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
@@ -195,7 +246,8 @@ a.para-link:hover{color:var(--blue-400);}
 .erwartung-box.visible{display:block;}
 .print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
 .print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* PIN */
+
+/* ── PIN ── */
 .pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
 .pin-overlay.open{display:flex;}
 .pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
@@ -216,19 +268,26 @@ a.para-link:hover{color:var(--blue-400);}
 .pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
 .pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
 .pin-cancel:hover{color:var(--text);}
+
+/* ── MISC ── */
 .step{display:none;}
 .step.active{display:block;}
 .teacher-only{display:none;}
 body.version-b .teacher-only{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 @media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
-@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.pflichten-split{grid-template-columns:1fr;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.pflichten-split{grid-template-columns:1fr;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}}
 </style>
 </head>
 <body id="body-root">
 
+<!-- ══════════════ TOPBAR ══════════════ -->
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 4</span>
   <div class="topbar-right">
@@ -239,6 +298,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
+<!-- ══════════════ PROGRESS ══════════════ -->
 <div class="progress-bar-wrap">
   <div class="progress-inner">
     <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
@@ -257,17 +317,23 @@ body.version-b .teacher-only{display:block;}
 
 <div class="main">
 
+<!-- ══════════════ HERO ══════════════ -->
 <div class="hero">
   <div class="hero-tag">📝 Modul 2 · Der Vertrag</div>
   <h1>Rechte &amp; Pflichten aus dem Kaufvertrag</h1>
   <p>Ein Kaufvertrag schließen – das geht schnell. Aber was passiert danach? Wer muss was tun? Diese Stunde zeigt dir, was Käufer und Verkäufer laut § 433 BGB voneinander verlangen können.</p>
   <div class="hero-meta">
-    <div class="hero-meta-item">⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
-    <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 60–61</div>
-    <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 60–61</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler analysieren Rechte und Pflichten aus dem Kaufvertrag und wenden § 433 BGB auf konkrete Sachverhalte an. Sie sind sich der rechtlichen Folgen von Verträgen bewusst.</div>
   </div>
 </div>
 
+<!-- ══════════════ GLOBAL TEACHER NOTE ══════════════ -->
 <div class="teacher-note teacher-only">
   <div class="teacher-note-header">🎓 Hinweise – Version B</div>
   <p>Schwerpunkt: § 433 BGB vollständig analysieren – beide Absätze, beide Seiten. Wichtig: Schüler müssen erkennen, dass der Kaufvertrag BEIDE Parteien verpflichtet.</p>
@@ -275,12 +341,12 @@ body.version-b .teacher-only{display:block;}
     <li>Schritt 1: Gasanlage-Fall (M1, S. 60) – Perspektivenwechsel! Schüler sollen BEIDE Seiten verstehen.</li>
     <li>Schritt 2: Normenanalyse § 433 – unbedingt BEIDE Absätze behandeln. Häufiger Fehler: Schüler vergessen die Abnahmepflicht des Käufers.</li>
     <li>Schritt 3: Buchaufgaben S. 61, Aufg. 1–3. Aufg. 4 (§ 448 Versandkosten) ist fakultativ.</li>
-    <li>Schritt 4: KI-Vergleich Fobizz – Schwerpunkt: Erkennt die KI BEIDE Pflichten des Käufers?</li>
-    <li>Wichtig: Am Ende explizit betonen – der Kaufvertrag ist nur das Verpflichtungsgeschäft. Eigentum und Besitz gehen noch NICHT über! (Vorbereitung Std. 6)</li>
+    <li>Schritt 4: KI-Aufgabe – Schüler sammeln mit der KI Argumente für den Ernstfall. Reflexion: Welche Argumente hat die KI genannt? Was fehlt?</li>
+    <li>⚠️ Am Ende explizit betonen: Der Kaufvertrag ist nur das Verpflichtungsgeschäft. Eigentum und Besitz gehen noch NICHT über! (Vorbereitung Stunde 6)</li>
   </ul>
 </div>
 
-<!-- STEP 1: EINSTIEG -->
+<!-- ══════════════ STEP 1: EINSTIEG ══════════════ -->
 <div class="step active" id="step-1">
   <div class="section">
     <div class="section-header">
@@ -292,8 +358,21 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Tipp</div><p>Schüler sollen zuerst OHNE Buch spontan antworten: Wer hat recht – Werkstatt oder Kunde? Dann Buchverweis S. 60 öffnen lassen und Interessen gegenüberstellen (Aufg. 1).</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c2">Lebensweltbezug</span>
+        <span class="chip c3">Methodenvielfalt</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Tipp</div>
+          <p>Schüler sollen zuerst OHNE Buch spontan antworten: Wer hat recht – Werkstatt oder Kunde? Dann Buchverweis S. 60 öffnen lassen und Interessen gegenüberstellen (Aufg. 1).</p>
+        </div>
+      </div>
+
+      <div class="info-box orange">
+        <strong>💡 Warum ist das relevant für dich?</strong>
+        Du bestellst etwas – und überlegst es dir dann anders. Darf man einfach zurücktreten? § 433 BGB regelt genau das: Was passiert nach dem Vertragsschluss? Diese Stunde gibt dir das Werkzeug, um im Ernstfall deine Rechte zu kennen – und einzufordern.
+      </div>
 
       <div class="scenario">
         <div class="scenario-label">⚙️ Fall: Die Gasanlage</div>
@@ -302,15 +381,43 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">💬</div><div class="task-title">Partnerarbeit – Perspektivenwechsel</div></div>
+        <div class="task-header">
+          <div class="task-num">💬</div>
+          <div class="task-header-text">
+            <span class="task-title">Partnerarbeit – Perspektivenwechsel</span>
+            <span class="task-subtitle">Diskussion · Partnerarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Stellt die Interessen beider Seiten gegenüber. Wer will was – und warum?</p>
-          <textarea class="answer-area" placeholder="Interessen Herr Maier (Besteller): ...&#10;&#10;Interessen Autowerkstatt: ...&#10;&#10;Meine Meinung: Wer hat recht? ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-fall')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-fall">
-            <strong>Interessen Herr Maier:</strong> Er möchte nicht zur Abnahme und Bezahlung verpflichtet sein. Er ist der Meinung, dass ohne Unterschrift oder Auftragsbestätigung kein gültiger Vertrag besteht.<br><br>
-            <strong>Interessen der Werkstatt:</strong> Sie möchte, dass der Vertrag erfüllt wird – Abnahme und Bezahlung der Gasanlage. Sie hat die Anlage bereits bestellt und kann sonst auf den Kosten sitzen bleiben.<br><br>
-            <strong>Rechtliche Beurteilung:</strong> Die Werkstatt hat recht. Der Vertrag wurde mündlich per Telefon geschlossen – das reicht. <em>„pacta sunt servanda"</em> – Verträge sind einzuhalten, auch mündliche. Herr Maier ist zur Abnahme und Bezahlung verpflichtet.
+          <div class="task-icons">
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+                <rect x="2" y="3" width="22" height="16" rx="4" fill="#0d9488"/>
+                <path d="M6 19l-4 6 8-4" fill="#0d9488"/>
+                <rect x="20" y="18" width="22" height="16" rx="4" fill="#0d9488" opacity="0.7"/>
+                <path d="M38 34l4 4-8-2" fill="#0d9488" opacity="0.7"/>
+                <path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 44 36" fill="none">
+                <circle cx="12" cy="10" r="6.5" fill="#0d9488"/>
+                <circle cx="32" cy="10" r="6.5" fill="#0d9488"/>
+                <path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Stellt die Interessen beider Seiten gegenüber. Wer will was – und warum?</p>
+            <textarea class="answer-area" placeholder="Interessen Herr Maier (Besteller): ...&#10;&#10;Interessen Autowerkstatt: ...&#10;&#10;Meine Meinung: Wer hat recht? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fall">
+              <strong>Interessen Herr Maier:</strong> Er möchte nicht zur Abnahme und Bezahlung verpflichtet sein. Er ist der Meinung, dass ohne Unterschrift oder Auftragsbestätigung kein gültiger Vertrag besteht.<br><br>
+              <strong>Interessen der Werkstatt:</strong> Sie möchte, dass der Vertrag erfüllt wird – Abnahme und Bezahlung der Gasanlage. Sie hat die Anlage bereits bestellt und kann sonst auf den Kosten sitzen bleiben.<br><br>
+              <strong>Rechtliche Beurteilung:</strong> Die Werkstatt hat recht. Der Vertrag wurde mündlich per Telefon geschlossen – das reicht. <em>„pacta sunt servanda"</em> – Verträge sind einzuhalten, auch mündliche. Herr Maier ist zur Abnahme und Bezahlung verpflichtet.
+            </div>
           </div>
         </div>
       </div>
@@ -320,12 +427,14 @@ body.version-b .teacher-only{display:block;}
         Ein Kaufvertrag kann mündlich, schriftlich oder konkludent geschlossen werden – alle sind gleich bindend. Eine Unterschrift ist nur bei bestimmten Vertragsarten zwingend (z.B. Immobilienkauf, Ehe).
       </div>
 
-      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: § 433 BGB →</button></div>
+      <div class="nav-btns">
+        <button class="btn-primary" onclick="nextStep(1)">Weiter: § 433 BGB →</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 2: § 433 BGB -->
+<!-- ══════════════ STEP 2: § 433 BGB ══════════════ -->
 <div class="step" id="step-2">
   <div class="section">
     <div class="section-header">
@@ -337,14 +446,22 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c1">Veranschaulichung</span><span class="chip k">Kompetenzorientiert</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Häufiger Schülerfehler: Nur Abs. 1 (Verkäuferpflichten) wird analysiert – Abs. 2 (Käuferpflichten) wird vergessen! Besonders die <strong>Abnahmepflicht</strong> des Käufers wird oft nicht genannt. Nach der Aufgabe explizit darauf hinweisen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c1">Veranschaulichung</span>
+        <span class="chip k">Kompetenzorientiert</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Häufiger Schülerfehler: Nur Abs. 1 (Verkäuferpflichten) wird analysiert – Abs. 2 (Käuferpflichten) wird vergessen! Besonders die <strong>Abnahmepflicht</strong> des Käufers wird oft nicht genannt. Nach der Aufgabe explizit darauf hinweisen.</p>
+        </div>
+      </div>
 
       <div class="book-ref">
         <div class="book-ref-icon">📗</div>
         <div class="book-ref-body">
           <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
-          <div class="book-ref-text">Lies die Seite <strong>60–61</strong>, Abschnitt <strong>2.3 „Welche Verpflichtungen bringt ein Kaufvertrag mit sich?"</strong>. Achte besonders auf § 433 BGB – lies <strong>beide Absätze</strong> sorgfältig.</div>
+          <div class="book-ref-text">Lies die Seiten <strong>60–61</strong>, Abschnitt <strong>„Welche Verpflichtungen bringt ein Kaufvertrag mit sich?"</strong>. Achte besonders auf § 433 BGB – lies <strong>beide Absätze</strong> sorgfältig.</div>
         </div>
       </div>
 
@@ -408,7 +525,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 3: BUCHAUFGABEN -->
+<!-- ══════════════ STEP 3: BUCHAUFGABEN ══════════════ -->
 <div class="step" id="step-3">
   <div class="section">
     <div class="section-header">
@@ -420,8 +537,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c2">Lebensweltbezug</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Aufgabe 3 (S. 61) ist der Kern: Schüler konkretisieren die Pflichten aus § 433 auf 3 verschiedene Fälle (M1 Werkstatt, M2 Fahrradshop, M3 Online-Kauf). Aufgabe 4 (§ 448 Versandkosten) ist fakultativ für schnellere Schüler.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip k">Kompetenzorientiert</span>
+        <span class="chip c2">Lebensweltbezug</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Aufgabe 3 (S. 61) ist der Kern: Schüler konkretisieren die Pflichten aus § 433 auf 3 verschiedene Fälle (M1 Werkstatt, M2 Fahrradshop, M3 Online-Kauf). Aufgabe 4 (§ 448 Versandkosten) ist fakultativ für schnellere Schüler.</p>
+        </div>
+      </div>
 
       <div class="book-ref">
         <div class="book-ref-icon">📗</div>
@@ -432,39 +557,87 @@ body.version-b .teacher-only{display:block;}
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">1</div><div class="task-title">Aufgaben 1 &amp; 2 (S. 61) – Interessen + pacta sunt servanda</div></div>
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgaben 1 &amp; 2 (S. 61) – Interessen + pacta sunt servanda</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Bearbeite <strong>Aufgabe 1</strong>: Stelle die Interessen von Herrn Maier und der Autowerkstatt gegenüber.<br>
-          Bearbeite <strong>Aufgabe 2</strong>: Erkläre den Rechtsgrundsatz „pacta sunt servanda" anhand des Gasanlage-Falls.</p>
-          <textarea class="answer-area" style="min-height:100px;" placeholder="Aufg. 1 – Interessen Herr Maier: ...&#10;Interessen Werkstatt: ...&#10;&#10;Aufg. 2 – pacta sunt servanda bedeutet hier: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-12')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-12">
-            <strong>Aufgabe 1 – Interessen:</strong><br>
-            Herr Maier: keine Verpflichtung zur Abnahme und Bezahlung der Gasanlage; Unwirksamkeit ohne Unterschrift.<br>
-            Autowerkstatt: Erfüllung des Vertrags – Abnahme und Bezahlung durch den Kunden.<br><br>
-            <strong>Aufgabe 2 – pacta sunt servanda:</strong><br>
-            Verträge sind einzuhalten. Die Werkstatt muss sich darauf verlassen können, dass bestellte Waren auch abgenommen und bezahlt werden – sonst kann sie ihr eigenes Geschäft nicht planen. Der Grundsatz dient der Rechtssicherheit im Geschäftsleben.
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 40 34" fill="none">
+                <path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+                <path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Bearbeite <strong>Aufgabe 1</strong>: Stelle die Interessen von Herrn Maier und der Autowerkstatt gegenüber.<br>
+            Bearbeite <strong>Aufgabe 2</strong>: Erkläre den Rechtsgrundsatz „pacta sunt servanda" anhand des Gasanlage-Falls.</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="Aufg. 1 – Interessen Herr Maier: ...&#10;Interessen Werkstatt: ...&#10;&#10;Aufg. 2 – pacta sunt servanda bedeutet hier: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-12')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-12">
+              <strong>Aufgabe 1 – Interessen:</strong><br>
+              Herr Maier: keine Verpflichtung zur Abnahme und Bezahlung der Gasanlage; Unwirksamkeit ohne Unterschrift.<br>
+              Autowerkstatt: Erfüllung des Vertrags – Abnahme und Bezahlung durch den Kunden.<br><br>
+              <strong>Aufgabe 2 – pacta sunt servanda:</strong><br>
+              Verträge sind einzuhalten. Die Werkstatt muss sich darauf verlassen können, dass bestellte Waren auch abgenommen und bezahlt werden – sonst kann sie ihr eigenes Geschäft nicht planen. Der Grundsatz dient der Rechtssicherheit im Geschäftsleben.
+            </div>
           </div>
         </div>
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">2</div><div class="task-title">Aufgabe 3 (S. 61) – § 433 BGB auf Fälle anwenden</div></div>
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 3 (S. 61) – § 433 BGB auf Fälle anwenden</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Bearbeite <strong>Aufgabe 3 auf Seite 61</strong>: Konkretisiere die Pflichten aus § 433 BGB für die drei Fälle M1 (Werkstatt), M2 (Fahrradshop) und M3 (Online-Kauf).</p>
-          <textarea class="answer-area" style="min-height:120px;" placeholder="M1 – Werkstatt:&#10;Verkäufer muss: ...&#10;Käufer muss: ...&#10;&#10;M2 – Fahrradshop:&#10;Verkäufer muss: ...&#10;Käufer muss: ...&#10;&#10;M3 – Online-Kauf:&#10;Verkäufer muss: ...&#10;Käufer muss: ..."></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-3')">✓ Musterlösung anzeigen</button>
-          <div class="solution-reveal" id="sol-3">
-            <strong>M1 – Autowerkstatt:</strong><br>
-            Verkäufer (Werkstatt): Gasanlage übergeben und einbauen; Eigentum verschaffen; Anlage muss mangelfrei sein.<br>
-            Käufer (Herr Maier): vereinbarten Preis zahlen; Anlage abnehmen.<br><br>
-            <strong>M2 – Fahrradshop:</strong><br>
-            Verkäufer: Fahrrad montiert übergeben; Eigentum verschaffen; Rad muss mangelfrei sein.<br>
-            Käufer: 430 € zahlen; Fahrrad abholen und abnehmen.<br><br>
-            <strong>M3 – Online-Kauf (siren):</strong><br>
-            Verkäufer: Buch versenden und übergeben lassen; Eigentum verschaffen; Buch muss mangelfrei sein.<br>
-            Käufer (Frau Solakis): 5,90 € zahlen; Buch abnehmen.<br><br>
-            <em>💡 Zusatz (Aufg. 4): Versandkosten trägt gem. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__448.html" target="_blank">§ 448 Abs. 1 BGB</a> grundsätzlich der Käufer – viele Versandhändler übernehmen sie aber freiwillig.</em>
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none">
+                <path d="M6 6C6 4.343 7.343 3 9 3h14l8 8v26a2 2 0 01-2 2H9a3 3 0 01-3-3V6z" stroke="#1976D2" stroke-width="2.5" fill="none"/>
+                <path d="M23 3v8h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="18" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2" font-family="Georgia, serif">§</text>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Konkretisiere die Pflichten aus § 433 BGB für die drei Fälle M1 (Werkstatt), M2 (Fahrradshop) und M3 (Online-Kauf) auf Seite 61.</p>
+            <textarea class="answer-area" style="min-height:120px;" placeholder="M1 – Werkstatt:&#10;Verkäufer muss: ...&#10;Käufer muss: ...&#10;&#10;M2 – Fahrradshop:&#10;Verkäufer muss: ...&#10;Käufer muss: ...&#10;&#10;M3 – Online-Kauf:&#10;Verkäufer muss: ...&#10;Käufer muss: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-3">
+              <strong>M1 – Autowerkstatt:</strong><br>
+              Verkäufer (Werkstatt): Gasanlage übergeben und einbauen; Eigentum verschaffen; Anlage muss mangelfrei sein.<br>
+              Käufer (Herr Maier): vereinbarten Preis zahlen; Anlage abnehmen.<br><br>
+              <strong>M2 – Fahrradshop:</strong><br>
+              Verkäufer: Fahrrad montiert übergeben; Eigentum verschaffen; Rad muss mangelfrei sein.<br>
+              Käufer: 430 € zahlen; Fahrrad abholen und abnehmen.<br><br>
+              <strong>M3 – Online-Kauf:</strong><br>
+              Verkäufer: Buch versenden und übergeben lassen; Eigentum verschaffen; Buch muss mangelfrei sein.<br>
+              Käufer (Frau Solakis): 5,90 € zahlen; Buch abnehmen.<br><br>
+              <em>💡 Zusatz (Aufg. 4): Versandkosten trägt gem. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__448.html" target="_blank">§ 448 Abs. 1 BGB</a> grundsätzlich der Käufer – viele Versandhändler übernehmen sie aber freiwillig.</em>
+            </div>
           </div>
         </div>
       </div>
@@ -477,37 +650,100 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 4: KI -->
+<!-- ══════════════ STEP 4: KI-AUFGABE ══════════════ -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
       <div class="section-icon green">🤖</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 4 · KI &amp; Reflexion</div>
-        <div class="section-title">KI erklären lassen – kritisch vergleichen</div>
-        <div class="section-time">⏱ ca. 5 Minuten · Fobizz</div>
+        <div class="section-tag">Schritt 4 · KI &amp; Transfer</div>
+        <div class="section-title">Argumente sammeln für den Ernstfall – mit KI</div>
+        <div class="section-time">⏱ ca. 6 Minuten · Fobizz</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c4">Kreativität</span><span class="chip c2">Individualisiert</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Kernfrage: Nennt die KI BEIDE Pflichten des Käufers (Zahlen + Abnehmen)? Erfahrungsgemäß vergessen KI-Systeme die Abnahmepflicht häufig – gutes Lernmoment.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip c4">Kreativität</span>
+        <span class="chip c2">Lebensweltbezug</span>
+        <span class="chip k">Kompetenzorientiert</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Ziel dieser Aufgabe: Schüler überführen ihr Wissen aus § 433 in eine reale Handlungssituation. Die KI ist hier Werkzeug zur Argumentationssammlung – keine Orakel-Funktion. Kernfrage der Reflexion: Welche Argumente hat die KI geliefert, welche kommen aus dem eigenen Wissen?</p>
+        </div>
+      </div>
+
+      <div class="info-box teal">
+        <strong>🎯 Worum geht es?</strong>
+        Stell dir vor: Du hast jemanden ein gebrauchtes Fahrrad für 80 € verkauft. Die Person hat es bereits mitgenommen – weigert sich aber zu zahlen und sagt: <em>„War doch nur ein Gespräch, kein echter Vertrag."</em><br><br>
+        Mit dem folgenden KI-Prompt sammelst du gemeinsam mit der KI alle rechtlichen Argumente, die du in diesem Fall brauchst.
+      </div>
 
       <div class="ki-box">
-        <div class="ki-icon">🤖</div>
-        <div class="ki-text">
-          <strong>KI-Aufgabe: § 433 BGB erklären lassen</strong>
-          Öffne Fobizz und stelle folgende Frage:<br>
-          <em>„Erkläre mir § 433 BGB. Welche Pflichten hat der Verkäufer – und welche der Käufer? Nenne alle Pflichten vollständig."</em><br><br>
-          Vergleiche danach: Hat die KI <strong>alle vier Pflichten</strong> genannt? Besonders: Hat sie die <strong>Abnahmepflicht des Käufers</strong> erwähnt?
-          <br><a href="https://plattform.fobizz.com" target="_blank" class="ki-link">Zu Fobizz →</a>
+        <div class="ki-box-header">
+          <div class="ki-box-icon">🤖</div>
+          <div>
+            <div class="ki-box-title">KI-Aufgabe – Prompt kopieren &amp; bei Fobizz einfügen</div>
+            <div class="ki-box-subtitle">Fobizz · KI-Assistent</div>
+          </div>
+        </div>
+
+        <div class="ki-steps">
+          <div class="ki-step"><div class="ki-step-num">1</div><span>Kopiere den Prompt unten mit dem Button</span></div>
+          <div class="ki-step"><div class="ki-step-num">2</div><span>Öffne Fobizz und füge den Prompt in den Chat ein</span></div>
+          <div class="ki-step"><div class="ki-step-num">3</div><span>Lies die Argumente durch und notiere sie im Reflexionsfeld</span></div>
+        </div>
+
+        <div class="ki-prompt-wrap">
+          <div class="ki-prompt-label">📋 Prompt – zum Kopieren</div>
+          <div class="ki-prompt-text" id="ki-prompt-text">Ich brauche deine Hilfe als Lern-Assistent für Wirtschaft und Recht. 
+
+Ich habe mit jemandem mündlich einen Kaufvertrag über ein gebrauchtes Fahrrad für 80 € abgeschlossen. Die Person hat das Fahrrad bereits mitgenommen – weigert sich aber jetzt zu zahlen und sagt: „War doch nur ein Gespräch, kein echter Vertrag."
+
+Hilf mir, Argumente für diese drei Fragen zu sammeln:
+1. Warum ist trotzdem ein gültiger Kaufvertrag entstanden?
+2. Was sagt § 433 Abs. 2 BGB über die Pflichten des Käufers?
+3. Welche konkreten Argumente kann ich nutzen, um die Person zu überzeugen zu zahlen – ohne sofort zum Anwalt zu gehen?
+
+Erkläre in einfacher Sprache, passend für einen 16-Jährigen.</div>
+          <button class="ki-copy-btn" id="ki-copy-btn" onclick="copyPrompt()">📋 Prompt kopieren</button>
+          <a href="https://plattform.fobizz.com" target="_blank" class="ki-fobizz-btn">Zu Fobizz →</a>
         </div>
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Reflexion nach der KI-Antwort</div></div>
+        <div class="task-header">
+          <div class="task-num">✍</div>
+          <div class="task-header-text">
+            <span class="task-title">Reflexion – Was hat die KI geliefert?</span>
+            <span class="task-subtitle">KI / Fobizz · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Vergleiche die KI-Antwort mit deiner eigenen Normenanalyse aus Schritt 2.</p>
-          <textarea class="answer-area" placeholder="Hat die KI alle 4 Pflichten genannt? (Ja / Nein / teilweise)&#10;&#10;Was hat die KI vergessen oder falsch dargestellt?&#10;&#10;Was war an der KI-Erklärung gut?"></textarea>
+          <div class="task-icons">
+            <div class="ico ico-green">
+              <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+                <line x1="20" y1="2" x2="20" y2="8" stroke="#43A047" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="20" cy="2" r="2" fill="#43A047"/>
+                <rect x="6" y="8" width="28" height="22" rx="5" stroke="#43A047" stroke-width="2.5" fill="none"/>
+                <rect x="11" y="14" width="6" height="6" rx="2" fill="#43A047"/>
+                <rect x="23" y="14" width="6" height="6" rx="2" fill="#43A047"/>
+                <path d="M13 25h14" stroke="#43A047" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="M6 16h-3M34 16h3" stroke="#43A047" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
+                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Notiere die wichtigsten Argumente aus der KI-Antwort. Welche davon kannst du direkt mit § 433 BGB und „pacta sunt servanda" begründen?</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="Argument 1 (Vertragsschluss): ...&#10;&#10;Argument 2 (§ 433 Abs. 2): ...&#10;&#10;Argument 3 (pacta sunt servanda): ...&#10;&#10;Was hat die KI gut erklärt? Was fehlt oder ist ungenau?"></textarea>
+          </div>
         </div>
       </div>
 
@@ -519,7 +755,7 @@ body.version-b .teacher-only{display:block;}
   </div>
 </div>
 
-<!-- STEP 5: QUIZ -->
+<!-- ══════════════ STEP 5: QUIZ ══════════════ -->
 <div class="step" id="step-5">
   <div class="section">
     <div class="section-header">
@@ -531,8 +767,16 @@ body.version-b .teacher-only{display:block;}
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip k">Kompetenzorientiert</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Frage 2 (Abnahmepflicht) und Frage 4 (Verpflichtungsgeschäft) im Plenum besprechen – das sind die häufigsten Fehlerquellen.</p></div></div>
+      <div class="chip-row teacher-only">
+        <span class="chip k">Kompetenzorientiert</span>
+        <span class="chip c1">Veranschaulichung</span>
+      </div>
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Sicherung</div>
+          <p>Frage 2 (Abnahmepflicht) und Frage 4 (Verpflichtungsgeschäft) im Plenum besprechen – das sind die häufigsten Fehlerquellen.</p>
+        </div>
+      </div>
       <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen aus Stunde 4!</p>
 
       <div class="quiz-wrap">
@@ -589,16 +833,24 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
-        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst jetzt alle vier Pflichten aus § 433 BGB – sowohl die des Verkäufers (Übergabe + Eigentumsverschaffung) als auch die des Käufers (Zahlung + Abnahme). Du weißt, dass der Kaufvertrag nur ein <strong>Verpflichtungsgeschäft</strong> ist – Eigentum geht noch nicht über. Und du kannst dein Wissen im Ernstfall anwenden, um rechtliche Argumente zu formulieren.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+          <button class="btn-primary teacher-only" style="background:var(--orange);border:none;" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 6: ABFRAGE -->
+<!-- ══════════════ STEP 6: ABFRAGE ══════════════ -->
 <div class="step teacher-only" id="step-6">
   <div class="section">
     <div class="section-header">
@@ -720,9 +972,12 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
-        <button class="print-btn" onclick="window.print()" style="margin-left:auto;">🖨 Abfrage drucken</button>
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück zum Quiz</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
       </div>
     </div>
   </div>
@@ -730,7 +985,7 @@ body.version-b .teacher-only{display:block;}
 
 </div><!-- /main -->
 
-<!-- PIN MODAL -->
+<!-- ══════════════ PIN MODAL ══════════════ -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-logo">Recht<span>&</span>Ich</div>
@@ -761,110 +1016,42 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN='123456';
-let pinInput='',cur=1,quizA={},pollD={};
+const TEACHER_PIN='135791';
+let pinInput='',cur=1,quizA={};
 const TOTAL_STEPS=6;
-function openPinModal(){
-  if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}
-  pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';
-  document.getElementById('pin-overlay').classList.add('open');
-}
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
 function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
 function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
 function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
 function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
-function checkPin(){
-  if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}
-  else{document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';pinInput='';updatePinDots();const box=document.querySelector('.pin-box');box.style.animation='none';setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);}
-}
-function setVersion(v){
-  const b=document.getElementById('body-root');
-  document.getElementById('btn-a').classList.toggle('active',v==='a');
-  document.getElementById('btn-b').classList.toggle('active',v==='b');
-  if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}
-  else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}
-}
-function goToStep(n){
-  if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;
-  document.getElementById('step-'+cur).classList.remove('active');
-  cur=n;document.getElementById('step-'+cur).classList.add('active');
-  for(let i=1;i<=TOTAL_STEPS;i++){
-    const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);
-    if(!s)continue;s.classList.remove('active','done');
-    if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}
-    else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}
-    else if(l)l.classList.remove('done');
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';pinInput='';updatePinDots();const box=document.querySelector('.pin-box');box.style.animation='none';setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
 function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
 function prevStep(f){if(f>1)goToStep(f-1);}
-function revealSolution(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';
-}
-function toggleErwartung(id){
-  const el=document.getElementById(id);el.classList.toggle('visible');
-  el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Erwartungshorizont ausblenden':'📋 Erwartungshorizont anzeigen';
-}
-function checkQuiz(qId,btn,ok){
-  const c=document.getElementById(qId);if(c.dataset.answered)return;
-  c.dataset.answered='true';quizA[qId]=ok;
-  c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));
-  const fb=document.getElementById(qId+'-fb');
-  const yes={
-    q1:'✓ Richtig! § 433 Abs. 1: Sache übergeben + Eigentum verschaffen (+ mangelfrei).',
-    q2:'✓ Richtig! § 433 Abs. 2: zahlen UND abnehmen – beide Pflichten!',
-    q3:'✓ Richtig! Mündliche Verträge sind genauso bindend – pacta sunt servanda!',
-    q4:'✓ Richtig! Der Kaufvertrag = nur Verpflichtungsgeschäft. Eigentum geht erst später über (Stunde 6).'
-  };
-  const no={
-    q1:'✗ Nicht ganz. § 433 Abs. 1: Verkäufer muss Sache übergeben UND Eigentum verschaffen. → B ist korrekt.',
-    q2:'✗ Nicht ganz. Der Käufer hat ZWEI Pflichten: zahlen + abnehmen. Die Abnahmepflicht wird oft vergessen! → C ist korrekt.',
-    q3:'✗ Nicht ganz. Mündliche Kaufverträge sind voll wirksam – keine Unterschrift nötig. → C ist korrekt.',
-    q4:'✗ Nicht ganz. Der Kaufvertrag begründet nur Pflichten – Eigentum und Besitz gehen noch gar nicht über. → C ist korrekt.'
-  };
-  if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}
-  else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
-  const qs=['q1','q2','q3','q4'];
-  if(qs.every(q=>document.getElementById(q).dataset.answered)){
-    document.getElementById('quiz-score').style.display='block';
-    const n=qs.filter(q=>quizA[q]).length;
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';
-    if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
-function finishQuiz(){
-  const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
-  if(n<3){
-    document.getElementById('quiz-score').style.display='block';
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';
-    document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
-function retryQuiz(){
-  const qs=['q1','q2','q3','q4'];
-  qs.forEach(q=>{
-    const c=document.getElementById(q);delete c.dataset.answered;
-    c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));
-    document.getElementById(q+'-fb').className='quiz-feedback';
-    document.getElementById(q+'-fb').textContent='';
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';}
+function copyPrompt(){
+  const text=document.getElementById('ki-prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.getElementById('ki-copy-btn');
+    btn.textContent='✅ Kopiert!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Prompt kopieren';btn.classList.remove('copied');},2500);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    const btn=document.getElementById('ki-copy-btn');btn.textContent='✅ Kopiert!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Prompt kopieren';btn.classList.remove('copied');},2500);
   });
-  quizA={};
-  document.getElementById('quiz-score').style.display='none';
-  document.getElementById('quiz-retry-wrap').style.display='none';
-  window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
 }
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! § 433 Abs. 1: Sache übergeben + Eigentum verschaffen (+ mangelfrei).',q2:'✓ Richtig! § 433 Abs. 2: zahlen UND abnehmen – beide Pflichten!',q3:'✓ Richtig! Mündliche Verträge sind genauso bindend – pacta sunt servanda!',q4:'✓ Richtig! Der Kaufvertrag = nur Verpflichtungsgeschäft. Eigentum geht erst später über (Stunde 6).'};
+const no={q1:'✗ Nicht ganz. § 433 Abs. 1: Verkäufer muss Sache übergeben UND Eigentum verschaffen. → B ist korrekt.',q2:'✗ Nicht ganz. Der Käufer hat ZWEI Pflichten: zahlen + abnehmen. Die Abnahmepflicht wird oft vergessen! → C ist korrekt.',q3:'✗ Nicht ganz. Mündliche Kaufverträge sind voll wirksam – keine Unterschrift nötig. → C ist korrekt.',q4:'✗ Nicht ganz. Der Kaufvertrag begründet nur Pflichten – Eigentum und Besitz gehen noch gar nicht über. → C ist korrekt.'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
-document.addEventListener('keydown',function(e){
-  if(!document.getElementById('pin-overlay').classList.contains('open'))return;
-  if(e.key>='0'&&e.key<='9')pinKey(e.key);
-  else if(e.key==='Backspace')pinDel();
-  else if(e.key==='Escape')closePinModal();
-});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
 </script>
-<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
 </body>
 </html>
