@@ -17,16 +17,13 @@
   --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
   --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
   --shadow:0 2px 8px rgba(0,0,0,0.08);
-  --indigo:var(--blue-700);--amber:var(--orange);--amber-light:var(--orange-light);
-  --rose:var(--red);--rose-light:var(--red-light);
-  --slate:var(--text);--slate-mid:var(--text-secondary);--slate-light:var(--text-muted);
-  --bg:var(--bg-page);--success:var(--green);--success-light:var(--green-light);--radius:var(--radius-lg);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
-.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
@@ -51,6 +48,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
 .hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
 .hero-meta-item{display:flex;align-items:center;gap:5px;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
 .teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .teacher-note-header{display:flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
@@ -98,7 +98,6 @@ a.para-link:hover{color:var(--blue-400);}
 .chip.c2{background:var(--teal-light);border-color:#99f6e4;color:#0f766e;}
 .chip.c3{background:var(--orange-light);border-color:#fde68a;color:#92400e;}
 .chip.c4{background:var(--purple-light);border-color:#d8b4fe;color:#6b21a8;}
-/* ZEITSTRAHL */
 .zeitstrahl{margin:1.25rem 0;position:relative;}
 .zeitstrahl-line{position:absolute;top:28px;left:60px;right:60px;height:3px;background:var(--blue-400);z-index:0;}
 .zeitstrahl-steps{display:flex;justify-content:space-between;position:relative;z-index:1;}
@@ -109,7 +108,6 @@ a.para-link:hover{color:var(--blue-400);}
 .zs-dot.step3{background:var(--green);color:white;}
 .zs-label{font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;text-align:center;margin-bottom:3px;}
 .zs-sub{font-size:11px;color:var(--text-secondary);text-align:center;line-height:1.4;}
-/* POLL */
 .poll{margin:1rem 0;}
 .poll-question{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .poll-options{display:flex;flex-direction:column;gap:8px;}
@@ -124,7 +122,6 @@ a.para-link:hover{color:var(--blue-400);}
 .poll-result{margin-top:1rem;display:none;}
 .poll-result.visible{display:block;}
 .poll-result-text{background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:12px 16px;font-size:14px;color:var(--blue-800);line-height:1.6;}
-/* NORMEN TABLE */
 .normen-exercise{background:#f8fafc;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
 .normen-exercise h4{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;margin-bottom:0.75rem;color:var(--text);}
 .normen-table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -136,7 +133,6 @@ a.para-link:hover{color:var(--blue-400);}
 .normen-table tr:nth-child(even) td{background:#f8fafc;}
 .normen-table input[type="text"]{width:100%;border:1.5px solid var(--border);border-radius:6px;padding:5px 8px;font-family:'Nunito',sans-serif;font-size:13px;background:white;}
 .normen-table input[type="text"]:focus{outline:none;border-color:var(--blue-700);}
-/* TASK */
 .task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
 .task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
 .task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
@@ -149,7 +145,6 @@ a.para-link:hover{color:var(--blue-400);}
 .solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
 .solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
 .solution-reveal.visible{display:block;}
-/* WAHR/FALSCH */
 .wf-wrap{display:flex;flex-direction:column;gap:8px;margin:1rem 0;}
 .wf-item{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:white;font-size:14px;color:var(--text);}
 .wf-btns{display:flex;gap:6px;margin-left:auto;flex-shrink:0;}
@@ -158,7 +153,6 @@ a.para-link:hover{color:var(--blue-400);}
 .wf-btn.falsch:hover,.wf-btn.falsch.selected{background:var(--red-light);border-color:var(--red);color:var(--red);}
 .wf-btn.correct{background:var(--green-light);border-color:var(--green);color:var(--green);}
 .wf-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
-/* QUIZ */
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
 .quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
@@ -179,7 +173,8 @@ a.para-link:hover{color:var(--blue-400);}
 .btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
 .btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* ABFRAGE */
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
 .abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
 .abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
 .abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
@@ -203,7 +198,6 @@ a.para-link:hover{color:var(--blue-400);}
 .erwartung-box.visible{display:block;}
 .print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
 .print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
-/* PIN */
 .pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
 .pin-overlay.open{display:flex;}
 .pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
@@ -228,13 +222,18 @@ a.para-link:hover{color:var(--blue-400);}
 .teacher-only{display:none;}
 body.version-b .teacher-only{display:block;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
 @media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
 @media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.zeitstrahl-steps{flex-direction:column;align-items:flex-start;gap:12px;}.zeitstrahl-line{display:none;}}
 </style>
 </head>
 <body id="body-root">
+
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 6</span>
   <div class="topbar-right">
@@ -244,6 +243,7 @@ body.version-b .teacher-only{display:block;}
     </div>
   </div>
 </div>
+
 <div class="progress-bar-wrap">
   <div class="progress-inner">
     <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
@@ -259,6 +259,7 @@ body.version-b .teacher-only{display:block;}
     <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
   </div>
 </div>
+
 <div class="main">
 
 <div class="hero">
@@ -270,6 +271,10 @@ body.version-b .teacher-only{display:block;}
     <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 62–63</div>
     <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
   </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler unterscheiden Verpflichtungs- und Erfüllungsgeschäft und wenden § 929 BGB auf konkrete Sachverhalte an. Sie erklären das Trennungsprinzip und korrigieren die verbreitete Fehlvorstellung, dass Bezahlung und Eigentumsübergang gleichzusetzen sind.</div>
+  </div>
 </div>
 
 <div class="teacher-note teacher-only">
@@ -280,7 +285,7 @@ body.version-b .teacher-only{display:block;}
     <li>⚠️ <strong>Schülerfehlmeinung gezielt ansprechen</strong> (DK_62): „Bezahlen = Eigentümer werden" ist FALSCH. Als Wahr/Falsch-Aufgabe eingebaut.</li>
     <li>Schritt 1: Pro/Contra-Poll zur Fehlmeinung – erst Meinungen sammeln, dann aufklären.</li>
     <li>Schritt 3: Normenanalyse § 929 BGB in EA. Gute Differenzierung: Basis = § 929, Zusatz = Eigentumsvorbehalt § 449.</li>
-    <li>Schritt 4: Buchaufgaben S. 63, Aufg. 1–3.</li>
+    <li>Schritt 4: Buchaufgaben S. 63, Aufg. 1, 4 und 5.</li>
   </ul>
 </div>
 
@@ -298,6 +303,11 @@ body.version-b .teacher-only{display:block;}
     <div class="section-body">
       <div class="chip-row"><span class="chip c2">Lebensweltbezug</span><span class="chip c3">Methodenvielfalt</span></div>
       <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Wichtig</div><p>Diese Fehlvorstellung (Bezahlen = Eigentümer) ist laut DK_62 sehr verbreitet. Lass Schüler ERST abstimmen, DANN aufklären. Nicht gleich die richtige Antwort verraten!</p></div></div>
+
+      <div class="info-box orange">
+        <strong>💡 Warum ist das relevant für dich?</strong>
+        Du kaufst etwas – und denkst: „Ich hab bezahlt, also gehört es mir." Aber stimmt das wirklich? Rechtlich gesehen ist Bezahlen und Eigentümer-werden nicht dasselbe. Diese Stunde zeigt dir, was wirklich passiert – und warum das im Ernstfall wichtig sein kann.
+      </div>
 
       <div class="poll" id="poll-1">
         <div class="poll-question">Du kaufst ein Fahrrad für 300 € und bezahlst sofort. Wann wirst du rechtlich gesehen Eigentümer?</div>
@@ -333,10 +343,10 @@ body.version-b .teacher-only{display:block;}
       <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 EXPLIZITER HINWEIS PFLICHT</div><p>Nach diesem Schritt unbedingt aktiv eingreifen und betonen: „Der Kaufvertrag begründet NUR Verpflichtungen – er überträgt noch KEIN Eigentum und KEINEN Besitz. Das passiert erst beim Erfüllungsgeschäft." (DK_62 explizit)</p></div></div>
 
       <div class="book-ref">
-        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-icon">📋</div>
         <div class="book-ref-body">
-          <div class="book-ref-title">Leseauftrag – startup.WR Bayern 10 (C.C. Buchner)</div>
-          <div class="book-ref-text">Lies Seite <strong>62–63</strong>, Abschnitt <strong>2.4 „Wie werden die Pflichten aus einem Kaufvertrag erfüllt?"</strong>. Achte besonders auf M1 (Fahrradkauf) und den Unterschied zwischen Verpflichtungs- und Erfüllungsgeschäft.</div>
+          <div class="book-ref-title">Handout – ByCS Lernplattform</div>
+          <div class="book-ref-text">Das Handout <strong>„WR 10 Recht 2 Kaufhandlung Handout"</strong> findest du auf der ByCS Lernplattform. Es fasst die Inhalte zu Verpflichtungs- und Erfüllungsgeschäft zusammen und dient als Grundlage für diesen Schritt.</div>
         </div>
       </div>
 
@@ -373,7 +383,6 @@ body.version-b .teacher-only{display:block;}
         Das Trennungsprinzip schützt Verkäufer und Käufer. Beispiel: Ein Händler kann eine Ware verkaufen und trotzdem Eigentümer bleiben, bis die vollständige Bezahlung erfolgt ist. Das nennt man <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__449.html" target="_blank">Eigentumsvorbehalt (§ 449 BGB)</a>.
       </div>
 
-      <!-- WAHR/FALSCH -->
       <p class="content-text" style="margin-top:1rem;"><strong>Teste dein Verständnis – Wahr oder Falsch?</strong></p>
       <div class="wf-wrap" id="wf-wrap">
         <div class="wf-item" id="wf1">
@@ -605,10 +614,18 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst jetzt den Unterschied zwischen Verpflichtungsgeschäft (Kaufvertrag, § 433 BGB) und Erfüllungsgeschäft (Übereignung, § 929 BGB). Du weißt, dass Bezahlen allein nicht zum Eigentümer macht – dafür braucht es Übergabe und Einigung. Und du kannst das Trennungsprinzip auf konkrete Alltagsfälle anwenden.
+      </div>
+
       <div class="nav-btns" style="margin-top:1.5rem;">
         <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
         <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
         <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
+      </div>
+      <div style="margin-top:1rem;display:flex;justify-content:flex-end;">
+        <a href="index.html" class="btn-home">🏠 Zurück zur Übersicht</a>
       </div>
     </div>
   </div>
@@ -722,7 +739,6 @@ body.version-b .teacher-only{display:block;}
 
 </div><!-- /main -->
 
-<!-- PIN MODAL -->
 <div class="pin-overlay" id="pin-overlay">
   <div class="pin-box">
     <div class="pin-logo">Recht<span>&</span>Ich</div>
@@ -742,7 +758,7 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN='123456';
+const TEACHER_PIN='135791';
 let pinInput='',cur=1,quizA={},pollD={},wfAnswered=0;
 const TOTAL_STEPS=6;
 function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
@@ -765,12 +781,15 @@ function checkWF(num,isCorrect,btn){
   wfAnswered++;
   if(wfAnswered>=3)document.getElementById('wf-result').style.display='block';
 }
-function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');const yes={q1:'✓ Richtig! Verpflichtungsgeschäft = Pflichten entstehen. Erfüllungsgeschäft = Eigentum und Besitz werden übertragen.',q2:'✓ Richtig! § 929 BGB: Übergabe + Einigung. Bezahlen macht nicht zum Eigentümer!',q3:'✓ Richtig! Kira ist noch keine Eigentümerin – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung.',q4:'✓ Richtig! Eigentumsvorbehalt (§ 449 BGB) – Eigentum geht erst mit Vollzahlung über.'};const no={q1:'✗ Nicht ganz. Verpflichtungsgeschäft = Kaufvertrag (Pflichten). Erfüllungsgeschäft = Übereignung (Eigentum). → B ist korrekt.',q2:'✗ Nicht ganz. § 929 BGB: Eigentum geht über durch Übergabe + Einigung – nicht durch Bezahlung! → C ist korrekt.',q3:'✗ Nicht ganz. Kira hat noch kein Eigentum – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung. → C.',q4:'✗ Nicht ganz. Das nennt man Eigentumsvorbehalt gem. § 449 BGB. → C ist korrekt.'};if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! Verpflichtungsgeschäft = Pflichten entstehen. Erfüllungsgeschäft = Eigentum und Besitz werden übertragen.',q2:'✓ Richtig! § 929 BGB: Übergabe + Einigung. Bezahlen macht nicht zum Eigentümer!',q3:'✓ Richtig! Kira ist noch keine Eigentümerin – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung.',q4:'✓ Richtig! Eigentumsvorbehalt (§ 449 BGB) – Eigentum geht erst mit Vollzahlung über.'};
+const no={q1:'✗ Nicht ganz. Verpflichtungsgeschäft = Kaufvertrag (Pflichten). Erfüllungsgeschäft = Übereignung (Eigentum). → B ist korrekt.',q2:'✗ Nicht ganz. § 929 BGB: Eigentum geht über durch Übergabe + Einigung – nicht durch Bezahlung! → C ist korrekt.',q3:'✗ Nicht ganz. Kira hat noch kein Eigentum – das Fahrrad wurde noch nicht übergeben. § 929 BGB braucht Übergabe + Einigung. → C.',q4:'✗ Nicht ganz. Das nennt man Eigentumsvorbehalt gem. § 449 BGB. → C ist korrekt.'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
 function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
 function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
 document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
 </script>
-<style>@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}</style>
 </body>
 </html>
