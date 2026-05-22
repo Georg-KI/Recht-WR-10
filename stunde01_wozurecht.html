@@ -714,7 +714,7 @@ body.version-b .teacher-only{display:block;}
     <div class="pin-icon">🔐</div>
     <div class="pin-title">Lehrkraft-Bereich</div>
     <div class="pin-sub">Bitte gib deinen 6-stelligen PIN ein.</div>
-    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div></div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div><div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div></div>
     <div class="pin-error" id="pin-error"></div>
     <div class="pin-pad">
       <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
@@ -727,15 +727,15 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const PIN_HASH='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3';
+const PIN_HASH='385319fce53854f96b636f28301b3d31be241dcaf6f1775da31a5e768b3a848e';
 let pinInput='',cur=1,quizA={},pollD={};
 const TOTAL_STEPS=6;
 function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
 function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
-function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(()=>checkPin(),120);}
+function pinKey(d){if(pinInput.length>=8)return;pinInput+=d;updatePinDots();if(pinInput.length===8)setTimeout(()=>checkPin(),120);}
 function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
-function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
-async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h==='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3'){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function updatePinDots(){for(let i=0;i<8;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h==='385319fce53854f96b636f28301b3d31be241dcaf6f1775da31a5e768b3a848e'){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
 function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
 function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
 function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
