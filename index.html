@@ -321,11 +321,25 @@ const MODULES = [
   }
 ];
 
-const CODES = {
-  "FALE42":1,"FUDU70":2,"BAJE99":3,"BUJU73":4,"TULA36":5,
-  "NIGE61":6,"DOFI69":7,"LATU26":8,"DUMU69":9,"JACE51":10,
-  "KARI85":11,"HIPE51":12,"HUKE86":13,"LUKI13":14,"CIRI23":15,
-  "ZIJO77":16,"GIGE98":17,"LUSU75":18
+const CODE_HASHES = {
+  "817366f74b985222c4400f15d18386c84ff7b841f2a06d9ae0d0be13d3e78a2f":1,
+  "5a207804ddaa2d18ca25a829913b2f77e16ac820ef847c1f7dc735a40f9fcc15":2,
+  "9e696db6b9122bc30f8c554dd0c507157d4128fbfff02a879f21a6caa7479e82":3,
+  "fdd76f87e9d768a9488f9a55697f8e6fc2fa27921254dd0ee28b3c4d366c1cce":4,
+  "410a7e0e4bee0944826d18f103112e885fc65370732b609d659ea418370bda4f":5,
+  "6cd53fc48a5b7603783c602513614213b43ce6cb4ad4c2205b228680effbe3f9":6,
+  "d3c226785690b1644b3a311ac00f0818667a782a942d57484c04308db1817624":7,
+  "ce2acd02f5948526f919d8454cf0b2232dce4a31b79b7fd38b244292d559ed09":8,
+  "a9a4fe191c4d230ee8ad6ca5985192a778366e2fc99dfc796691f33582f96620":9,
+  "fdca57d78128bad2813d0b34b92e413a9b3ef071bef604ec6f4e14f6c584dd04":10,
+  "6a59775e5e3221c61841c31444c6faa8a3d6df6aebbda01705909fb80eac2768":11,
+  "77e1a2dbdc73534f37fc2f45bfd05b13b4c3483aa97c561a68ed6f8e3e91174e":12,
+  "f8b5f0ef18a435faece2ed94ec22a2380a2fd1d406823cb4d7a7470420d24d40":13,
+  "1553cc8ddf413232cb8ad71e0544f686878dcdb5be8250740cda76b853befd34":14,
+  "61bedb8d33fb7893c771727dd6e502530309a0a13f9f1e7f0f36e695b332238e":15,
+  "4bf3fad7c7bf5993b0e7264580f611005b3b90708b7cd353a9aba33b605acb4d":16,
+  "411e93f2ef2a743f59c91d2c25bd6708e3fdfffab19a0031cfc7a65039cc0fb2":17,
+  "fedc9474f2442bb26bc7cc4363a19bb6056108fd5ac0226db2374d31cf5b3168":18
 };
 
 // ═══════════════════════════════════════════════════════
@@ -457,7 +471,7 @@ function openModal(){
 function closeModal(){
   document.getElementById('modal-overlay').classList.remove('open');
 }
-function submitCode(){
+async function submitCode(){
   const val=document.getElementById('code-input').value.trim().toUpperCase();
   const input=document.getElementById('code-input');
   const errEl=document.getElementById('code-error');
@@ -465,8 +479,12 @@ function submitCode(){
 
   if(val.length<6){errEl.textContent='Bitte alle 6 Zeichen eingeben.';input.classList.add('error');setTimeout(()=>input.classList.remove('error'),400);return;}
 
-  if(CODES[val]){
-    const nr=CODES[val];
+  const enc=new TextEncoder();
+  const buf=await crypto.subtle.digest('SHA-256',enc.encode(val));
+  const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+
+  if(CODE_HASHES[h]){
+    const nr=CODE_HASHES[h];
     const alreadyDone=isUnlocked(nr);
     unlock(nr);
     if(alreadyDone){
