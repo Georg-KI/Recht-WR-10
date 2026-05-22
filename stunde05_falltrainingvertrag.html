@@ -816,16 +816,16 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN='135791';
+const PIN_HASH='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3';
 let pinInput='',cur=1,quizA={};
 const TOTAL_STEPS=6;
 
 function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
 function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
-function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(checkPin,120);}
+function pinKey(d){if(pinInput.length>=6)return;pinInput+=d;updatePinDots();if(pinInput.length===6)setTimeout(()=>checkPin(),120);}
 function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
 function updatePinDots(){for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
-function checkPin(){if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h==='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3'){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
 
 function setVersion(v){
   const b=document.getElementById('body-root');
