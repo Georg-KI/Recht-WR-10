@@ -856,7 +856,7 @@ body.version-b .teacher-only{display:block;}
 </div>
 
 <script>
-const TEACHER_PIN = '123456';
+const PIN_HASH='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3';
 let pinInput='', cur=1, quizA={}, pollD={};
 const TOTAL_STEPS = 6;
 
@@ -873,7 +873,7 @@ function closePinModal(){
 function pinKey(d){
   if(pinInput.length>=6)return;
   pinInput+=d;updatePinDots();
-  if(pinInput.length===6)setTimeout(checkPin,120);
+  if(pinInput.length===6)setTimeout(()=>checkPin(),120);
 }
 function pinDel(){
   pinInput=pinInput.slice(0,-1);updatePinDots();
@@ -882,16 +882,7 @@ function pinDel(){
 function updatePinDots(){
   for(let i=0;i<6;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);
 }
-function checkPin(){
-  if(pinInput===TEACHER_PIN){closePinModal();setVersion('b');}
-  else{
-    document.getElementById('pin-error').textContent='Falscher PIN – bitte nochmal versuchen.';
-    pinInput='';updatePinDots();
-    const box=document.querySelector('.pin-box');
-    box.style.animation='none';
-    setTimeout(()=>{box.style.animation='shake 0.35s ease';},10);
-  }
-}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h==='e4470d5ce8bca7b1bac9d32a6680e6a45cf4708db848a96f874e1a1b0f9a97a3'){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
 
 function setVersion(v){
   const b=document.getElementById('body-root');
