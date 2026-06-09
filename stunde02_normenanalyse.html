@@ -36,6 +36,8 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
 .topbar-logo{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:white;text-decoration:none;}
 .topbar-logo span{color:var(--blue-400);}
+.topbar-logo{display:flex;align-items:center;gap:6px;}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
 .topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
 .topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
@@ -171,19 +173,7 @@ a.para-link:hover{color:var(--blue-400);}
 .normen-item:last-child{border-bottom:none;}
 
 /* KI BOX */
-.ki-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.ki-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
-.ki-text{font-size:14px;color:#14532d;line-height:1.6;}
-.ki-text strong{font-weight:700;display:block;margin-bottom:3px;}
-.ki-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#0d9488;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
-
 /* MEBIS BOX */
-.mebis-box{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border:1.5px solid #a78bfa;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
-.mebis-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
-.mebis-text{font-size:14px;color:#3b0764;line-height:1.6;}
-.mebis-text strong{font-weight:700;display:block;margin-bottom:3px;}
-.mebis-link{display:inline-flex;align-items:center;gap:5px;margin-top:8px;padding:7px 14px;background:#7c3aed;color:white;text-decoration:none;border-radius:var(--radius-sm);font-size:13px;font-weight:700;}
-
 /* QUIZ */
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
@@ -209,14 +199,6 @@ a.para-link:hover{color:var(--blue-400);}
 .btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
 
 /* BADGE */
-.badge-reveal{border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:1.5rem;display:none;background:linear-gradient(135deg,#1e293b,#334155);}
-.badge-reveal.visible{display:block;}
-.badge-canvas-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
-.badge-name{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:white;margin-bottom:0.4rem;}
-.badge-sub{font-size:14px;color:#94a3b8;margin-bottom:1.25rem;}
-.badge-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;}
-.badge-dl:hover{background:var(--blue-800);}
-
 /* STEPS */
 .step{display:none;}
 .step.active{display:block;}
@@ -278,7 +260,10 @@ body.version-b .teacher-only{display:block;}
 <body id="body-root">
 
 <div class="topbar">
-  <a href="#" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <a href="index.html" class="topbar-logo">
+    Recht<span>&</span>Ich
+    <span class="topbar-logo-back">← Übersicht</span>
+  </a>
   <div class="topbar-sep"></div>
   <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 2</span>
   <div class="topbar-right">
@@ -297,9 +282,9 @@ body.version-b .teacher-only{display:block;}
     <div class="prog-line" id="line-2"></div>
     <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>StGB-Normen</span></div>
     <div class="prog-line" id="line-3"></div>
-    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>KI-Aufgabe</span></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>§ 223 StGB</span></div>
     <div class="prog-line" id="line-4"></div>
-    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz &amp; Badge</span></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz</span></div>
     <div class="prog-line" id="line-5"></div>
     <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
   </div>
@@ -316,6 +301,10 @@ body.version-b .teacher-only{display:block;}
     <div class="hero-meta-item">📘 startup.WR Bayern 10, S. 56–57</div>
     <div class="hero-meta-item">🎯 5 Schritte + Lehrkraft-Abfrage</div>
   </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler analysieren Rechtsnormen, um Tatbestandsmerkmale und Rechtsfolgen strukturiert herauszuarbeiten, und wenden das Wenn-Dann-Schema sowohl auf zivilrechtliche als auch auf strafrechtliche Normen an.</div>
+  </div>
 </div>
 
 <div class="teacher-note teacher-only">
@@ -324,8 +313,8 @@ body.version-b .teacher-only{display:block;}
   <ul>
     <li>Schritt 1: Kurze Aktivierung (ca. 3 Min.) – Schüler rufen sich das Schema aus Stunde 1 in Erinnerung.</li>
     <li>Schritte 2–3: Normenarbeit EA – typischer Fehler: TB zu allgemein formuliert. Lasse nach Schritt 2 kurz vergleichen.</li>
-    <li>Schritt 4: KI-Vergleich Fobizz – wichtig für Medienkompetenz, nicht überspringen.</li>
-    <li>Schritt 5: Quiz + Badge → nach Abschluss mebis-Badge freischalten.</li>
+    <li>Schritt 4: Normenanalyse § 223 Abs. 1 StGB (Aufg. 5, S. 57) – Wechsel vom Zivil- ins Strafrecht zeigt die Allgemeingültigkeit des Wenn-Dann-Schemas.</li>
+    <li>Schritt 5: Quiz mit Retry – keine automatische Badge-Vergabe, kein überspringen.</li>
     <li>Optional: Kreuzworträtsel S. 54 (AB_54) steht als Zusatzaufgabe für schnelle Schüler zur Verfügung.</li>
   </ul>
 </div>
@@ -533,69 +522,74 @@ body.version-b .teacher-only{display:block;}
 
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(3)">Weiter: KI-Aufgabe →</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: § 223 StGB analysieren →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 4: KI-AUFGABE -->
+<!-- STEP 4: NORMENANALYSE § 223 ABS 1 STGB -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon green">🤖</div>
+      <div class="section-icon red">⚖️</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 4 · KI &amp; Reflexion</div>
-        <div class="section-title">KI als Rechtserklärer – kritisch vergleichen</div>
-        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit mit Fobizz</div>
+        <div class="section-tag">Schritt 4 · Normenanalyse Strafrecht</div>
+        <div class="section-title">§ 223 Abs. 1 StGB – Körperverletzung analysieren</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
       </div>
     </div>
     <div class="section-body">
-      <div class="chip-row"><span class="chip c4">Kreativität</span><span class="chip k">Kompetenzorientiert</span><span class="chip c2">Individualisiert</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Kernziel dieser Aufgabe: Schüler merken, wo KI ungenau oder zu vereinfacht erklärt. Wichtig für Medienkompetenz. Lass 1–2 Schüler ihre Vergleiche am Ende kurz vorstellen.</p></div></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Aufgabe 5 (S. 57) als Wechsel vom Zivil- ins Strafrecht. Schüler erleben: Das Wenn-Dann-Schema funktioniert in beiden Rechtsgebieten gleich. Achtung bei der Tathandlung: zwei Alternativen (körperliche Misshandlung ODER Gesundheitsschädigung) – reicht jeweils eine.</p></div></div>
 
-      <p class="content-text">Du hast jetzt drei Normen analysiert. Teste jetzt, wie gut eine KI das gleiche leisten kann – und wo du kritisch hinschauen musst.</p>
+      <p class="content-text">Du hast jetzt zwei zivilrechtliche Normen analysiert. Zum Abschluss schauen wir, ob das Wenn-Dann-Schema auch im <strong>Strafrecht</strong> funktioniert.</p>
 
-      <div class="ki-box">
-        <div class="ki-icon">🤖</div>
-        <div class="ki-text">
-          <strong>KI-Aufgabe: § 985 BGB erklären lassen</strong>
-          Öffne Fobizz und stelle der KI folgende Frage:<br>
-          <em>„Erkläre mir § 985 BGB in einfachen Worten. Was sind die Tatbestandsmerkmale und die Rechtsfolge? Gib mir ein Alltagsbeispiel."</em><br><br>
-          Vergleiche die Antwort dann mit deiner eigenen Normenanalyse aus Schritt 2.
-          <br><a href="https://plattform.fobizz.com" target="_blank" class="ki-link">Zu Fobizz →</a>
-        </div>
+      <div class="para-quote">
+        <div class="para-label">Die Rechtsnorm – Wortlaut</div>
+        <p>§ 223 Abs. 1 StGB (Körperverletzung): „Wer eine andere Person körperlich misshändelt oder an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft.“</p>
+        <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/stgb/__223.html" target="_blank">§ 223 StGB ↗</a></div>
       </div>
 
       <div class="task">
-        <div class="task-header"><div class="task-num">✍</div><div class="task-title">Reflexionsaufgabe – nach der KI-Antwort</div></div>
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 5 (S. 57) – Normenanalyse § 223 Abs. 1 StGB</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
         <div class="task-body">
-          <p>Beantworte nach dem Fobizz-Gespräch folgende Fragen:</p>
-          <textarea class="answer-area" style="min-height:100px;" placeholder="1. Was hat die KI gut erklärt? ...&#10;&#10;2. Was fehlt in der KI-Antwort oder ist ungenau? ...&#10;&#10;3. Worin unterscheidet sich die KI-Erklärung von deiner Normentabelle?"></textarea>
-          <button class="solution-btn" onclick="revealSolution('sol-ki')">📋 Reflexionshilfe anzeigen</button>
-          <div class="solution-reveal" id="sol-ki">
-            <strong>Typische Stärken der KI:</strong><br>
-            • Alltagsbeispiele sind oft anschaulich und leicht verständlich<br>
-            • Einfache Sprache, gut als erster Einstieg<br><br>
-            <strong>Typische Schwächen der KI:</strong><br>
-            • Tatbestandsmerkmale oft nicht klar nummeriert (TB 1, TB 2 …)<br>
-            • Rechtsfolge und Tatbestand nicht immer sauber getrennt<br>
-            • Kann veraltete Gesetzestexte zitieren (immer mit gesetze-im-internet.de prüfen!)<br>
-            • Keine Haftung für Fehler – KI ist kein Rechtsanwalt<br><br>
-            <em>Fazit: KI ist ein hilfreicher Einstieg – aber du musst die Normenanalyse selbst können und KI-Ausgaben kritisch prüfen.</em>
+          <p>Führe eine Normenanalyse durch: Arbeite die <strong>Tatbestandsmerkmale</strong> und die <strong>Rechtsfolge</strong> heraus. Achte besonders darauf, dass die Tathandlung in <em>zwei Alternativen</em> geregelt ist.</p>
+          <textarea class="answer-area" style="min-height:120px;" placeholder="Tatbestandsmerkmale (Wenn ...):&#10;1. ...&#10;2. ...&#10;3. ...&#10;&#10;Rechtsfolge (Dann ...): ..."></textarea>
+          <button class="solution-btn" onclick="revealSolution('sol-223')">✓ Musterlösung anzeigen</button>
+          <div class="solution-reveal" id="sol-223">
+            <strong>Tatbestandsmerkmale (Wenn …):</strong><br>
+            1. Täter: <em>wer</em> (= jede natürliche Person)<br>
+            2. Opfer: <em>eine andere Person</em><br>
+            3. Tathandlung – zwei Alternativen, von denen eine reicht:<br>
+             a) körperliche Misshandlung (z. B. Schlagen, Treten)<br>
+             b) Schädigung an der Gesundheit (z. B. Krankheit hervorrufen)<br><br>
+            <strong>Rechtsfolge (Dann …):</strong><br>
+            Freiheitsstrafe bis zu fünf Jahren <strong>oder</strong> Geldstrafe.<br><br>
+            <em>Beobachtung:</em> Das Wenn-Dann-Schema funktioniert genau wie im BGB – nur dass die Rechtsfolge im Strafrecht eine <strong>Strafe</strong> ist, während sie im BGB meist einen <strong>Anspruch</strong> begründet.
           </div>
         </div>
       </div>
 
+      <div class="info-box teal">
+        <strong>🔑 Erkenntnis:</strong>
+        Das Wenn-Dann-Schema funktioniert in jedem Rechtsgebiet – ob BGB, StGB oder Verfassungsrecht. Du kannst es ab jetzt auf jede beliebige Rechtsnorm anwenden.
+      </div>
+
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz &amp; Badge →</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter zum Quiz →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- STEP 5: QUIZ + BADGE -->
+<!-- STEP 5: QUIZ -->
 <div class="step" id="step-5">
   <div class="section">
     <div class="section-header">
@@ -608,7 +602,7 @@ body.version-b .teacher-only{display:block;}
     </div>
     <div class="section-body">
       <div class="chip-row"><span class="chip k">Kompetenzorientiert</span><span class="chip c1">Veranschaulichung</span></div>
-      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Nach dem Quiz: Frage 3 und 4 im Plenum besprechen – Schüler sollen begründen, nicht nur raten. Danach mebis-Badge freischalten.</p></div></div>
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Nach dem Quiz: Frage 3 und 4 im Plenum besprechen – Schüler sollen begründen, nicht nur raten. Danach ByCS-Badge freischalten.</p></div></div>
 
       <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen aus Modul 1 (Stunden 1 &amp; 2). Bei 3 oder mehr richtigen Antworten schaltest du das Abzeichen <strong>„Rechtseinsteiger"</strong> frei!</p>
 
@@ -670,28 +664,17 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="badge-reveal" id="badge-1">
-        <div class="badge-canvas-wrap"><canvas id="badge-canvas" width="280" height="280"></canvas></div>
-        <div class="badge-name">🔰 Rechtseinsteiger</div>
-        <div class="badge-sub">Modul 1 abgeschlossen · WR 10 · Lernbereich 2</div>
-        <a id="badge-dl" class="badge-dl" download="badge_rechtseinsteiger.png">⬇ Badge als PNG herunterladen</a>
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du hast die Normenanalyse jetzt sicher im Griff: Tatbestand und Rechtsfolge sauber trennen, das Wenn-Dann-Schema auf BGB- und StGB-Normen anwenden. Damit hast du Modul 1 „Recht & Normen“ abgeschlossen.
       </div>
 
-      <div class="teacher-only" style="margin-top:1rem;">
-        <div class="mebis-box">
-          <div class="mebis-icon">🎓</div>
-          <div class="mebis-text">
-            <strong>mebis-Badge freischalten</strong>
-            Nach dem Quiz: Schalte den digitalen Badge „Rechtseinsteiger" in mebis für die Klasse frei. Schüler die das Quiz bestanden haben erhalten dort die offizielle Bestätigung für Modul 1.
-            <br><a href="https://www.mebis.bayerncloud.de" target="_blank" class="mebis-link">Zu mebis →</a>
-          </div>
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
         </div>
-      </div>
-
-      <div class="nav-btns" style="margin-top:1.5rem;">
-        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
-        <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-        <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
       </div>
     </div>
   </div>
@@ -957,16 +940,7 @@ function checkQuiz(qId,btn,ok){
   }
 }
 
-function finishQuiz(){
-  const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;
-  if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}
-  else{
-    document.getElementById('quiz-score').style.display='block';
-    document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';
-    document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch und versuche es erneut.';
-    document.getElementById('quiz-retry-wrap').style.display='block';
-  }
-}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
 
 function retryQuiz(){
   const qs=['q1','q2','q3','q4'];
@@ -982,31 +956,6 @@ function retryQuiz(){
   window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
 }
 
-function drawBadge(){
-  const cv=document.getElementById('badge-canvas'),ctx=cv.getContext('2d');
-  const w=280,h=280,cx=140,cy=140,r=128;
-  const g=ctx.createRadialGradient(cx,cy-30,20,cx,cy,r);
-  g.addColorStop(0,'#1976D2');g.addColorStop(1,'#0D47A1');
-  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='#fbbf24';ctx.lineWidth=6;ctx.stroke();
-  ctx.beginPath();ctx.arc(cx,cy,r-12,0,Math.PI*2);ctx.strokeStyle='rgba(251,191,36,0.2)';ctx.lineWidth=2;ctx.stroke();
-  ctx.save();
-  ctx.beginPath();
-  ctx.moveTo(cx,cy-60);ctx.bezierCurveTo(cx+52,cy-60,cx+62,cy-18,cx+62,cy+14);
-  ctx.bezierCurveTo(cx+62,cy+48,cx+24,cy+72,cx,cy+80);
-  ctx.bezierCurveTo(cx-24,cy+72,cx-62,cy+48,cx-62,cy+14);
-  ctx.bezierCurveTo(cx-62,cy-18,cx-52,cy-60,cx,cy-60);
-  ctx.closePath();ctx.fillStyle='rgba(255,255,255,0.1)';ctx.fill();ctx.strokeStyle='#fbbf24';ctx.lineWidth=3;ctx.stroke();
-  ctx.restore();
-  ctx.font='bold 56px Georgia,serif';ctx.fillStyle='#fbbf24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('§',cx,cy-4);
-  ctx.font='bold 17px sans-serif';ctx.fillStyle='#ffffff';ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  ctx.fillText('RECHTS-',cx,cy+58);ctx.fillText('EINSTEIGER',cx,cy+79);
-  ctx.font='14px sans-serif';ctx.fillStyle='#fbbf24';ctx.textBaseline='middle';
-  ctx.fillText('★',cx-72,cy+26);ctx.fillText('★',cx+72,cy+26);
-  ctx.font='10px sans-serif';ctx.fillStyle='rgba(255,255,255,0.4)';ctx.textBaseline='alphabetic';
-  ctx.fillText('WR 10 · Lernbereich 2 · Modul 1',cx,cy+104);
-  document.getElementById('badge-dl').href=cv.toDataURL('image/png');
-}
 
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
 document.addEventListener('keydown',function(e){
