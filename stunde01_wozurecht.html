@@ -47,6 +47,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text)
 .hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
 .hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
 .hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
 .teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
 .teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
 .teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
@@ -134,13 +137,6 @@ a.para-link:hover{color:var(--blue-400);}
 .func-card-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--text);margin-bottom:4px;}
 .func-card-text{font-size:12px;color:var(--text-secondary);line-height:1.4;}
 /* BADGE */
-.badge-reveal{border-radius:var(--radius-lg);padding:2rem;text-align:center;margin-top:1.5rem;display:none;background:linear-gradient(135deg,#1e293b,#334155);}
-.badge-reveal.visible{display:block;}
-.badge-canvas-wrap{display:flex;justify-content:center;margin-bottom:1rem;}
-.badge-name{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;color:white;margin-bottom:0.4rem;}
-.badge-sub{font-size:14px;color:#94a3b8;margin-bottom:1.25rem;}
-.badge-dl{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:10px 20px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;}
-.badge-dl:hover{background:var(--blue-800);}
 /* QUIZ */
 .quiz-wrap{margin:0.5rem 0;}
 .quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
@@ -261,6 +257,10 @@ body.version-b .teacher-only{display:block;}
     <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
     <div>📘 startup.WR Bayern 10, S. 52–55</div>
     <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler analysieren rechtliche Rahmenbedingungen im Hinblick auf zentrale Funktionen des Rechts und erkennen, warum eine Rechtsordnung ein geregeltes Zusammenleben in der Gesellschaft überhaupt ermöglicht.</div>
   </div>
 </div>
 
@@ -516,7 +516,7 @@ body.version-b .teacher-only{display:block;}
     </div>
     <div class="section-body">
       <div class="teacher-only">
-        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Fragen 2 und 4 im Plenum besprechen. Bei ≥ 3/4 richtigen Antworten erscheint der Badge „Rechtseinsteiger" – in mebis nach vollständiger Abgabe freischalten.</p></div>
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Sicherung</div><p>Fragen 2 und 4 im Plenum besprechen. Schüler sollen ihre Antworten begründen können.</p></div>
       </div>
       <p class="content-text" style="margin-bottom:1.25rem;">Teste dein Wissen. Bei <strong>3 oder mehr</strong> richtigen Antworten verdienst du den Badge <strong>„🔰 Rechtseinsteiger"</strong>!</p>
 
@@ -574,18 +574,9 @@ body.version-b .teacher-only{display:block;}
         </div>
       </div>
 
-      <div class="badge-reveal" id="badge-1">
-        <div class="badge-canvas-wrap"><canvas id="badge-canvas" width="280" height="280"></canvas></div>
-        <div class="badge-name">🔰 Rechtseinsteiger</div>
-        <div class="badge-sub">Modul 1 gestartet · WR 10 · Lernbereich 2</div>
-        <a id="badge-dl" class="badge-dl" download="badge_rechtseinsteiger.png">⬇ Badge als PNG herunterladen</a>
-      </div>
-
-      <div class="teacher-only" style="margin-top:1rem;">
-        <div class="info-box orange">
-          <strong>🎓 mebis-Badge freischalten</strong>
-          Nach dem Quiz und vollständiger Bearbeitung: Badge „🔰 Rechtseinsteiger" in mebis für die Klasse freischalten. Der Badge gilt für Modul 1 (Stunden 1 + 2).
-        </div>
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst nun die vier Hauptfunktionen des Rechts: Ordnungs-, Schutz-, Friedens- und Gerechtigkeitsfunktion. Du verstehst, warum eine Gesellschaft ohne Recht nicht funktionieren würde, und kannst Alltagskonflikte den passenden Funktionen zuordnen.
       </div>
 
       <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
@@ -593,7 +584,6 @@ body.version-b .teacher-only{display:block;}
         <div style="display:flex;gap:10px;">
           <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
           <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
-          <button class="btn-primary teacher-only" style="background:var(--orange);border-color:var(--orange);" onclick="goToStep(6)">🎓 Zur Abfrage →</button>
         </div>
       </div>
     </div>
@@ -747,32 +737,14 @@ const yes={q1:'✓ Richtig! Recht regelt das Zusammenleben und gleicht unterschi
 const no={q1:'✗ Nicht ganz. Recht dient dem Zusammenleben aller – nicht nur der Bestrafung. → B',q2:'✗ Nicht ganz. Schutz für Schwächere = Schutzfunktion. → C',q3:'✗ Nicht ganz. Tatbestand = Voraussetzungen (das Wenn). Die Rechtsfolge ist das Dann. → B',q4:'✗ Nicht ganz. Ordnungs- + Friedensfunktion – verbindliche Lösung ohne Gewalt. → C'};
 if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
 const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
-function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n>=3){document.getElementById('badge-1').classList.add('visible');drawBadge();}else{document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
 function retryQuiz(){
   const qs=['q1','q2','q3','q4'];
   qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});
   quizA={};
   document.getElementById('quiz-score').style.display='none';
   document.getElementById('quiz-retry-wrap').style.display='none';
-  document.getElementById('badge-1').classList.remove('visible');
   window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});
-}
-function drawBadge(){
-  const cv=document.getElementById('badge-canvas'),ctx=cv.getContext('2d');
-  const cx=140,cy=140,r=128;
-  const g=ctx.createRadialGradient(cx,cy-30,20,cx,cy,r);
-  g.addColorStop(0,'#1976D2');g.addColorStop(1,'#0D47A1');
-  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
-  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle='#fbbf24';ctx.lineWidth=6;ctx.stroke();
-  ctx.beginPath();ctx.arc(cx,cy,r-12,0,Math.PI*2);ctx.strokeStyle='rgba(251,191,36,0.2)';ctx.lineWidth=2;ctx.stroke();
-  ctx.font='bold 56px Georgia,serif';ctx.fillStyle='#fbbf24';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('§',cx,cy-4);
-  ctx.font='bold 17px sans-serif';ctx.fillStyle='#ffffff';ctx.textAlign='center';ctx.textBaseline='alphabetic';
-  ctx.fillText('RECHTS-',cx,cy+58);ctx.fillText('EINSTEIGER',cx,cy+79);
-  ctx.font='14px sans-serif';ctx.fillStyle='#fbbf24';ctx.textBaseline='middle';
-  ctx.fillText('★',cx-72,cy+26);ctx.fillText('★',cx+72,cy+26);
-  ctx.font='10px sans-serif';ctx.fillStyle='rgba(255,255,255,0.4)';ctx.textBaseline='alphabetic';
-  ctx.fillText('WR 10 · Lernbereich 2 · Modul 1',cx,cy+104);
-  document.getElementById('badge-dl').href=cv.toDataURL('image/png');
 }
 document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
 document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
