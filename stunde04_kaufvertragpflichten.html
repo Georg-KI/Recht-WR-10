@@ -171,22 +171,7 @@ a.para-link:hover{color:var(--blue-400);}
 .ico-purple{border:1.5px solid #7B1FA2;}
 
 /* ── KI BOX (neu) ── */
-.ki-box{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1.5px solid #86efac;border-radius:var(--radius-md);padding:1.25rem;margin:1rem 0;}
-.ki-box-header{display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;}
-.ki-box-icon{font-size:22px;flex-shrink:0;}
-.ki-box-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:800;color:#14532d;}
-.ki-box-subtitle{font-size:11px;color:#16a34a;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;}
-.ki-prompt-wrap{background:white;border:1.5px solid #86efac;border-radius:var(--radius-sm);padding:1rem 1.1rem;margin:0.75rem 0;position:relative;}
-.ki-prompt-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:#16a34a;margin-bottom:0.5rem;}
-.ki-prompt-text{font-size:13px;color:#1a1a1a;line-height:1.7;white-space:pre-wrap;font-family:'Nunito',sans-serif;}
-.ki-copy-btn{display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;padding:8px 16px;background:var(--teal);color:white;border:none;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.15s;}
-.ki-copy-btn:hover{background:#0f766e;transform:translateY(-1px);}
-.ki-copy-btn.copied{background:var(--green);}
-.ki-fobizz-btn{display:inline-flex;align-items:center;gap:6px;margin-top:0.75rem;margin-left:8px;padding:8px 16px;background:white;color:var(--teal);border:1.5px solid var(--teal);border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.15s;}
-.ki-fobizz-btn:hover{background:var(--teal-light);}
-.ki-steps{margin-top:0.75rem;display:flex;flex-direction:column;gap:6px;}
-.ki-step{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#14532d;line-height:1.5;}
-.ki-step-num{width:20px;height:20px;border-radius:50%;background:#16a34a;color:white;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+
 
 /* ── ANSWER / SOLUTION ── */
 .answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:80px;margin-top:8px;background:white;transition:border-color 0.15s;}
@@ -307,7 +292,7 @@ body.version-b .teacher-only{display:block;}
     <div class="prog-line" id="line-2"></div>
     <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Buchaufgaben</span></div>
     <div class="prog-line" id="line-3"></div>
-    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>KI-Aufgabe</span></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Transfer</span></div>
     <div class="prog-line" id="line-4"></div>
     <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz</span></div>
     <div class="prog-line" id="line-5"></div>
@@ -341,7 +326,7 @@ body.version-b .teacher-only{display:block;}
     <li>Schritt 1: Wohnmobil-Fall (M1, S. 60) – Perspektivenwechsel! Schüler sollen BEIDE Seiten verstehen.</li>
     <li>Schritt 2: Normenanalyse § 433 – unbedingt BEIDE Absätze behandeln. Häufiger Fehler: Schüler vergessen die Abnahmepflicht des Käufers.</li>
     <li>Schritt 3: Buchaufgaben S. 61, Aufg. 1–3. Aufg. 4 (§ 448 Versandkosten) ist fakultativ.</li>
-    <li>Schritt 4: KI-Aufgabe – Schüler sammeln mit der KI Argumente für den Ernstfall. Reflexion: Welche Argumente hat die KI genannt? Was fehlt?</li>
+    <li>Schritt 4: Transferaufgabe – Schüler wenden § 433 BGB auf einen neuen Alltagsfall (Handykauf online) an. Partnerarbeit mit Musterlösung. Ziel: eigenständige Subsumtion ohne Vorlage.</li>
     <li>⚠️ Am Ende explizit betonen: Der Kaufvertrag ist nur das Verpflichtungsgeschäft. Eigentum und Besitz gehen noch NICHT über! (Vorbereitung Stunde 6)</li>
   </ul>
 </div>
@@ -644,105 +629,121 @@ body.version-b .teacher-only{display:block;}
 
       <div class="nav-btns">
         <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
-        <button class="btn-primary" onclick="nextStep(3)">Weiter: KI-Aufgabe →</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Transfer →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ STEP 4: KI-AUFGABE ══════════════ -->
+<!-- ══════════════ STEP 4: TRANSFER ══════════════ -->
 <div class="step" id="step-4">
   <div class="section">
     <div class="section-header">
-      <div class="section-icon green">🤖</div>
+      <div class="section-icon teal">⚖️</div>
       <div class="section-meta">
-        <div class="section-tag">Schritt 4 · KI &amp; Transfer</div>
-        <div class="section-title">Argumente sammeln für den Ernstfall – mit KI</div>
-        <div class="section-time">⏱ ca. 6 Minuten · Fobizz</div>
+        <div class="section-tag">Schritt 4 · Transfer</div>
+        <div class="section-title">§ 433 BGB im Alltag – der Handykauf</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Partnerarbeit</div>
       </div>
     </div>
     <div class="section-body">
       <div class="chip-row teacher-only">
-        <span class="chip c4">Kreativität</span>
         <span class="chip c2">Lebensweltbezug</span>
+        <span class="chip c3">Methodenvielfalt</span>
         <span class="chip k">Kompetenzorientiert</span>
       </div>
       <div class="teacher-only">
         <div class="teacher-note" style="display:block;margin-bottom:1rem;">
           <div class="teacher-note-header">🎓 Hinweis</div>
-          <p>Ziel dieser Aufgabe: Schüler überführen ihr Wissen aus § 433 in eine reale Handlungssituation. Die KI ist hier Werkzeug zur Argumentationssammlung – keine Orakel-Funktion. Kernfrage der Reflexion: Welche Argumente hat die KI geliefert, welche kommen aus dem eigenen Wissen?</p>
+          <p>Ziel: Schüler übertragen § 433 BGB auf einen neuen, lebensweltnahen Fall – ohne Vorlage. Beide Aufgaben haben unterschiedliche Schwerpunkte: Aufgabe 1 prüft die Pflichten beider Seiten, Aufgabe 2 einen Sonderfall (Ware nicht geliefert). Im Plenum: Lösungen kurz vergleichen und die Abnahmepflicht des Käufers (oft vergessen!) nochmals hervorheben.</p>
         </div>
       </div>
 
       <div class="info-box teal">
-        <strong>🎯 Worum geht es?</strong>
-        Stell dir vor: Du hast jemanden ein gebrauchtes Fahrrad für 80 € verkauft. Die Person hat es bereits mitgenommen – weigert sich aber zu zahlen und sagt: <em>„War doch nur ein Gespräch, kein echter Vertrag."</em><br><br>
-        Mit dem folgenden KI-Prompt sammelst du gemeinsam mit der KI alle rechtlichen Argumente, die du in diesem Fall brauchst.
+        <strong>📱 Der Fall: „Das Handy kommt nicht an"</strong><br><br>
+        Lena (16) bestellt über einen Online-Shop ein gebrauchtes Smartphone für 149 €. Der Verkäufer bestätigt die Bestellung per E-Mail. Drei Tage später ist das Paket noch nicht angekommen – und Lena fragt sich, wer eigentlich was schuldet.
       </div>
 
-      <div class="ki-box">
-        <div class="ki-box-header">
-          <div class="ki-box-icon">🤖</div>
-          <div>
-            <div class="ki-box-title">KI-Aufgabe – Prompt kopieren &amp; bei Fobizz einfügen</div>
-            <div class="ki-box-subtitle">Fobizz · KI-Assistent</div>
-          </div>
-        </div>
-
-        <div class="ki-steps">
-          <div class="ki-step"><div class="ki-step-num">1</div><span>Kopiere den Prompt unten mit dem Button</span></div>
-          <div class="ki-step"><div class="ki-step-num">2</div><span>Öffne Fobizz und füge den Prompt in den Chat ein</span></div>
-          <div class="ki-step"><div class="ki-step-num">3</div><span>Lies die Argumente durch und notiere sie im Reflexionsfeld</span></div>
-        </div>
-
-        <div class="ki-prompt-wrap">
-          <div class="ki-prompt-label">📋 Prompt – zum Kopieren</div>
-          <div class="ki-prompt-text" id="ki-prompt-text">Ich brauche deine Hilfe als Lern-Assistent für Wirtschaft und Recht. 
-
-Ich habe mit jemandem mündlich einen Kaufvertrag über ein gebrauchtes Fahrrad für 80 € abgeschlossen. Die Person hat das Fahrrad bereits mitgenommen – weigert sich aber jetzt zu zahlen und sagt: „War doch nur ein Gespräch, kein echter Vertrag."
-
-Hilf mir, Argumente für diese drei Fragen zu sammeln:
-1. Warum ist trotzdem ein gültiger Kaufvertrag entstanden?
-2. Was sagt § 433 Abs. 2 BGB über die Pflichten des Käufers?
-3. Welche konkreten Argumente kann ich nutzen, um die Person zu überzeugen zu zahlen – ohne sofort zum Anwalt zu gehen?
-
-Erkläre in einfacher Sprache, passend für einen 16-Jährigen.</div>
-          <button class="ki-copy-btn" id="ki-copy-btn" onclick="copyPrompt()">📋 Prompt kopieren</button>
-          <a href="https://plattform.fobizz.com" target="_blank" class="ki-fobizz-btn">Zu Fobizz →</a>
-        </div>
-      </div>
-
+      <!-- Aufgabe 1 -->
       <div class="task">
         <div class="task-header">
-          <div class="task-num">✍</div>
+          <div class="task-icons">
+            <div class="ico ico-teal">
+              <!-- Partnerarbeit-Icon: zwei Personen -->
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="12" cy="10" r="5" stroke="#0d9488" stroke-width="2.2" fill="none"/>
+                <path d="M2 30c0-5.523 4.477-10 10-10" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <circle cx="24" cy="10" r="5" stroke="#0d9488" stroke-width="2.2" fill="none"/>
+                <path d="M34 30c0-5.523-4.477-10-10-10" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="ico ico-blue">
+              <!-- Falllösungs-Icon: Dokument mit § -->
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <rect x="5" y="2" width="22" height="30" rx="3" stroke="#1976D2" stroke-width="2.2" fill="none"/>
+                <path d="M10 10h12M10 16h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+                <text x="10" y="28" font-size="11" fill="#1976D2" font-family="serif" font-weight="bold">§</text>
+              </svg>
+            </div>
+          </div>
           <div class="task-header-text">
-            <span class="task-title">Reflexion – Was hat die KI geliefert?</span>
-            <span class="task-subtitle">KI / Fobizz · Einzelarbeit</span>
+            <span class="task-title">Aufgabe 1 – Pflichten benennen</span>
+            <span class="task-subtitle">Falllösung · Partnerarbeit</span>
           </div>
         </div>
         <div class="task-body">
+          <div class="task-content">
+            <p>Nennt die Pflichten des Online-Shops und von Lena aus dem Kaufvertrag. Stützt euch dabei auf <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a>.</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="Meine Antwort: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-transfer-1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-transfer-1">
+              <strong>Pflichten des Online-Shops (Verkäufer) gem. § 433 Abs. 1 BGB:</strong><br>
+              • Das Smartphone an Lena übergeben<br>
+              • Das Eigentum am Smartphone auf Lena übertragen<br><br>
+              <strong>Pflichten von Lena (Käuferin) gem. § 433 Abs. 2 BGB:</strong><br>
+              • Den Kaufpreis von 149 € zahlen<br>
+              • Das Smartphone abnehmen<br><br>
+              <em>Hinweis: Solange der Shop nicht geliefert hat, muss Lena noch nicht zahlen – beide Pflichten entstehen gleichzeitig mit dem Vertragsschluss, sind aber voneinander abhängig (Zug-um-Zug-Prinzip).</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Aufgabe 2 -->
+      <div class="task">
+        <div class="task-header">
           <div class="task-icons">
-            <div class="ico ico-green">
-              <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
-                <line x1="20" y1="2" x2="20" y2="8" stroke="#43A047" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="20" cy="2" r="2" fill="#43A047"/>
-                <rect x="6" y="8" width="28" height="22" rx="5" stroke="#43A047" stroke-width="2.5" fill="none"/>
-                <rect x="11" y="14" width="6" height="6" rx="2" fill="#43A047"/>
-                <rect x="23" y="14" width="6" height="6" rx="2" fill="#43A047"/>
-                <path d="M13 25h14" stroke="#43A047" stroke-width="2.2" stroke-linecap="round"/>
-                <path d="M6 16h-3M34 16h3" stroke="#43A047" stroke-width="2" stroke-linecap="round"/>
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="12" cy="10" r="5" stroke="#0d9488" stroke-width="2.2" fill="none"/>
+                <path d="M2 30c0-5.523 4.477-10 10-10" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                <circle cx="24" cy="10" r="5" stroke="#0d9488" stroke-width="2.2" fill="none"/>
+                <path d="M34 30c0-5.523-4.477-10-10-10" stroke="#0d9488" stroke-width="2.2" stroke-linecap="round" fill="none"/>
               </svg>
             </div>
             <div class="ico ico-blue">
               <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
-                <circle cx="18" cy="12" r="7" fill="#1976D2"/>
-                <path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <rect x="5" y="2" width="22" height="30" rx="3" stroke="#1976D2" stroke-width="2.2" fill="none"/>
+                <path d="M10 10h12M10 16h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/>
+                <text x="10" y="28" font-size="11" fill="#1976D2" font-family="serif" font-weight="bold">§</text>
               </svg>
             </div>
           </div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 2 – Rechtliche Konsequenz</span>
+            <span class="task-subtitle">Falllösung · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
           <div class="task-content">
-            <p>Notiere die wichtigsten Argumente aus der KI-Antwort. Welche davon kannst du direkt mit § 433 BGB und „pacta sunt servanda" begründen?</p>
-            <textarea class="answer-area" style="min-height:110px;" placeholder="Argument 1 (Vertragsschluss): ...&#10;&#10;Argument 2 (§ 433 Abs. 2): ...&#10;&#10;Argument 3 (pacta sunt servanda): ...&#10;&#10;Was hat die KI gut erklärt? Was fehlt oder ist ungenau?"></textarea>
+            <p>Der Shop liefert nach einer Woche immer noch nicht. Lena hat aber bereits bezahlt. Welche Pflicht hat der Shop verletzt? Nennt den genauen Paragraphen und Absatz.</p>
+            <textarea class="answer-area" style="min-height:80px;" placeholder="Meine Antwort: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-transfer-2')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-transfer-2">
+              Der Online-Shop hat seine Pflicht aus <strong>§ 433 Abs. 1 BGB</strong> verletzt: Er hat das Smartphone weder übergeben noch das Eigentum daran auf Lena übertragen. Da Lena bereits gezahlt hat, befindet sich der Shop im <em>Schuldnerverzug</em> – Lena kann die Lieferung verlangen oder, wenn weiter nichts passiert, vom Vertrag zurücktreten.
+            </div>
           </div>
         </div>
       </div>
@@ -1032,18 +1033,6 @@ function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
 function prevStep(f){if(f>1)goToStep(f-1);}
 function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
 function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont anzeigen';}
-function copyPrompt(){
-  const text=document.getElementById('ki-prompt-text').innerText;
-  navigator.clipboard.writeText(text).then(()=>{
-    const btn=document.getElementById('ki-copy-btn');
-    btn.textContent='✅ Kopiert!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='📋 Prompt kopieren';btn.classList.remove('copied');},2500);
-  }).catch(()=>{
-    const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
-    const btn=document.getElementById('ki-copy-btn');btn.textContent='✅ Kopiert!';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='📋 Prompt kopieren';btn.classList.remove('copied');},2500);
-  });
-}
 function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
 const yes={q1:'✓ Richtig! § 433 Abs. 1: Sache übergeben + Eigentum verschaffen (+ mangelfrei).',q2:'✓ Richtig! § 433 Abs. 2: zahlen UND abnehmen – beide Pflichten!',q3:'✓ Richtig! Mündliche Verträge sind genauso bindend – pacta sunt servanda!',q4:'✓ Richtig! Der Kaufvertrag = nur Verpflichtungsgeschäft. Eigentum geht erst später über (Stunde 6).'};
 const no={q1:'✗ Nicht ganz. § 433 Abs. 1: Verkäufer muss Sache übergeben UND Eigentum verschaffen. → B ist korrekt.',q2:'✗ Nicht ganz. Der Käufer hat ZWEI Pflichten: zahlen + abnehmen. Die Abnahmepflicht wird oft vergessen! → C ist korrekt.',q3:'✗ Nicht ganz. Mündliche Kaufverträge sind voll wirksam – keine Unterschrift nötig. → C ist korrekt.',q4:'✗ Nicht ganz. Der Kaufvertrag begründet nur Pflichten – Eigentum und Besitz gehen noch gar nicht über. → C ist korrekt.'};
