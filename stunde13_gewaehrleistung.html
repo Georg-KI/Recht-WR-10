@@ -1,1 +1,1074 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 13 – Gewährleistungsrechte &amp; die Reklamations-E-Mail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
 
+/* ── TOPBAR ── */
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* ── PROGRESS ── */
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+
+/* ── MAIN ── */
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* ── HERO ── */
+.hero{background:var(--grad-blue);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
+
+/* ── TEACHER NOTE ── */
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* ── SECTION ── */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.red{background:var(--red-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:var(--teal-light);}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+
+/* ── INPUTS ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:85px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+
+/* ── SOLUTION ── */
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box strong{font-weight:700;}
+.info-box > strong:first-of-type{display:block;margin-bottom:4px;}
+
+/* ── BOOK REF ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+
+/* ── PARA QUOTE / SCENARIO (dunkel) ── */
+.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
+.scenario strong{color:var(--blue-400);}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;}
+a.para-link:hover{color:var(--blue-400);}
+
+/* ── CONTENT ── */
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+
+/* ── GEWÄHRLEISTUNGS-PYRAMIDE ── */
+.gw-pyramid{margin:1.25rem 0;border-radius:var(--radius-md);overflow:hidden;border:1.5px solid var(--border);background:#fafafa;}
+.gw-stage{padding:1rem 1.25rem;}
+.gw-stage-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;padding:3px 10px;border-radius:100px;margin-bottom:8px;}
+.gw-stage-1 .gw-stage-label{background:#fee2e2;color:#991b1b;}
+.gw-stage-2 .gw-stage-label{background:#fed7aa;color:#9a3412;}
+.gw-stage-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:15.5px;color:var(--text);margin-bottom:0.4rem;line-height:1.3;}
+.gw-stage-desc{font-size:13.5px;color:var(--text-secondary);line-height:1.55;margin-bottom:0.6rem;}
+.gw-stage-1{background:#fff5f5;border-bottom:1px solid var(--border);}
+.gw-stage-2{background:#fff7ed;}
+.gw-options{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch;margin-top:0.6rem;}
+.gw-option{background:white;border:1.5px solid var(--red);border-radius:var(--radius-sm);padding:0.65rem 0.9rem;font-size:13px;line-height:1.5;}
+.gw-option-title{font-weight:800;font-size:12.5px;color:var(--red);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.5px;}
+.gw-or{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:var(--text-muted);background:white;border-radius:50%;width:34px;height:34px;align-self:center;border:1.5px dashed var(--border);}
+.gw-bridge{background:#1e293b;color:#fbbf24;padding:0.7rem 1.25rem;font-size:13px;text-align:center;font-weight:700;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.gw-bridge-arrow{font-size:18px;}
+.gw-secondary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0.6rem;}
+.gw-sec-card{background:white;border:1.5px solid var(--orange);border-radius:var(--radius-sm);padding:0.65rem 0.85rem;}
+.gw-sec-title{font-weight:800;font-size:12.5px;color:#9a3412;margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px;}
+.gw-sec-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.45;}
+@media(max-width:640px){.gw-options{grid-template-columns:1fr;}.gw-or{margin:0 auto;}.gw-secondary{grid-template-columns:1fr;}}
+
+/* ── GARANTIE-VS-GEWÄHRLEISTUNG TABELLE ── */
+.gg-table{border-radius:var(--radius-md);overflow:hidden;border:1.5px solid var(--border);margin:1rem 0;background:white;}
+.gg-row{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);}
+.gg-row:last-child{border-bottom:none;}
+.gg-row.head{background:#1e293b;color:white;}
+.gg-cell{padding:0.7rem 1rem;font-size:13px;line-height:1.5;border-right:1px solid var(--border);}
+.gg-cell:last-child{border-right:none;}
+.gg-row.head .gg-cell{border-right-color:rgba(255,255,255,0.15);font-weight:800;font-size:12.5px;text-transform:uppercase;letter-spacing:0.5px;}
+.gg-cell.label{background:#f8fafc;font-weight:700;color:var(--text);font-size:13px;}
+.gg-cell.gw{color:#1b5e20;}
+.gg-cell.ga{color:#7f1d1d;}
+@media(max-width:640px){.gg-row{grid-template-columns:1fr;}.gg-cell{border-right:none;border-bottom:1px solid var(--border);}.gg-cell:last-child{border-bottom:none;}}
+
+/* ── E-MAIL BAUSTEINE ── */
+.email-builder{background:#fafafa;border:1.5px solid var(--border);border-radius:var(--radius-md);padding:1rem 1.25rem;margin:1rem 0;}
+.email-builder-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;color:var(--blue-800);margin-bottom:0.6rem;display:flex;align-items:center;gap:8px;}
+.email-block{background:white;border:1.5px solid var(--border);border-left:4px solid var(--blue-700);border-radius:var(--radius-sm);padding:0.7rem 1rem;margin-bottom:0.6rem;}
+.email-block:last-child{margin-bottom:0;}
+.email-block-num{display:inline-block;background:var(--blue-700);color:white;font-weight:800;font-size:11px;border-radius:100px;padding:2px 9px;margin-right:8px;}
+.email-block-title{font-weight:800;font-size:13.5px;color:var(--text);display:inline;}
+.email-block-text{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-top:5px;}
+.email-block-text em{color:var(--blue-800);font-style:normal;font-weight:600;}
+
+/* ── E-MAIL PREVIEW BOX (Musterlösung) ── */
+.email-preview{background:#fff;border:1px solid var(--border);border-radius:var(--radius-sm);padding:0.9rem 1.1rem;margin-top:6px;font-family:'Courier New',monospace;font-size:12.5px;line-height:1.65;color:var(--text);white-space:pre-wrap;}
+.email-preview .email-line-bold{font-family:'Nunito',sans-serif;font-weight:700;}
+
+/* ── BUTTONS ── */
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+
+/* ── ABFRAGE ── */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:11px;font-weight:700;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:#0f766e;}
+.abfrage-q-label.komm{color:#92400e;}
+.abfrage-q-label.kreativ{color:#9f1239;}
+.abfrage-q-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.5;}
+.abfrage-q-body{padding:1rem 1.1rem;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.erwartung-box{margin-top:10px;background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--blue-800);line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+
+/* ── PIN MODAL ── */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+
+/* ── STEP / TEACHER ── */
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}}
+
+/* ── SVG ICON HELPER ── */
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-purple{border:1.5px solid var(--purple);}
+.ico-red{border:1.5px solid var(--red);}
+</style>
+</head>
+<body id="body-root">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">Recht<span>&</span>Ich</a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 13</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Konzept</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Anwendung</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Reklamations-E-Mail</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Buchaufgaben</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">⚖️ Modul 5 · Sachmangel &amp; Gewährleistung</div>
+  <h1>Gewährleistungsrechte &amp; die Reklamations-E-Mail</h1>
+  <p>Die Akkulaufzeit deines neuen Handys ist nach drei Wochen plötzlich miserabel. Du gehst zum Händler – und der schiebt dich zum Hersteller weiter. Hat er das Recht dazu? In dieser Stunde lernst du, welche Ansprüche dir bei einem Sachmangel zustehen – und wie du sie souverän einforderst.</p>
+  <div class="hero-meta">
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 74–77</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler sind sich in konkreten Problemsituationen beim Kauf passender Rechte als Verbraucher bewusst und kommunizieren diese gegenüber dem Verkäufer situationsgerecht.</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Schwerpunkt: <strong>vom Mangelbegriff (Stunde 12) zu den konkreten Käuferrechten</strong>. Bewusst <strong>keine</strong> klassische Normenanalyse von § 437 BGB – die Norm ist zu komplex. Stattdessen ein didaktisches Stufen-Modell (Pyramide) plus die praxisrelevante Reklamations-E-Mail.</p>
+  <ul>
+    <li>Schritt 1: Lebensweltfall „Bluetooth-Kopfhörer" – aktiviert Vorwissen und zeigt die häufige Verbraucherunsicherheit (Händler vs. Hersteller).</li>
+    <li>Schritt 2: Kernstück 1 – die Gewährleistungs-Pyramide. Wichtigste Lernziele: <strong>Nacherfüllung kommt immer zuerst</strong>; Käufer hat das <strong>Wahlrecht</strong> Reparatur ↔ Ersatzlieferung. Erst nach erfolgloser Frist Stufe 2.</li>
+    <li>Schritt 2 (Ende): Garantie ≠ Gewährleistung. Verbreitete Fehlvorstellung gezielt aufgreifen!</li>
+    <li>Schritt 3: Drei kompakte Fallchecks zur Anwendung der Pyramide.</li>
+    <li>Schritt 4: Kernstück 2 – die Reklamations-E-Mail (Lehrplan-Kompetenz „situationsgerecht kommunizieren"). 5-Bausteine-Struktur. Eigenes Schreiben + Musterlösung.</li>
+    <li>Schritt 5: Buchaufgaben S. 77, Aufg. 2 + 3 (Forderungen + Nacherfüllung); Aufg. 4 (Streitgespräch) als Option.</li>
+    <li>Bewusst <strong>noch nicht</strong> vertieft: Beweislastumkehr im 1. Jahr – das ist Thema in Stunde 14 (Verbraucherschutz). Hier nur kurzer Hinweis.</li>
+    <li>ByCS-Handout mit den Buchfällen ist optional in Vorbereitung – bis dahin direkter Buchverweis.</li>
+  </ul>
+</div>
+
+
+<!-- STEP 1: EINSTIEG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">🎧</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Einstieg</div>
+        <div class="section-title">Die Bluetooth-Kopfhörer – wer ist eigentlich zuständig?</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="info-box orange">
+        <strong>💡 Warum ist das relevant für dich?</strong>
+        Fast jeder hat es schon erlebt: Du reklamierst etwas – und der Verkäufer wimmelt dich ab. „Da müssen Sie zum Hersteller." „Garantie ist abgelaufen." „Da können wir leider nichts machen." Wer seine Rechte nicht kennt, gibt schnell klein bei. Diese Stunde gibt dir die Werkzeuge, das nicht mehr passieren zu lassen.
+      </div>
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Schüler antworten zunächst aus dem Bauchgefühl. Im Plenum kurz sammeln: Wer würde was tun? Häufige Antworten: „Hersteller anschreiben", „Garantie checken", „neue kaufen". Daraus die Frage entwickeln: <strong>Welche Rechte habe ich gegen den Händler – und was bedeutet das?</strong></p>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-label">🎧 Fall: Die Bluetooth-Kopfhörer</div>
+        <p>Vor drei Wochen hast du dir bei einem Elektronikmarkt vor Ort hochwertige Bluetooth-Kopfhörer für <strong>129 €</strong> gekauft. Seit zwei Tagen lädt der linke Ohrhörer nicht mehr richtig: nach 30 Minuten Akkulaufzeit ist Schluss. Sichtbare Beschädigungen gibt es keine.</p>
+        <p style="margin-top:0.6rem;">Du gehst zurück in den Laden. Der Verkäufer schaut sich die Kopfhörer kurz an und meint: <strong>„Da können wir nichts machen. Bei sowas wenden Sie sich am besten direkt an den Hersteller – Garantiehotline steht im Heft."</strong></p>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">💭</div>
+          <div class="task-header-text">
+            <span class="task-title">Erste Einschätzung – Einzelarbeit</span>
+            <span class="task-subtitle">Spontane Reaktion · ohne Hilfsmittel</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 38" fill="none">
+                <circle cx="18" cy="18" r="14" stroke="#1976D2" stroke-width="2.5" fill="none"/>
+                <path d="M14 14c0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.6-1 2.5-2.5 3.5S17 19 17 20.5" stroke="#1976D2" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <circle cx="17.5" cy="26" r="1.6" fill="#1976D2"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Beantworte aus dem Bauchgefühl – noch ohne Buch oder Internet:</p>
+            <p style="margin-top:0.4rem;">a) Hat der Verkäufer recht? Musst du dich wirklich an den Hersteller wenden?</p>
+            <p>b) Welche Rechte stehen dir deiner Meinung nach gegen den <em>Händler</em> zu? Was kannst du konkret verlangen?</p>
+            <textarea class="answer-area" placeholder="a) Verkäufer hat recht / nicht recht, weil ...&#10;&#10;b) Ich glaube, ich kann Folgendes verlangen: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-einstieg')">✓ Erste Antwort anzeigen</button>
+            <div class="solution-reveal" id="sol-einstieg">
+              <strong>Kurze Einordnung (ausführlich folgt in Schritt 2):</strong><br>
+              a) <strong>Der Verkäufer hat NICHT recht.</strong> Der Vertragspartner beim Kauf ist der Händler – nicht der Hersteller. Dir stehen <strong>gesetzliche Gewährleistungsrechte gegen den Händler</strong> zu.<br>
+              b) Du kannst verlangen, dass der Händler den Mangel <strong>kostenfrei behebt</strong> – entweder durch Reparatur oder durch Lieferung eines neuen Geräts. <strong>Du wählst</strong>, nicht der Händler. Wenn das nicht klappt, hast du weitere Rechte (Rücktritt, Minderung, Schadensersatz).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box red">
+        <strong>⚠️ Wichtig: Vertragspartner ist der Händler!</strong>
+        Bei einem Kauf im Laden oder Online-Shop ist <em>der Händler</em> dein Vertragspartner – nicht der Hersteller. Die <strong>gesetzliche Gewährleistung</strong> richtet sich also gegen den Händler, auch wenn das Produkt von einer großen Marke stammt. Was der Verkäufer im Fall oben gemacht hat, ist eine sehr verbreitete – aber rechtlich falsche – Abwimmel-Taktik.
+      </div>
+
+      <div class="nav-btns"><button class="btn-primary" onclick="nextStep(1)">Weiter: Welche Rechte habe ich? →</button></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STEP 2: KONZEPT -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">⚖️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Konzept</div>
+        <div class="section-title">Die Gewährleistungs-Pyramide – was kann ich wann verlangen?</div>
+        <div class="section-time">⏱ ca. 12 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Bewusst keine vollständige Normenanalyse von § 437 BGB – die Norm wirft auf die Sekundäransprüche, die selbst wieder in §§ 439 ff. ausdifferenziert sind. Für Klasse 10 reicht das Stufen-Modell. Wichtig: Schüler müssen erkennen, dass die <strong>Reihenfolge</strong> verbindlich ist (Nacherfüllung zuerst).</p>
+        </div>
+      </div>
+
+      <p class="content-text">Sobald ein <strong>Sachmangel</strong> vorliegt (Stunde 12), hat der Käufer bestimmte Ansprüche gegen den Verkäufer. Das Gesetz gibt dabei eine klare <strong>Reihenfolge</strong> vor: Zuerst hat der Verkäufer die Chance, den Mangel zu beseitigen – erst danach stehen dem Käufer „härtere" Rechte zu.</p>
+
+      <div class="gw-pyramid">
+        <div class="gw-stage gw-stage-1">
+          <span class="gw-stage-label">Stufe 1 · Primäranspruch</span>
+          <div class="gw-stage-title">Nacherfüllung (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__439.html" target="_blank">§ 439 BGB</a>)</div>
+          <div class="gw-stage-desc">Der Verkäufer bekommt zuerst die Chance, den Mangel zu beseitigen – auf seine Kosten. <strong>Der Käufer wählt</strong>, wie das geschehen soll:</div>
+          <div class="gw-options">
+            <div class="gw-option">
+              <div class="gw-option-title">🔧 Reparatur</div>
+              Mangel an der gekauften Sache wird behoben.
+            </div>
+            <div class="gw-or">ODER</div>
+            <div class="gw-option">
+              <div class="gw-option-title">📦 Ersatzlieferung</div>
+              Neue, mangelfreie Sache statt der defekten.
+            </div>
+          </div>
+        </div>
+
+        <div class="gw-bridge">
+          <span class="gw-bridge-arrow">↓</span>
+          <span>Nacherfüllung schlägt fehl <em style="color:#fde68a;font-style:normal;">(z. B. 2× Reparatur ohne Erfolg)</em> oder Verkäufer verweigert sie <em style="color:#fde68a;font-style:normal;">→ erst dann Stufe 2</em></span>
+          <span class="gw-bridge-arrow">↓</span>
+        </div>
+
+        <div class="gw-stage gw-stage-2">
+          <span class="gw-stage-label">Stufe 2 · Sekundäransprüche</span>
+          <div class="gw-stage-title">Wenn Nacherfüllung scheitert – diese Rechte stehen dem Käufer zur Wahl:</div>
+          <div class="gw-secondary">
+            <div class="gw-sec-card">
+              <div class="gw-sec-title">↩️ Rücktritt</div>
+              <div class="gw-sec-desc">Geld zurück, Sache zurück. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__323.html" target="_blank">§ 323</a>/<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__437.html" target="_blank">437 BGB</a></div>
+            </div>
+            <div class="gw-sec-card">
+              <div class="gw-sec-title">💶 Minderung</div>
+              <div class="gw-sec-desc">Käufer behält die Sache und zahlt weniger. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__441.html" target="_blank">§ 441 BGB</a></div>
+            </div>
+            <div class="gw-sec-card">
+              <div class="gw-sec-title">⚖️ Schadensersatz</div>
+              <div class="gw-sec-desc">Ersatz für Schäden, die durch den Mangel entstanden sind. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__280.html" target="_blank">§ 280 BGB</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box blue">
+        <strong>💡 Warum diese Reihenfolge?</strong>
+        Der Gesetzgeber bringt damit die Interessen beider Seiten in Ausgleich: Der Verkäufer bekommt eine faire Chance, den Mangel selbst zu reparieren oder die Sache zu ersetzen – das ist meist günstiger als Rückabwicklung. Der Käufer bekommt im Gegenzug am Ende auf jeden Fall eine mangelfreie Sache (oder sein Geld zurück).
+      </div>
+
+      <p class="content-text" style="margin-top:1.25rem;"><strong>Wichtig:</strong> Bevor man auf Stufe 2 wechseln darf, muss man dem Verkäufer für die Nacherfüllung eine <strong>angemessene Frist</strong> setzen (etwa 14 Tage). Reagiert der Verkäufer in dieser Frist nicht oder scheitert die Nacherfüllung, kann der Käufer auf Stufe 2 wechseln.</p>
+
+      <div class="info-box orange">
+        <strong>⏰ Frist: Wie lange gelten Gewährleistungsrechte?</strong>
+        Bei neuen Sachen <strong>zwei Jahre ab Übergabe</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__438.html" target="_blank">§ 438 BGB</a>). Bei gebrauchten Sachen darf der Händler die Frist beim Verbrauchsgüterkauf auf <strong>mindestens ein Jahr</strong> verkürzen. Innerhalb des ersten Jahres ist der Verbraucher zusätzlich besonders geschützt – darauf gehen wir in Stunde 14 (Verbraucherschutz) genauer ein.
+      </div>
+
+      <h3 style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;margin:1.5rem 0 0.6rem;color:var(--text);">🤔 Garantie ≠ Gewährleistung – ein häufiges Missverständnis</h3>
+      <p class="content-text">„Sie haben doch noch Garantie!" – das hört man oft beim Reklamieren. Aber: Garantie und Gewährleistung sind <strong>zwei völlig verschiedene Dinge</strong>:</p>
+
+      <div class="gg-table">
+        <div class="gg-row head">
+          <div class="gg-cell"></div>
+          <div class="gg-cell">🛡️ Gewährleistung</div>
+          <div class="gg-cell">🎁 Garantie</div>
+        </div>
+        <div class="gg-row">
+          <div class="gg-cell label">Wer schuldet sie?</div>
+          <div class="gg-cell gw">Der Händler (gesetzlich verpflichtet)</div>
+          <div class="gg-cell ga">Hersteller oder Händler (freiwillig)</div>
+        </div>
+        <div class="gg-row">
+          <div class="gg-cell label">Rechtsgrundlage</div>
+          <div class="gg-cell gw"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__437.html" target="_blank">§§ 437 ff. BGB</a> – gesetzlich</div>
+          <div class="gg-cell ga"><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__443.html" target="_blank">§ 443 BGB</a> – per Vertrag/Zusage</div>
+        </div>
+        <div class="gg-row">
+          <div class="gg-cell label">Dauer</div>
+          <div class="gg-cell gw">2 Jahre (neu), mind. 1 Jahr (gebraucht)</div>
+          <div class="gg-cell ga">So lange, wie der Garantiegeber zusagt</div>
+        </div>
+        <div class="gg-row">
+          <div class="gg-cell label">Worum geht es?</div>
+          <div class="gg-cell gw">Mangel bei Übergabe</div>
+          <div class="gg-cell ga">Was in den Garantiebedingungen steht</div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <strong>💡 Merke:</strong>
+        Die Gewährleistung hast du <strong>immer</strong> – sie ist gesetzlich. Die Garantie ist ein <strong>freiwilliges Extra</strong>. Eine abgelaufene Garantie bedeutet nicht, dass auch die Gewährleistung weg ist! Du kannst beide nebeneinander geltend machen.
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: Fallchecks →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STEP 3: ANWENDUNG -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🔍</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Anwendung</div>
+        <div class="section-title">Drei Fallchecks – welche Rechte habe ich konkret?</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Die drei Fälle decken systematisch die wichtigsten Konstellationen ab:<br>
+          Fall 1: Mangel innerhalb der Gewährleistungsfrist – Schüler erkennen Stufe 1 (Nacherfüllung) mit Wahlrecht.<br>
+          Fall 2: Verkäufer verweigert Nacherfüllung – Übergang zu Stufe 2 (Frist setzen → dann Rücktritt etc.).<br>
+          Fall 3: Garantie abgelaufen, aber Gewährleistungsfrist läuft noch – häufiges Missverständnis aus Schritt 2 testen.</p>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Fall 1 – Der defekte Akku</span>
+            <span class="task-subtitle">Falllösung · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-red">
+              <svg width="22" height="22" viewBox="0 0 36 38" fill="none">
+                <rect x="5" y="9" width="22" height="22" rx="3" stroke="#E53935" stroke-width="2.5" fill="none"/>
+                <rect x="27" y="14" width="3" height="12" rx="1" fill="#E53935"/>
+                <rect x="9" y="13" width="14" height="14" rx="1.5" fill="#E53935" opacity="0.2"/>
+                <path d="M14 16l3 4-2 1 3 4" stroke="#E53935" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Tom hat sich vor <strong>8 Monaten</strong> ein Smartphone für 600 € bei einem Elektronikmarkt gekauft. Seit kurzem ist die Akkulaufzeit drastisch eingebrochen – nach 3 Stunden ist Schluss. Tom geht zurück in den Laden.</p>
+            <p>Was kann Tom konkret verlangen? Auf welcher Stufe der Pyramide steht er?</p>
+            <textarea class="answer-area" placeholder="Stufe: ...&#10;Mein Recht: ...&#10;Wer wählt zwischen Reparatur und Ersatz? ...&#10;Wer trägt die Kosten? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fall1">
+              <strong>Stufe 1 – Nacherfüllung (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__439.html" target="_blank">§ 439 BGB</a>).</strong><br>
+              Tom kann vom Händler verlangen, dass der Mangel kostenfrei behoben wird – entweder durch <strong>Reparatur</strong> oder durch <strong>Ersatzlieferung</strong> eines neuen Smartphones. <strong>Tom wählt</strong>, nicht der Händler. Da das Gerät erst 8 Monate alt ist, läuft die Gewährleistungsfrist (2 Jahre ab Übergabe) noch problemlos. Alle Kosten (Reparatur, Versand, Material) trägt der Verkäufer.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Fall 2 – Der hartnäckige Verkäufer</span>
+            <span class="task-subtitle">Falllösung · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-orange">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="14" stroke="#FF9800" stroke-width="2.5" fill="none"/>
+                <path d="M12 12l12 12M24 12L12 24" stroke="#FF9800" stroke-width="2.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Mia (16) hat in einem kleinen Fahrradladen ein E-Bike für 950 € gekauft. Nach 6 Wochen versagt die Schaltung. Mia reklamiert. Der Verkäufer brummt: <strong>„Das wird sich schon wieder einrenken – warten Sie mal ein paar Wochen ab. Wir reparieren das jetzt nicht."</strong></p>
+            <p>Wie geht Mia vor? Welche Schritte sind nötig, bis sie auf Stufe 2 der Pyramide wechseln darf?</p>
+            <textarea class="answer-area" placeholder="Schritt 1: ...&#10;Was muss Mia setzen? ...&#10;Was passiert, wenn der Verkäufer auch dann nicht reagiert? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall2')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fall2">
+              <strong>Schritt 1:</strong> Mia muss dem Verkäufer eine <strong>angemessene Frist</strong> zur Nacherfüllung setzen – am besten schriftlich, z. B. per E-Mail (etwa 14 Tage). Sie verlangt konkret die Reparatur oder die Ersatzlieferung eines neuen, funktionierenden E-Bikes.<br><br>
+              <strong>Schritt 2:</strong> Lässt der Verkäufer die Frist verstreichen oder verweigert er die Nacherfüllung weiterhin, wechselt Mia auf <strong>Stufe 2</strong>: Sie kann nun zwischen <strong>Rücktritt</strong> (Geld zurück), <strong>Minderung</strong> (Teil des Kaufpreises zurück, Rad behalten) und <strong>Schadensersatz</strong> wählen.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">3</div>
+          <div class="task-header-text">
+            <span class="task-title">Fall 3 – Garantie weg, Rechte weg?</span>
+            <span class="task-subtitle">Falllösung · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-purple">
+              <svg width="22" height="22" viewBox="0 0 36 38" fill="none">
+                <rect x="6" y="6" width="24" height="26" rx="2" stroke="#AB47BC" stroke-width="2.5" fill="none"/>
+                <path d="M11 14h14M11 19h14M11 24h10" stroke="#AB47BC" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="26" cy="26" r="5" fill="#AB47BC"/>
+                <path d="M23.5 26l2 2 3-3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Lea hat vor <strong>14 Monaten</strong> einen Laptop für 850 € im Online-Shop gekauft. Die <strong>Herstellergarantie war auf 12 Monate</strong> begrenzt. Jetzt geht das Touchpad nicht mehr richtig – ein typischer Materialdefekt. Der Online-Shop schreibt: „Garantie ist abgelaufen, wir können nichts mehr für Sie tun."</p>
+            <p>Stimmt das? Hat Lea wirklich keine Rechte mehr?</p>
+            <textarea class="answer-area" placeholder="Antwort: ...&#10;Begründung (Garantie vs. Gewährleistung): ...&#10;Welche Rechte hat Lea? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-fall3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-fall3">
+              <strong>Nein, der Shop liegt falsch.</strong> Garantie und Gewährleistung sind zwei verschiedene Dinge:<br>
+              • Die <strong>Garantie</strong> (12 Monate) ist eine freiwillige Zusatzleistung des Herstellers – die ist tatsächlich abgelaufen.<br>
+              • Die <strong>gesetzliche Gewährleistung</strong> gilt aber unabhängig davon <strong>2 Jahre</strong> ab Übergabe (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__438.html" target="_blank">§ 438 BGB</a>) – und richtet sich gegen den <strong>Online-Shop als Händler</strong>.<br><br>
+              Lea ist erst 14 Monate nach dem Kauf dran – sie hat also weiterhin Anspruch auf <strong>Nacherfüllung</strong> (Reparatur oder Ersatzlieferung) gegen den Shop. Sie muss aber – im Unterschied zum ersten Jahr – ggf. beweisen, dass der Mangel bereits bei Übergabe angelegt war. <em>(Mehr dazu in Stunde 14.)</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Die Reklamations-E-Mail →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STEP 4: REKLAMATIONS-E-MAIL -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon teal">📧</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · Anwendung &amp; Kommunikation</div>
+        <div class="section-title">Die Reklamations-E-Mail – Rechte situationsgerecht einfordern</div>
+        <div class="section-time">⏱ ca. 10 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Kernkompetenz des Lehrplans („situationsgerecht kommunizieren"). Hier geht es weniger ums Auswendiglernen, sondern um die <strong>Anwendung</strong>: Schüler erkennen, dass eine wirksame Reklamation eine klare Struktur braucht. Wichtigste Punkte: konkrete Mangelbenennung, klare Forderung (Nacherfüllung), <strong>angemessene Frist</strong>, Ankündigung der nächsten Stufe. Es geht nicht um Drohung, sondern um klare, sachliche Kommunikation.</p>
+        </div>
+      </div>
+
+      <p class="content-text">Wer reklamiert, kommt mit einem Anruf oder einer freundlich geschriebenen Mail oft nicht weit – besonders wenn der Verkäufer abwiegelt (siehe Fall 2 aus Schritt 3). Eine <strong>klar strukturierte Reklamations-E-Mail</strong> ist dein wichtigstes Werkzeug. Sie ist sachlich, höflich, aber präzise – und zeigt: Du kennst deine Rechte.</p>
+
+      <div class="info-box blue">
+        <strong>📨 Die fünf Bausteine einer wirksamen Reklamation</strong>
+        Eine gute Reklamations-E-Mail folgt einer klaren Struktur. Jeder Baustein hat seine Funktion – fehlt einer, schwächst du deine Position.
+      </div>
+
+      <div class="email-builder">
+        <div class="email-builder-title">🧱 Bausteine im Detail</div>
+
+        <div class="email-block">
+          <span class="email-block-num">1</span>
+          <span class="email-block-title">Sachverhalt klar darstellen</span>
+          <div class="email-block-text">Wer, wann, was, wo gekauft – inklusive <em>Datum, Artikel, Preis, ggf. Bestell-/Rechnungsnummer</em>. So weiß der Empfänger sofort, worum es geht.</div>
+        </div>
+
+        <div class="email-block">
+          <span class="email-block-num">2</span>
+          <span class="email-block-title">Mangel präzise benennen</span>
+          <div class="email-block-text">Was funktioniert konkret nicht? Seit wann? <em>Genaue, nachprüfbare Beschreibung</em> – keine Pauschalaussagen wie „läuft schlecht".</div>
+        </div>
+
+        <div class="email-block">
+          <span class="email-block-num">3</span>
+          <span class="email-block-title">Konkrete Forderung: Nacherfüllung</span>
+          <div class="email-block-text">Klar sagen, was du willst: <em>Reparatur ODER Ersatzlieferung</em> – auf Grundlage der gesetzlichen Gewährleistung (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__439.html" target="_blank">§ 439 BGB</a>). Die Wahl liegt bei dir!</div>
+        </div>
+
+        <div class="email-block">
+          <span class="email-block-num">4</span>
+          <span class="email-block-title">Angemessene Frist setzen</span>
+          <div class="email-block-text">Mit konkretem Datum: <em>„bis zum [Datum, ca. 14 Tage später]"</em>. Ohne Frist kein Übergang auf Stufe 2. Wichtig für deine Rechtsposition!</div>
+        </div>
+
+        <div class="email-block">
+          <span class="email-block-num">5</span>
+          <span class="email-block-title">Stufe 2 ankündigen (sachlich)</span>
+          <div class="email-block-text">Hinweis darauf, was du tust, wenn die Frist verstreicht: <em>Rücktritt vom Vertrag, Minderung oder Schadensersatz</em>. Keine Drohung – nur klare Ansage.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">✍️</div>
+          <div class="task-header-text">
+            <span class="task-title">Anwendungsaufgabe – Schreibe die E-Mail zum Kopfhörer-Fall</span>
+            <span class="task-subtitle">Einzelarbeit · ca. 8 Min.</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 36 38" fill="none">
+                <rect x="4" y="9" width="28" height="20" rx="2" stroke="#0d9488" stroke-width="2.5" fill="none"/>
+                <path d="M4 11l14 10 14-10" stroke="#0d9488" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Erinnerung Fall (siehe Schritt 1):<br>
+            Bluetooth-Kopfhörer, gekauft vor 3 Wochen bei „Elektromarkt Müller GmbH" für 129 €. Bestellnummer fiktiv: <strong>RE-2026-7842</strong>. Der linke Ohrhörer lädt nicht mehr richtig; nach 30 Minuten ist Schluss. Der Verkäufer im Laden hat dich abgewimmelt.</p>
+            <p style="margin-top:0.4rem;">Verfasse eine vollständige Reklamations-E-Mail an <strong>service@elektromarkt-mueller.de</strong>. Nutze alle fünf Bausteine. Heute ist der 24.06.2026.</p>
+            <textarea class="answer-area" style="min-height:260px;font-family:'Courier New',monospace;font-size:13px;" placeholder="Betreff: ...&#10;&#10;Sehr geehrte Damen und Herren,&#10;&#10;am [Datum] habe ich bei Ihnen ...&#10;&#10;Seit dem [Datum] ...&#10;&#10;Auf Grundlage der gesetzlichen Gewährleistung gemäß § 439 BGB fordere ich Sie hiermit zur Nacherfüllung auf. Ich wähle ...&#10;&#10;Bitte erledigen Sie dies bis zum ...&#10;&#10;Sollte die Frist erfolglos verstreichen, behalte ich mir vor ...&#10;&#10;Mit freundlichen Grüßen&#10;[Name]"></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-email')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-email">
+              <strong>Musterlösung – komplette E-Mail mit allen fünf Bausteinen:</strong>
+              <div class="email-preview"><span class="email-line-bold">Betreff:</span> Reklamation Bluetooth-Kopfhörer – Bestellnr. RE-2026-7842 – Nacherfüllung mit Fristsetzung
+
+<span class="email-line-bold">Sehr geehrte Damen und Herren,</span>
+
+am 03.06.2026 habe ich in Ihrer Filiale ein Paar Bluetooth-Kopfhörer (Modell „NovaSound Pro X1") zum Preis von 129,00 € erworben (Bestellnr. RE-2026-7842). [Baustein 1: Sachverhalt]
+
+Seit dem 22.06.2026 weist das Gerät einen erheblichen Mangel auf: Der linke Ohrhörer lädt nicht mehr vollständig, sodass die Akkulaufzeit auf etwa 30 Minuten reduziert ist. Eine äußere Beschädigung liegt nicht vor; der Mangel ist offenbar produkt- bzw. materialbedingt. [Baustein 2: Mangel]
+
+Auf Grundlage der gesetzlichen Gewährleistung gemäß § 439 BGB fordere ich Sie hiermit zur Nacherfüllung auf. Ich wähle die <span class="email-line-bold">Ersatzlieferung</span> eines neuen, mangelfreien Geräts gleicher Art. [Baustein 3: Forderung]
+
+Bitte erledigen Sie dies bis spätestens zum <span class="email-line-bold">08.07.2026</span>. [Baustein 4: Frist]
+
+Sollte die Frist erfolglos verstreichen oder die Nacherfüllung scheitern, behalte ich mir ausdrücklich vor, vom Kaufvertrag zurückzutreten und die Rückerstattung des Kaufpreises zu verlangen. [Baustein 5: Sekundärrechte ankündigen]
+
+Mit freundlichen Grüßen
+Max Mustermann</div>
+              <strong style="display:block;margin-top:10px;">💡 Hinweise:</strong>
+              • Die Frist 14 Tage ist üblich und „angemessen".<br>
+              • Im Betreff schon klar machen: Reklamation, Bestellnummer, Fristsetzung – das beschleunigt die Bearbeitung.<br>
+              • Auf den Hersteller verweist du <strong>nicht</strong> – Vertragspartner ist der Händler.<br>
+              • Sachlich bleiben! Drohgebärden („sonst Anzeige!") sind unprofessionell und schwächen deine Position.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box green">
+        <strong>📝 Tipp für die Praxis</strong>
+        Reklamationen <strong>immer schriftlich</strong> – am besten per E-Mail oder Einschreiben. Nur so kannst du im Streitfall belegen, dass und wann du die Frist gesetzt hast. Bewahre außerdem den Kassenbon bzw. die Rechnung auf!
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter: Buchaufgaben →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STEP 5: BUCHAUFGABEN -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">📚</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Buchaufgaben</div>
+        <div class="section-title">Mängelrechte anwenden – S. 77, Aufg. 2 + 3</div>
+        <div class="section-time">⏱ ca. 7 Minuten · Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Hinweis</div>
+          <p>Buchaufgaben S. 77 nutzen die Fälle M1 (defektes Display) und M2 (Fahrradbremse). Aufg. 2: konkrete Forderungen erarbeiten – analog zu Schritt 3. Aufg. 3: sinnvolle Wahl der Nacherfüllungsart begründen. Aufg. 4 (Streitgespräch zu M2) eignet sich als Differenzierung für schnellere Schüler. Ein ergänzendes ByCS-Handout mit den Buchfällen ist in Vorbereitung.</p>
+        </div>
+      </div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Leseauftrag &amp; Bearbeitung – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Öffne dein Buch auf <strong>S. 74–77</strong> (Kapitel 2.8 – „Welche Ansprüche hat man als Käufer, wenn die Ware Mängel aufweist?"). Sieh dir besonders die beiden Fälle <strong>M1 (defektes Display)</strong> und <strong>M2 (Fahrrad mit defekter Bremse)</strong> an. Die folgenden Aufgaben beziehen sich auf diese beiden Fälle.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 2 (S. 77) – Forderungen für M1 und M2</span>
+            <span class="task-subtitle">Buchaufgabe · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none">
+                <path d="M6 6C6 4.343 7.343 3 9 3h14l8 8v26a2 2 0 01-2 2H9a3 3 0 01-3-3V6z" stroke="#1976D2" stroke-width="2.5" fill="none"/>
+                <path d="M23 3v8h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <text x="18" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2" font-family="Georgia, serif">§</text>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Listet für die Fälle M1 (defektes Display) und M2 (Fahrradbremse) mögliche Forderungen der jeweiligen Käuferin und Käufer gegenüber den Verkäuferinnen und Verkäufern auf. Nutzt die Gewährleistungs-Pyramide aus Schritt 2.</p>
+            <textarea class="answer-area" style="min-height:140px;" placeholder="M1 – Defektes Display:&#10;Stufe / Forderung: ...&#10;Wahlrecht: ...&#10;&#10;M2 – Fahrradbremse:&#10;Stufe / Forderung: ...&#10;Wahlrecht: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-buch2')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-buch2">
+              <strong>M1 – Defektes Display (Handy, 3 Tage alt):</strong><br>
+              Stufe 1 – Nacherfüllung gemäß <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__439.html" target="_blank">§ 439 BGB</a>. Der Käufer kann <strong>wählen</strong>: Reparatur (Display austauschen lassen) oder Ersatzlieferung (neues Handy). Da das Gerät erst 3 Tage alt ist, ist die Ersatzlieferung naheliegend. Alle Kosten trägt der Verkäufer. Im Buch-Dialog wird allerdings nur die Reparatur angeboten („einschicken, kann einige Wochen dauern") – der Käufer dürfte hier auf Ersatzlieferung bestehen.<br><br>
+              <strong>M2 – Fahrrad mit defekter Bremse (1 Woche alt):</strong><br>
+              Ebenfalls Stufe 1 – Nacherfüllung. Wahl zwischen Reparatur (Bremse reparieren) oder Ersatzlieferung (neues Rad). Beachte: Der Verkäufer im Buch versucht abzuwimmeln („preisgünstig", „keine Garantie gegeben") – das ist rechtlich irrelevant! Die <strong>gesetzliche Gewährleistung</strong> gilt unabhängig von einer Garantie. Auch die zerrissene Jeans ist erwähnenswert: Das könnte ein <strong>Mangelfolgeschaden</strong> sein (Stufe 2: Schadensersatz neben Nacherfüllung).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 3 (S. 77) – Sinnvolle Art der Nacherfüllung</span>
+            <span class="task-subtitle">Buchaufgabe · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-green">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="14" stroke="#43A047" stroke-width="2.5" fill="none"/>
+                <path d="M11 18l5 5 10-11" stroke="#43A047" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Wählt für die Fälle M1 und M2 jeweils eine sinnvolle Art der Nacherfüllung (M5 nutzen). Begründet eure Wahl mit Blick auf die Interessen des Käufers.</p>
+            <textarea class="answer-area" style="min-height:120px;" placeholder="M1 – meine Wahl: ... weil ...&#10;&#10;M2 – meine Wahl: ... weil ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-buch3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-buch3">
+              <strong>M1 – Defektes Display:</strong><br>
+              Sinnvoll: <strong>Ersatzlieferung</strong>. Das Handy ist erst 3 Tage alt – es sollte sich um einen Gerätemangel bei Übergabe handeln. Eine Reparatur kann mehrere Wochen dauern, ein Smartphone ist im Alltag aber unverzichtbar. Mit der Ersatzlieferung hat der Käufer schneller wieder ein funktionierendes Gerät.<br><br>
+              <strong>M2 – Fahrradbremse:</strong><br>
+              Eher <strong>Reparatur</strong> – die Bremse lässt sich vergleichsweise schnell vor Ort tauschen. Eine Ersatzlieferung eines kompletten Rades wäre für den Verkäufer unverhältnismäßig, wenn der eigentliche Defekt nur die Endmontage einer Komponente betrifft. Hier könnte der Verkäufer die Ersatzlieferung sogar verweigern (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__439.html" target="_blank">§ 439 Abs. 4 BGB</a>: unverhältnismäßige Kosten).<br><br>
+              <em>Hinweis: Das Wahlrecht des Käufers wird durch das Verhältnismäßigkeitsprinzip eingeschränkt – die Wahl muss objektiv angemessen sein.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">+</div>
+          <div class="task-header-text">
+            <span class="task-title">Zusatzaufgabe (optional) – Streitgespräch zu M2</span>
+            <span class="task-subtitle">Aufg. 4 (S. 77) · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-red">
+              <svg width="22" height="22" viewBox="0 0 44 38" fill="none">
+                <rect x="2" y="3" width="22" height="16" rx="4" fill="#E53935"/>
+                <path d="M6 19l-4 6 8-4" fill="#E53935"/>
+                <rect x="20" y="18" width="22" height="16" rx="4" fill="#E53935" opacity="0.65"/>
+                <path d="M38 34l4 4-8-2" fill="#E53935" opacity="0.65"/>
+                <path d="M7 9h12M7 13h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M25 24h12M25 28h8" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Stellt für ein Streitgespräch zwischen Verkäufer und Käuferin im Fall M2 Argumente zusammen. Bezieht die Information der Verbraucherzentrale (M5) und den Begriff Mangelfolgeschaden (M6) mit ein. Spielt das Gespräch ggf. kurz vor der Klasse.</p>
+            <textarea class="answer-area" style="min-height:120px;" placeholder="Argumente Verkäufer: ...&#10;&#10;Argumente Käuferin: ...&#10;&#10;Mein Fazit: ..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box purple">
+        <strong>🏁 Sicherung</strong>
+        Halte als Kerngedanke fest: Bei einem Sachmangel hat der Käufer <strong>immer zuerst Anspruch auf Nacherfüllung</strong> – Reparatur oder Ersatzlieferung. Erst wenn das scheitert, geht es zur Stufe 2 (Rücktritt, Minderung, Schadensersatz). Eine klar formulierte schriftliche Reklamation mit Fristsetzung ist dafür der Schlüssel.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- STEP 6: LEHRKRAFT-ABFRAGE (teacher-only) -->
+<div class="step teacher-only" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage</div>
+        <div class="section-title">Vier-Kompetenz-Abfrage (ca. 10 Minuten)</div>
+        <div class="section-time">🔵 Wissen · 🟢 Kritisches Denken · 🟡 Kommunikation · 🔴 Kreativität</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+        <div class="teacher-note-header">🎓 Hinweise zur Abfrage</div>
+        <p>Vier Fragen aus den vier K+5-Kompetenzbereichen. Schwerpunkt diesmal auf <strong>Kommunikation</strong>, da die zentrale Lehrplan-Kompetenz dieser Stunde („situationsgerecht kommunizieren") konkret abgeprüft wird. Vor dem Aufruf: <strong>Quiz wurde bewusst weggelassen</strong>, daher dient die Abfrage zugleich der Sicherung.</p>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:1rem;">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--blue-50);border:1px solid #bfdbfe;color:var(--blue-800);">🔵 Wissen</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--teal-light);border:1px solid #99f6e4;color:#0f766e;">🟢 Kritisches Denken</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--orange-light);border:1px solid #fde68a;color:#92400e;">🟡 Kommunikation</span>
+          <span style="font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--red-light);border:1px solid #fecdd3;color:#9f1239;">🔴 Kreativität</span>
+        </div>
+        <button class="print-btn" onclick="window.print()">🖨 Drucken</button>
+      </div>
+
+      <div class="abfrage-wrap">
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Nenne die beiden Stufen der Gewährleistungsrechte – mit allen jeweiligen Optionen.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Vollständige Antwort: Stufe 1 mit beiden Optionen und Wahlrecht; Stufe 2 mit allen drei Optionen.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew1">
+              <strong>Stufe 1 – Nacherfüllung (§ 439 BGB):</strong> Reparatur ODER Ersatzlieferung – <strong>Wahlrecht des Käufers</strong>. (2 P.)<br>
+              <strong>Übergang:</strong> erst nach erfolgloser angemessener Frist oder Verweigerung der Nacherfüllung. (1 P.)<br>
+              <strong>Stufe 2 – Sekundärrechte:</strong> Rücktritt (§ 323/437 BGB) · Minderung (§ 441 BGB) · Schadensersatz (§ 280 BGB). (3 P.)<br><br>
+              <em>Punktabzug, wenn das Wahlrecht des Käufers oder die Reihenfolge fehlt – beides ist Kern der Stunde.</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 3 Min.</div>
+              <div class="abfrage-q-text">„Garantie ist immer besser als Gewährleistung." Stimmt das? Begründe!</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Häufiges Missverständnis. Bewertet: klare Abgrenzung der Begriffe + nachvollziehbare Begründung.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew2">
+              <strong>FALSCH.</strong> Beide haben unterschiedliche Funktionen:<br>
+              • <strong>Gewährleistung</strong> ist gesetzlich (§§ 437 ff. BGB), gilt 2 Jahre und kann nicht ausgeschlossen werden. Sie greift bei jedem Mangel, der bei Übergabe bestand.<br>
+              • <strong>Garantie</strong> ist freiwillig (§ 443 BGB). Inhalt, Dauer und Bedingungen legt der Garantiegeber selbst fest – sie kann besser oder schlechter sein als die Gewährleistung.<br><br>
+              Im Idealfall hat der Käufer <strong>beides nebeneinander</strong>. Eine abgelaufene Garantie bedeutet NICHT, dass auch die Gewährleistung weg ist.
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Erläutere die fünf Bausteine einer wirksamen Reklamations-E-Mail. Welche Funktion hat jeder Baustein?</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Lehrplan-Kernkompetenz! Bewertet: alle 5 Bausteine in richtiger Reihenfolge + jeweils Funktion.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew3">
+              <strong>1. Sachverhalt</strong> – wer, wann, was, wo gekauft (Bestellnr., Preis). → Empfänger weiß sofort, worum es geht.<br>
+              <strong>2. Mangelbenennung</strong> – konkret, nachprüfbar. → Macht den Anspruch greifbar.<br>
+              <strong>3. Forderung Nacherfüllung</strong> – Reparatur oder Ersatzlieferung (eigene Wahl), Verweis auf § 439 BGB. → Klar definierter Anspruch.<br>
+              <strong>4. Fristsetzung</strong> – konkretes Datum (ca. 14 Tage). → Zwingende Voraussetzung für Übergang auf Stufe 2.<br>
+              <strong>5. Sekundärrechte ankündigen</strong> – Rücktritt/Minderung/Schadensersatz. → Macht ernst, ohne zu drohen.<br><br>
+              <em>Sehr gute Antwort verbindet Bausteine direkt mit der Pyramide aus Schritt 2.</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erfinde einen eigenen Fall, in dem der Käufer auf Stufe 2 der Pyramide wechselt. Welches der drei Sekundärrechte wählt er – und warum?</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Eigener Fall – nicht aus dem Unterricht. Bewertet: realistischer Fall + nachvollziehbare Wahl des passenden Sekundärrechts.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew4">
+              <strong>Beispiel:</strong> Anna hat eine neue Waschmaschine gekauft. Nach der ersten Wäsche wäscht sie nicht mehr richtig. Anna setzt eine Frist von 14 Tagen zur Reparatur. Der Verkäufer schickt zwei Techniker – beide Reparaturen bringen nichts. → Anna wechselt auf Stufe 2 und tritt <strong>vom Vertrag zurück</strong>, weil sie sich nicht mehr auf das Gerät verlassen kann und ihr Vertrauen erschüttert ist.<br><br>
+              Andere mögliche Wahl: <strong>Minderung</strong> bei kleineren Mängeln, die das Gerät noch nutzbar lassen (z. B. Kratzer im Display, das aber funktioniert). <strong>Schadensersatz</strong>, wenn durch den Mangel ein Folgeschaden entstanden ist (z. B. ausgelaufene Wäsche → Wasserschaden).<br><br>
+              <em>Bewertet wird, ob die Wahl zum Fall passt.</em>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 8-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div><div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div></div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const PIN_HASH='385319fce53854f96b636f28301b3d31be241dcaf6f1775da31a5e768b3a848e';
+let pinInput='',cur=1;
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=8)return;pinInput+=d;updatePinDots();if(pinInput.length===8)setTimeout(()=>checkPin(),120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<8;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h===PIN_HASH){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+function revealSolution(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':'✓ Musterlösung anzeigen';}
+function toggleErwartung(id){const el=document.getElementById(id);el.classList.toggle('visible');el.previousElementSibling.textContent=el.classList.contains('visible')?'▲ Ausblenden':'📋 Erwartungshorizont';}
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+</script>
+</body>
+</html>
