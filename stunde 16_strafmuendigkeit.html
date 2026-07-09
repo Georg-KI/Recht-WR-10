@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 16 – Strafmündigkeit &amp; Jugendstrafrecht</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --violet:#4527A0;--violet-light:#EDE7F6;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --grad-violet7:linear-gradient(135deg,#4527A0,#7B1FA2);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* ── PROGRESS ── */
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+
+/* ── MAIN ── */
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* ── HERO (Modul 7: Dunkelviolett) ── */
+.hero{background:var(--grad-violet7);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
+
+/* ── TEACHER NOTE ── */
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* ── SECTION ── */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.red{background:var(--red-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:var(--teal-light);}
+.section-icon.violet{background:var(--violet-light);}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.task.violet{border-color:var(--violet);}
+.task.violet .task-header{background:var(--violet);}
+
+/* ── INPUTS ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:85px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+
+/* ── SOLUTION ── */
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box.violet{background:var(--violet-light);border-left:3px solid var(--violet);color:#311B92;}
+.info-box strong{font-weight:700;}
+.info-box > strong:first-of-type{display:block;margin-bottom:4px;}
+
+/* ── BOOK REF ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+
+/* ── SCENARIO (dunkel) ── */
+.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
+.scenario strong{color:var(--blue-400);}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;}
+a.para-link:hover{color:var(--blue-400);}
+.para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.para-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.para-label a{color:var(--blue-400);text-decoration:none;}
+.para-quote p{font-size:14.5px;line-height:1.65;color:#e2e8f0 !important;font-style:italic;}
+.para-ref{font-size:12px;color:#94a3b8;margin-top:0.6rem;}
+.para-ref a{color:var(--blue-400);}
+
+/* ── CONTENT ── */
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+
+/* ── VERGLEICHSTABELLE ── */
+.cmp-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:1.25rem 0;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.cmp-table th{padding:0.75rem 0.9rem;text-align:left;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:white;}
+.cmp-table th.side{background:#f8fafc;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;width:22%;}
+.cmp-table th.civ{background:var(--blue-700);}
+.cmp-table th.straf{background:var(--violet);}
+.cmp-table td{padding:0.7rem 0.9rem;border-top:1px solid var(--border);color:var(--text-secondary);line-height:1.55;vertical-align:top;}
+.cmp-table td.side{background:#f8fafc;font-weight:700;color:var(--text);font-size:12.5px;}
+
+/* ── ALTERSSTUFEN (Strafmündigkeit) ── */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:1.25rem 0;}
+.tier-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:white;display:flex;flex-direction:column;}
+.tier-head{padding:0.6rem 0.75rem;text-align:center;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;line-height:1.35;}
+.tier-head small{display:block;font-size:10.5px;font-weight:600;opacity:0.85;text-transform:uppercase;letter-spacing:0.5px;}
+.tier-head.grau{background:#78909C;}
+.tier-head.violet{background:var(--violet);}
+.tier-head.orange{background:#E65100;}
+.tier-head.green{background:#2E7D32;}
+.tier-body{padding:0.8rem 0.9rem;font-size:12.5px;color:var(--text-secondary);line-height:1.55;flex:1;}
+.tier-body strong{color:var(--text);}
+
+/* ── SANKTIONEN JGG ── */
+.sank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:1.25rem 0;}
+.sank-card{background:white;border:1.5px solid var(--border);border-top:4px solid var(--violet);border-radius:var(--radius-md);padding:1rem 1.1rem;}
+.sank-card.mild{border-top-color:var(--green);}
+.sank-card.mittel{border-top-color:var(--orange);}
+.sank-card.hart{border-top-color:var(--red);}
+.sank-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13.5px;color:var(--text);margin-bottom:4px;}
+.sank-text{font-size:12.5px;color:var(--text-secondary);line-height:1.55;}
+
+/* ── QUIZ ── */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+#quiz-score{background:var(--blue-50);border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin-top:1rem;display:none;}
+#score-text{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:var(--blue-800);}
+#score-sub{font-size:13px;color:var(--blue-800);}
+
+/* ── BUTTONS ── */
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+
+/* ── ABFRAGE ── */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:11px;font-weight:700;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:#0f766e;}
+.abfrage-q-label.komm{color:#92400e;}
+.abfrage-q-label.kreativ{color:#9f1239;}
+.abfrage-q-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.5;}
+.abfrage-q-body{padding:1rem 1.1rem;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.erwartung-box{margin-top:10px;background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--blue-800);line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+
+/* ── PIN MODAL ── */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+
+/* ── STEP / TEACHER ── */
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}.cmp-table{font-size:12px;}}
+
+/* ── SVG ICON HELPER ── */
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-purple{border:1.5px solid var(--purple);}
+.ico-red{border:1.5px solid var(--red);}
+</style>
+</head>
+<body id="body-root">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">Recht<span>&</span>Ich <span class="topbar-logo-back">← Übersicht</span></a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 16</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Zivil- vs. Strafrecht</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Strafmündigkeit</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Falltraining</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Quiz</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">🚨 Modul 7 · Widerrechtliches Handeln</div>
+  <h1>Strafmündigkeit &amp; Jugendstrafrecht</h1>
+  <p>Jonas kennt die Rechnung schon: 1.200 € Schadensersatz für das Auto, das er mit dem E-Scooter gerammt hat. Doch jetzt liegt ein Brief der Polizei im Briefkasten – es wird gegen ihn ermittelt. Wird Jonas jetzt auch noch bestraft? In dieser Stunde lernst du, wann aus einer Tat eine Straftat wird, ab welchem Alter man dafür geradestehen muss – und wie das Jugendstrafrecht junge Täter behandelt.</p>
+  <div class="hero-meta">
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 startup.WR Bayern 10, S. 84–86</div>
+    <div>🎯 5 Schritte + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler analysieren die rechtlichen Konsequenzen ihres Handelns und sind sich der rechtlichen Folgen widerrechtlichen Handelns bewusst. Sie unterscheiden die unerlaubte Handlung von der Straftat, wenden die Regelungen zur Strafmündigkeit auf konkrete Fälle an und beurteilen Rechtsfolgen von z.&nbsp;B. Sachbeschädigung, Diebstahl und Körperverletzung.</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Stunde 16 setzt den <strong>Jonas-Fall aus Stunde 15</strong> fort – diesmal mit der strafrechtlichen Brille. Didaktischer Kern: Die Abgrenzung unerlaubte Handlung ↔ Straftat wird am Vorsatz-Erfordernis des § 303 StGB greifbar (fahrlässige Sachbeschädigung ist <strong>nicht</strong> strafbar – zivilrechtlich haftet Jonas trotzdem).</p>
+  <ul>
+    <li>Schritt 1: Einstieg – Fortsetzung Jonas (Anzeige wegen Sachbeschädigung).</li>
+    <li>Schritt 2: Zivil- vs. Strafrecht (eigene Gegenüberstellung, angelehnt an M5 S. 86) + Auflösung Jonas (§§ 303, 15 StGB) + <strong>Buchaufgabe 3 (S. 86)</strong> zum Skaterpark-Fall M3.</li>
+    <li>Schritt 3: Strafmündigkeit – alle vier Altersstufen inkl. Heranwachsende (§ 105 JGG), Gegenüberstellung zu § 828 BGB (Stunde 15), Sanktionen des JGG + <strong>Buchaufgabe 4 (S. 86)</strong>.</li>
+    <li>Schritt 4: Kernaufgabe <strong>Buchaufgabe 5 (S. 86)</strong> – Antwortschreiben an Lisa (M4) mit § 242 StGB. Optional (violett, für Schnelle): <strong>Aufgabe 6</strong> – §§ 5, 8 JGG und Funktionen des Rechts.</li>
+    <li>Aufgaben 1–2 (S. 86) entfallen; M2 (Richterurteile USA/D) eignet sich bei Zeitreserve als kurzer Plenums-Impuls zur Frage „Was soll Strafe eigentlich bewirken?".</li>
+    <li>Vertiefendes Fachwissen: S. 100–101 (Stufen der Deliktsfähigkeit, Strafmündigkeit, Übersichtsgrafik Rechts-/Geschäfts-/Delikts-/Straffähigkeit).</li>
+  </ul>
+</div>
+
+<!-- STEP 1: EINSTIEG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon violet">🛴</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Einstieg</div>
+        <div class="section-title">Der Fall Jonas – Teil 2: Post von der Polizei</div>
+        <div class="section-time">⏱ ca. 4 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="chip-row teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Einstieg</div><p>Kurz an Stunde 15 anknüpfen (zivilrechtliche Lösung ist bekannt: §§ 823 I, 828 III BGB). Die Leitfrage „Wird Jonas jetzt <em>zusätzlich</em> bestraft?" bewusst offen lassen – die Auflösung (kein Vorsatz → § 303 StGB greift nicht) kommt erst in Schritt 2 und ist der Aha-Moment der Stunde.</p></div></div>
+
+      <div class="scenario">
+        <div class="scenario-label">📖 Fortsetzung aus Stunde 15</div>
+        <p>Du erinnerst dich: Der 16-jährige <strong>Jonas</strong> ist mit dem E-Scooter unterwegs, schaut kurz aufs Handy – und rammt ein parkendes Auto. Schaden: <strong>1.200 €</strong>. Zivilrechtlich ist der Fall klar: Jonas ist deliktsfähig und muss Schadensersatz zahlen (§§ 823 Abs. 1, 828 Abs. 3 BGB).</p>
+        <p style="margin-top:0.75rem;">Doch damit ist die Sache nicht erledigt. Der Autobesitzer ist wütend und erstattet <strong>Anzeige bei der Polizei</strong> – wegen Sachbeschädigung. Zwei Wochen später liegt ein Brief im Briefkasten: <em>„Gegen Sie wird ein Ermittlungsverfahren geführt."</em> Jonas ist geschockt: <strong>„Ich zahle doch schon den Schaden – werde ich jetzt auch noch bestraft?!"</strong></p>
+      </div>
+
+      <div class="info-box orange">
+        <strong>💡 Warum ist das relevant für dich?</strong>
+        Ab deinem 14. Geburtstag bist du strafmündig – du kannst also vor dem Jugendgericht landen. Eine Schlägerei auf dem Schulweg, ein „geliehenes" Fahrrad, ein geklautes Lipgloss: Solche Dinge haben ab 14 echte rechtliche Konsequenzen. Heute lernst du, welche das sind – und warum das Jugendstrafrecht trotzdem anders tickt als das Erwachsenenstrafrecht.
+      </div>
+
+      <p class="content-text">Drei Fragen begleiten dich durch diese Stunde:</p>
+      <div class="info-box violet">
+        <strong>🔎 Leitfragen</strong>
+        1. Kann <strong>eine</strong> Tat gleichzeitig Schadensersatz <em>und</em> Strafe auslösen – oder gilt „doppelt geht nicht"?<br>
+        2. Ab welchem Alter kann man überhaupt bestraft werden – und was gilt für 14- bis 20-Jährige?<br>
+        3. Wie geht der Fall für Jonas aus?
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-primary" onclick="nextStep(1)">Weiter: Zivil- vs. Strafrecht →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: ZIVIL- VS. STRAFRECHT -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">⚖️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Konzept</div>
+        <div class="section-title">Unerlaubte Handlung ↔ Straftat: Zwei Rechtsgebiete, zwei Ziele</div>
+        <div class="section-time">⏱ ca. 8 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Die Gegenüberstellung ist eine eigene didaktische Aufbereitung (angelehnt an M5, S. 86 – Schaubild dort ergänzend zeigen). Zentraler Merksatz: Zivil- und Strafrecht laufen <strong>unabhängig nebeneinander</strong> – Schadensersatz ist keine Strafe, Strafe ist kein Schadensersatz. Aufgabe 3 (S. 86) schließt den Schritt ab.</p></div></div>
+
+      <p class="content-text">In Stunde 15 hast du die <strong>unerlaubte Handlung</strong> kennengelernt: Wer einen anderen widerrechtlich schädigt, muss <strong>Schadensersatz</strong> zahlen (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__823.html" target="_blank">§ 823 BGB</a>). Das ist <strong>Zivilrecht</strong> – es regelt den Ausgleich zwischen Privatpersonen. Eine <strong>Straftat</strong> ist etwas anderes: Hier tritt der <strong>Staat</strong> auf den Plan, weil die Tat die Allgemeinheit betrifft. Vergleiche selbst:</p>
+
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th class="side"></th>
+            <th class="civ">⚖️ Unerlaubte Handlung (Zivilrecht)</th>
+            <th class="straf">🚨 Straftat (Strafrecht)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="side">Wer steht sich gegenüber?</td>
+            <td>Geschädigter ↔ Schädiger (Privatpersonen bzw. Unternehmen)</td>
+            <td>Staat (vertreten durch die <strong>Staatsanwaltschaft</strong>) ↔ Beschuldigter</td>
+          </tr>
+          <tr>
+            <td class="side">Ziel</td>
+            <td><strong>Ausgleich:</strong> Der Geschädigte soll so gestellt werden, als wäre nichts passiert</td>
+            <td><strong>Strafe &amp; Prävention:</strong> Schutz der Allgemeinheit, Abschreckung, beim JGG vor allem Erziehung</td>
+          </tr>
+          <tr>
+            <td class="side">Wichtige Gesetze</td>
+            <td>BGB (z.&nbsp;B. <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__823.html" target="_blank">§ 823</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__828.html" target="_blank">§ 828</a>)</td>
+            <td>StGB (z.&nbsp;B. <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__303.html" target="_blank">§ 303</a>), bei Jugendlichen das <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/" target="_blank">JGG</a></td>
+          </tr>
+          <tr>
+            <td class="side">Mögliche Folge</td>
+            <td>Schadensersatz, Schmerzensgeld, Herausgabe</td>
+            <td>Geldstrafe, Freiheitsstrafe – bei Jugendlichen: Maßnahmen nach dem JGG</td>
+          </tr>
+          <tr>
+            <td class="side">Wer wird aktiv?</td>
+            <td>Der Geschädigte muss seine Ansprüche <strong>selbst</strong> geltend machen (notfalls Klage)</td>
+            <td>Der Staat ermittelt <strong>von Amts wegen</strong> – auch ohne Wunsch des Opfers</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box blue">
+        <strong>🔑 Merke: Beides gleichzeitig ist möglich!</strong>
+        Ein und dieselbe Handlung kann <strong>beide</strong> Rechtsgebiete auslösen. Wer einen Mitschüler verprügelt, begeht eine Straftat (Körperverletzung, <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__223.html" target="_blank">§ 223 StGB</a>) <em>und</em> eine unerlaubte Handlung (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__823.html" target="_blank">§ 823 BGB</a> – Schmerzensgeld!). Strafverfahren und Schadensersatz laufen unabhängig nebeneinander.
+      </div>
+
+      <p class="content-text"><strong>Und Jonas?</strong> Der Autobesitzer hat ihn wegen Sachbeschädigung angezeigt. Schau dir die Norm genau an:</p>
+
+      <div class="para-quote">
+        <div class="para-label"><a href="https://www.gesetze-im-internet.de/stgb/__303.html" target="_blank">§ 303 Abs. 1 StGB – Sachbeschädigung</a></div>
+        <p>„Wer rechtswidrig eine fremde Sache beschädigt oder zerstört, wird mit Freiheitsstrafe bis zu zwei Jahren oder mit Geldstrafe bestraft."</p>
+        <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/stgb/__303.html" target="_blank">gesetze-im-internet.de – § 303 StGB ↗</a></div>
+      </div>
+
+      <p class="content-text">Klingt erstmal so, als hätte Jonas ein Problem. Aber im Strafrecht gibt es eine entscheidende Grundregel:</p>
+
+      <div class="para-quote">
+        <div class="para-label"><a href="https://www.gesetze-im-internet.de/stgb/__15.html" target="_blank">§ 15 StGB – Vorsätzliches und fahrlässiges Handeln</a></div>
+        <p>„Strafbar ist nur vorsätzliches Handeln, wenn nicht das Gesetz fahrlässiges Handeln ausdrücklich mit Strafe bedroht."</p>
+        <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/stgb/__15.html" target="_blank">gesetze-im-internet.de – § 15 StGB ↗</a></div>
+      </div>
+
+      <div class="info-box green">
+        <strong>✅ Auflösung: Jonas wird nicht bestraft</strong>
+        Jonas hat das Auto nicht <strong>absichtlich</strong> gerammt – er war unaufmerksam, hat also <strong>fahrlässig</strong> gehandelt. § 303 StGB stellt aber nur die <em>vorsätzliche</em> Sachbeschädigung unter Strafe; eine fahrlässige Sachbeschädigung ist im StGB nicht vorgesehen. Das Ermittlungsverfahren wird eingestellt. <strong>Aber:</strong> Die zivilrechtliche Haftung bleibt voll bestehen – § 823 BGB erfasst Vorsatz <em>und</em> Fahrlässigkeit. Die 1.200 € muss Jonas trotzdem zahlen.
+      </div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Buchaufgabe – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Lies den Zeitungsartikel <strong>M3 auf Seite 85</strong> (Schlägerei am Skaterpark) und schau dir das Schaubild <strong>M5 auf Seite 86</strong> an. Bearbeite dann <strong>Aufgabe 3 auf Seite 86</strong>.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">1</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 3 (S. 86) – Warum drohen den Tätern aus M3 doppelte Konsequenzen?</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/><path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Begründe mithilfe der Unterscheidung von Zivil- und Strafrecht, weshalb den beiden Tätern aus M3 Konsequenzen aus <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__223.html" target="_blank">§ 223 StGB</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__303.html" target="_blank">§ 303 StGB</a> <strong>und</strong> <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__823.html" target="_blank">§ 823 BGB</a> drohen könnten.</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="§ 223 StGB (Körperverletzung), weil ...&#10;§ 303 StGB (Sachbeschädigung), weil ...&#10;§ 823 BGB (Schadensersatz), weil ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-a3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-a3">
+              <strong>§ 223 StGB – Körperverletzung (Strafrecht):</strong> Die Täter haben das Opfer geschlagen und getreten und dabei erheblich verletzt (u.&nbsp;a. Gehirnerschütterung, Platzwunde). Das ist eine vorsätzliche Körperverletzung – der Staat verfolgt die Tat.<br><br>
+              <strong>§ 303 StGB – Sachbeschädigung (Strafrecht):</strong> Bei der Schlägerei wurde auch eine fremde Sache beschädigt (zerbrochene Zahnspange). Da die Schläge vorsätzlich waren, kommt zusätzlich Sachbeschädigung in Betracht.<br><br>
+              <strong>§ 823 BGB – unerlaubte Handlung (Zivilrecht):</strong> Unabhängig von der Strafe kann das Opfer von den Tätern <em>persönlich</em> Ersatz verlangen: Behandlungskosten, Ersatz der Zahnspange, dazu Schmerzensgeld.<br><br>
+              <strong>Fazit:</strong> Eine Handlung – zwei Rechtsgebiete. Das Strafverfahren schützt die Allgemeinheit, der zivilrechtliche Anspruch entschädigt das Opfer. Beides läuft nebeneinander.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: Strafmündigkeit →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: STRAFMÜNDIGKEIT -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon violet">🎂</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Strafmündigkeit</div>
+        <div class="section-title">Ab wann wird man bestraft? Die vier Altersstufen</div>
+        <div class="section-time">⏱ ca. 9 Minuten · Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Die Vier-Stufen-Darstellung spiegelt bewusst das Drei-Stufen-Muster der Deliktsfähigkeit aus Stunde 15 – die Gegenüberstellungstabelle festigt beide Systeme. Bei den Heranwachsenden (§ 105 JGG) betonen: In der Praxis wird bei 18- bis 20-Jährigen sehr häufig Jugendstrafrecht angewendet (so auch im Skaterpark-Fall M3). Aufgabe 4 (S. 86) in Partnerarbeit; die Sanktionsdreiteilung vorher sichern.</p></div></div>
+
+      <p class="content-text">Ob jemand für eine Straftat <strong>bestraft</strong> werden kann, hängt vom Alter und von der geistigen Reife ab – das nennt man <strong>Strafmündigkeit</strong>. Das Gesetz unterscheidet vier Stufen:</p>
+
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-head grau">unter 14<small>Kinder</small></div>
+          <div class="tier-body"><strong>Schuldunfähig</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__19.html" target="_blank">§ 19 StGB</a>): Eine Bestrafung durch ein Gericht ist nicht möglich. Aber: Jugendamt und Familiengericht können eingreifen – und zivilrechtlich kann ab 7 trotzdem gehaftet werden!</div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-head violet">14–17<small>Jugendliche</small></div>
+          <div class="tier-body"><strong>Bedingt strafmündig</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__1.html" target="_blank">§ 1</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__3.html" target="_blank">§ 3 JGG</a>): verantwortlich, wenn sie zur Tatzeit reif genug sind, das Unrecht der Tat einzusehen. Es gilt das <strong>Jugendstrafrecht (JGG)</strong>.</div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-head orange">18–20<small>Heranwachsende</small></div>
+          <div class="tier-body"><strong>Voll strafmündig</strong> – aber: Nach <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__105.html" target="_blank">§ 105 JGG</a> wird <strong>Jugendstrafrecht</strong> angewendet, wenn der Täter in seiner Reife noch einem Jugendlichen gleichsteht oder die Tat jugendtypisch ist – sonst Erwachsenenstrafrecht.</div>
+        </div>
+        <div class="tier-card">
+          <div class="tier-head green">ab 21<small>Erwachsene</small></div>
+          <div class="tier-body"><strong>Voll strafmündig:</strong> Es gilt ausschließlich das <strong>Erwachsenenstrafrecht</strong> (StGB) – Geldstrafe oder Freiheitsstrafe nach dem jeweiligen Strafrahmen.</div>
+        </div>
+      </div>
+
+      <div class="info-box violet">
+        <strong>🔁 Schon gewusst? Deliktsfähigkeit ≠ Strafmündigkeit</strong>
+        Beide Begriffe fragen nach Alter und Einsichtsfähigkeit – aber in <strong>verschiedenen Rechtsgebieten</strong>. Vergleiche mit Stunde 15:
+      </div>
+
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th class="side"></th>
+            <th class="civ">Deliktsfähigkeit (Zivilrecht)</th>
+            <th class="straf">Strafmündigkeit (Strafrecht)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="side">Frage</td>
+            <td>Muss ich für einen Schaden <strong>zahlen</strong>?</td>
+            <td>Kann ich <strong>bestraft</strong> werden?</td>
+          </tr>
+          <tr>
+            <td class="side">Norm</td>
+            <td><a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__828.html" target="_blank">§ 828 BGB</a></td>
+            <td><a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__19.html" target="_blank">§ 19 StGB</a> + <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__3.html" target="_blank">§§ 1, 3, 105 JGG</a></td>
+          </tr>
+          <tr>
+            <td class="side">Altersgrenzen</td>
+            <td>unter 7 nicht · 7–17 bedingt (Einsichtsfähigkeit) · ab 18 voll</td>
+            <td>unter 14 nicht · 14–17 bedingt (JGG) · 18–20 Heranwachsende (§ 105 JGG) · ab 21 voll (StGB)</td>
+          </tr>
+          <tr>
+            <td class="side">Folge</td>
+            <td>Schadensersatz, Schmerzensgeld</td>
+            <td>Maßnahmen nach JGG bzw. Geld-/Freiheitsstrafe</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="content-text">Was passiert konkret, wenn ein Jugendlicher verurteilt wird? Im Jugendstrafrecht steht nicht die Vergeltung im Mittelpunkt, sondern der <strong>Erziehungsgedanke</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__2.html" target="_blank">§ 2 JGG</a>): Der junge Mensch soll künftig ohne Straftaten leben. Dafür kennt das JGG drei Stufen von Rechtsfolgen:</p>
+
+      <div class="sank-grid">
+        <div class="sank-card mild">
+          <div class="sank-title">1️⃣ Erziehungsmaßregeln</div>
+          <div class="sank-text">Mildeste Stufe (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__9.html" target="_blank">§ 9 JGG</a>): <strong>Weisungen</strong> (z.&nbsp;B. Sozialstunden, Anti-Gewalt-Training, Betreuungsweisung) und <strong>Erziehungsbeistandschaft</strong> – Unterstützung statt Strafe.</div>
+        </div>
+        <div class="sank-card mittel">
+          <div class="sank-title">2️⃣ Zuchtmittel</div>
+          <div class="sank-text">Spürbarer „Denkzettel" (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__13.html" target="_blank">§ 13 JGG</a>): <strong>Verwarnung</strong>, <strong>Auflagen</strong> (z.&nbsp;B. Schadenswiedergutmachung, Geldbetrag) oder <strong>Jugendarrest</strong> (Freizeit-, Kurz- oder Dauerarrest bis 4 Wochen).</div>
+        </div>
+        <div class="sank-card hart">
+          <div class="sank-title">3️⃣ Jugendstrafe</div>
+          <div class="sank-text">Schärfste Stufe (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__17.html" target="_blank">§ 17 JGG</a>): Freiheitsentzug in einer Jugendstrafanstalt – <strong>6 Monate bis 5 Jahre</strong>, bei besonders schweren Verbrechen bis zu 10 Jahre. Nur, wenn Erziehungsmaßregeln und Zuchtmittel nicht ausreichen.</div>
+        </div>
+      </div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Buchaufgabe – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Nimm dir noch einmal den Skaterpark-Artikel <strong>M3 (S. 85)</strong> vor und bearbeite <strong>Aufgabe 4 auf Seite 86</strong>.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">2</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 4 (S. 86) – Der Skaterpark-Fall vor dem Jugendgericht</span>
+            <span class="task-subtitle">Buchaufgabe · Partnerarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 40 34" fill="none"><path d="M20 6C20 6 14 4 6 5C4 5 3 6 3 8L3 30C3 31.5 4.5 32.5 6 32C14 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M20 6C20 6 26 4 34 5C36 5 37 6 37 8L37 30C37 31.5 35.5 32.5 34 32C26 31 20 32 20 32" stroke="#1976D2" stroke-width="2.2" stroke-linecap="round" fill="none"/><line x1="20" y1="6" x2="20" y2="32" stroke="#1976D2" stroke-width="2" stroke-linecap="round"/><path d="M8 12h9M8 16h9M8 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><path d="M23 12h9M23 16h9M23 20h6" stroke="#1976D2" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/></svg>
+            </div>
+            <div class="ico ico-teal">
+              <svg width="22" height="22" viewBox="0 0 44 36" fill="none"><circle cx="12" cy="10" r="6.5" fill="#0d9488"/><circle cx="32" cy="10" r="6.5" fill="#0d9488"/><path d="M1 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/><path d="M21 34c0-6.075 4.925-11 11-11s11 4.925 11 11" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Beurteilt gemeinsam die Konsequenzen, die das Verhalten der beiden Jugendlichen aus M3 nach dem Jugendstrafrecht hatte. Bezieht dabei ein: die persönlichen Umstände der Täter, die Stufen der Strafmündigkeit (<a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__1.html" target="_blank">§§ 1</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__3.html" target="_blank">3</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__105.html" target="_blank">105 JGG</a>) und das allgemeine Strafmaß der Körperverletzung nach <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__223.html" target="_blank">§ 223 StGB</a>.</p>
+            <textarea class="answer-area" style="min-height:130px;" placeholder="Alterseinordnung der Täter (§§ 1, 3, 105 JGG): ...&#10;Verhängte Maßnahmen und ihre Stufe (Erziehungsmaßregel / Zuchtmittel / Jugendstrafe): ...&#10;Vergleich mit dem Strafrahmen des § 223 StGB: ...&#10;Rolle der persönlichen Umstände: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-a4')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-a4">
+              <strong>Alterseinordnung:</strong> Der jüngere Täter war zur Tatzeit 17, also Jugendlicher (§ 1 JGG) – er ist bedingt strafmündig, wenn er reif genug war, das Unrecht einzusehen (§ 3 JGG), wovon das Gericht ausging. Der ältere Täter ist Heranwachsender (18–20); nach § 105 JGG wandte das Gericht auch bei ihm Jugendstrafrecht an, weil Reifeentwicklung und Tatumstände jugendtypisch waren.<br><br>
+              <strong>Verhängte Maßnahmen:</strong> Eine Woche Jugendarrest ist ein <em>Zuchtmittel</em> (§ 13 JGG); der Erziehungsbeistand und die Weisung, Unterstützung bei der Berufsfindung zu suchen, sind <em>Erziehungsmaßregeln</em> (§ 9 JGG). Eine Jugendstrafe (§ 17 JGG) wurde nicht verhängt.<br><br>
+              <strong>Vergleich mit § 223 StGB:</strong> Das Erwachsenenstrafrecht sieht für Körperverletzung Freiheitsstrafe bis zu 5 Jahren oder Geldstrafe vor. Das Jugendgericht blieb bewusst deutlich darunter – nicht aus Milde, sondern weil im JGG der <em>Erziehungsgedanke</em> (§ 2 JGG) Vorrang hat: Die Maßnahmen sollen den Tätern helfen, ihr Leben zu ordnen, statt sie „wegzusperren".<br><br>
+              <strong>Persönliche Umstände:</strong> Schulabbruch, fehlender Ausbildungsplatz und Arbeitslosigkeit flossen in die Entscheidung ein – genau darauf zielen Erziehungsbeistand und Berufsfindungs-Weisung. Zugleich wertete das Gericht das Treten gegen den Kopf des knienden Opfers strafschärfend.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Falltraining →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: FALLTRAINING -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon orange">✉️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · Falltraining</div>
+        <div class="section-title">Antwortschreiben an Lisa – was droht nach dem Ladendiebstahl?</div>
+        <div class="section-time">⏱ ca. 9 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Kernaufgabe der Stunde (Aufg. 5, S. 86) – knüpft an das bewährte Briefformat aus Stunde 13 (Reklamations-E-Mail) und Stunde 15 (Antwortschreiben) an. Bewertungsschwerpunkte: korrekte Einordnung (16 = strafmündig, JGG), saubere Nennung des § 242 StGB, realistische Konsequenzen (Erziehungsmaßregeln/Zuchtmittel statt Jugendstrafe) und adressatengerechter, beruhigender Ton. Aufgabe 6 nur für schnelle Schüler/innen (violett).</p></div></div>
+
+      <p class="content-text">Jetzt bist du die Expertin bzw. der Experte: Im Buch findest du auf <strong>S. 86 (M4)</strong> den Forumspost der 16-jährigen <strong>Lisa</strong>. Sie wurde beim Ladendiebstahl erwischt, hat alles gestanden und die Ware zurückgegeben – und hat nun eine Vorladung erhalten. Sie fragt verzweifelt, was ihr droht.</p>
+
+      <div class="para-quote">
+        <div class="para-label"><a href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 Abs. 1 StGB – Diebstahl</a></div>
+        <p>„Wer eine fremde bewegliche Sache einem anderen in der Absicht wegnimmt, die Sache sich oder einem Dritten rechtswidrig zuzueignen, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft."</p>
+        <div class="para-ref">→ Volltext: <a href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">gesetze-im-internet.de – § 242 StGB ↗</a></div>
+      </div>
+
+      <div class="book-ref">
+        <div class="book-ref-icon">📗</div>
+        <div class="book-ref-body">
+          <div class="book-ref-title">Buchaufgabe – startup.WR Bayern 10 (C.C. Buchner)</div>
+          <div class="book-ref-text">Lies <strong>M4 auf Seite 86</strong> und bearbeite <strong>Aufgabe 5 auf Seite 86</strong>.</div>
+        </div>
+      </div>
+
+      <div class="task">
+        <div class="task-header">
+          <div class="task-num">3</div>
+          <div class="task-header-text">
+            <span class="task-title">Aufgabe 5 (S. 86) – Kernaufgabe: Analyse + Antwortschreiben an Lisa</span>
+            <span class="task-subtitle">Kreativaufgabe · Einzelarbeit</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-orange">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none"><path d="M18 4C11.373 4 6 9.373 6 16c0 4.136 2.022 7.789 5.1 10.053C12.2 27.26 13 28.5 13 30h10c0-1.5.8-2.74 1.9-3.947C27.978 23.789 30 20.136 30 16c0-6.627-5.373-12-12-12z" fill="#FFC107" stroke="#FF9800" stroke-width="2"/><path d="M18 1V3M28 5l-1.5 1.5M32 15h-2M28 27l-1.5-1.5M8 27l1.5-1.5M6 15h2M8 5l1.5 1.5" stroke="#FF9800" stroke-width="2" stroke-linecap="round"/><rect x="13" y="30" width="10" height="3" rx="1" fill="#9E9E9E"/><rect x="14" y="33" width="8" height="3" rx="1" fill="#9E9E9E"/></svg>
+            </div>
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="12" r="7" fill="#1976D2"/><path d="M4 34c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#1976D2" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p><strong>a)</strong> Analysiere zunächst, welche Konsequenzen der Diebstahl für Lisa haben kann: Ist sie strafmündig? Welche Norm hat sie verletzt? Welche Rechtsfolgen kommen realistisch in Betracht?</p>
+            <p><strong>b)</strong> Verfasse anschließend ein <strong>Antwortschreiben</strong> an Lisa im Forum. Beziehe den <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__242.html" target="_blank">§ 242 StGB</a> ausdrücklich ein – aber erkläre ihn so, dass Lisa ihn versteht. Gehe auch darauf ein, was für sie spricht.</p>
+            <textarea class="answer-area" style="min-height:180px;" placeholder="Hallo Lisa,&#10;&#10;erst einmal: tief durchatmen. Ich erkläre dir, wie deine Lage rechtlich aussieht.&#10;&#10;1. Bist du strafmündig? ...&#10;2. Welche Straftat steht im Raum (§ 242 StGB)? ...&#10;3. Was droht dir realistisch – und was spricht für dich? ...&#10;4. Mein Rat: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-a5')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-a5">
+              <strong>Mögliches Antwortschreiben (sinngemäß):</strong><br><br>
+              Hallo Lisa,<br><br>
+              erst einmal durchatmen – deine Lage ist ernst, aber nicht aussichtslos. Da du 16 bist, bist du <strong>strafmündig</strong>: Für dich gilt das <strong>Jugendstrafrecht</strong> (§§ 1, 3 JGG), nicht das Erwachsenenstrafrecht.<br><br>
+              Was dir vorgeworfen wird, ist <strong>Diebstahl nach § 242 StGB</strong>: Du hast fremde bewegliche Sachen (das Make-up) weggenommen, um sie zu behalten. Der Paragraf droht zwar „Freiheitsstrafe bis zu fünf Jahren oder Geldstrafe" an – dieser Strafrahmen gilt aber für Erwachsene. Beim Jugendgericht steht der <strong>Erziehungsgedanke</strong> im Vordergrund.<br><br>
+              Realistisch musst du mit <strong>Erziehungsmaßregeln oder Zuchtmitteln</strong> rechnen: zum Beispiel Sozialstunden, eine Verwarnung oder die Teilnahme an einem Präventionskurs. Eine Jugendstrafe (also Freiheitsentzug) ist bei einer Ersttäterin in deiner Situation sehr unwahrscheinlich. <strong>Für dich spricht viel:</strong> Du hast gestanden, alles zurückgegeben und warst noch nie polizeilich auffällig.<br><br>
+              Mein Rat: Nimm die Vorladung ernst, sprich offen mit deinen Eltern und geh vorbereitet hin – die <strong>Jugendgerichtshilfe</strong> unterstützt dich im Verfahren. Und ganz wichtig: Es bleibt bei diesem einen Mal.<br><br>
+              Viele Grüße<br><br>
+              <em>Bewertung: strafmündig richtig eingeordnet, § 242 StGB korrekt und verständlich erklärt, realistische JGG-Folgen statt Panikmache, adressatengerechter Ton.</em>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="task violet">
+        <div class="task-header">
+          <div class="task-num">★</div>
+          <div class="task-header-text">
+            <span class="task-title">Vertiefung (optional) – Aufgabe 6 (S. 86): Wozu ist Strafrecht eigentlich gut?</span>
+            <span class="task-subtitle">Buchaufgabe · Einzelarbeit · für Schnelle</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-icons">
+            <div class="ico ico-blue">
+              <svg width="22" height="22" viewBox="0 0 36 40" fill="none"><path d="M6 6C6 4.343 7.343 3 9 3h14l8 8v26a2 2 0 01-2 2H9a3 3 0 01-3-3V6z" stroke="#1976D2" stroke-width="2.5" fill="none"/><path d="M23 3v8h8" stroke="#1976D2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="18" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#1976D2" font-family="Georgia, serif">§</text></svg>
+            </div>
+          </div>
+          <div class="task-content">
+            <p>Bearbeite <strong>Aufgabe 6 auf Seite 86</strong>: Lege mithilfe der <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__5.html" target="_blank">§§ 5</a> und <a class="para-link" href="https://www.gesetze-im-internet.de/jgg/__8.html" target="_blank">8 JGG</a> dar, wie zweckmäßig die in den Fällen M3 und M4 angewandten Regelungen des Strafrechts im Hinblick auf die <strong>zentralen Funktionen des Rechts</strong> (Stunde 1!) sind.</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="§ 5 JGG (Rechtsfolgen-Stufen) und § 8 JGG (Kombination von Maßnahmen) ...&#10;Schutzfunktion: ...&#10;Ordnungs-/Friedensfunktion: ...&#10;Ausgleichsfunktion: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-a6')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-a6">
+              <strong>§ 5 JGG</strong> ordnet die Rechtsfolgen in Stufen (Erziehungsmaßregeln → Zuchtmittel → Jugendstrafe nur als letztes Mittel), <strong>§ 8 JGG</strong> erlaubt es, mehrere Maßnahmen zu verbinden – wie im Skaterpark-Fall (Jugendarrest <em>plus</em> Erziehungsbeistand und Weisung).<br><br>
+              <strong>Schutzfunktion:</strong> Die Allgemeinheit wird geschützt, ohne junge Täter durch Haft dauerhaft aus der Bahn zu werfen – die Maßnahmen setzen an den Ursachen (fehlende Ausbildung, fehlende Struktur) an.<br>
+              <strong>Ordnungs- und Friedensfunktion:</strong> Der Staat reagiert spürbar auf Regelverstöße (Arrest, Vorladung) und verhindert Selbstjustiz – der Konflikt wird in einem geordneten Verfahren gelöst.<br>
+              <strong>Ausgleichsfunktion:</strong> Auflagen wie Schadenswiedergutmachung und der parallel mögliche zivilrechtliche Anspruch (§ 823 BGB) gleichen die Interessen von Opfer und Täter aus.<br><br>
+              <strong>Fazit:</strong> Die abgestuften, kombinierbaren Reaktionen des JGG sind zweckmäßig, weil sie Strafe und Erziehung verbinden – bei Lisa (M4) reicht voraussichtlich die unterste Stufe, im Skaterpark-Fall (M3) war eine Kombination nötig.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter: Quiz →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: QUIZ -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🏆</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Wissenssicherung</div>
+        <div class="section-title">Abschluss-Quiz – Stunde 16</div>
+        <div class="section-time">⏱ ca. 5 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Sicherung</div>
+          <p>Frage 2 im Plenum besprechen – das Vorsatz-Erfordernis des § 303 StGB ist der Knackpunkt der Stunde. Bei Frage 3 nachhaken, warum § 105 JGG in der Praxis so oft zu Jugendstrafrecht führt.</p>
+        </div>
+      </div>
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">1. Ab welchem Alter ist man in Deutschland strafmündig?</div>
+        <div class="quiz-options" id="q1">
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span><span>Ab 7 Jahren – wie bei der Deliktsfähigkeit.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">B</span><span>Ab 12 Jahren, wenn die Eltern zustimmen.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">C</span><span>Ab 14 Jahren – vorher ist man schuldunfähig (§ 19 StGB).</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">D</span><span>Erst ab 18 Jahren, mit der Volljährigkeit.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q1-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">2. Jonas (16) beschädigt aus Unachtsamkeit ein parkendes Auto. Muss er mit einer Strafe nach § 303 StGB rechnen?</div>
+        <div class="quiz-options" id="q2">
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">A</span><span>Ja – jede Beschädigung einer fremden Sache ist automatisch strafbar.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">B</span><span>Nein – Sachbeschädigung ist nur bei Vorsatz strafbar. Zivilrechtlich haftet er aber trotzdem (§ 823 BGB).</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">C</span><span>Nein – weil Minderjährige grundsätzlich nicht bestraft werden können.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span><span>Ja – aber nur, wenn der Schaden über 1.000 € liegt.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q2-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">3. Der 19-jährige Tim begeht eine Straftat. Welches Strafrecht gilt für ihn?</div>
+        <div class="quiz-options" id="q3">
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span><span>Immer das Erwachsenenstrafrecht – er ist ja volljährig.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span><span>Keines – Heranwachsende sind schuldunfähig.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">C</span><span>Immer das Jugendstrafrecht, bis er 21 wird.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">D</span><span>Als Heranwachsender: Jugend- oder Erwachsenenstrafrecht – je nach Reife und Art der Tat (§ 105 JGG).</span></button>
+        </div>
+        <div class="quiz-feedback" id="q3-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">4. Welcher Grundgedanke steht im Jugendstrafrecht (JGG) im Vordergrund?</div>
+        <div class="quiz-options" id="q4">
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">A</span><span>Der Erziehungsgedanke – der junge Mensch soll künftig ohne Straftaten leben.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">B</span><span>Möglichst harte Abschreckung durch hohe Freiheitsstrafen.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">C</span><span>Die finanzielle Entschädigung des Opfers.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span><span>Der Vergeltungsgedanke – jede Tat muss gesühnt werden.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <div id="quiz-score">
+        <span id="score-text"></span><span id="score-sub"></span>
+      </div>
+      <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+        <button class="btn-secondary" style="border-color:var(--red);color:var(--red);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+      </div>
+
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du heute gelernt</strong>
+        Du kennst nun den Unterschied zwischen <strong>unerlaubter Handlung</strong> (Zivilrecht, Schadensersatz) und <strong>Straftat</strong> (Strafrecht, Strafe durch den Staat) und weißt, dass eine Tat beides zugleich sein kann. Du kannst die vier Stufen der <strong>Strafmündigkeit</strong> erklären – vom schuldunfähigen Kind über Jugendliche (JGG) und Heranwachsende (§ 105 JGG) bis zum Erwachsenen – und kennst die drei Rechtsfolgen-Stufen des JGG samt Erziehungsgedanke. In der mündlichen Abfrage wirst du zeigen, dass du diese Regeln auf neue Fälle wie den Ladendiebstahl oder den Skaterpark-Fall anwenden kannst.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: LEHRKRAFT-ABFRAGE -->
+<div class="step" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage (nur Lehrkraft)</div>
+        <div class="section-title">Abfrage Stunde 16 – Strafmündigkeit &amp; Jugendstrafrecht</div>
+        <div class="section-time">⏱ ca. 10 Minuten · 1 Schüler/in · 4K-Modell</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
+        <div class="teacher-note-header">🎓 Durchführung</div>
+        <p>Vier Fragen nach dem 4K-Modell (Wissen · Kritisches Denken · Kommunikation · Kreativität). Erwartungshorizonte einzeln aufklappbar. Bei Frage 2 auf die saubere Trennung von Strafmündigkeit (§ 19 StGB) und Deliktsfähigkeit (§ 828 BGB) achten – das ist die häufigste Verwechslung.</p>
+      </div>
+
+      <div class="abfrage-wrap">
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erkläre den Begriff „Strafmündigkeit" und nenne die vier Altersstufen mit den jeweils geltenden Regeln.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: korrekte Definition (alters- und reifeabhängige strafrechtliche Verantwortlichkeit) und vollständige Stufenfolge.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew1">Strafmündigkeit = die vom Alter und der geistigen Reife abhängige Fähigkeit, für eine Straftat verantwortlich gemacht zu werden. Stufen: unter 14 schuldunfähig (§ 19 StGB, keine Bestrafung möglich); 14–17 Jugendliche, bedingt strafmündig (§§ 1, 3 JGG – Einsichtsfähigkeit zur Tatzeit), es gilt das JGG; 18–20 Heranwachsende, voll strafmündig, aber § 105 JGG: Jugendstrafrecht bei jugendlicher Reife oder jugendtypischer Tat; ab 21 Erwachsene, ausschließlich StGB.</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Die 13-jährige Mia stiehlt im Drogeriemarkt Kosmetik im Wert von 60 €. Kann sie bestraft werden – und bleibt die Tat damit völlig folgenlos? Prüfe!</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: § 19 StGB korrekt angewendet, aber Differenzierung: „nicht strafbar" ≠ „folgenlos" (Jugendamt, Eltern, Zivilrecht).</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew2">Mia ist unter 14 und damit schuldunfähig (§ 19 StGB) – eine Bestrafung durch ein Gericht ist ausgeschlossen, das Ermittlungsverfahren wird eingestellt. Folgenlos bleibt die Tat trotzdem nicht: Polizei informiert die Eltern, das Jugendamt kann eingeschaltet werden, der Laden kann Hausverbot erteilen. Zivilrechtlich ist Mia mit 13 bedingt deliktsfähig (§ 828 Abs. 3 BGB) – bei entsprechender Einsichtsfähigkeit haftet sie z. B. für beschädigte Ware. Starke Antworten trennen sauber: Strafmündigkeit (nein) ↔ Deliktsfähigkeit (ja, bedingt).</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erkläre einem Mitschüler in einfachen Worten den Unterschied zwischen einer unerlaubten Handlung und einer Straftat.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: einfache Sprache, korrekter Kern (privater Ausgleich vs. staatliche Strafe), Hinweis auf mögliches Zusammentreffen.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew3">Unerlaubte Handlung: Du hast jemandem einen Schaden zugefügt – der Geschädigte kann von dir persönlich Geld verlangen (Zivilrecht, § 823 BGB). Straftat: Du hast gegen ein Strafgesetz verstoßen – jetzt kümmert sich der Staat darum und bestraft dich (Strafrecht, StGB/JGG). Wichtig: Eine Tat kann beides zugleich sein – dann läuft beides nebeneinander. Kommunikative Kompetenz im Vordergrund.</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erfinde zwei kurze Fälle: einen, in dem dieselbe Handlung Straftat UND unerlaubte Handlung ist – und einen, in dem nur eine unerlaubte Handlung vorliegt.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Eigene Fälle. Bewertet: Der Unterschied muss am Vorsatz bzw. am fehlenden Straftatbestand erkennbar sein.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew4">Beispiel „beides": Ein Schüler zerstört absichtlich das Handy eines Mitschülers – vorsätzliche Sachbeschädigung (§ 303 StGB) und zugleich unerlaubte Handlung (§ 823 BGB, Schadensersatz). Beispiel „nur unerlaubte Handlung": Beim Toben stößt jemand aus Unachtsamkeit eine teure Vase um – fahrlässig, daher keine Strafbarkeit nach § 303 StGB, aber Schadensersatzpflicht nach § 823 BGB. Schlüssel: Vorsatz vorhanden oder nicht.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 8-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div><div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div></div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const PIN_HASH='385319fce53854f96b636f28301b3d31be241dcaf6f1775da31a5e768b3a848e';
+let pinInput='',cur=1,quizA={};
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=8)return;pinInput+=d;updatePinDots();if(pinInput.length===8)setTimeout(()=>checkPin(),120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<8;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h===PIN_HASH){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}window.scrollTo({top:0,behavior:'smooth'});}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+function revealSolution(id){const el=document.getElementById(id);const btn=el.previousElementSibling;if(!btn.dataset.label)btn.dataset.label=btn.textContent;el.classList.toggle('visible');btn.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':btn.dataset.label;}
+function toggleErwartung(id){const el=document.getElementById(id);const btn=el.previousElementSibling;if(!btn.dataset.label)btn.dataset.label=btn.textContent;el.classList.toggle('visible');btn.textContent=el.classList.contains('visible')?'▲ Ausblenden':btn.dataset.label;}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! Mit 14 beginnt die Strafmündigkeit – unter 14 ist man schuldunfähig (§ 19 StGB).',q2:'✓ Richtig! § 303 StGB verlangt Vorsatz (§ 15 StGB) – die zivilrechtliche Haftung nach § 823 BGB bleibt aber bestehen.',q3:'✓ Richtig! Als Heranwachsender entscheidet die Reife bzw. die Art der Tat über Jugend- oder Erwachsenenstrafrecht (§ 105 JGG).',q4:'✓ Richtig! Im JGG steht die Erziehung im Vordergrund (§ 2 JGG) – der junge Mensch soll künftig ohne Straftaten leben.'};
+const no={q1:'✗ Nicht ganz. Strafmündig ist man ab 14 – vorher schuldunfähig (§ 19 StGB). → C',q2:'✗ Nicht ganz. Fahrlässige Sachbeschädigung ist nicht strafbar – zivilrechtlich haftet Jonas trotzdem. → B',q3:'✗ Nicht ganz. Bei 18- bis 20-Jährigen entscheidet § 105 JGG je nach Reife und Tat. → D',q4:'✗ Nicht ganz. Kern des JGG ist der Erziehungsgedanke (§ 2 JGG). → A'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+</script>
+</body>
+</html>
