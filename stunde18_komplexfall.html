@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stunde 18 – Rechtsfall-Simulator: Komplexfall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0D47A1;--blue-800:#1565C0;--blue-700:#1976D2;--blue-400:#29B6F6;--blue-50:#E3F2FD;
+  --green:#43A047;--green-light:#E8F5E9;--orange:#FF9800;--orange-light:#FFF3E0;
+  --purple:#AB47BC;--purple-light:#F3E5F5;--red:#E53935;--red-light:#FFEBEE;
+  --teal:#0d9488;--teal-light:#ccfbf1;
+  --violet:#4527A0;--violet-light:#EDE7F6;
+  --m8:#37474F;--m8-light:#ECEFF1;
+  --text:#1A1A1A;--text-secondary:#555555;--text-muted:#AAAAAA;
+  --border:#E0E0E0;--bg-page:#F0F4F8;
+  --grad-blue:linear-gradient(135deg,#1976D2,#29B6F6);
+  --grad-violet7:linear-gradient(135deg,#4527A0,#7B1FA2);
+  --grad-m8:linear-gradient(135deg,#37474F,#607D8B);
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,0.08);--shadow-lg:0 4px 20px rgba(0,0,0,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg-page);color:var(--text);font-size:16px;line-height:1.7;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--blue-700);color:white;padding:0 2rem;display:flex;align-items:center;gap:1rem;height:52px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(25,118,210,0.25);}
+.topbar-logo{font-weight:900;font-size:15px;color:white;text-decoration:none;display:flex;align-items:center;gap:6px;}
+.topbar-logo span{color:var(--blue-400);}
+.topbar-logo-back{font-size:11px;color:rgba(255,255,255,0.6);font-weight:400;border-left:1px solid rgba(255,255,255,0.2);padding-left:8px;margin-left:2px;}
+.topbar-sep{width:1px;height:20px;background:rgba(255,255,255,0.2);}
+.topbar-title{font-size:13px;color:var(--blue-50);font-weight:400;}
+.topbar-right{margin-left:auto;}
+.mode-toggle{display:flex;background:rgba(255,255,255,0.12);border-radius:100px;padding:3px;gap:2px;}
+.mode-btn{border:none;background:transparent;color:rgba(255,255,255,0.7);font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:100px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.mode-btn.active{background:white;color:var(--blue-700);font-weight:700;}
+
+/* ── PROGRESS ── */
+.progress-bar-wrap{background:white;border-bottom:1px solid var(--border);padding:0 2rem;}
+.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:10px 0;overflow-x:auto;}
+.prog-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted);cursor:pointer;white-space:nowrap;}
+.prog-step.active{color:var(--blue-700);font-weight:700;}
+.prog-step.done{color:var(--green);}
+.prog-dot{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--text-muted);flex-shrink:0;transition:all 0.2s;}
+.prog-step.active .prog-dot{background:var(--blue-700);color:white;}
+.prog-step.done .prog-dot{background:var(--green);color:white;}
+.prog-line{flex:1;height:2px;background:var(--border);min-width:8px;border-radius:2px;}
+.prog-line.done{background:var(--green);}
+
+/* ── MAIN ── */
+.main{max-width:880px;margin:0 auto;padding:2rem 2rem 6rem;}
+
+/* ── HERO (Modul 7: Dunkelviolett) ── */
+.hero{background:var(--grad-m8);border-radius:var(--radius-lg);padding:2.5rem 2.5rem 2rem;color:white;margin-bottom:1.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'§';position:absolute;right:1.5rem;top:-10px;font-family:'Nunito',sans-serif;font-size:130px;font-weight:900;color:rgba(255,255,255,0.06);line-height:1;pointer-events:none;}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);border-radius:100px;padding:4px 14px;font-size:12px;font-weight:700;margin-bottom:1rem;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:27px;font-weight:900;line-height:1.2;margin-bottom:0.75rem;}
+.hero p{font-size:15px;color:rgba(255,255,255,0.88);max-width:580px;line-height:1.6;margin-bottom:1.25rem;}
+.hero-meta{display:flex;gap:16px;font-size:13px;color:rgba(255,255,255,0.72);flex-wrap:wrap;}
+.hero-lehrplan{background:rgba(255,255,255,0.12);border-radius:var(--radius-sm);padding:0.75rem 1rem;margin-top:1rem;font-size:13px;}
+.hero-lehrplan-label{font-weight:700;color:rgba(255,255,255,0.7);font-size:11px;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;}
+.hero-lehrplan-text{color:rgba(255,255,255,0.85);line-height:1.5;}
+
+/* ── TEACHER NOTE ── */
+.teacher-note{background:#fffbeb;border:1.5px solid #fbbf24;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin-bottom:1.5rem;display:none;}
+.teacher-note-header{font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:#92400e;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px;display:flex;align-items:center;gap:8px;}
+.teacher-note p{font-size:14px;color:#78350f;line-height:1.6;}
+.teacher-note ul{font-size:14px;color:#78350f;padding-left:1.2rem;line-height:1.8;margin-top:0.4rem;}
+
+/* ── SECTION ── */
+.section{background:white;border-radius:var(--radius-lg);border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden;box-shadow:var(--shadow);animation:fadeUp 0.3s ease both;}
+.section-header{padding:1.25rem 1.5rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:12px;}
+.section-icon{width:38px;height:38px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;margin-top:1px;}
+.section-icon.blue{background:var(--blue-50);}
+.section-icon.green{background:var(--green-light);}
+.section-icon.orange{background:var(--orange-light);}
+.section-icon.red{background:var(--red-light);}
+.section-icon.purple{background:var(--purple-light);}
+.section-icon.teal{background:var(--teal-light);}
+.section-icon.violet{background:var(--violet-light);}
+.section-meta{flex:1;}
+.section-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--text-muted);margin-bottom:3px;}
+.section-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);line-height:1.3;}
+.section-time{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.section-body{padding:1.5rem;}
+
+/* ── TASK ── */
+.task{border:1.5px solid var(--blue-400);border-radius:var(--radius-md);overflow:hidden;margin:1rem 0;}
+.task-header{background:var(--blue-700);padding:0.75rem 1.1rem;display:flex;align-items:center;gap:10px;}
+.task-num{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.2);color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.task-header-text{display:flex;flex-direction:column;gap:1px;}
+.task-title{font-size:13px;font-weight:700;color:white;line-height:1.3;}
+.task-subtitle{font-size:11px;color:rgba(255,255,255,0.7);font-weight:400;}
+.task-body{padding:1.1rem 1.2rem;background:#F0F4F8;display:flex;gap:14px;align-items:flex-start;}
+.task-icons{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.task-content{flex:1;}
+.task-content p{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:0.5rem;}
+.task-content p:last-child{margin-bottom:0;}
+.task.violet{border-color:var(--violet);}
+.task.violet .task-header{background:var(--violet);}
+
+/* ── INPUTS ── */
+.answer-area{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--text);resize:vertical;min-height:85px;margin-top:8px;background:white;transition:border-color 0.15s;}
+.answer-area:focus{outline:none;border-color:var(--blue-700);}
+
+/* ── SOLUTION ── */
+.solution-btn{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.solution-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.solution-reveal{margin-top:10px;background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:#1b5e20;line-height:1.6;display:none;}
+.solution-reveal.visible{display:block;}
+
+/* ── INFO BOXES ── */
+.info-box{border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;font-size:14px;line-height:1.65;}
+.info-box.blue{background:var(--blue-50);border-left:3px solid var(--blue-700);color:var(--blue-800);}
+.info-box.green{background:var(--green-light);border-left:3px solid var(--green);color:#1b5e20;}
+.info-box.orange{background:var(--orange-light);border-left:3px solid var(--orange);color:#78350f;}
+.info-box.red{background:var(--red-light);border-left:3px solid var(--red);color:#7f1d1d;}
+.info-box.purple{background:var(--purple-light);border-left:3px solid var(--purple);color:#4a1272;}
+.info-box.teal{background:var(--teal-light);border-left:3px solid var(--teal);color:#134e4a;}
+.info-box.violet{background:var(--violet-light);border-left:3px solid var(--violet);color:#311B92;}
+.info-box strong{font-weight:700;}
+.info-box > strong:first-of-type{display:block;margin-bottom:4px;}
+
+/* ── BOOK REF ── */
+.book-ref{background:#faf5ff;border:1.5px solid #d8b4fe;border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin:1rem 0;display:flex;gap:12px;align-items:flex-start;}
+.book-ref-icon{font-size:24px;flex-shrink:0;}
+.book-ref-body{flex:1;}
+.book-ref-title{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:#6b21a8;margin-bottom:4px;}
+.book-ref-text{font-size:14px;color:#581c87;line-height:1.6;}
+.book-ref-text strong{font-weight:700;}
+
+/* ── SCENARIO (dunkel) ── */
+.scenario{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.scenario-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.scenario p{font-size:15px;line-height:1.6;color:#e2e8f0;}
+.scenario strong{color:var(--blue-400);}
+a.para-link{color:var(--blue-700);text-decoration:none;border-bottom:1px dotted var(--blue-700);font-weight:700;}
+a.para-link:hover{color:var(--blue-400);}
+.para-quote{background:#1e293b;border-radius:var(--radius-md);padding:1.25rem 1.5rem;margin:1rem 0;}
+.para-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:0.5rem;font-weight:700;}
+.para-label a{color:var(--blue-400);text-decoration:none;}
+.para-quote p{font-size:14.5px;line-height:1.65;color:#e2e8f0 !important;font-style:italic;}
+.para-ref{font-size:12px;color:#94a3b8;margin-top:0.6rem;}
+.para-ref a{color:var(--blue-400);}
+
+/* ── CONTENT ── */
+.content-text{font-size:15px;color:var(--text-secondary);line-height:1.75;margin-bottom:1rem;}
+
+/* ── VERGLEICHSTABELLE ── */
+.cmp-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:1.25rem 0;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.cmp-table th{padding:0.75rem 0.9rem;text-align:left;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;color:white;}
+.cmp-table th.side{background:#f8fafc;color:var(--text-secondary);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;width:22%;}
+.cmp-table th.civ{background:var(--blue-700);}
+.cmp-table th.straf{background:var(--violet);}
+.cmp-table td{padding:0.7rem 0.9rem;border-top:1px solid var(--border);color:var(--text-secondary);line-height:1.55;vertical-align:top;}
+.cmp-table td.side{background:#f8fafc;font-weight:700;color:var(--text);font-size:12.5px;}
+
+/* ── ALTERSSTUFEN (Strafmündigkeit) ── */
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:1.25rem 0;}
+.tier-card{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:white;display:flex;flex-direction:column;}
+.tier-head{padding:0.6rem 0.75rem;text-align:center;color:white;font-family:'Nunito',sans-serif;font-weight:800;font-size:13px;line-height:1.35;}
+.tier-head small{display:block;font-size:10.5px;font-weight:600;opacity:0.85;text-transform:uppercase;letter-spacing:0.5px;}
+.tier-head.grau{background:#78909C;}
+.tier-head.violet{background:var(--violet);}
+.tier-head.orange{background:#E65100;}
+.tier-head.green{background:#2E7D32;}
+.tier-body{padding:0.8rem 0.9rem;font-size:12.5px;color:var(--text-secondary);line-height:1.55;flex:1;}
+.tier-body strong{color:var(--text);}
+
+/* ── SANKTIONEN JGG ── */
+.sank-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:1.25rem 0;}
+.sank-card{background:white;border:1.5px solid var(--border);border-top:4px solid var(--violet);border-radius:var(--radius-md);padding:1rem 1.1rem;}
+.sank-card.mild{border-top-color:var(--green);}
+.sank-card.mittel{border-top-color:var(--orange);}
+.sank-card.hart{border-top-color:var(--red);}
+.sank-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:13.5px;color:var(--text);margin-bottom:4px;}
+.sank-text{font-size:12.5px;color:var(--text-secondary);line-height:1.55;}
+
+/* ── QUIZ ── */
+.quiz-wrap{margin:0.5rem 0;}
+.quiz-q{font-size:15px;font-weight:600;color:var(--text);margin-bottom:0.75rem;line-height:1.5;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+.quiz-opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.15s;background:white;font-size:14px;color:var(--text);line-height:1.4;text-align:left;font-family:'Nunito',sans-serif;width:100%;font-weight:500;}
+.quiz-opt:hover{border-color:var(--blue-400);background:var(--blue-50);}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-light);color:#1b5e20;}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-light);color:#7f1d1d;}
+.quiz-opt.disabled{pointer-events:none;}
+.quiz-opt-letter{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px;color:var(--text-secondary);}
+.quiz-opt.correct .quiz-opt-letter{background:var(--green);color:white;}
+.quiz-opt.wrong .quiz-opt-letter{background:var(--red);color:white;}
+.quiz-feedback{font-size:13px;padding:8px 12px;border-radius:var(--radius-sm);display:none;margin-top:6px;font-weight:500;}
+.quiz-feedback.correct{background:var(--green-light);color:#1b5e20;display:block;}
+.quiz-feedback.wrong{background:var(--red-light);color:#7f1d1d;display:block;}
+.divider{border:none;border-top:1px solid var(--border);margin:1.25rem 0;}
+#quiz-score{background:var(--blue-50);border-radius:var(--radius-md);padding:1.1rem 1.25rem;margin-top:1rem;display:none;}
+#score-text{font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;color:var(--blue-800);}
+#score-sub{font-size:13px;color:var(--blue-800);}
+
+/* ── BUTTONS ── */
+.nav-btns{display:flex;gap:10px;margin-top:1.5rem;justify-content:flex-end;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue-700);color:white;border:none;border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.15s;}
+.btn-primary:hover{background:var(--blue-800);transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;}
+.btn-secondary:hover{border-color:var(--blue-700);color:var(--blue-700);}
+.btn-home{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--blue-700);border:1.5px solid var(--blue-700);border-radius:var(--radius-md);padding:11px 22px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;text-decoration:none;}
+.btn-home:hover{background:var(--blue-50);}
+
+/* ── ABFRAGE ── */
+.abfrage-wrap{display:flex;flex-direction:column;gap:1rem;}
+.abfrage-q{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;}
+.abfrage-q-header{padding:0.9rem 1.1rem;display:flex;align-items:center;gap:10px;background:#f8fafc;}
+.abfrage-q-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;}
+.abfrage-q-num.wissen{background:var(--blue-700);}
+.abfrage-q-num.denken{background:var(--teal);}
+.abfrage-q-num.komm{background:var(--orange);}
+.abfrage-q-num.kreativ{background:var(--red);}
+.abfrage-q-meta{flex:1;}
+.abfrage-q-label{font-size:11px;font-weight:700;margin-bottom:2px;}
+.abfrage-q-label.wissen{color:var(--blue-700);}
+.abfrage-q-label.denken{color:#0f766e;}
+.abfrage-q-label.komm{color:#92400e;}
+.abfrage-q-label.kreativ{color:#9f1239;}
+.abfrage-q-text{font-size:14px;font-weight:600;color:var(--text);line-height:1.5;}
+.abfrage-q-body{padding:1rem 1.1rem;}
+.abfrage-q-body p{font-size:13px;color:var(--text-secondary);line-height:1.6;margin-bottom:0.5rem;}
+.erwartung-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1.5px solid var(--border);background:white;border-radius:var(--radius-sm);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.erwartung-btn:hover{border-color:var(--blue-700);color:var(--blue-700);background:var(--blue-50);}
+.erwartung-box{margin-top:10px;background:var(--blue-50);border-left:3px solid var(--blue-700);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;color:var(--blue-800);line-height:1.6;display:none;}
+.erwartung-box.visible{display:block;}
+.print-btn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;background:white;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all 0.15s;}
+.print-btn:hover{border-color:var(--blue-700);color:var(--blue-700);}
+
+/* ── PIN MODAL ── */
+.pin-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.7);backdrop-filter:blur(4px);z-index:999;display:none;align-items:center;justify-content:center;}
+.pin-overlay.open{display:flex;}
+.pin-box{background:white;border-radius:20px;padding:2rem 2rem 1.75rem;width:320px;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center;animation:fadeUp 0.2s ease both;}
+.pin-logo{font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;color:var(--blue-700);margin-bottom:1rem;}
+.pin-logo span{color:var(--blue-400);}
+.pin-icon{font-size:38px;margin-bottom:0.75rem;}
+.pin-title{font-family:'Nunito',sans-serif;font-size:17px;font-weight:800;color:var(--text);margin-bottom:0.3rem;}
+.pin-sub{font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;line-height:1.5;}
+.pin-dots{display:flex;justify-content:center;gap:10px;margin-bottom:1.25rem;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:all 0.15s;}
+.pin-dot.filled{background:var(--blue-700);}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1rem;}
+.pin-key{border:1.5px solid var(--border);border-radius:var(--radius-md);padding:14px 0;font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--text);background:white;cursor:pointer;transition:all 0.12s;}
+.pin-key:hover{border-color:var(--blue-700);background:var(--blue-50);color:var(--blue-700);}
+.pin-key:active{transform:scale(0.94);}
+.pin-key.del{font-size:16px;font-weight:600;color:var(--text-secondary);}
+.pin-key.zero{grid-column:2;}
+.pin-error{font-size:13px;color:var(--red);height:18px;margin-bottom:0.5rem;font-weight:600;}
+.pin-cancel{font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:6px;font-family:'Nunito',sans-serif;}
+
+/* ── STEP / TEACHER ── */
+.step{display:none;}
+.step.active{display:block;}
+.teacher-only{display:none;}
+body.version-b .teacher-only{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%,60%{transform:translateX(-8px);}40%,80%{transform:translateX(8px);}}
+@media print{.topbar,.progress-bar-wrap,.nav-btns,.mode-toggle,.pin-overlay{display:none!important;}.step{display:block!important;}.section{box-shadow:none;border:1px solid #ccc;}}
+@media(max-width:640px){.topbar{padding:0 1rem;}.topbar-title{display:none;}.main{padding:1rem 1rem 5rem;}.hero{padding:1.5rem 1.25rem;}.hero h1{font-size:22px;}.task-body{flex-direction:column;}.task-icons{flex-direction:row;}.cmp-table{font-size:12px;}}
+
+/* ── SVG ICON HELPER ── */
+.ico{background:white;border-radius:8px;padding:8px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ico-blue{border:1.5px solid var(--blue-700);}
+.ico-teal{border:1.5px solid var(--teal);}
+.ico-orange{border:1.5px solid var(--orange);}
+.ico-green{border:1.5px solid var(--green);}
+.ico-purple{border:1.5px solid var(--purple);}
+.ico-red{border:1.5px solid var(--red);}
+
+/* ── FALLAKTEN (Simulator) ── */
+.akte{border:1.5px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin:1.4rem 0;background:white;}
+.akte-header{background:var(--m8);color:white;padding:0.8rem 1.15rem;display:flex;align-items:center;gap:12px;}
+.akte-num{background:rgba(255,255,255,0.16);border-radius:6px;padding:2px 11px;font-family:'Nunito',sans-serif;font-weight:800;font-size:11.5px;letter-spacing:0.6px;text-transform:uppercase;white-space:nowrap;}
+.akte-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:14.5px;line-height:1.3;}
+.akte-body{padding:1.15rem 1.25rem;}
+.decision-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--m8);margin:1rem 0 0.5rem;}
+.gutachten-label{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.8px;color:var(--blue-700);margin:1.1rem 0 0.4rem;}
+.bilanz-box{background:var(--m8-light);border:1.5px solid var(--m8);border-radius:var(--radius-md);padding:1.25rem 1.4rem;margin:1rem 0;}
+.bilanz-title{font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:var(--m8);margin-bottom:4px;}
+.bilanz-sub{font-size:13.5px;color:#455A64;line-height:1.6;}
+</style>
+</head>
+<body id="body-root">
+
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">Recht<span>&</span>Ich <span class="topbar-logo-back">← Übersicht</span></a>
+  <div class="topbar-sep"></div>
+  <span class="topbar-title">WR 10 · Lernbereich 2 · Stunde 18</span>
+  <div class="topbar-right">
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-a" onclick="setVersion('a')">👤 Schüler</button>
+      <button class="mode-btn" id="btn-b" onclick="openPinModal()">🎓 Lehrkraft</button>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" id="prog-1" onclick="goToStep(1)"><div class="prog-dot">1</div><span>Einstieg</span></div>
+    <div class="prog-line" id="line-1"></div>
+    <div class="prog-step" id="prog-2" onclick="goToStep(2)"><div class="prog-dot">2</div><span>Akten 1–2</span></div>
+    <div class="prog-line" id="line-2"></div>
+    <div class="prog-step" id="prog-3" onclick="goToStep(3)"><div class="prog-dot">3</div><span>Akten 3–4</span></div>
+    <div class="prog-line" id="line-3"></div>
+    <div class="prog-step" id="prog-4" onclick="goToStep(4)"><div class="prog-dot">4</div><span>Akten 5–6</span></div>
+    <div class="prog-line" id="line-4"></div>
+    <div class="prog-step" id="prog-5" onclick="goToStep(5)"><div class="prog-dot">5</div><span>Abschluss</span></div>
+    <div class="prog-line" id="line-5"></div>
+    <div class="prog-step teacher-only" id="prog-6" onclick="goToStep(6)"><div class="prog-dot">6</div><span>🎓 Abfrage</span></div>
+  </div>
+</div>
+
+<div class="main">
+
+<div class="hero">
+  <div class="hero-tag">🏆 Modul 8 · Abschluss</div>
+  <h1>Rechtsfall-Simulator: Komplexfall</h1>
+  <p>Willkommen in der Kanzlei „WR&nbsp;10" – heute bist du die Anwältin bzw. der Anwalt. Emma, Jonas und Lisa bringen dir einen Fall, der es in sich hat: Online-Kauf, Taschengeld, ein ruckelnder Motor, ein Lackkratzer, ein wütender Tritt und ein virales Wut-Reel. Sechs Fallakten, sechs Entscheidungen, sechs Kurzprüfungen – alles, was du in diesem Schuljahr gelernt hast, kommt hier zusammen.</p>
+  <div class="hero-meta">
+    <div>⏱ 30 Min. Erarbeitung + 10 Min. Abfrage</div>
+    <div>📘 Nachschlagewerk: Fachwissen S. 90–101 (Open Book)</div>
+    <div>🎯 6 Fallakten + Quiz + Lehrkraft-Abfrage</div>
+  </div>
+  <div class="hero-lehrplan">
+    <div class="hero-lehrplan-label">📋 Lehrplan-Bezug</div>
+    <div class="hero-lehrplan-text">Die Schülerinnen und Schüler wenden ihre Kenntnisse aus dem gesamten Lernbereich „Recht als Handlungsrahmen" vernetzt auf einen komplexen Fall an: Sie prüfen Rechtsfragen methodisch im Gutachtenstil, wenden einschlägige Rechtsnormen an und beurteilen zivil- wie strafrechtliche Konsequenzen ihres Handelns.</div>
+  </div>
+</div>
+
+<div class="teacher-note teacher-only">
+  <div class="teacher-note-header">🎓 Hinweise – Version B</div>
+  <p>Stunde 18 ist die <strong>Synthese-Stunde</strong> des Lernbereichs – kein neuer Stoff. Format: <strong>Rechtsfall-Simulator</strong> mit sechs Fallakten. Jede Akte = Sachverhalt → interaktive <strong>Entscheidung</strong> (Sofort-Feedback, Erstversuche werden für die Bilanz in Schritt 5 gezählt) → <strong>Gutachtenstil-Kurzprüfung</strong> mit Musterlösung.</p>
+  <ul>
+    <li><strong>Open Book:</strong> Fachwissen S. 90–101 ist ausdrücklich als Nachschlagewerk freigegeben – realistisches juristisches Arbeiten statt Auswendigwissen.</li>
+    <li><strong>Zeitmanagement:</strong> Schriftliche Gutachten mindestens bei den Akten 1, 4 und 5; die übrigen Kurzprüfungen dürfen stichpunktartig oder mündlich mit dem Partner gelöst werden (Differenzierung).</li>
+    <li><strong>Themenabdeckung:</strong> Akte 1 Vertragsschluss (§§ 145 ff., invitatio) · Akte 2 Geschäftsfähigkeit (§ 110) · Akte 3 Verpflichtungs-/Erfüllungsgeschäft, Eigentum/Besitz · Akte 4 Sachmangel/Gewährleistung vs. Widerruf · Akte 5 Delikts- und Strafrecht (Fahrlässigkeit/Vorsatz) · Akte 6 Urheberrecht + § 22 KunstUrhG.</li>
+    <li><strong>Figuren-Kontinuität:</strong> Emma (St. 17), Jonas (St. 15/16) und Lisa (St. 16, Vorladung) kehren zurück – Lisas Erfahrung motiviert den Gang in die „Kanzlei".</li>
+    <li>Bilanz in Schritt 5 („X von 6 auf Anhieb") ist rein motivational – keine Bewertungsgrundlage. Badge „Rechtsexperte" wie immer ausschließlich über ByCS.</li>
+  </ul>
+</div>
+
+<!-- STEP 1: EINSTIEG -->
+<div class="step active" id="step-1">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:var(--m8-light);">🗂️</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 1 · Kanzlei-Briefing</div>
+        <div class="section-title">Ein Fall, drei Mandanten – und du entscheidest</div>
+        <div class="section-time">⏱ ca. 3 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Einstieg</div><p>Rollenzuweisung kurz und ernst nehmen („Sie sind die Anwältin/der Anwalt") – das trägt die Motivation. Den Gutachtenstil-Merkkasten einmal gemeinsam aufklappen, dann in die Akten starten.</p></div></div>
+
+      <div class="scenario">
+        <div class="scenario-label">📖 Das Mandat</div>
+        <p>Montagmorgen, Kanzlei <strong>„WR&nbsp;10"</strong>. Drei bekannte Gesichter sitzen im Wartezimmer: <strong>Emma</strong> hat sich einen E-Scooter gekauft – und seitdem läuft alles schief. <strong>Jonas</strong> war „nur kurz eine Runde fahren". Und <strong>Lisa</strong>, die nach ihrer eigenen Vorladung weiß, dass man rechtliche Post niemals ignoriert, hat die beiden hierher verfrachtet: <strong>„Glaubt mir – ihr wollt das jetzt sauber klären."</strong></p>
+        <p style="margin-top:0.75rem;">Auf deinem Schreibtisch liegen <strong>sechs Fallakten</strong>. Deine Aufgabe: In jeder Akte triffst du zuerst die richtige <strong>Entscheidung</strong> – und prüfst sie dann kurz im <strong>Gutachtenstil</strong> nach. Am Ende ziehst du Bilanz: Bist du reif für den Titel „Rechtsexperte"?</p>
+      </div>
+
+      <div class="info-box blue">
+        <strong>📚 Open Book – wie im echten Leben</strong>
+        Juristinnen und Juristen wissen nicht alles auswendig – sie wissen, <strong>wo</strong> es steht. Das Fachwissen auf <strong>S. 90–101</strong> im Buch und alle verlinkten Paragrafen sind heute ausdrücklich freigegeben. Nachschlagen ist keine Schwäche, sondern Methode.
+      </div>
+
+      <div class="task" style="border-color:var(--m8);">
+        <div class="task-header" style="background:var(--m8);">
+          <div class="task-num">§</div>
+          <div class="task-header-text">
+            <span class="task-title">Dein Werkzeug: der Gutachtenstil (aus Stunde 5)</span>
+            <span class="task-subtitle">Merkkasten · bei Bedarf aufklappen</span>
+          </div>
+        </div>
+        <div class="task-body">
+          <div class="task-content">
+            <p>So prüfst du jede Rechtsfrage sauber in vier Schritten:</p>
+            <button class="solution-btn" onclick="revealSolution('gut-merk')">📖 Gutachtenstil anzeigen</button>
+            <div class="solution-reveal" id="gut-merk">
+              <strong>1. Obersatz:</strong> Wer will was von wem woraus? („Emma könnte gegen … einen Anspruch aus § … haben.")<br>
+              <strong>2. Definition:</strong> Was verlangt die Norm? Tatbestandsmerkmale benennen und definieren.<br>
+              <strong>3. Subsumtion:</strong> Sachverhalt Merkmal für Merkmal unter die Definitionen ordnen („Hier liegt … vor, weil …").<br>
+              <strong>4. Konklusion:</strong> Ergebnis im Antwortsatz („Also hat Emma … / Also ist der Vertrag …").
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-primary" onclick="nextStep(1)">Akte 1 öffnen →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 2: AKTEN 1-2 -->
+<div class="step" id="step-2">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon blue">📄</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 2 · Akten 1–2</div>
+        <div class="section-title">Vertragsschluss &amp; Geschäftsfähigkeit</div>
+        <div class="section-time">⏱ ca. 9 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Akte 1: die invitatio ad offerendum ist die klassische Falle – in der Musterlösung steckt auch der Hinweis, dass die automatische Eingangsbestätigung noch keine Annahme ist. Akte 2: § 110 BGB greift nur bei <em>vollständiger</em> Bewirkung mit überlassenen Mitteln; die Ratenkauf-Variante als Kontrast im Plenum ansprechen.</p></div></div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 1</div>
+          <div class="akte-title">Der Klick – wann war der Vertrag da?</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p><strong>Emma (15)</strong> entdeckt im Online-Shop „RollFix" einen E-Scooter für <strong>289 €</strong> – „Nur noch 3 Stück!". Sie klickt auf „Jetzt kaufen", sekundenschnell kommt eine automatische Eingangsbestätigung per E-Mail. Zwei Tage später folgt die Versandbestätigung, am Freitag steht das Paket vor der Tür.</p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Wann ist der Kaufvertrag zustande gekommen?</div>
+          <div class="quiz-options" id="d1">
+            <button class="quiz-opt" onclick="checkDecision('d1',this,false)"><span class="quiz-opt-letter">A</span><span>Schon mit der Anzeige im Shop – das Angebot stand ja online.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d1',this,false)"><span class="quiz-opt-letter">B</span><span>Mit Emmas Klick auf „Jetzt kaufen" – damit war alles erledigt.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d1',this,true)"><span class="quiz-opt-letter">C</span><span>Mit Emmas Bestellung (Antrag) und der Annahme des Shops – hier spätestens durch die Versandbestätigung.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d1',this,false)"><span class="quiz-opt-letter">D</span><span>Erst mit der Übergabe des Pakets am Freitag.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d1-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung im Gutachtenstil</div>
+          <div class="task-content">
+            <p>Prüfe: Ist zwischen Emma und „RollFix" ein Kaufvertrag (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433 BGB</a>) zustande gekommen? Arbeite mit <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__145.html" target="_blank">§ 145</a> und <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__147.html" target="_blank">§ 147 BGB</a>.</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="Obersatz: Zwischen Emma und RollFix könnte ein Kaufvertrag ...&#10;Definition: Ein Vertrag kommt zustande durch ...&#10;Subsumtion: Die Shop-Seite ist ... / Emmas Bestellung ist ... / Die Annahme liegt in ...&#10;Konklusion: Also ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g1')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g1">
+              <strong>Obersatz:</strong> Zwischen Emma und RollFix könnte ein Kaufvertrag nach § 433 BGB zustande gekommen sein.<br>
+              <strong>Definition:</strong> Dazu bedarf es zweier übereinstimmender Willenserklärungen: Antrag (§ 145 BGB) und Annahme (§ 147 BGB).<br>
+              <strong>Subsumtion:</strong> Die Produktseite im Shop ist noch kein Antrag, sondern eine <em>invitatio ad offerendum</em> – eine Aufforderung an beliebig viele Kunden, selbst einen Antrag abzugeben. Den Antrag stellt Emma mit ihrer Bestellung. Die automatische Eingangsbestätigung bestätigt nur den Zugang der Bestellung und ist noch keine Annahme; die Annahme erklärt der Shop spätestens mit der Versandbestätigung.<br>
+              <strong>Konklusion:</strong> Also ist der Kaufvertrag mit Zugang der Versandbestätigung zustande gekommen – ob er angesichts von Emmas Alter auch <em>wirksam</em> ist, klärt Akte 2.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 2</div>
+          <div class="akte-title">Mamas Veto – zählt der Vertrag überhaupt?</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p>Emma ist 15 – und hat die <strong>289 € vollständig</strong> von ihrem Konto bezahlt: gespartes Taschengeld und Geldgeschenke, über die sie laut ihren Eltern frei verfügen darf. Als der Scooter geliefert wird, ist ihre Mutter trotzdem sauer: <strong>„Ohne uns zu fragen? Das Ding geht zurück – ich stimme dem Kauf nicht zu!"</strong></p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Kann Emmas Mutter den Vertrag jetzt noch kippen?</div>
+          <div class="quiz-options" id="d2">
+            <button class="quiz-opt" onclick="checkDecision('d2',this,false)"><span class="quiz-opt-letter">A</span><span>Ja – Minderjährige brauchen für jeden Kauf die Zustimmung der Eltern.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d2',this,false)"><span class="quiz-opt-letter">B</span><span>Ja – der Vertrag ist schwebend unwirksam, bis beide Eltern genehmigen.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d2',this,false)"><span class="quiz-opt-letter">C</span><span>Nein – ab 14 ist man voll geschäftsfähig.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d2',this,true)"><span class="quiz-opt-letter">D</span><span>Nein – Emma hat vollständig mit ihr überlassenen Mitteln bezahlt: Der Vertrag ist nach § 110 BGB von Anfang an wirksam.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d2-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung im Gutachtenstil</div>
+          <div class="task-content">
+            <p>Prüfe die Wirksamkeit des Vertrags anhand der <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__106.html" target="_blank">§§ 106 ff. BGB</a>, insbesondere des <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__110.html" target="_blank">§ 110 BGB</a>. Überlege auch: Was wäre anders, wenn Emma in Raten zahlen würde?</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="Obersatz: Der Kaufvertrag könnte trotz Emmas Minderjährigkeit wirksam sein ...&#10;Definition (§ 110 BGB): ...&#10;Subsumtion: ...&#10;Konklusion: ... / Variante Ratenkauf: ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g2')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g2">
+              <strong>Obersatz:</strong> Der Kaufvertrag könnte trotz Emmas beschränkter Geschäftsfähigkeit (§ 106 BGB, 7–17 Jahre) wirksam sein.<br>
+              <strong>Definition:</strong> Nach § 110 BGB („Taschengeldparagraf") ist ein Vertrag von Anfang an wirksam, wenn der Minderjährige die Leistung <em>vollständig</em> mit Mitteln <em>bewirkt</em>, die ihm zu diesem Zweck oder zur freien Verfügung überlassen wurden – im vernünftigen Rahmen dessen, womit die Eltern rechnen müssen.<br>
+              <strong>Subsumtion:</strong> Emma hat die 289 € komplett aus Taschengeld und zur freien Verfügung überlassenen Geldgeschenken gezahlt; ein E-Scooter liegt für eine 15-Jährige noch im Rahmen alterstypischer Anschaffungen. Die Leistung ist vollständig bewirkt.<br>
+              <strong>Konklusion:</strong> Also ist der Vertrag wirksam – die nachträgliche Verweigerung der Mutter geht ins Leere.<br><br>
+              <strong>Variante Ratenkauf:</strong> Bei Ratenzahlung wäre die Leistung nicht vollständig bewirkt – § 110 BGB griffe nicht, der Vertrag wäre schwebend unwirksam (§ 108 BGB) und die Mutter könnte die Genehmigung verweigern.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(2)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(2)">Weiter: Akten 3–4 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 3: AKTEN 3-4 -->
+<div class="step" id="step-3">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon purple">🔄</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 3 · Akten 3–4</div>
+        <div class="section-title">Kaufhandlung, Eigentum &amp; Verbraucherschutz</div>
+        <div class="section-time">⏱ ca. 9 Minuten · Einzel-/Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Akte 3 sichert die Dreiteilung der Kaufhandlung (ein Verpflichtungs-, zwei Erfüllungsgeschäfte) und die Trennung Eigentum/Besitz – die Leihe an Jonas ist die Kontrollfrage. Akte 4: Auf exakte Terminologie bestehen (Gewährleistung ≠ Garantie!); die abgelaufene Widerrufsfrist ist der bewusste Stolperstein.</p></div></div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 3</div>
+          <div class="akte-title">Geliefert &amp; verliehen – wem gehört der Scooter?</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p>Freitag: Das Paket kommt an, Emma packt aus – bezahlt ist ja längst. Am Samstag fragt <strong>Jonas</strong>, ob er den Scooter übers Wochenende <strong>ausleihen</strong> darf – Emma sagt ja, Jonas nimmt ihn mit nach Hause.</p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Wie ist die Rechtslage am Samstagabend?</div>
+          <div class="quiz-options" id="d3">
+            <button class="quiz-opt" onclick="checkDecision('d3',this,false)"><span class="quiz-opt-letter">A</span><span>Jonas ist Eigentümer und Besitzer – er hat den Scooter schließlich bei sich.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d3',this,true)"><span class="quiz-opt-letter">B</span><span>Emma ist Eigentümerin geblieben, Jonas ist (unmittelbarer) Besitzer.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d3',this,false)"><span class="quiz-opt-letter">C</span><span>„RollFix" bleibt Eigentümer, bis Emma volljährig ist.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d3',this,false)"><span class="quiz-opt-letter">D</span><span>Emma und Jonas sind jetzt Miteigentümer.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d3-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung</div>
+          <div class="task-content">
+            <p>Zerlege den Fall in die <strong>drei Geschäfte der Kaufhandlung</strong> (<a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__433.html" target="_blank">§ 433</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__929.html" target="_blank">§ 929</a> BGB) und erkläre mit <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__854.html" target="_blank">§ 854 BGB</a>, warum Eigentum und Besitz nach der Leihe auseinanderfallen.</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="Verpflichtungsgeschäft: ...&#10;Erfüllungsgeschäft 1 (Ware): ...&#10;Erfüllungsgeschäft 2 (Geld): ...&#10;Nach der Leihe: Eigentum bei ... / Besitz bei ..., weil ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g3')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g3">
+              <strong>Verpflichtungsgeschäft:</strong> Der Kaufvertrag (§ 433 BGB) verpflichtet RollFix zu Übergabe und Eigentumsverschaffung, Emma zur Zahlung.<br>
+              <strong>Erfüllungsgeschäfte:</strong> (1) Übereignung des Scooters an Emma durch Einigung und Übergabe bei Lieferung (§ 929 BGB) – Emma wird Eigentümerin und Besitzerin (§ 854 BGB). (2) Übereignung des Geldes an RollFix mit der Zahlung.<br>
+              <strong>Nach der Leihe:</strong> Die Leihe überträgt nur die <em>tatsächliche Gewalt</em>: Jonas wird unmittelbarer Besitzer (§ 854 BGB). Das Eigentum – die rechtliche Herrschaft – bleibt bei Emma; für einen Eigentumswechsel fehlt jede Einigung.<br>
+              <strong>Merksatz:</strong> Eigentum = rechtliche Herrschaft, Besitz = tatsächliche Gewalt. Beim geliehenen Scooter fallen beide auseinander.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 4</div>
+          <div class="akte-title">Das Ruckeln – Widerruf oder Gewährleistung?</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p><strong>Drei Wochen nach der Lieferung</strong> beginnt der Motor zu stottern: Bei jeder Beschleunigung ruckelt der Scooter, zweimal geht er ganz aus. Emma ist bedient: <strong>„Ich schicke das Ding einfach zurück und will mein Geld – im Internet darf man doch immer widerrufen!"</strong></p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Was rätst du Emma als ihre Anwältin / dein Anwalt?</div>
+          <div class="quiz-options" id="d4">
+            <button class="quiz-opt" onclick="checkDecision('d4',this,false)"><span class="quiz-opt-letter">A</span><span>Widerrufen – bei Online-Käufen kann man jederzeit ohne Gründe zurücktreten.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d4',this,false)"><span class="quiz-opt-letter">B</span><span>Nichts zu machen – gekauft ist gekauft.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d4',this,true)"><span class="quiz-opt-letter">C</span><span>Gewährleistung: Nacherfüllung verlangen – Reparatur oder Ersatzlieferung nach Emmas Wahl; § 477 BGB vermutet, dass der Mangel von Anfang an vorlag.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d4',this,false)"><span class="quiz-opt-letter">D</span><span>Nur hoffen, dass der Hersteller freiwillig eine Garantie gegeben hat – sonst geht nichts.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d4-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung im Gutachtenstil</div>
+          <div class="task-content">
+            <p>Prüfe: Liegt ein <strong>Sachmangel</strong> vor (Ist- vs. Soll-Beschaffenheit)? Und begründe, warum der Widerruf ausscheidet, die <strong>Gewährleistung</strong> aber greift – inklusive <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__477.html" target="_blank">§ 477 BGB</a>.</p>
+            <textarea class="answer-area" style="min-height:110px;" placeholder="Obersatz: Der Scooter könnte mangelhaft sein ...&#10;Definition: Ein Sachmangel liegt vor, wenn ...&#10;Subsumtion: Soll-Beschaffenheit ... / Ist-Beschaffenheit ...&#10;Konklusion + Rechtsfolgen: ... / Warum kein Widerruf mehr? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g4')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g4">
+              <strong>Obersatz:</strong> Emma könnte Gewährleistungsrechte haben, wenn der Scooter bei Gefahrübergang mangelhaft war.<br>
+              <strong>Definition:</strong> Ein Sachmangel liegt vor, wenn die Ist-Beschaffenheit von der Soll-Beschaffenheit abweicht – von einem Neugerät darf man üblicherweise einen störungsfreien Betrieb erwarten (objektive Anforderungen).<br>
+              <strong>Subsumtion:</strong> Ein neuer E-Scooter, der beim Beschleunigen ruckelt und sich abschaltet, bleibt hinter dieser üblichen Beschaffenheit zurück. Der Mangel zeigte sich nach drei Wochen – nach § 477 BGB wird innerhalb eines Jahres vermutet, dass er schon bei der Übergabe vorlag; RollFix müsste das Gegenteil beweisen.<br>
+              <strong>Konklusion:</strong> Also kann Emma <em>Nacherfüllung</em> verlangen – nach ihrer Wahl Reparatur oder Ersatzlieferung, kostenlos. Erst wenn das scheitert: Rücktritt oder Minderung.<br><br>
+              <strong>Warum kein Widerruf?</strong> Das Widerrufsrecht bei Fernabsatzverträgen gilt nur <em>14 Tage</em> – die sind nach drei Wochen abgelaufen. <strong>Und die Begriffe sauber halten:</strong> Die <em>Gewährleistung</em> ist Emmas gesetzliches Recht gegen den Händler; eine <em>Garantie</em> wäre nur eine freiwillige Zusatzleistung des Herstellers – sie ersetzt die Gewährleistung nie (Antwort D wäre also doppelt falsch).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(3)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(3)">Weiter: Akten 5–6 →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 4: AKTEN 5-6 -->
+<div class="step" id="step-4">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon violet">🚨</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 4 · Akten 5–6</div>
+        <div class="section-title">Delikt, Strafe &amp; das Wut-Reel</div>
+        <div class="section-time">⏱ ca. 9 Minuten · Einzel-/Partnerarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="teacher-only"><div class="teacher-note" style="display:block;margin-bottom:1rem;"><div class="teacher-note-header">🎓 Hinweis</div><p>Akte 5 lebt von der Symmetrie: Jonas fahrlässig (nur zivilrechtlich), Nachbar vorsätzlich (zivil- <em>und</em> strafrechtlich) – exakt die Pointe der Stunden 15/16. Akte 6 bündelt Stunde 17; „aber es ist doch die Wahrheit!" als Fehlvorstellung explizit aufgreifen.</p></div></div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 5</div>
+          <div class="akte-title">Kratzer &amp; Tritt – zwei Schäden, zwei Rechtslagen</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p>Der reparierte Scooter ist zurück. <strong>Jonas (16)</strong> dreht eine Runde, schaut kurz zur Seite – und schrammt <strong>aus Unachtsamkeit</strong> am geparkten Auto von <strong>Herrn Berger (42)</strong> entlang: Lackkratzer, 650 €. Berger rennt heraus, sieht den Kratzer und tritt <strong>vor Wut absichtlich</strong> gegen den am Boden liegenden Scooter – das Display zerspringt, 180 € Schaden.</p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Wie ist die Lage – zivil- und strafrechtlich?</div>
+          <div class="quiz-options" id="d5">
+            <button class="quiz-opt" onclick="checkDecision('d5',this,false)"><span class="quiz-opt-letter">A</span><span>Beide machen sich strafbar – Sachbeschädigung ist Sachbeschädigung.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d5',this,true)"><span class="quiz-opt-letter">B</span><span>Nur Herr Berger ist strafbar (§ 303 StGB verlangt Vorsatz) – Schadensersatz nach § 823 BGB schulden aber beide.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d5',this,false)"><span class="quiz-opt-letter">C</span><span>Nur Jonas haftet – Herr Berger hat sich ja bloß abreagiert.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d5',this,false)"><span class="quiz-opt-letter">D</span><span>Niemand haftet – Unfall und Affekt heben sich gegenseitig auf.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d5-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung im Gutachtenstil</div>
+          <div class="task-content">
+            <p>Prüfe <strong>beide Richtungen</strong>: (a) Bergers Anspruch gegen Jonas aus <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__823.html" target="_blank">§ 823 I BGB</a> (denk an <a class="para-link" href="https://www.gesetze-im-internet.de/bgb/__828.html" target="_blank">§ 828 III BGB</a>!) und (b) die Strafbarkeit Bergers nach <a class="para-link" href="https://www.gesetze-im-internet.de/stgb/__303.html" target="_blank">§ 303 StGB</a>. Wessen Eigentum hat Berger eigentlich beschädigt?</p>
+            <textarea class="answer-area" style="min-height:130px;" placeholder="(a) Berger gegen Jonas, § 823 I BGB: Rechtsgutsverletzung ... / Verschulden (Fahrlässigkeit) ... / § 828 III ...&#10;(b) Strafbarkeit Berger, § 303 StGB: fremde Sache (wessen Eigentum?) ... / Vorsatz ...&#10;Zusatz: Wer kann von Berger Schadensersatz verlangen?"></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g5')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g5">
+              <strong>(a) Berger gegen Jonas (§ 823 I BGB):</strong> Jonas hat Bergers Eigentum verletzt (Lackkratzer), rechtswidrig und schuldhaft – Fahrlässigkeit genügt im Zivilrecht. Mit 16 ist Jonas nach § 828 III BGB verantwortlich, wenn er die nötige Einsicht hatte – davon ist auszugehen. Also schuldet Jonas 650 € Schadensersatz.<br><br>
+              <strong>(b) Strafbarkeit Bergers (§ 303 StGB):</strong> Der Scooter ist für Berger eine <em>fremde</em> Sache – Eigentümerin ist Emma (Akte 3!), Jonas war nur Besitzer. Berger hat sie <em>vorsätzlich</em> beschädigt. Also hat er sich der Sachbeschädigung strafbar gemacht – als 42-Jähriger voll strafmündig nach dem StGB.<br><br>
+              <strong>Zivilrechtlich gegen Berger:</strong> Schadensersatz aus § 823 I BGB (180 €) kann <em>Emma</em> als Eigentümerin verlangen.<br><br>
+              <strong>Die Pointe:</strong> Jonas handelte fahrlässig – zivilrechtliche Haftung ja, Strafbarkeit nein (§ 15 StGB, Stunde 16!). Berger handelte vorsätzlich – bei ihm kommt beides zusammen. Wut ist keine Rechtfertigung.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="akte">
+        <div class="akte-header">
+          <div class="akte-num">Akte 6</div>
+          <div class="akte-title">Das Wut-Reel – „Aber es ist doch die Wahrheit!"</div>
+        </div>
+        <div class="akte-body">
+          <div class="scenario" style="margin-top:0;">
+            <div class="scenario-label">📖 Sachverhalt</div>
+            <p>Emma hat den Tritt <strong>gefilmt</strong>. Noch am Abend schneidet sie ein Reel: Herr Berger in Großaufnahme, gut erkennbar, darunter ein <strong>aktueller Chart-Song</strong>, Titel: „Dieser Typ hat meinen Scooter zerstört!!" Das Video geht durch die Decke. <strong>Lisa</strong> wird blass: „Emma … nimm das SOFORT runter. Frag mich, woher ich das weiß."</p>
+          </div>
+
+          <div class="decision-label">⚖️ Deine Entscheidung</div>
+          <div class="quiz-q">Hat Lisa recht – und wenn ja, warum?</div>
+          <div class="quiz-options" id="d6">
+            <button class="quiz-opt" onclick="checkDecision('d6',this,false)"><span class="quiz-opt-letter">A</span><span>Nein – das Video zeigt nur die Wahrheit, und die darf man immer posten.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d6',this,false)"><span class="quiz-opt-letter">B</span><span>Halb – nur der Chart-Song ist ein Problem, Berger hat seine Rechte durch den Tritt verwirkt.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d6',this,false)"><span class="quiz-opt-letter">C</span><span>Halb – nur Bergers Abbildung ist heikel, kurze Songausschnitte sind immer frei.</span></button>
+            <button class="quiz-opt" onclick="checkDecision('d6',this,true)"><span class="quiz-opt-letter">D</span><span>Ja, doppelt: Der Song verletzt die Verwertungsrechte des Urhebers (UrhG), Bergers erkennbares Bildnis ohne Einwilligung verletzt § 22 KunstUrhG.</span></button>
+          </div>
+          <div class="quiz-feedback" id="d6-fb"></div>
+
+          <div class="gutachten-label">✍️ Kurzprüfung</div>
+          <div class="task-content">
+            <p>Begründe in Stichpunkten, welche <strong>zwei Rechtspositionen</strong> das Reel verletzt (<a class="para-link" href="https://www.gesetze-im-internet.de/urhg/__97.html" target="_blank">§ 97 UrhG</a>, <a class="para-link" href="https://www.gesetze-im-internet.de/kunsturhg/__22.html" target="_blank">§ 22 KunstUrhG</a>) – und welche Konsequenzen Emma realistisch drohen. Ändert Bergers eigene Tat daran etwas?</p>
+            <textarea class="answer-area" style="min-height:100px;" placeholder="Verletzung 1 (Song): ...&#10;Verletzung 2 (Bildnis): ...&#10;Realistische Konsequenzen: ...&#10;Spielt es eine Rolle, dass Berger selbst Unrecht getan hat? ..."></textarea>
+            <button class="solution-btn" onclick="revealSolution('sol-g6')">✓ Musterlösung anzeigen</button>
+            <div class="solution-reveal" id="sol-g6">
+              <strong>Verletzung 1 – der Song:</strong> Emma macht ein fremdes Werk öffentlich zugänglich – das exklusive Verwertungsrecht des Urhebers. Gewinnabsicht ist egal (Stunde 17).<br>
+              <strong>Verletzung 2 – das Bildnis:</strong> Berger ist gut erkennbar; die Verbreitung ohne seine Einwilligung verletzt sein Recht am eigenen Bild (§ 22 KunstUrhG).<br>
+              <strong>Konsequenzen:</strong> Sperrung des Videos, Abmahnung mit Unterlassungserklärung, Unterlassungs- und Schadensersatzansprüche (§ 97 UrhG); Berger kann Löschung verlangen.<br>
+              <strong>„Aber die Wahrheit!":</strong> Dass Berger selbst rechtswidrig gehandelt hat, gibt Emma kein Recht zur öffentlichen Bloßstellung – für den Tritt gibt es Polizei und Zivilklage, nicht den Online-Pranger. Zwei fremde Rechtsverletzungen heben sich nicht auf – das war schon in Akte 5 die Lektion.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns">
+        <button class="btn-secondary" onclick="prevStep(4)">← Zurück</button>
+        <button class="btn-primary" onclick="nextStep(4)">Weiter: Fallabschluss →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 5: FALLABSCHLUSS + QUIZ -->
+<div class="step" id="step-5">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon green">🏆</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 5 · Fallabschluss</div>
+        <div class="section-title">Kanzlei-Bilanz &amp; Abschluss-Quiz</div>
+        <div class="section-time">⏱ ca. 6 Minuten · Einzelarbeit</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-only">
+        <div class="teacher-note" style="display:block;margin-bottom:1rem;">
+          <div class="teacher-note-header">🎓 Sicherung</div>
+          <p>Die Bilanz ist rein motivational (keine Bewertungsgrundlage). Im Plenum lohnt der Blick auf Akte 5: Wessen Eigentum hat Berger beschädigt? (Emmas – Akte 3!) Das zeigt, wie die Akten ineinandergreifen. Quiz-Frage 3 greift genau das noch einmal auf.</p>
+        </div>
+      </div>
+
+      <div class="bilanz-box">
+        <div class="bilanz-title" id="bilanz-title">📊 Deine Kanzlei-Bilanz</div>
+        <div class="bilanz-sub" id="bilanz-sub">Triff erst alle sechs Entscheidungen in den Akten 1–6 – dann erscheint hier deine Bilanz.</div>
+      </div>
+
+      <p class="content-text">Zum Schluss vier Fragen quer durch den Fall – ohne Nachschlagen:</p>
+
+      <div class="quiz-wrap">
+        <div class="quiz-q">1. Was ist die Produktseite eines Online-Shops rechtlich gesehen?</div>
+        <div class="quiz-options" id="q1">
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">A</span><span>Ein verbindlicher Antrag an alle Besucher der Seite.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">B</span><span>Bereits die Annahme künftiger Bestellungen.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,false)"><span class="quiz-opt-letter">C</span><span>Ein Vertrag unter der Bedingung, dass Ware vorrätig ist.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q1',this,true)"><span class="quiz-opt-letter">D</span><span>Eine invitatio ad offerendum – den Antrag stellt erst der Kunde mit seiner Bestellung.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q1-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">2. Eine 15-Jährige bezahlt einen Kauf vollständig mit gespartem Taschengeld. Was gilt?</div>
+        <div class="quiz-options" id="q2">
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,true)"><span class="quiz-opt-letter">A</span><span>Der Vertrag ist nach § 110 BGB von Anfang an wirksam – ohne Zustimmung der Eltern.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">B</span><span>Der Vertrag ist nichtig, weil sie unter 18 ist.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">C</span><span>Der Vertrag bleibt schwebend unwirksam, bis die Eltern genehmigen.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q2',this,false)"><span class="quiz-opt-letter">D</span><span>Der Vertrag gilt nur bis zu einem Warenwert von 50 €.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q2-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">3. Jemand beschädigt absichtlich einen Scooter, den Jonas sich von Emma geliehen hat. Wessen Eigentum verletzt er?</div>
+        <div class="quiz-options" id="q3">
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">A</span><span>Das von Jonas – er hatte den Scooter ja gerade in seiner Gewalt.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">B</span><span>Das des Online-Shops – der hat ihn schließlich verkauft.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,true)"><span class="quiz-opt-letter">C</span><span>Das von Emma – die Leihe machte Jonas nur zum Besitzer, Eigentümerin blieb sie.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q3',this,false)"><span class="quiz-opt-letter">D</span><span>Niemandes – geliehene Sachen sind rechtlich herrenlos.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q3-fb"></div>
+
+        <hr class="divider">
+
+        <div class="quiz-q">4. Fahrlässige und vorsätzliche Sachbeschädigung – was ist der entscheidende Unterschied?</div>
+        <div class="quiz-options" id="q4">
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">A</span><span>Keiner – beide führen zu Strafe und Schadensersatz.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,true)"><span class="quiz-opt-letter">B</span><span>Strafbar nach § 303 StGB ist nur die vorsätzliche Beschädigung – Schadensersatz nach § 823 BGB schulden dagegen beide.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">C</span><span>Fahrlässigkeit wird härter bestraft, weil man hätte aufpassen müssen.</span></button>
+          <button class="quiz-opt" onclick="checkQuiz('q4',this,false)"><span class="quiz-opt-letter">D</span><span>Bei Vorsatz muss man keinen Schadensersatz zahlen, nur die Strafe.</span></button>
+        </div>
+        <div class="quiz-feedback" id="q4-fb"></div>
+      </div>
+
+      <div id="quiz-score">
+        <span id="score-text"></span><span id="score-sub"></span>
+      </div>
+      <div id="quiz-retry-wrap" style="display:none;margin-top:0.75rem;">
+        <button class="btn-secondary" style="border-color:var(--red);color:var(--red);" onclick="retryQuiz()">🔄 Quiz nochmal versuchen</button>
+      </div>
+
+      <div class="info-box teal" style="margin-top:1.5rem;">
+        <strong>✅ Das hast du in diesem Lernbereich gelernt</strong>
+        Du kannst einen Lebenssachverhalt in rechtliche Einzelfragen zerlegen und sie methodisch im <strong>Gutachtenstil</strong> prüfen: vom <strong>Vertragsschluss</strong> (Antrag und Annahme, invitatio ad offerendum) über die <strong>Geschäftsfähigkeit</strong> Minderjähriger (§§ 106 ff., 110 BGB), die Trennung von <strong>Verpflichtungs- und Erfüllungsgeschäft</strong> samt <strong>Eigentum und Besitz</strong>, die Rechte des Verbrauchers bei <strong>Sachmangel, Gewährleistung und Widerruf</strong> bis zu <strong>Deliktsrecht</strong> (§§ 823, 828 BGB), <strong>Strafrecht und Strafmündigkeit</strong> (§ 303 StGB, § 19 StGB, JGG) und dem <strong>Urheberrecht</strong> im digitalen Alltag. Kurz: Du erkennst, wann Recht dein Handeln rahmt – und kannst begründet entscheiden, statt zu raten.
+      </div>
+
+      <div class="nav-btns" style="justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(5)">← Zurück</button>
+          <button class="btn-primary" onclick="finishQuiz()">Quiz abschließen ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 6: LEHRKRAFT-ABFRAGE -->
+<div class="step" id="step-6">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon red">🎓</div>
+      <div class="section-meta">
+        <div class="section-tag">Schritt 6 · Mündliche Abfrage (nur Lehrkraft)</div>
+        <div class="section-title">Abfrage Stunde 18 – Komplexfall (Synthese Lernbereich 2)</div>
+        <div class="section-time">⏱ ca. 10 Minuten · 1 Schüler/in · 4K-Modell</div>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <div class="teacher-note" style="display:block;margin-bottom:1.25rem;">
+        <div class="teacher-note-header">🎓 Durchführung</div>
+        <p>Abschluss-Abfrage über den gesamten Lernbereich, aufgehängt am Emma-Fall. Vier Fragen nach dem 4K-Modell mit aufklappbaren Erwartungshorizonten. Besonders ergiebig ist Frage 2 – sie prüft, ob die Widerrufs-/Gewährleistungs-Abgrenzung wirklich sitzt.</p>
+      </div>
+
+      <div class="abfrage-wrap">
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num wissen">1</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label wissen">🔵 Wissen · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Nenne mindestens vier Rechtsgebiete bzw. Themenfelder, die im Emma-Fall berührt wurden – jeweils mit einer zentralen Norm.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: Breite des Überblicks und korrekte Norm-Zuordnung.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew1')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew1">Mögliche Nennungen: Vertragsschluss (§§ 145, 147, 433 BGB), Geschäftsfähigkeit/Taschengeldparagraf (§§ 106 ff., 110 BGB), Eigentum und Besitz bzw. Erfüllungsgeschäfte (§§ 929, 854 BGB), Gewährleistung/Sachmangel (§ 477 BGB, Nacherfüllung) und Widerrufsrecht, Deliktsrecht (§§ 823, 828 BGB), Strafrecht/Strafmündigkeit (§§ 303, 15, 19 StGB, JGG), Urheberrecht und Recht am eigenen Bild (§ 97 UrhG, § 22 KunstUrhG). Vier korrekte Paare genügen für volle Punktzahl.</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num denken">2</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label denken">🟢 Kritisches Denken · ca. 3 Min.</div>
+              <div class="abfrage-q-text">Emma sagt: „Hätte ich das Ruckeln schon nach einer Woche bemerkt, hätte ich einfach widerrufen – das wäre viel besser gewesen als der ganze Gewährleistungs-Kram." Hat sie recht? Wäge ab.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: saubere Abgrenzung der beiden Institute, Abwägung statt Schwarz-Weiß.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew2')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew2">Teilweise: Innerhalb der 14 Tage hätte Emma beim Fernabsatzvertrag ohne Angabe von Gründen widerrufen und ihr Geld zurückverlangen können – schnell und unkompliziert, ggf. gegen Rücksendekosten. Aber: Der Widerruf beendet den Vertrag komplett; wenn Emma den Scooter eigentlich behalten will, ist die Gewährleistung passgenauer (kostenlose Reparatur oder Ersatzlieferung). Zudem gilt der Widerruf nur in besonderen Situationen (Fernabsatz/Haustür) und befristet, die Gewährleistung dagegen zwei Jahre bei jedem Kauf. Starke Antworten erkennen: zwei verschiedene Instrumente für verschiedene Ziele – nicht „besser/schlechter".</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num komm">3</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label komm">🟡 Kommunikation · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erkläre Emma in einfachen Worten den Unterschied zwischen „Vertrag geschlossen" und „Eigentum erworben".</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Bewertet: adressatengerechte Sprache bei korrektem Kern (Verpflichtung vs. Erfüllung).</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew3')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew3">Sinngemäß: „Mit dem Vertrag versprecht ihr euch nur etwas: Der Shop verspricht dir den Scooter, du versprichst das Geld (§ 433 BGB). Deins wird der Scooter erst durch ein zweites Geschäft – wenn ihr euch über den Eigentumsübergang einig seid und du ihn übergeben bekommst (§ 929 BGB)." Fachsprachliche Kür: ein Verpflichtungsgeschäft, zwei Erfüllungsgeschäfte; Bestehen auf einfacher, verständlicher Sprache.</div>
+          </div>
+        </div>
+
+        <div class="abfrage-q">
+          <div class="abfrage-q-header">
+            <div class="abfrage-q-num kreativ">4</div>
+            <div class="abfrage-q-meta">
+              <div class="abfrage-q-label kreativ">🔴 Kreativität · ca. 2 Min.</div>
+              <div class="abfrage-q-text">Erfinde eine „Akte 7", die ein weiteres Thema des Schuljahres in den Fall einbaut – und skizziere in zwei Sätzen die rechtliche Lösung.</div>
+            </div>
+          </div>
+          <div class="abfrage-q-body">
+            <p>Eigene Lösung. Bewertet: schlüssige Anbindung an den Fall + vertretbare rechtliche Kurzlösung mit Norm.</p>
+            <button class="erwartung-btn" onclick="toggleErwartung('ew4')">📋 Erwartungshorizont anzeigen</button>
+            <div class="erwartung-box" id="ew4">Beispiele: Herr Berger verweigert die Zahlung der 180 € → Emma kann ihren Anspruch aus § 823 I BGB notfalls einklagen (Friedens-/Ausgleichsfunktion des Rechts, Stunde 1). Oder: Der Shop wirbt „Reduzierter Scooter – vom Umtausch ausgeschlossen" → Umtausch ist Kulanz, die gesetzliche Gewährleistung bleibt davon unberührt. Oder: Jonas (16) „leiht" sich den Scooter diesmal ungefragt → Abgrenzung Besitzentzug, ggf. § 242 StGB-Diskussion (Zueignungsabsicht?). Jede stimmige Idee mit passender Norm ist wertbar.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-btns" style="margin-top:1.5rem;justify-content:space-between;">
+        <a href="index.html" class="btn-home">🏠 Zur Übersicht</a>
+        <div style="display:flex;gap:10px;">
+          <button class="btn-secondary" onclick="prevStep(6)">← Zurück</button>
+          <button class="print-btn" onclick="window.print()">🖨 Abfrage drucken</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+<!-- PIN MODAL -->
+<div class="pin-overlay" id="pin-overlay">
+  <div class="pin-box">
+    <div class="pin-logo">Recht<span>&</span>Ich</div>
+    <div class="pin-icon">🔐</div>
+    <div class="pin-title">Lehrkraft-Bereich</div>
+    <div class="pin-sub">Bitte gib deinen 8-stelligen PIN ein.</div>
+    <div class="pin-dots"><div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div><div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div><div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div><div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div></div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinKey('1')">1</button><button class="pin-key" onclick="pinKey('2')">2</button><button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button><button class="pin-key" onclick="pinKey('5')">5</button><button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button><button class="pin-key" onclick="pinKey('8')">8</button><button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button><button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <button class="pin-cancel" onclick="closePinModal()">Abbrechen</button>
+  </div>
+</div>
+
+<script>
+const PIN_HASH='385319fce53854f96b636f28301b3d31be241dcaf6f1775da31a5e768b3a848e';
+let pinInput='',cur=1,quizA={};
+const TOTAL_STEPS=6;
+function openPinModal(){if(document.getElementById('body-root').classList.contains('version-b')){setVersion('a');return;}pinInput='';updatePinDots();document.getElementById('pin-error').textContent='';document.getElementById('pin-overlay').classList.add('open');}
+function closePinModal(){document.getElementById('pin-overlay').classList.remove('open');pinInput='';updatePinDots();}
+function pinKey(d){if(pinInput.length>=8)return;pinInput+=d;updatePinDots();if(pinInput.length===8)setTimeout(()=>checkPin(),120);}
+function pinDel(){pinInput=pinInput.slice(0,-1);updatePinDots();document.getElementById('pin-error').textContent='';}
+function updatePinDots(){for(let i=0;i<8;i++)document.getElementById('pd'+i).classList.toggle('filled',i<pinInput.length);}
+async function checkPin(){const enc=new TextEncoder();const buf=await crypto.subtle.digest('SHA-256',enc.encode(pinInput));const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');if(h===PIN_HASH){closePinModal();setVersion('b');}else{document.getElementById('pin-error').textContent='Falscher PIN.';pinInput='';updatePinDots();const b=document.querySelector('.pin-box');b.style.animation='none';setTimeout(()=>{b.style.animation='shake 0.35s ease';},10);}}
+function setVersion(v){const b=document.getElementById('body-root');document.getElementById('btn-a').classList.toggle('active',v==='a');document.getElementById('btn-b').classList.toggle('active',v==='b');if(v==='b'){b.classList.add('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='block');document.getElementById('btn-b').textContent='🎓 Lehrkraft ✓';}else{b.classList.remove('version-b');document.querySelectorAll('.teacher-only').forEach(e=>e.style.display='none');document.getElementById('btn-b').textContent='🎓 Lehrkraft';if(cur===6)goToStep(5);}}
+function goToStep(n){if(n===6&&!document.getElementById('body-root').classList.contains('version-b'))return;document.getElementById('step-'+cur).classList.remove('active');cur=n;document.getElementById('step-'+cur).classList.add('active');for(let i=1;i<=TOTAL_STEPS;i++){const s=document.getElementById('prog-'+i),l=document.getElementById('line-'+i);if(!s)continue;s.classList.remove('active','done');if(i<cur){s.classList.add('done');if(l)l.classList.add('done');}else if(i===cur){s.classList.add('active');if(l)l.classList.remove('done');}else if(l)l.classList.remove('done');}if(n===5)updateBilanz();window.scrollTo({top:0,behavior:'smooth'});}
+function nextStep(f){if(f<TOTAL_STEPS)goToStep(f+1);}
+function prevStep(f){if(f>1)goToStep(f-1);}
+function revealSolution(id){const el=document.getElementById(id);const btn=el.previousElementSibling;if(!btn.dataset.label)btn.dataset.label=btn.textContent;el.classList.toggle('visible');btn.textContent=el.classList.contains('visible')?'▲ Lösung ausblenden':btn.dataset.label;}
+function toggleErwartung(id){const el=document.getElementById(id);const btn=el.previousElementSibling;if(!btn.dataset.label)btn.dataset.label=btn.textContent;el.classList.toggle('visible');btn.textContent=el.classList.contains('visible')?'▲ Ausblenden':btn.dataset.label;}
+function checkQuiz(qId,btn,ok){const c=document.getElementById(qId);if(c.dataset.answered)return;c.dataset.answered='true';quizA[qId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(qId+'-fb');
+const yes={q1:'✓ Richtig! Die Produktseite ist nur eine invitatio ad offerendum – den Antrag stellt der Kunde.',q2:'✓ Richtig! Vollständig mit überlassenen Mitteln bewirkt → § 110 BGB macht den Vertrag von Anfang an wirksam.',q3:'✓ Richtig! Die Leihe übertrug nur den Besitz – Eigentümerin blieb Emma (§§ 854, 929 BGB).',q4:'✓ Richtig! § 303 StGB verlangt Vorsatz (§ 15 StGB) – die zivilrechtliche Ersatzpflicht aus § 823 BGB trifft dagegen beide.'};
+const no={q1:'✗ Nicht ganz. Die Shop-Seite lädt nur zu Anträgen ein (invitatio ad offerendum). → D',q2:'✗ Nicht ganz. Bei vollständiger Zahlung mit überlassenen Mitteln greift § 110 BGB – wirksam von Anfang an. → A',q3:'✗ Nicht ganz. Leihe überträgt nur Besitz – das Eigentum blieb bei Emma. → C',q4:'✗ Nicht ganz. Strafbar ist nur die vorsätzliche Sachbeschädigung; Schadensersatz schulden beide. → B'};
+if(ok){btn.classList.add('correct');fb.textContent=yes[qId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=no[qId];fb.className='quiz-feedback wrong';}
+const qs=['q1','q2','q3','q4'];if(qs.every(q=>document.getElementById(q).dataset.answered)){document.getElementById('quiz-score').style.display='block';const n=qs.filter(q=>quizA[q]).length;document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=n===4?' – Perfekt!':n>=3?' – Sehr gut!':' – Lies die Inhalte noch einmal durch.';if(n<3)document.getElementById('quiz-retry-wrap').style.display='block';}}
+
+let decA={};const DEC_IDS=['d1','d2','d3','d4','d5','d6'];
+const decYes={d1:'✓ Richtig entschieden! Shop-Seite = invitatio ad offerendum; Emmas Bestellung ist der Antrag (§ 145 BGB), die Annahme liegt spätestens in der Versandbestätigung (§ 147 BGB).',d2:'✓ Richtig entschieden! § 110 BGB: vollständig mit überlassenen Mitteln bewirkt – der Vertrag ist von Anfang an wirksam, das Veto kommt zu spät.',d3:'✓ Richtig entschieden! Die Leihe übertrug nur die tatsächliche Gewalt (Besitz, § 854 BGB) – Eigentümerin bleibt Emma (§ 929 BGB bei der Lieferung).',d4:'✓ Richtig entschieden! Die 14-tägige Widerrufsfrist ist vorbei – aber die gesetzliche Gewährleistung greift: Nacherfüllung nach Emmas Wahl, § 477 BGB vermutet den Mangel bei Übergabe.',d5:'✓ Richtig entschieden! Strafbar ist nur der vorsätzlich handelnde Berger (§§ 303, 15 StGB) – Schadensersatz nach § 823 BGB schulden beide.',d6:'✓ Richtig entschieden! Doppelte Verletzung: Verwertungsrechte des Song-Urhebers (UrhG) und Bergers Recht am eigenen Bild (§ 22 KunstUrhG). „Wahrheit\u201c ist keine Lizenz.'};
+const decNo={d1:'✗ Leider daneben. Die Shop-Seite ist nur eine invitatio ad offerendum – Vertrag erst mit Bestellung (Antrag) und Annahme des Shops. → C',d2:'✗ Leider daneben. Emma hat vollständig mit überlassenen Mitteln bezahlt – § 110 BGB macht den Vertrag von Anfang an wirksam. → D',d3:'✗ Leider daneben. Leihe überträgt nur den Besitz – Eigentümerin bleibt Emma. → B',d4:'✗ Leider daneben. Der Widerruf ist nach 14 Tagen verfristet; richtig ist die Gewährleistung mit vorrangiger Nacherfüllung. → C',d5:'✗ Leider daneben. § 303 StGB verlangt Vorsatz – strafbar ist nur Berger; zivilrechtlich haften beide. → B',d6:'✗ Leider daneben. Song (UrhG) UND erkennbares Bildnis (§ 22 KunstUrhG) sind verletzt – Bergers eigene Tat ändert daran nichts. → D'};
+function checkDecision(dId,btn,ok){const c=document.getElementById(dId);if(c.dataset.answered)return;c.dataset.answered='true';decA[dId]=ok;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('disabled'));const fb=document.getElementById(dId+'-fb');if(ok){btn.classList.add('correct');fb.textContent=decYes[dId];fb.className='quiz-feedback correct';}else{btn.classList.add('wrong');fb.textContent=decNo[dId];fb.className='quiz-feedback wrong';}}
+function updateBilanz(){const done=DEC_IDS.filter(d=>document.getElementById(d).dataset.answered).length;const right=DEC_IDS.filter(d=>decA[d]).length;const t=document.getElementById('bilanz-title'),s=document.getElementById('bilanz-sub');if(done<DEC_IDS.length){t.textContent='📊 Deine Kanzlei-Bilanz';s.textContent='Du hast erst '+done+' von 6 Entscheidungen getroffen – geh zurück in die Akten und entscheide die übrigen Fälle.';return;}t.textContent='📊 Kanzlei-Bilanz: '+right+' von 6 Entscheidungen auf Anhieb richtig';s.textContent=right===6?'Ausgezeichnet – dieser Fall wäre bei dir in besten Händen. Der Titel „Rechtsexperte\u201c ist verdient!':right>=4?'Starke Leistung! Schau dir die Musterlösungen der verfehlten Akten noch einmal an – dann sitzt alles.':'Ein solides Fundament ist da – arbeite die Musterlösungen der Akten in Ruhe nach, bevor du ins Quiz gehst.';}
+function finishQuiz(){const qs=['q1','q2','q3','q4'],n=qs.filter(q=>quizA[q]).length;if(n<3){document.getElementById('quiz-score').style.display='block';document.getElementById('score-text').textContent=n+' von 4 Fragen richtig';document.getElementById('score-sub').textContent=' – Lies die Inhalte noch einmal durch.';document.getElementById('quiz-retry-wrap').style.display='block';}}
+function retryQuiz(){const qs=['q1','q2','q3','q4'];qs.forEach(q=>{const c=document.getElementById(q);delete c.dataset.answered;c.querySelectorAll('.quiz-opt').forEach(b=>b.classList.remove('disabled','correct','wrong'));document.getElementById(q+'-fb').className='quiz-feedback';document.getElementById(q+'-fb').textContent='';});quizA={};document.getElementById('quiz-score').style.display='none';document.getElementById('quiz-retry-wrap').style.display='none';window.scrollTo({top:document.getElementById('step-5').offsetTop-60,behavior:'smooth'});}
+document.getElementById('pin-overlay').addEventListener('click',function(e){if(e.target===this)closePinModal();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('pin-overlay').classList.contains('open'))return;if(e.key>='0'&&e.key<='9')pinKey(e.key);else if(e.key==='Backspace')pinDel();else if(e.key==='Escape')closePinModal();});
+</script>
+</body>
+</html>
